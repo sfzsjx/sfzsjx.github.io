@@ -6,17 +6,23 @@
     
 
     
-    <title>Arxiu: 2018 | Hexo</title>
+    <title>图数据集群搭建 | Hexo</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图数据集群搭建">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/图数据集群搭建/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-14T02:19:59.072Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="图数据集群搭建">
+<meta name="twitter:description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
     
 
     
@@ -125,172 +131,150 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Arxiu: 2018
+    Sense categoria
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-图数据集群搭建" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/08/14/SPARK-DATAFRAME/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/08/14/SPARK-DATAFRAME/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-08-14T02:23:52.000Z" itemprop="datePublished">2018-08-14</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/08/14/SPARK-DATAFRAME/">SPARK DATAFRAME</a>
+        图数据集群搭建
         </h1>
     
 
-        <p class="article-excerpt">
-            
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/08/14/图数据集群搭建/" class="article-date">
+            <time datetime="2018-08-14T02:15:50.000Z" itemprop="datePublished">2018-08-14</time>
+        </a>
     </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/08/14/图数据集群搭建/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/08/14/图数据集群搭建/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
+                
             </div>
-            <div class="date"><time datetime="2018-08-14T02:15:50.000Z" itemprop="datePublished">2018-08-14</time></div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <pre><code>NEO4J高可用集群搭建
+</code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
+<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416，完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416，完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</a></p>
+<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003。执行下面命令" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003。执行下面命令</a></p>
+<p><a href="http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz" target="_blank" rel="noopener">http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</a></p>
+<p>[点击并拖拽以移动]</p>
+<pre><code>或者前往neo4j官网下载：https://neo4j.com/download/。
+</code></pre><p>二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</p>
+<p>tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz<br>scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j<br>scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j<br>scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</p>
+<p>[点击并拖拽以移动]</p>
+<p>三 、修改配置文件neo4j.conf(重要)</p>
+<p>master节点：</p>
+<pre><code>dbms.mode=HA
+ha.server_id=1
+ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
+
+dbms.connectors.default_listen_address=0.0.0.0
+</code></pre><p>slave1节点：</p>
+<pre><code>dbms.mode=HA
+ha.server_id=2
+ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
+
+dbms.connectors.default_listen_address=0.0.0.0
+</code></pre><p>slave2节点：</p>
+<pre><code>dbms.mode=HA
+ha.server_id=3
+ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
+
+dbms.connectors.default_listen_address=0.0.0.0
+</code></pre><p>四、启动HA集群,分别进入neo4j 目录下执行</p>
+<p>./bin/neo4j start<br>./bin/neo4j start<br>./bin/neo4j start</p>
+<p>[点击并拖拽以移动]</p>
+<p> 五、进入localhost：7474查看集群信息</p>
+
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/08/14/图数据集群搭建/">图数据集群搭建</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            NEO4J高可用集群搭建
-高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。
-好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/08/13/hello-world/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://yoursite.com/2018/08/13/hello-world/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
+        <footer class="article-footer">
             
-            </div>
-            <div class="date"><time datetime="2018-08-13T08:48:53.448Z" itemprop="datePublished">2018-08-13</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/08/13/hello-world/">Hello World</a>
-        </h1>
-    
 
-        <p class="article-excerpt">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
-        </p>
+
+
+    <a data-url="http://yoursite.com/2018/08/14/图数据集群搭建/" data-id="cjkt34xq50002nwujx9mmklmc" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
+
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
     
-
-
-    </div></section>
-
+    </section>
 
 
                         </div>
@@ -351,6 +335,29 @@ Quick
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/08/14/SPARK-DATAFRAME/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">més nou</strong>
+        <p class="article-nav-title">
+        
+            SPARK DATAFRAME
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/08/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antic</strong>
+        <p class="article-nav-title">Hello World</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -498,11 +505,13 @@ Quick
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://yoursite.com/2018/08/14/图数据集群搭建/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
