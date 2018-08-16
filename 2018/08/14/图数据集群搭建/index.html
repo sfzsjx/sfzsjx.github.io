@@ -108,18 +108,20 @@
 
 
 
-  <meta name="description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
-<meta name="keywords" content="数据库,图">
+  <meta name="description" content="** NEO4J高可用集群搭建 ** 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/arti">
+<meta name="keywords" content="数据库,neo4j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图数据集群搭建">
 <meta property="og:url" content="http://yoursite.com/2018/08/14/图数据集群搭建/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
+<meta property="og:description" content="** NEO4J高可用集群搭建 ** 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/arti">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-15T01:21:22.629Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-08-16T00:38:22.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图数据集群搭建">
-<meta name="twitter:description" content="NEO4J高可用集群搭建 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/article/de">
+<meta name="twitter:description" content="** NEO4J高可用集群搭建 ** 高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。 好了，话不多说，如果看过前一篇文章https://blog.csdn.net/fffsssfff6/arti">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
 
 
@@ -371,7 +373,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-08-15 09:21:22" itemprop="dateModified" datetime="2018-08-15T09:21:22+08:00">2018-08-15</time>
+                <time title="Updated at: 2018-08-16 08:38:22" itemprop="dateModified" datetime="2018-08-16T08:38:22+08:00">2018-08-16</time>
               
             
           </span>
@@ -422,22 +424,23 @@
       
 
       
-        <pre><code>NEO4J高可用集群搭建
+        <pre><code>** NEO4J高可用集群搭建 **
 </code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
-<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416，完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416，完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</a></p>
+<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
 <p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003。执行下面命令" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003。执行下面命令</a></p>
-<p><a href="http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz" target="_blank" rel="noopener">http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<pre><code>或者前往neo4j官网下载：https://neo4j.com/download/。
-</code></pre><p>二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
+<pre><code>http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz
+
+或者前往neo4j官网下载：https://neo4j.com/download/。
+</code></pre><p>二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
 <p>三 、修改配置文件neo4j.conf(重要)</p>
-<p>master节点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">    ha.server_id=1</span><br><span class="line">    ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line"></span><br><span class="line">    dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
+<p>master节点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
 <p>slave1节点：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">    ha.server_id=2</span><br><span class="line">    ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line"></span><br><span class="line">    dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
 <p>slave2节点：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">    ha.server_id=3</span><br><span class="line">    ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line"></span><br><span class="line">    dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>四、启动HA集群,分别进入neo4j 目录下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure></p>
-<p> 五、进入localhost：7474查看集群信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
+<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
 
       
     </div>
@@ -460,7 +463,7 @@
           
             <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
-            <a href="/tags/图/" rel="tag"># 图</a>
+            <a href="/tags/neo4j/" rel="tag"># neo4j</a>
           
         </div>
       
