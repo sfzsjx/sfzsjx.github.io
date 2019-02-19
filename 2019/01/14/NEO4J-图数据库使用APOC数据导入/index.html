@@ -108,17 +108,17 @@
 
 
 
-  <meta name="description" content="天道酬勤">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+  <meta name="description" content="Neo4j 数据导入 一、安装与部署 直接在官网下载安装包安装，解压即可。 二、下载相应的jar包 1.sqlserver 数据导入neo4j的jar包 apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar 2.mysql 数据导入neo4j的jar包 apoc-3.3.0.1-all.jar    mysq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEO4J 图数据库使用APOC数据导入">
+<meta property="og:url" content="http://yoursite.com/2019/01/14/NEO4J-图数据库使用APOC数据导入/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="天道酬勤">
+<meta property="og:description" content="Neo4j 数据导入 一、安装与部署 直接在官网下载安装包安装，解压即可。 二、下载相应的jar包 1.sqlserver 数据导入neo4j的jar包 apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar 2.mysql 数据导入neo4j的jar包 apoc-3.3.0.1-all.jar    mysq">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-15T01:02:07.097Z">
+<meta property="og:updated_time" content="2019-01-14T06:33:35.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="天道酬勤">
+<meta name="twitter:title" content="NEO4J 图数据库使用APOC数据导入">
+<meta name="twitter:description" content="Neo4j 数据导入 一、安装与部署 直接在官网下载安装包安装，解压即可。 二、下载相应的jar包 1.sqlserver 数据导入neo4j的jar包 apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar 2.mysql 数据导入neo4j的jar包 apoc-3.3.0.1-all.jar    mysq">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/14/NEO4J-图数据库使用APOC数据导入/">
 
 
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title>关于 | 上善若水博客</title>
+  <title>NEO4J 图数据库使用APOC数据导入 | 上善若水博客</title>
   
 
 
@@ -234,7 +234,7 @@
         
         
           
-          <li class="menu-item menu-item-about menu-item-active">
+          <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
   </li>
@@ -291,71 +291,177 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/NEO4J-图数据库使用APOC数据导入/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">关于</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">NEO4J 图数据库使用APOC数据导入
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-14 14:33:35" itemprop="dateCreated datePublished" datetime="2019-01-14T14:33:35+08:00">2019-01-14</time>
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <pre><code>Neo4j 数据导入
+</code></pre><p>一、安装与部署</p>
+<pre><code>直接在官网下载安装包安装，解压即可。
+</code></pre><p>二、下载相应的jar包</p>
+<p>1.sqlserver 数据导入neo4j的jar包</p>
+<p>apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar</p>
+<p>2.mysql 数据导入neo4j的jar包</p>
+<p>apoc-3.3.0.1-all.jar    mysql-connector-java-8.0.8-dmr.jar</p>
+<p>3.将对应jar包放在安装目录plugins文件目录里，然后conf目录里的neo4j.conf的后面加上</p>
+<p>dbms.security.procedures.unrestricted=apoc.*</p>
+<p>apoc.import.file.enabled=true<br>apoc.export.file.enabled=true</p>
+<p>4.restart neo4j,运行return apoc.version(),若有版本号，则成功。</p>
+<p>三、导数据</p>
+<p>import org.neo4j.driver.v1.<em>;<br>public class Connect{<br>public static void main(String[] args){<br> Driver driver = GraphDatabase.driver(“bolt://localhost:7687”,AuthTokens.basic(“neo4j”,”neo4j”));<br> Session session = driver.session();<br> String cypher=”create constraint on (n:ITEM) ASSERT n.itemid is unique”; //创建唯一索引，这样可以更快的导入数据<br> Session.run(cypher);<br> cypher=”CALL apoc.periodic.iterate(\”CALL apoc.load.jdbc(‘jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8’,\\”SELECT </em> FROM TABLE1\\”)\”,\”MERGE(n:ITEM{itemid:row.mitemid}) with <em> MERGE(m:ITEM{itemid:row.itemid}) with </em> create p=(n)-[r:rel{rels:row.rels}]-&gt;(m)\”,{batchSize:10000,iterateList:true})”;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型<br> Session.run(cypher);<br> session.close();<br> driver.close();<br>   }<br>}<br>mysql数据库类似,不再赘述。</p>
+<p>补充：1.使用neo4j-import导入数据的命令</p>
+<p>neo4j-admin import –nodes:item  “nodes.csv”  –relationships:rel “rel_header.csv,rel.csv” –ignore-missing-nodes</p>
+<p>2.apoc 导出命令</p>
+<p>call apoc.export.cypher.query(<br>“MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2”,<br>“/tmp/friendships.cypher”,<br>{format:’plain’,cypherFormat:’updateStructure’})`<br>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a></p>
+<p>call apoc.export.cypher.query(“match (n:lable) where not (n)–() and n.properties = ‘400’ return distinct(n)”,”C://User/Desktop/test”,{format:’plain’,cypherFormat:’create’})<br> 3.不用解压也能导数据load csv</p>
+<p>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10<br>using periodic commit 1000<br>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ create (item:ITEM{id:line[0],item:line[1]})</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/RDD常用算子/" rel="next" title="RDD常用算子">
+                <i class="fa fa-chevron-left"></i> RDD常用算子
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/CDH-5-15-简易版离线安装完整版/" rel="prev" title="CDH 5.15 简易版离线安装完整版">
+                CDH 5.15 简易版离线安装完整版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
