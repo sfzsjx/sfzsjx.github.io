@@ -109,15 +109,14 @@
 
 
   <meta name="description" content="天道酬勤">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SPARK DATAFRAME">
-<meta property="og:url" content="http://yoursite.com/2018/08/14/SPARK-DATAFRAME/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="上善若水博客">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="天道酬勤">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-14T02:23:52.880Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SPARK DATAFRAME">
+<meta name="twitter:title" content="上善若水博客">
 <meta name="twitter:description" content="天道酬勤">
 
 
@@ -127,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/14/SPARK-DATAFRAME/">
+  <link rel="canonical" href="http://yoursite.com/page/2/">
 
 
 
@@ -137,7 +136,7 @@
   };
 </script>
 
-  <title>SPARK DATAFRAME | 上善若水博客</title>
+  <title>上善若水博客</title>
   
 
 
@@ -184,7 +183,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
 	<a href="https://github.com/sfzsjx"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
@@ -294,9 +294,9 @@
           
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/SPARK-DATAFRAME/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/图数据集群搭建/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="上善若水">
@@ -328,7 +328,11 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SPARK DATAFRAME
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/图数据集群搭建/" itemprop="url">
+                  图数据集群搭建
+                </a>
               
             
           </h1>
@@ -353,7 +357,189 @@
                 
               
 
-              <time title="Post created: 2018-08-14 10:23:52" itemprop="dateCreated datePublished" datetime="2018-08-14T10:23:52+08:00">2018-08-14</time>
+              <time title="Post created: 2018-08-14 10:15:50" itemprop="dateCreated datePublished" datetime="2018-08-14T10:15:50+08:00">2018-08-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-08-16 08:46:15" itemprop="dateModified" datetime="2018-08-16T08:46:15+08:00">2018-08-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图数据库/" itemprop="url" rel="index"><span itemprop="name">图数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>** NEO4J高可用集群搭建 **
+</code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
+<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
+<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">```							  </span><br><span class="line"> 或者前往neo4j官网下载 ：https://neo4j.com/download/ .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</span><br><span class="line">``` bash</span><br><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
+<p>三 、修改配置文件neo4j.conf(重要)</p>
+<p>master节点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
+<p>slave1节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>slave2节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
+<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/hello-world/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/13/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-08-13 16:48:53" itemprop="dateCreated datePublished" datetime="2018-08-13T16:48:53+08:00">2018-08-13</time>
             
 
             
@@ -388,6 +574,19 @@
 
       
         
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
+        
       
     </div>
 
@@ -407,32 +606,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/08/14/图数据集群搭建/" rel="next" title="图数据集群搭建">
-                <i class="fa fa-chevron-left"></i> 图数据集群搭建
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/15/RDD常用算子/" rel="prev" title="RDD常用算子">
-                RDD常用算子 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -442,15 +621,18 @@
   </article>
 
 
-  </div>
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -705,10 +887,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
-
-
 
   
 
