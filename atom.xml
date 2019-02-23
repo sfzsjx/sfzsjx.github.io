@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-22T05:59:14.544Z</updated>
+  <updated>2019-02-23T06:45:58.063Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>17-数据分析实战笔记： 决策树</title>
+    <link href="http://yoursite.com/2019/02/23/17-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0%EF%BC%9A-%E5%86%B3%E7%AD%96%E6%A0%91/"/>
+    <id>http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/</id>
+    <published>2019-02-23T06:16:23.000Z</published>
+    <updated>2019-02-23T06:45:58.063Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树的工作原理"><a href="#决策树的工作原理" class="headerlink" title="决策树的工作原理"></a>决策树的工作<strong>原理</strong></h2><blockquote><p>  在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。<br><img src="/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png" alt="image.png"><br>上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：<strong>构造和剪枝。</strong></p></blockquote><h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote><p>构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：<br>1.根节点：树的顶端，最开始的那个节点<br>2.内部节点：树的中间节点<br>3.叶节点：树最底部的节点，也是决策树结果</p></blockquote><p>构造过程中，需要解决的三个重要问题：<br>1.选择哪个属性作为根节点；<br>2.选择哪些属性作为子节点；<br>3.什么时候停止并得到目标状态，即叶子节点。</p><h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><blockquote><p>剪枝就是给决策树瘦身。也即不需要过多的判断也能得到不错的结果。主要是为了防止“过拟合（Overfitting）”现象的发生。<br>过拟合现象会导致得到的模型虽然训练结果好，但是泛化能力差。<br>剪枝一般分为两种：“预剪枝”（Pre-Pruning）和“后剪枝”（Post-Pruning）</p></blockquote><p><img src="/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png" alt="image.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;决策树&quot;&gt;&lt;a href=&quot;#决策树&quot; class=&quot;headerlink&quot; title=&quot;决策树&quot;&gt;&lt;/a&gt;决策树&lt;/h1&gt;&lt;h2 id=&quot;决策树的工作原理&quot;&gt;&lt;a href=&quot;#决策树的工作原理&quot; class=&quot;headerlink&quot; title=&quot;决策树的工
+      
+    
+    </summary>
+    
+      <category term="决策树" scheme="http://yoursite.com/categories/%E5%86%B3%E7%AD%96%E6%A0%91/"/>
+    
+    
+      <category term="决策树" scheme="http://yoursite.com/tags/%E5%86%B3%E7%AD%96%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>02 数据分析实战笔记--学习数据挖掘的最佳路径</title>

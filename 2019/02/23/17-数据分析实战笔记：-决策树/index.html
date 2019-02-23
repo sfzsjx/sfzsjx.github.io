@@ -108,16 +108,21 @@
 
 
 
-  <meta name="description" content="天道酬勤">
-<meta property="og:type" content="website">
-<meta property="og:title" content="上善若水博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="决策树决策树的工作原理   在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：构造和剪枝。  构造 构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：1.根节点：树的顶端，最开始的那个节点2.内部节点：树的中间节点3.叶节点：树最底部的节点，也是决策树">
+<meta name="keywords" content="决策树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="17-数据分析实战笔记： 决策树">
+<meta property="og:url" content="http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="天道酬勤">
+<meta property="og:description" content="决策树决策树的工作原理   在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：构造和剪枝。  构造 构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：1.根节点：树的顶端，最开始的那个节点2.内部节点：树的中间节点3.叶节点：树最底部的节点，也是决策树">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png">
+<meta property="og:updated_time" content="2019-02-23T06:45:58.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="上善若水博客">
-<meta name="twitter:description" content="天道酬勤">
+<meta name="twitter:title" content="17-数据分析实战笔记： 决策树">
+<meta name="twitter:description" content="决策树决策树的工作原理   在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：构造和剪枝。  构造 构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：1.根节点：树的顶端，最开始的那个节点2.内部节点：树的中间节点3.叶节点：树最底部的节点，也是决策树">
+<meta name="twitter:image" content="http://yoursite.com/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png">
 
 
 
@@ -126,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/">
 
 
 
@@ -136,7 +141,7 @@
   };
 </script>
 
-  <title>Archiv | 上善若水博客</title>
+  <title>17-数据分析实战笔记： 决策树 | 上善若水博客</title>
   
 
 
@@ -183,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
 	<a href="https://github.com/sfzsjx"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
@@ -257,7 +262,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
   </li>
@@ -290,428 +295,201 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">17-数据分析实战笔记： 决策树
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-23 14:16:23 / Updated at: 14:45:58" itemprop="dateCreated datePublished" datetime="2019-02-23T14:16:23+08:00">2019-02-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        Öhm..! Insgesamt 13 Artikel. Bleib dran.
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/" itemprop="url" rel="index"><span itemprop="name">决策树</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/23/17-数据分析实战笔记：-决策树/" itemprop="url">
-              
-                <span itemprop="name">17-数据分析实战笔记： 决策树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-23T14:16:23+08:00" content="2019-02-23">
-          02-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/02-数据分析实战笔记-学习数据挖掘的最佳路径/" itemprop="url">
-              
-                <span itemprop="name">02 数据分析实战笔记--学习数据挖掘的最佳路径</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-18T22:26:38+08:00" content="2019-02-18">
-          02-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/修炼指南/" itemprop="url">
-              
-                <span itemprop="name">修炼指南</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-18T22:04:46+08:00" content="2019-02-18">
-          02-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/数据分析全景图笔记/" itemprop="url">
-              
-                <span itemprop="name">数据分析全景图笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-18T14:29:35+08:00" content="2019-02-18">
-          02-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/21/jupyter-安装/" itemprop="url">
-              
-                <span itemprop="name">jupyter 安装</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-21T09:11:39+08:00" content="2019-01-21">
-          01-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/18/学习笔记/" itemprop="url">
-              
-                <span itemprop="name">学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-18T16:56:37+08:00" content="2019-01-18">
-          01-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/18/kylin-jdbc-连接/" itemprop="url">
-              
-                <span itemprop="name">kylin jdbc 连接</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-18T09:13:24+08:00" content="2019-01-18">
-          01-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/14/CDH-5-15-简易版离线安装完整版/" itemprop="url">
-              
-                <span itemprop="name">CDH 5.15 简易版离线安装完整版</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-14T14:34:23+08:00" content="2019-01-14">
-          01-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/14/NEO4J-图数据库使用APOC数据导入/" itemprop="url">
-              
-                <span itemprop="name">NEO4J 图数据库使用APOC数据导入</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-14T14:33:35+08:00" content="2019-01-14">
-          01-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/15/RDD常用算子/" itemprop="url">
-              
-                <span itemprop="name">RDD常用算子</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-15T14:15:14+08:00" content="2018-08-15">
-          08-15
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树的工作原理"><a href="#决策树的工作原理" class="headerlink" title="决策树的工作原理"></a>决策树的工作<strong>原理</strong></h2><blockquote>
+<p>  在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。<br><img src="/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png" alt="image.png"><br>上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：<strong>构造和剪枝。</strong></p>
+</blockquote>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote>
+<p>构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：<br>1.根节点：树的顶端，最开始的那个节点<br>2.内部节点：树的中间节点<br>3.叶节点：树最底部的节点，也是决策树结果</p>
+</blockquote>
+<p>构造过程中，需要解决的三个重要问题：<br>1.选择哪个属性作为根节点；<br>2.选择哪些属性作为子节点；<br>3.什么时候停止并得到目标状态，即叶子节点。</p>
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><blockquote>
+<p>剪枝就是给决策树瘦身。也即不需要过多的判断也能得到不错的结果。主要是为了防止“过拟合（Overfitting）”现象的发生。<br>过拟合现象会导致得到的模型虽然训练结果好，但是泛化能力差。<br>剪枝一般分为两种：“预剪枝”（Pre-Pruning）和“后剪枝”（Post-Pruning）</p>
+</blockquote>
+<p><img src="/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png" alt="image.png"></p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/决策树/" rel="tag"># 决策树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/02-数据分析实战笔记-学习数据挖掘的最佳路径/" rel="next" title="02 数据分析实战笔记--学习数据挖掘的最佳路径">
+                <i class="fa fa-chevron-left"></i> 02 数据分析实战笔记--学习数据挖掘的最佳路径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -732,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -831,6 +618,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">决策树的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造"><span class="nav-number">1.1.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剪枝"><span class="nav-number">1.1.2.</span> <span class="nav-text">剪枝</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -970,6 +773,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
 
   
 
