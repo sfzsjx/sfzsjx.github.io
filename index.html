@@ -311,6 +311,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/18-决策树（中）-CART算法笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/07/18-决策树（中）-CART算法笔记/" itemprop="url">
+                  18| 决策树（中） : CART算法笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-07 09:16:53 / Updated at: 10:43:39" itemprop="dateCreated datePublished" datetime="2019-03-07T09:16:53+08:00">2019-03-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/" itemprop="url" rel="index"><span itemprop="name">决策树</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/数据挖掘/" itemprop="url" rel="index"><span itemprop="name">数据挖掘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/2019/03/07/95366780-4076-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><blockquote>
+<p>基于信息度量的不同方式，我们把决策树分为ID3算法、C4.5算法和CART算法。CART算法（Classification And Regression Tree）,<br>又称分类回归树。也就是说CART决策树既可以作为分类树，又可以作为回归树。而且CART只支持二叉树。<br>分类树和回归树的区别<br>分类树可以处理离散数据，也就是数据种类有限的数据，它输出的是样本类别，而回归树可以对连续型的数值进行预测<br>也就是数据在某个区间都有取值的可能，它输出的是一个数值。</p>
+</blockquote>
+<h2 id="CART分类树工作流程"><a href="#CART分类树工作流程" class="headerlink" title="CART分类树工作流程"></a>CART分类树工作流程</h2><p>在属性选择上CART算法采用基尼系数作为衡量指标。</p>
+<blockquote>
+<p>假设t为节点，那么该节点是GINI系数为：<br><img src="/images/2019/03/07/4fe1cf50-4079-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中p(Ck|t)表示节点t属于类别Ck的概率，节点t的基尼系数为1减去个类别Ck概率平方和。<br>在CART算法中，基于基尼系数对特征属性进行二元分裂，假设属性A将节点D划分为D1和D2，如下图所示：<br><img src="/images/2019/03/07/d4b50920-407b-11e9-8a4c-37398b64114f.png" alt="image.png"><br>那么节点D的基尼系数等于子节点D1和D2的归一化基尼系数之和，用公式表示为：<br><img src="/images/2019/03/07/0e9e5290-407c-11e9-8a4c-37398b64114f.png" alt="image.png"><br>归一化基尼系数代表的是每个子节点的基尼系数乘以该节点占整体父节点D中的比例。节点D被属性A划分后基尼系数越大，样本集合的<br>不确定性越大，也就是不纯度越高。</p>
+</blockquote>
+<h2 id="如何使用CART算法来创建分类树"><a href="#如何使用CART算法来创建分类树" class="headerlink" title="如何使用CART算法来创建分类树"></a>如何使用CART算法来创建分类树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line"># 准备数据集</span><br><span class="line">iris=load_iris()</span><br><span class="line"># 获取特征集和分类标识</span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.33, random_state=0)</span><br><span class="line"># 创建 CART 分类树</span><br><span class="line">clf = DecisionTreeClassifier(criterion=&apos;gini&apos;)</span><br><span class="line"># 拟合构造 CART 分类树</span><br><span class="line">clf = clf.fit(train_features, train_labels)</span><br><span class="line"># 用 CART 分类树做预测</span><br><span class="line">test_predict = clf.predict(test_features)</span><br><span class="line"># 预测结果与测试集结果作比对</span><br><span class="line">score = accuracy_score(test_labels, test_predict)</span><br><span class="line">print(&quot;CART 分类树准确率 %.4lf&quot; % score)</span><br></pre></td></tr></table></figure>
+<h2 id="CART回归树工作流程"><a href="#CART回归树工作流程" class="headerlink" title="CART回归树工作流程"></a>CART回归树工作流程</h2><blockquote>
+<p>在CART回归树中，通过样本的混乱程度，也就是样本的离散程度来评价“不纯度”。<br>设x为样本的个体，均值为u。可以通过取差值的绝对值或者方差来评价。<br>差值绝对值：<br><img src="/images/2019/03/07/ee8fa8c0-407e-11e9-8a4c-37398b64114f.png" alt="image.png"><br>方差：<br><img src="/images/2019/03/07/096e0420-407f-11e9-8a4c-37398b64114f.png" alt="image.png"><br>以上两种节点划分标准，分别对应着两种目标函数最优化的标准。最小绝对偏差（LAD）和最小二乘偏差（LSD）。</p>
+</blockquote>
+<h2 id="CART回归树预测"><a href="#CART回归树预测" class="headerlink" title="CART回归树预测"></a>CART回归树预测</h2><p>例子：波士顿房价预测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.metrics import mean_squared_error</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.datasets import load_boston</span><br><span class="line">from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error</span><br><span class="line">from sklearn.tree import DecisionTreeRegressor</span><br><span class="line"># 准备数据集</span><br><span class="line">boston=load_boston()</span><br><span class="line"># 探索数据</span><br><span class="line">print(boston.feature_names)</span><br><span class="line"># 获取特征集和房价</span><br><span class="line">features = boston.data</span><br><span class="line">prices = boston.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_price, test_price = train_test_split(features, prices, test_size=0.33)</span><br><span class="line"># 创建 CART 回归树</span><br><span class="line">dtr=DecisionTreeRegressor()</span><br><span class="line"># 拟合构造 CART 回归树</span><br><span class="line">dtr.fit(train_features, train_price)</span><br><span class="line"># 预测测试集中的房价</span><br><span class="line">predict_price = dtr.predict(test_features)</span><br><span class="line"># 测试集的结果评价</span><br><span class="line">print(&apos;回归树二乘偏差均值:&apos;, mean_squared_error(test_price, predict_price))</span><br><span class="line">print(&apos;回归树绝对值偏差均值:&apos;, mean_absolute_error(test_price, predict_price))</span><br></pre></td></tr></table></figure></p>
+<h2 id="CART决策树的剪枝"><a href="#CART决策树的剪枝" class="headerlink" title="CART决策树的剪枝"></a>CART决策树的剪枝</h2><p>CART决策树的剪枝主要采用的是CCP（cost-complexity prune）方法,又称代价复杂度。这种剪枝方式采用了节点的表面误差率增益值作为评估：<br><img src="/images/2019/03/07/7d6460c0-4081-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中Tt代表以t为根节点的子树，C(Tt)表示节点t的子树没被裁剪时子树Tt的误差，C(t)表示节点t的子树被裁剪时节点t的误差，|Tt|代表子树Tt的叶子树，剪枝后，T的叶子数减少了|Tt|-1。<br>所以节点的表面误差率增益值等于节点t的子树被剪枝后的误差变化除以减掉的叶子数量。</p>
+<p><img src="/images/2019/03/07/ce361dd0-4082-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/03-数据分析实战45-：-Python-基础语法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1985,161 +2164,6 @@ public class KylinJdbc {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/NEO4J-图数据库使用APOC数据导入/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/14/NEO4J-图数据库使用APOC数据导入/" itemprop="url">
-                  NEO4J 图数据库使用APOC数据导入
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-14 14:33:35" itemprop="dateCreated datePublished" datetime="2019-01-14T14:33:35+08:00">2019-01-14</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>Neo4j 数据导入
-</code></pre><p>一、安装与部署</p>
-<pre><code>直接在官网下载安装包安装，解压即可。
-</code></pre><p>二、下载相应的jar包</p>
-<p>1.sqlserver 数据导入neo4j的jar包</p>
-<p>apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar</p>
-<p>2.mysql 数据导入neo4j的jar包</p>
-<p>apoc-3.3.0.1-all.jar    mysql-connector-java-8.0.8-dmr.jar</p>
-<p>3.将对应jar包放在安装目录plugins文件目录里，然后conf目录里的neo4j.conf的后面加上</p>
-<p>dbms.security.procedures.unrestricted=apoc.*</p>
-<p>apoc.import.file.enabled=true<br>apoc.export.file.enabled=true</p>
-<p>4.restart neo4j,运行return apoc.version(),若有版本号，则成功。</p>
-<p>三、导数据</p>
-<p>import org.neo4j.driver.v1.<em>;<br>public class Connect{<br>public static void main(String[] args){<br> Driver driver = GraphDatabase.driver(“bolt://localhost:7687”,AuthTokens.basic(“neo4j”,”neo4j”));<br> Session session = driver.session();<br> String cypher=”create constraint on (n:ITEM) ASSERT n.itemid is unique”; //创建唯一索引，这样可以更快的导入数据<br> Session.run(cypher);<br> cypher=”CALL apoc.periodic.iterate(\”CALL apoc.load.jdbc(‘jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8’,\\”SELECT </em> FROM TABLE1\\”)\”,\”MERGE(n:ITEM{itemid:row.mitemid}) with <em> MERGE(m:ITEM{itemid:row.itemid}) with </em> create p=(n)-[r:rel{rels:row.rels}]-&gt;(m)\”,{batchSize:10000,iterateList:true})”;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型<br> Session.run(cypher);<br> session.close();<br> driver.close();<br>   }<br>}<br>mysql数据库类似,不再赘述。</p>
-<p>补充：1.使用neo4j-import导入数据的命令</p>
-<p>neo4j-admin import –nodes:item  “nodes.csv”  –relationships:rel “rel_header.csv,rel.csv” –ignore-missing-nodes</p>
-<p>2.apoc 导出命令</p>
-<p>call apoc.export.cypher.query(<br>“MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2”,<br>“/tmp/friendships.cypher”,<br>{format:’plain’,cypherFormat:’updateStructure’})`<br>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a></p>
-<p>call apoc.export.cypher.query(“match (n:lable) where not (n)–() and n.properties = ‘400’ return distinct(n)”,”C://User/Desktop/test”,{format:’plain’,cypherFormat:’create’})<br> 3.不用解压也能导数据load csv</p>
-<p>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10<br>using periodic commit 1000<br>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ create (item:ITEM{id:line[0],item:line[1]})</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2187,7 +2211,7 @@ public class KylinJdbc {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2214,7 +2238,9 @@ public class KylinJdbc {
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
