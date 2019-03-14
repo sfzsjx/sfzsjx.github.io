@@ -108,17 +108,22 @@
 
 
 
-  <meta name="description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式">
+  <meta name="description" content="数据挖掘常遇见的问题，也是核心问题：  如何选择各种分类器，到底选择哪个分类算法？ 如何优化分类器参数，以便得到更好的分类器？  三个目标：  创建各种分类器，包括已经掌握的SVM、决策树、KNN分类器，以及随机森林分类器； 掌握GridSearchCV工具，优化算法模型的参数； 使用Pipeline 管道机制进行流水线作业。（数据规范或者数据降维）  构建随机森林分类器  随机森林（Random">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记">
-<meta property="og:url" content="http://yoursite.com/2019/01/18/学习笔记/index.html">
+<meta property="og:title" content="数据挖掘实战（1） ： 信用卡违约率分析">
+<meta property="og:url" content="http://yoursite.com/2019/03/14/数据挖掘实战（1）-：-信用卡违约率分析/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式">
+<meta property="og:description" content="数据挖掘常遇见的问题，也是核心问题：  如何选择各种分类器，到底选择哪个分类算法？ 如何优化分类器参数，以便得到更好的分类器？  三个目标：  创建各种分类器，包括已经掌握的SVM、决策树、KNN分类器，以及随机森林分类器； 掌握GridSearchCV工具，优化算法模型的参数； 使用Pipeline 管道机制进行流水线作业。（数据规范或者数据降维）  构建随机森林分类器  随机森林（Random">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-18T08:56:37.581Z">
+<meta property="og:image" content="http://yoursite.com/images/2019/03/14/79bd1cb0-45fd-11e9-9d60-a566f1b35488.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/03/14/fecb8ac0-45ff-11e9-9d60-a566f1b35488.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/03/14/d48a1df0-4620-11e9-9d60-a566f1b35488.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/03/14/667a0a90-4621-11e9-9d60-a566f1b35488.png">
+<meta property="og:updated_time" content="2019-03-14T07:21:30.690Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习笔记">
-<meta name="twitter:description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式">
+<meta name="twitter:title" content="数据挖掘实战（1） ： 信用卡违约率分析">
+<meta name="twitter:description" content="数据挖掘常遇见的问题，也是核心问题：  如何选择各种分类器，到底选择哪个分类算法？ 如何优化分类器参数，以便得到更好的分类器？  三个目标：  创建各种分类器，包括已经掌握的SVM、决策树、KNN分类器，以及随机森林分类器； 掌握GridSearchCV工具，优化算法模型的参数； 使用Pipeline 管道机制进行流水线作业。（数据规范或者数据降维）  构建随机森林分类器  随机森林（Random">
+<meta name="twitter:image" content="http://yoursite.com/images/2019/03/14/79bd1cb0-45fd-11e9-9d60-a566f1b35488.png">
 
 
 
@@ -127,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/18/学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/14/数据挖掘实战（1）-：-信用卡违约率分析/">
 
 
 
@@ -137,7 +142,7 @@
   };
 </script>
 
-  <title>学习笔记 | 上善若水博客</title>
+  <title>数据挖掘实战（1） ： 信用卡违约率分析 | 上善若水博客</title>
   
 
 
@@ -311,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/数据挖掘实战（1）-：-信用卡违约率分析/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="上善若水">
@@ -328,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习笔记
+          <h1 class="post-title" itemprop="name headline">数据挖掘实战（1） ： 信用卡违约率分析
               
             
           </h1>
@@ -353,9 +358,13 @@
                 
               
 
-              <time title="Post created: 2019-01-18 16:56:37" itemprop="dateCreated datePublished" datetime="2019-01-18T16:56:37+08:00">2019-01-18</time>
+              <time title="Post created: 2019-03-14 10:23:18 / Updated at: 15:21:30" itemprop="dateCreated datePublished" datetime="2019-03-14T10:23:18+08:00">2019-03-14</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -387,8 +396,33 @@
       
 
       
-        <p>chcp    查看windows系统编码格式</p>
-<p>chcp 65001   将Windows格式编码设为utf-8模式</p>
+        <p>数据挖掘常遇见的问题，也是<strong>核心问题</strong>：</p>
+<ol>
+<li>如何选择各种分类器，到底选择哪个分类算法？</li>
+<li>如何优化分类器参数，以便得到更好的分类器？</li>
+</ol>
+<p><strong>三个目标</strong>：</p>
+<ol>
+<li>创建各种分类器，包括已经掌握的SVM、决策树、KNN分类器，以及随机森林分类器；</li>
+<li>掌握GridSearchCV工具，优化算法模型的参数；</li>
+<li>使用Pipeline 管道机制进行流水线作业。（数据规范或者数据降维）</li>
+</ol>
+<p>构建<strong>随机森林</strong>分类器<br>  随机森林（Random Forest,简称 RF），他实际是一个包含多个决策树分类器，<br>每个子分类器都是一颗CART分类回归树。所以随机森林既可以做分类也可以做回归任务。做分类时，输出的结果是每个子分类器<br>中分类结果最多的那个；做回归时，输出的结果是每个子分类的任务输出结果的平均值。<br>在sklearn中，使用RandomForestClassifier()构造随机森林模型，常用的参数有：<br><img src="/images/2019/03/14/79bd1cb0-45fd-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<p>使用 <strong>GridSearchCV</strong> 工具对模型参数进行调优<br>  GridSearchCV 是Python 的参数自动搜索模块，只要告诉它想要的调优的参数有哪些以及参数的取值范围，<br>它就会把所以的情况都跑一遍，然后告诉我们哪个参数最优，结果如何。<br>GridSearchCV(estimator,param_grid,cv = None,scoring=None)构造参数的自动搜索模块，主要参数说明；</p>
+<p><img src="/images/2019/03/14/fecb8ac0-45ff-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<p>简单例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.ensemble import RandomForestClassifier</span><br><span class="line">from sklearn.model_selection import GridSearchCV</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">rf = RandomForestClassifier()</span><br><span class="line">parameters = &#123;&quot;n_estimators&quot;:range(1,11)&#125;</span><br><span class="line">iris = load_iris()</span><br><span class="line">clf = GridSearchCV(estimator=rf,param_grid=parameters,cv =5)</span><br><span class="line">clf.fit(iris.data,iris.target)</span><br><span class="line">print(&quot;最优分数：%.4lf&quot;  %clf.best_score_)</span><br><span class="line">print(&quot;最优参数：&quot;,clf.best_params_)</span><br></pre></td></tr></table></figure></p>
+<p>使用 <strong>Pipeline </strong>管道机制进行流水作业<br>Python 有一种 Pipeline 管道机制。管道机制就是让我们把每一步都按照顺序下来，从而创建Pipeline流水作业。<br>每一步都采用（’名称’，步骤）的方式来表示。</p>
+<p>下面使用Pipeline管道机制，用随机森林对iris数据集做分类任务。先用StandardScaler方法对数据规范化，然后使用随机森林分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.ensemble import RandomForestClassifier</span><br><span class="line">from sklearn.model_selection import GridSearchCV</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn.preprocessing import StandardScaler</span><br><span class="line">from sklearn.pipeline import Pipeline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rf = RandomForestClassifier()</span><br><span class="line">parameters = &#123;&quot;randomforestclassifier__n_estimators&quot;: range(1,11)&#125;</span><br><span class="line">iris = load_iris()</span><br><span class="line">pipeline = Pipeline([</span><br><span class="line">    (&apos;scaler&apos;,StandardScaler()),</span><br><span class="line">    (&apos;randomforestclassifier&apos;,rf)</span><br><span class="line"> ]) </span><br><span class="line"></span><br><span class="line">clf = GridSearchCV(estimator=pipeline,param_grid=parameters)</span><br><span class="line"></span><br><span class="line">clf.fit(iris.data,iris.target)</span><br><span class="line"></span><br><span class="line">print(&quot;最优分数：%.4lf&quot; %clf.best_score_)</span><br><span class="line">print(&quot;最优参数：&quot;,clf.best_params_)</span><br></pre></td></tr></table></figure>
+<p>对信用卡违约率进行分析</p>
+<p>数据来源github上下载即可 ：<a href="https://github.com/cystanford/credit_default" target="_blank" rel="noopener">信用卡违约数据</a><br>这个数据集是台湾某银行05年4月到9月的信用卡数据，数据集一共25个字段，具体含义如下：<br><img src="/images/2019/03/14/d48a1df0-4620-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<p>现在针对这个数据集构建一个信用卡违约率分类器。<br>项目的流程如下：<br><img src="/images/2019/03/14/667a0a90-4621-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<ol>
+<li>加载数据</li>
+<li>准备阶段：探索数据，采用数据可视化方式可以让我们对数据有更加直观的了解</li>
+<li>分类阶段：之所以把数据规范化放到这个阶段，是因为我们采用了Pipeline 管道机制。而为了找到合适的分类算法以及<br>相适应的分类器参数，需要多试几个分类器以及采用GridSearchCV工具找到最优参数<br>具体代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">from sklearn.model_selection import learning_curve,train_test_split,GridSearchCV</span><br><span class="line">from sklearn.preprocessing import StandardScaler</span><br><span class="line">from sklearn.pipeline import Pipeline</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line">from sklearn.svm import SVM</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line">from sklearn.ensemble import RandomForestClassifier</span><br><span class="line">from sklearn.neighbors import KNeighborsClassifier</span><br><span class="line">from matplotlib import pyplot as plt</span><br><span class="line">from seaborn as sns </span><br><span class="line"></span><br><span class="line">data = pd.read_csv(&apos;C:\\Users\\hadoop\\Desktop\\UCI_Credit_Card.csv&apos;)</span><br><span class="line">print(data.shape)</span><br><span class="line">print(data.describe())</span><br><span class="line">next_month = data[&apos;default.payment.next.month&apos;].value_counts()</span><br><span class="line">print(next_month)</span><br><span class="line">df = pd.DataFrame(&#123;&apos;default.payment.next.month&apos;: next_month.index,&apos;values&apos;:next_month&#125;)</span><br><span class="line">plt.rcParams[&apos;font.sans-self&apos;] = [&apos;SimHei&apos;]</span><br><span class="line">plt.figure(figsize =(6,6))</span><br><span class="line">plt.title(&apos;信用卡违约率客户\n(违约:1,守约:0)&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -416,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/18/kylin-jdbc-连接/" rel="next" title="kylin jdbc 连接">
-                <i class="fa fa-chevron-left"></i> kylin jdbc 连接
+              <a href="/2019/03/13/朴素贝叶斯/" rel="next" title="朴素贝叶斯">
+                <i class="fa fa-chevron-left"></i> 朴素贝叶斯
               </a>
             
           </div>
@@ -425,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/21/jupyter-安装/" rel="prev" title="jupyter 安装">
-                jupyter 安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
