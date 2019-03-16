@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-16T08:10:55.770Z</updated>
+  <updated>2019-03-16T08:21:07.711Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/03/16/Mysql-%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86-%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2019/03/16/Mysql-优化原理-笔记/</id>
     <published>2019-03-16T08:07:15.000Z</published>
-    <updated>2019-03-16T08:10:55.770Z</updated>
+    <updated>2019-03-16T08:21:07.711Z</updated>
     
     <content type="html"><![CDATA[<p>Mysql 逻辑框架<br><img src="/images/2019/03/16/7156c0e0-47be-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p>MYSQL 逻辑框架整体分为三层，最上层为客户端层，并非Mysql独有，诸如：连接处理，授权认证，安全等。</p><p>MYSQL 大多数核心服务均在这中间这一层，包括查询解析、分析、优化、缓存、内置函数。所有的跨存储引擎也在这层实现，如：存储过程，触发器和视图等</p><p>最下层为存储引擎。负责Mysql中数据存储和提取。</p><h2 id="Mysql查询过程"><a href="#Mysql查询过程" class="headerlink" title="Mysql查询过程"></a>Mysql查询过程</h2><p>  Mysql查询优化，首先得了解Mysql是如何优化和执行查询的，然后在实际的工作中就是遵循一些原则让Mysql的优化器能够按照预想的合理的方式运行而已。</p><p><img src="/images/2019/03/16/bce25300-47c1-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p><img src="/images/2019/03/16/cfcff250-47c2-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p>参考：<a href="https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA</a></p>]]></content>
     
