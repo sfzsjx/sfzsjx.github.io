@@ -311,6 +311,377 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/03-数据分析实战45-：-Python-基础语法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/" itemprop="url">
+                  03 数据分析实战45 ： Python 基础语法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-01 10:37:48 / Updated at: 10:50:10" itemprop="dateCreated datePublished" datetime="2019-03-01T10:37:48+08:00">2019-03-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/2019/03/01/66ec2200-3bc8-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<h1 id="Python-基础语法"><a href="#Python-基础语法" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h1><h2 id="Python-语言特点"><a href="#Python-语言特点" class="headerlink" title="Python 语言特点"></a>Python 语言特点</h2><blockquote>
+<p>Python 语言最大的优点就是简洁，同时有大量的第三方库，功能强大，能够解决数据分析的大部分问题。比如科学计算工具NumPy 和 Pandas库，深度学习工具 Keras 和 TensorFlow,以及机器学习工具 Scikit-learn。</p>
+</blockquote>
+<h2 id="安装及-IDE-环境"><a href="#安装及-IDE-环境" class="headerlink" title="安装及 IDE 环境"></a>安装及 IDE 环境</h2><p>安装Python 3.x 官网下载安装。<br>Python IDE 推荐使用 PythonCharm</p>
+<h2 id="Python-基础语法-1"><a href="#Python-基础语法-1" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum = 100+100</span><br><span class="line">print (&apos;hello,%s&apos; %name) # 打印输出</span><br><span class="line">print (&apos;sum = %d&apos; %sum)</span><br></pre></td></tr></table></figure>
+<h3 id="判断语句-if-…-else-…"><a href="#判断语句-if-…-else-…" class="headerlink" title="判断语句 if … else …"></a>判断语句 if … else …</h3><figure class="highlight plain"><figcaption><span>score></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       print (&apos;Excellent&apos;)</span><br><span class="line">else:</span><br><span class="line">       if score &lt; 60:</span><br><span class="line">           print( &apos;Fail&apos;)</span><br><span class="line">       else:</span><br><span class="line">           print (&apos;Good Job&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句-：-for-…-in"><a href="#循环语句-：-for-…-in" class="headerlink" title="循环语句 ： for … in"></a>循环语句 ： for … in</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for number in range(11):</span><br><span class="line">    sum = sum + number</span><br><span class="line">print (sum)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句：while"><a href="#循环语句：while" class="headerlink" title="循环语句：while"></a>循环语句：while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 1</span><br><span class="line">while number &lt; 11:</span><br><span class="line">       sum = sum + number</span><br><span class="line">       number = number + 1</span><br><span class="line">print （sum）</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型：列表、元组、字典、集合"><a href="#数据类型：列表、元组、字典、集合" class="headerlink" title="数据类型：列表、元组、字典、集合"></a>数据类型：列表、元组、字典、集合</h2><h3 id="列表："><a href="#列表：" class="headerlink" title="列表：[]"></a>列表：[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lists.append(&apos;d&apos;)</span><br><span class="line">print (lists)</span><br><span class="line">print (len(lists))</span><br><span class="line">lists.insert(0,&apos;mm&apos;)</span><br><span class="line">lists.pop()</span><br><span class="line">print (lists)</span><br></pre></td></tr></table></figure>
+<h3 id="元组（tuple）"><a href="#元组（tuple）" class="headerlink" title="元组（tuple）"></a>元组（tuple）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (tuples[0])</span><br></pre></td></tr></table></figure>
+<h3 id="字典（dictionary）"><a href="#字典（dictionary）" class="headerlink" title="字典（dictionary）"></a>字典（dictionary）</h3><figure class="highlight plain"><figcaption><span>-*- coding: utf-8 -*</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义一个 dictionary</span><br><span class="line">score = &#123;&apos;guanyu&apos;:95,&apos;zhangfei&apos;:96&#125;</span><br><span class="line"># 添加一个元素</span><br><span class="line">score[&apos;zhaoyun&apos;] = 98</span><br><span class="line">print (score)</span><br><span class="line"># 删除一个元素</span><br><span class="line">score.pop(&apos;zhangfei&apos;)</span><br><span class="line"># 查看 key 是否存在</span><br><span class="line">print (&apos;guanyu&apos; in score)</span><br><span class="line"># 查看一个 key 对应的值</span><br><span class="line">print (score.get(&apos;guanyu&apos;))</span><br><span class="line">print (score.get(&apos;yase&apos;,99))</span><br></pre></td></tr></table></figure>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.add(&apos;d&apos;)</span><br><span class="line">s.remove(&apos;b&apos;)</span><br><span class="line">print （s）</span><br><span class="line">print （&apos;c&apos; in s）</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/03/01/9d1f4470-3bcc-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<p><img src="/images/2019/03/01/a812ead0-3bcc-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"><br>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+<p>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/23/17-数据分析实战笔记：-决策树/" itemprop="url">
+                  17-数据分析实战笔记： 决策树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-23 14:16:23" itemprop="dateCreated datePublished" datetime="2019-02-23T14:16:23+08:00">2019-02-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-13 14:40:25" itemprop="dateModified" datetime="2019-03-13T14:40:25+08:00">2019-03-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/" itemprop="url" rel="index"><span itemprop="name">决策树</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树的工作原理"><a href="#决策树的工作原理" class="headerlink" title="决策树的工作原理"></a>决策树的工作<strong>原理</strong></h2><blockquote>
+<p>  在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。<br><img src="/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png" alt="image.png"><br>上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：<strong>构造和剪枝。</strong></p>
+</blockquote>
+<h2 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h2><p>优点：计算复杂度不高，输出结果易于理解，对中间值的确失不敏感，可以处理不相干特征数据<br>缺点：易发生过拟合<br>适用数据类型：数值型和标称型<br>创建分支的伪代码函数createBranch()如下所示：<br>检测数据集中的每个子项是否属于同一类：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">If so return 类标签：</span><br><span class="line">Else</span><br><span class="line">	寻找划分数据集的最好特征</span><br><span class="line">	划分数据集</span><br><span class="line">	创建分支节点</span><br><span class="line">		for 每个划分的子集</span><br><span class="line">		    调用函数createBranch并增加返回结果到分支节点中</span><br><span class="line">        return 分支节点</span><br></pre></td></tr></table></figure>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote>
+<p>构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：<br>1.根节点：树的顶端，最开始的那个节点<br>2.内部节点：树的中间节点<br>3.叶节点：树最底部的节点，也是决策树结果</p>
+</blockquote>
+<p>构造过程中，需要解决的三个重要问题：<br>1.选择哪个属性作为根节点；<br>2.选择哪些属性作为子节点；<br>3.什么时候停止并得到目标状态，即叶子节点。</p>
+<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><blockquote>
+<p>（1）收集数据：可以使用任何方法<br>（2）准备数据：树构造算法只适应于标称型数据，因此数值型数据必须离散化<br>（3）分析数据：可以适应任何方法，构造树完成之后，我们应该检查图形是否符合预期。<br>（4）训练算法：构造树的数据结构<br>（5）测试算法：使用经验树计算错误率。<br>（6）使用算法：此步骤可以适应于任何监督学习算法，而使用决策树可以更好的理解数据的含义</p>
+</blockquote>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><pre><code>划分数据集的最大原则：将无序的数据变得更加有序。
+在划分数据集前后的信息变化称之为信息增益，而我们可以计算每个特征值划分收获的信息增益，获得信息增益最高
+</code></pre><p>的特征就是最好的选择。<br>    熵定义为信息的期望值。如果待分类的事务可能划分在多个分类之中，则xi的信息定义为：<br>            <img src="/images/2019/03/13/ed1fe490-453e-11e9-9d60-a566f1b35488.png" alt="image.png"><br>为了计算熵，需要计算所有类别可能包含的信息期望值：<br><img src="/images/2019/03/13/2fda6990-453f-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<p>程序清单1 计算给定数据集的香农熵<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from math import log</span><br><span class="line">def calcShannonEnt(dataSet):</span><br><span class="line">	numEntries = len(dataSet)</span><br><span class="line">	labelCounts = &#123;&#125;</span><br><span class="line">	#为所有可能的分类创建字典</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		currentLabel = featVec[-1]</span><br><span class="line">		if currentLabel not in labelCounts.keys():</span><br><span class="line">		labelCounts[currentLabel] = 0</span><br><span class="line">		labelCounts[currentLabel] += 1</span><br><span class="line">	shannonEnt = 0.0</span><br><span class="line">	# 计算信息期望</span><br><span class="line">	for key in labelCounts:</span><br><span class="line">		prob = float(labelCounts[key])/numEntries</span><br><span class="line">		shannonEnt -= prob*log(prob,2)</span><br><span class="line">	return shannonEnt</span><br></pre></td></tr></table></figure></p>
+<p>程序清单2 按照给定的特征划分数据集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def splitDataSet(dataSet,axis,value):</span><br><span class="line">	retDataSet = []</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		if featVec[axis] == value：</span><br><span class="line">			reduceFeatVec = featVec[:axis]</span><br><span class="line">			reduceFeatVec.extend(featVec[axis+1:])</span><br><span class="line">			retDataSet.append(reducedFeatVec)</span><br><span class="line">	return retDataSet</span><br></pre></td></tr></table></figure></p>
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><blockquote>
+<p>剪枝就是给决策树瘦身。也即不需要过多的判断也能得到不错的结果。主要是为了防止“过拟合（Overfitting）”现象的发生。<br>过拟合现象会导致得到的模型虽然训练结果好，但是泛化能力差。<br>剪枝一般分为两种：“预剪枝”（Pre-Pruning）和“后剪枝”（Post-Pruning）</p>
+</blockquote>
+<p><img src="/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png" alt="image.png"></p>
+<p><img src="/images/2019/03/01/bc0ba040-3bc7-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/02-数据分析实战笔记-学习数据挖掘的最佳路径/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1817,338 +2188,11 @@ public class KylinJdbc {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/RDD常用算子/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/15/RDD常用算子/" itemprop="url">
-                  RDD常用算子
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2018-08-15 14:15:14 / Updated at: 18:52:32" itemprop="dateCreated datePublished" datetime="2018-08-15T14:15:14+08:00">2018-08-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>1.mapPartitionsWithIndex:独立运行在每个分片上，并带有分区的编号。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val rdd1 = sc.parallelize(List(1,2,3,4,5,6,7,8,9),2)</span><br><span class="line"> rdd1.saveAsTextFile(&quot;hdfs://master:8020/sfz&quot;) def func1(index:</span><br><span class="line">Int,iter: Iterator[(Int)]) : Iterator[String] = &#123;iter.toList.map(x =&gt;</span><br><span class="line"> &quot;[partID:&quot; + index + &quot;,val: &quot; + x +&quot;]&quot;).iterator&#125;</span><br><span class="line"> rdd1.mapPartitionsWithIndex(func1).collect</span><br></pre></td></tr></table></figure>
-<p><strong><em>2.aggregate:先局部操作，再整体操作。</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">val rdd2 = sc.parallelize(List(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;),2)</span><br><span class="line">def func2(index: Int,iter: Iterator[(String)]) : Iterator[String] = &#123;iter.toList.map(x =&gt; &quot;[partID:&quot; + index + &quot;,val: &quot; + x +&quot;]&quot;).iterator&#125;</span><br><span class="line">rdd2.mapPartitionsWithIndex(func2).collect</span><br><span class="line">rdd2.aggregate(&quot;&quot;)(_+_,_+_)</span><br><span class="line"></span><br><span class="line">val rdd3 = sc.parallelize(List(&quot;12&quot;,&quot;23&quot;,&quot;345&quot;,&quot;4567&quot;),2)</span><br><span class="line">rdd3.aggregate(&quot;&quot;)((x,y) =&gt; math.max(x.length,y.length).toString,(x,y) =&gt; x+y)</span><br><span class="line"></span><br><span class="line">val rdd5 = sc.parallelize(List(&quot;12&quot;,&quot;23&quot;,&quot;&quot;,&quot;345&quot;),2)</span><br><span class="line">rdd5.aggregate(&quot;&quot;)((x,y) =&gt; math.min(x.length,y.length).toString,(x,y) =&gt; x+y)</span><br></pre></td></tr></table></figure>
-<p><strong><em>3.aggregateByKey：将key值相同的，先局部操作，再整体操作。和reduceByKey内部实现差不多</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">val pairRDD = sc.parallelize(List( (&quot;cat&quot;,2), (&quot;cat&quot;, 5), (&quot;mouse&quot;,    4),(&quot;cat&quot;, 12), (&quot;dog&quot;, 12), (&quot;mouse&quot;, 2)), 2)    pairRDD.aggregateByKey(0)(math.max(_, _), _ + _).collect</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/图数据集群搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/14/图数据集群搭建/" itemprop="url">
-                  图数据集群搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2018-08-14 10:15:50" itemprop="dateCreated datePublished" datetime="2018-08-14T10:15:50+08:00">2018-08-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-08-16 08:46:15" itemprop="dateModified" datetime="2018-08-16T08:46:15+08:00">2018-08-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图数据库/" itemprop="url" rel="index"><span itemprop="name">图数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>** NEO4J高可用集群搭建 **
-</code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
-<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
-<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">```							  </span><br><span class="line"> 或者前往neo4j官网下载 ：https://neo4j.com/download/ .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</span><br><span class="line">``` bash</span><br><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
-<p>三 、修改配置文件neo4j.conf(重要)</p>
-<p>master节点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>slave1节点：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>slave2节点：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
-<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2191,7 +2235,7 @@ public class KylinJdbc {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2224,7 +2268,15 @@ public class KylinJdbc {
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2253,7 +2305,15 @@ public class KylinJdbc {
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

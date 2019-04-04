@@ -311,6 +311,328 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/spring-注解-笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/04/spring-注解-笔记/" itemprop="url">
+                  spring 注解 笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-04 14:32:58 / Updated at: 14:37:35" itemprop="dateCreated datePublished" datetime="2019-04-04T14:32:58+08:00">2019-04-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Controller和-RestController的区别"><a href="#Controller和-RestController的区别" class="headerlink" title="@Controller和@RestController的区别"></a>@Controller和@RestController的区别</h3><p>知识点：@RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。</p>
+<p>1) 如果只是使用@RestController注解Controller，则Controller中的方法无法返回jsp页面，或者html，配置的视图解析器 InternalResourceViewResolver不起作用，返回的内容就是Return 里的内容。</p>
+<p>2) 如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。<br>    如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。</p>
+<p>例如：</p>
+<p>1.使用@Controller 注解，在对应的方法上，视图解析器可以解析return 的jsp,html页面，并且跳转到相应页面</p>
+<p>若返回json等内容到页面，则需要加@ResponseBody注解</p>
+<h3 id="RequestMapping-和-GetMapping-PostMapping-区别"><a href="#RequestMapping-和-GetMapping-PostMapping-区别" class="headerlink" title="@RequestMapping   和  @GetMapping @PostMapping 区别"></a>@RequestMapping   和  @GetMapping @PostMapping 区别</h3><p>@GetMapping是一个组合注解，是@RequestMapping(method = RequestMethod.GET)的缩写。</p>
+<p>@PostMapping是一个组合注解，是@RequestMapping(method = RequestMethod.POST)的缩写。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/hive-笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/04/hive-笔记/" itemprop="url">
+                  hive 笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-04 09:47:50" itemprop="dateCreated datePublished" datetime="2019-04-04T09:47:50+08:00">2019-04-04</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>hive设置队列三种方式：</p>
+<blockquote>
+<p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -870,16 +1192,46 @@
                 
               
 
-              <time title="Post created: 2019-03-15 09:22:52 / Updated at: 09:34:25" itemprop="dateCreated datePublished" datetime="2019-03-15T09:22:52+08:00">2019-03-15</time>
+              <time title="Post created: 2019-03-15 09:22:52" itemprop="dateCreated datePublished" datetime="2019-03-15T09:22:52+08:00">2019-03-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-29 09:17:24" itemprop="dateModified" datetime="2019-03-29T09:17:24+08:00">2019-03-29</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/脚本/" itemprop="url" rel="index"><span itemprop="name">脚本</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -911,6 +1263,11 @@
         
           
             <p>统计test.sh 文件命令的行数<br>sed -n ‘$=’ /home/hadoop/test/test.sh</p>
+<p>shell 脚本日志写入追加时间文件夹<br>date_time=<code>date +&#39;%Y-%m-%d&#39;</code> &amp;&amp; sh /home/greesj2b/jiaoben/bomrank.sh &gt;&gt; /home/greesj2b/jiaoben/bomrank/log/bomrank_$date_time.log 2&gt;&amp;1</p>
+<p>hive 查看表锁情况</p>
+<p>show locks;</p>
+<p>对表解锁<br>unlock table tablename;</p>
+<p>关闭锁机制<br>set hive.support.concurrency=false;默认为true</p>
 
           
         
@@ -1229,11 +1586,29 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-14 09:26:40" itemprop="dateModified" datetime="2019-03-14T09:26:40+08:00">2019-03-14</time>
+                <time title="Updated at: 2019-04-03 14:36:20" itemprop="dateModified" datetime="2019-04-03T14:36:20+08:00">2019-04-03</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据挖掘算法/" itemprop="url" rel="index"><span itemprop="name">数据挖掘算法</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1268,9 +1643,10 @@
 <li>使用概率分布进行分类</li>
 <li>学习朴素贝叶斯分类器</li>
 <li>解析RSS源数据</li>
-<li>使用朴素贝叶斯来分析不同地区的态度</li>
+<li>使用朴素贝叶斯来分析不同地区的态度<br><strong>通用贝叶斯公式</strong></li>
 </ol>
-<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>优点：在数据较少的情况下仍然有效，可以处理多类别问题。<br>缺点：对于输入数据的准备方式较为敏感<br>适应数据类型：标称型数据<br>贝叶斯决策理论的核心思想：选择高概率所对应的类别<br>条件概率：</p>
+<p><img src="/images/2019/03/30/df943f70-528a-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
+<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>优点：在数据较少的情况下仍然有效，可以处理多类别问题。<br>缺点：对于输入数据的准备方式较为敏感<br>适应数据类型：标称型数据<br>贝叶斯决策理论的核心思想：选择高概率所对应的类别<br>朴素贝叶斯它是一个简单但是及其强大的预测算法，之所以称为朴素贝叶斯是因为他有个非常强硬的假设，即它假设输入的每个变量都是独立的 。<br>条件概率：</p>
 <p><img src="/images/2019/03/13/7b97ece0-455d-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
 <h3 id="朴素贝叶斯文档分类应用"><a href="#朴素贝叶斯文档分类应用" class="headerlink" title="朴素贝叶斯文档分类应用"></a>朴素贝叶斯文档分类应用</h3><p>一般过程</p>
 <ol>
@@ -1285,6 +1661,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def loadDataSet():</span><br><span class="line">	postingList = [[&apos;my&apos;,&apos;dog&apos;,&apos;has&apos;,&apos;flea&apos;,\</span><br><span class="line">	&apos;problems&apos;,&apos;help&apos;,&apos;please&apos;],</span><br><span class="line">	[&apos;maybe&apos;,&apos;not&apos;,&apos;take&apos;,&apos;him&apos;,\</span><br><span class="line">	&apos;I&apos;,&apos;love&apos;,&apos;him&apos;]]</span><br><span class="line">classVec = [0,1] # 1代表有侮辱性文字，0代表正常言论</span><br><span class="line">return postingList,classVec</span><br><span class="line"></span><br><span class="line">def createVocabList(dataSet):</span><br><span class="line">	vocabSet = set([])</span><br><span class="line">	for document in dataSet:</span><br><span class="line">		vocabSet = vocabSet | set(document)</span><br><span class="line">	return list(vocabSet)</span><br><span class="line"></span><br><span class="line">def setOfWords2Vec(vocabList,inputSet):</span><br><span class="line">returnVec = [0]*len(vocabList)</span><br><span class="line">for word in inputSet:</span><br><span class="line">	if word in vocabList:</span><br><span class="line">		returnVec[vocabList.index(word)] = 1</span><br><span class="line">	else:print &quot;the Word : %s is not in my Vocabulary!&quot; % word</span><br><span class="line">return returnVec</span><br></pre></td></tr></table></figure>
 <h4 id="训练算法"><a href="#训练算法" class="headerlink" title="训练算法"></a>训练算法</h4><p>函数伪代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">计算每个类别中的文档数目</span><br><span class="line">对每篇训练文档：</span><br><span class="line">	对每个类别：</span><br><span class="line">		如果词条出现文档中 --&gt; 增加该词条的计数值</span><br><span class="line">		增加所有词条的计数值</span><br><span class="line">	对每个类别：</span><br><span class="line">		对每个词条：</span><br><span class="line">			将该词条的数目除以总词条数目得到条件概率</span><br><span class="line">	返回每个类别的条件概率</span><br></pre></td></tr></table></figure></p>
 <p>程序清单2 朴素贝叶斯分类器训练函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def trainNB0(trainMatrix,trainCategory):</span><br><span class="line">	# 初始化概率</span><br><span class="line">	numTrainDocs = len(trainMatrix)</span><br><span class="line">	numWords = len(trainMatrix[0])</span><br><span class="line">	pAbusive = sum(trainCategory)/float(numTrainDocs)</span><br><span class="line">	p0Num = zeros(numWords);plNum = zeros(numWords)</span><br><span class="line">	p0Denom = 0.0;plDenom = 0.0</span><br><span class="line">	# 向量相加</span><br><span class="line">	for i in range(numTrainDocs):</span><br><span class="line">		if trainCategory[i] ==1;</span><br><span class="line">			p1Num += trainMatrix[i]</span><br><span class="line">			p1Denom += sum(trainMatrix[i])</span><br><span class="line">		else:</span><br><span class="line">			p0Num += trainMatrix[i]</span><br><span class="line">			p0Denom += sum(trainMatrix[i])	</span><br><span class="line">	p1Vect = p1Num/p1Denom</span><br><span class="line">	p0Vect = p0Num/p0Denom</span><br><span class="line">	return p0Vect,p1Vect,pAbusive</span><br></pre></td></tr></table></figure></p>
+<h3 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h3><h4 id="离散数据案例（判断性别【高，中，中】）"><a href="#离散数据案例（判断性别【高，中，中】）" class="headerlink" title="离散数据案例（判断性别【高，中，中】）"></a>离散数据案例（判断性别【高，中，中】）</h4><p><img src="/images/2019/03/30/636a22f0-528c-11e9-a83e-453cdda717bc.png" alt="image.png"><br> 可知 共有三个属性，用A代表属性，A1,A2,A3分别表示 身高 = 高、体重 = 中、鞋码 = 中。<br>      共有两个类别，用C代表类别，C1,C2 分别表示为 男、女，未知情况用C~j~ 表示。<br>补充：</p>
+<blockquote>
+<p>（1）条件概率：<br>                 P(A|B)=P(AB)/P(B)  （P(B)&gt;0）<br>   (2) 乘法公式：</p>
+<pre><code>-  P(AB)=P(A|B)P(B)=P(B|A)P(A)
+-  P(A1A2...An-1An)=P(A1)P(A2|A1)P(A3|A1A2)...P(An|A1A2...An-1)   （n≥2，P(A1A2...An-1) &gt; 0）
+</code></pre><p>  （3）全概率公式:<br>             如果事件组B1，B2，…. 满足<br>               1.B1，B2….两两互斥，即 Bi ∩ Bj = ∅ ，i≠j ， i,j=1，2，….，且P(Bi)&gt;0,i=1,2,….;<br>               2.B1∪B2∪….=Ω ，则称事件组 B1,B2,…是样本空间Ω的一个划分<br>             设 B1,B2,…是样本空间Ω的一个划分，A为任一事件，则：<br>                 <img src="/images/2019/03/30/0e323350-5290-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
+</blockquote>
+<p>现在需要求得在 A1,A2,A3 下 C~j~ 的概率：<br>           <img src="/images/2019/03/30/5e230640-5291-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
+<p>由于P(A1A2A3) 固定，故求P(C~j~|A1A2A3)最大等价于P(A1A2A3|C~j~)P(C~j~)最大值。</p>
 
           
         
@@ -1670,382 +2055,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/03-数据分析实战45-：-Python-基础语法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/" itemprop="url">
-                  03 数据分析实战45 ： Python 基础语法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-01 10:37:48 / Updated at: 10:50:10" itemprop="dateCreated datePublished" datetime="2019-03-01T10:37:48+08:00">2019-03-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
-
-                
-                
-                  . 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/2019/03/01/66ec2200-3bc8-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
-<h1 id="Python-基础语法"><a href="#Python-基础语法" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h1><h2 id="Python-语言特点"><a href="#Python-语言特点" class="headerlink" title="Python 语言特点"></a>Python 语言特点</h2><blockquote>
-<p>Python 语言最大的优点就是简洁，同时有大量的第三方库，功能强大，能够解决数据分析的大部分问题。比如科学计算工具NumPy 和 Pandas库，深度学习工具 Keras 和 TensorFlow,以及机器学习工具 Scikit-learn。</p>
-</blockquote>
-<h2 id="安装及-IDE-环境"><a href="#安装及-IDE-环境" class="headerlink" title="安装及 IDE 环境"></a>安装及 IDE 环境</h2><p>安装Python 3.x 官网下载安装。<br>Python IDE 推荐使用 PythonCharm</p>
-<h2 id="Python-基础语法-1"><a href="#Python-基础语法-1" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum = 100+100</span><br><span class="line">print (&apos;hello,%s&apos; %name) # 打印输出</span><br><span class="line">print (&apos;sum = %d&apos; %sum)</span><br></pre></td></tr></table></figure>
-<h3 id="判断语句-if-…-else-…"><a href="#判断语句-if-…-else-…" class="headerlink" title="判断语句 if … else …"></a>判断语句 if … else …</h3><figure class="highlight plain"><figcaption><span>score></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       print (&apos;Excellent&apos;)</span><br><span class="line">else:</span><br><span class="line">       if score &lt; 60:</span><br><span class="line">           print( &apos;Fail&apos;)</span><br><span class="line">       else:</span><br><span class="line">           print (&apos;Good Job&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="循环语句-：-for-…-in"><a href="#循环语句-：-for-…-in" class="headerlink" title="循环语句 ： for … in"></a>循环语句 ： for … in</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for number in range(11):</span><br><span class="line">    sum = sum + number</span><br><span class="line">print (sum)</span><br></pre></td></tr></table></figure>
-<h3 id="循环语句：while"><a href="#循环语句：while" class="headerlink" title="循环语句：while"></a>循环语句：while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 1</span><br><span class="line">while number &lt; 11:</span><br><span class="line">       sum = sum + number</span><br><span class="line">       number = number + 1</span><br><span class="line">print （sum）</span><br></pre></td></tr></table></figure>
-<h2 id="数据类型：列表、元组、字典、集合"><a href="#数据类型：列表、元组、字典、集合" class="headerlink" title="数据类型：列表、元组、字典、集合"></a>数据类型：列表、元组、字典、集合</h2><h3 id="列表："><a href="#列表：" class="headerlink" title="列表：[]"></a>列表：[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lists.append(&apos;d&apos;)</span><br><span class="line">print (lists)</span><br><span class="line">print (len(lists))</span><br><span class="line">lists.insert(0,&apos;mm&apos;)</span><br><span class="line">lists.pop()</span><br><span class="line">print (lists)</span><br></pre></td></tr></table></figure>
-<h3 id="元组（tuple）"><a href="#元组（tuple）" class="headerlink" title="元组（tuple）"></a>元组（tuple）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (tuples[0])</span><br></pre></td></tr></table></figure>
-<h3 id="字典（dictionary）"><a href="#字典（dictionary）" class="headerlink" title="字典（dictionary）"></a>字典（dictionary）</h3><figure class="highlight plain"><figcaption><span>-*- coding: utf-8 -*</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义一个 dictionary</span><br><span class="line">score = &#123;&apos;guanyu&apos;:95,&apos;zhangfei&apos;:96&#125;</span><br><span class="line"># 添加一个元素</span><br><span class="line">score[&apos;zhaoyun&apos;] = 98</span><br><span class="line">print (score)</span><br><span class="line"># 删除一个元素</span><br><span class="line">score.pop(&apos;zhangfei&apos;)</span><br><span class="line"># 查看 key 是否存在</span><br><span class="line">print (&apos;guanyu&apos; in score)</span><br><span class="line"># 查看一个 key 对应的值</span><br><span class="line">print (score.get(&apos;guanyu&apos;))</span><br><span class="line">print (score.get(&apos;yase&apos;,99))</span><br></pre></td></tr></table></figure>
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.add(&apos;d&apos;)</span><br><span class="line">s.remove(&apos;b&apos;)</span><br><span class="line">print （s）</span><br><span class="line">print （&apos;c&apos; in s）</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2019/03/01/9d1f4470-3bcc-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
-<p><img src="/images/2019/03/01/a812ead0-3bcc-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"><br>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
-<p>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/17-数据分析实战笔记：-决策树/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/23/17-数据分析实战笔记：-决策树/" itemprop="url">
-                  17-数据分析实战笔记： 决策树
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-23 14:16:23" itemprop="dateCreated datePublished" datetime="2019-02-23T14:16:23+08:00">2019-02-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-03-13 14:40:25" itemprop="dateModified" datetime="2019-03-13T14:40:25+08:00">2019-03-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/" itemprop="url" rel="index"><span itemprop="name">决策树</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树的工作原理"><a href="#决策树的工作原理" class="headerlink" title="决策树的工作原理"></a>决策树的工作<strong>原理</strong></h2><blockquote>
-<p>  在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。<br><img src="/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png" alt="image.png"><br>上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：<strong>构造和剪枝。</strong></p>
-</blockquote>
-<h2 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h2><p>优点：计算复杂度不高，输出结果易于理解，对中间值的确失不敏感，可以处理不相干特征数据<br>缺点：易发生过拟合<br>适用数据类型：数值型和标称型<br>创建分支的伪代码函数createBranch()如下所示：<br>检测数据集中的每个子项是否属于同一类：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">If so return 类标签：</span><br><span class="line">Else</span><br><span class="line">	寻找划分数据集的最好特征</span><br><span class="line">	划分数据集</span><br><span class="line">	创建分支节点</span><br><span class="line">		for 每个划分的子集</span><br><span class="line">		    调用函数createBranch并增加返回结果到分支节点中</span><br><span class="line">        return 分支节点</span><br></pre></td></tr></table></figure>
-<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote>
-<p>构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：<br>1.根节点：树的顶端，最开始的那个节点<br>2.内部节点：树的中间节点<br>3.叶节点：树最底部的节点，也是决策树结果</p>
-</blockquote>
-<p>构造过程中，需要解决的三个重要问题：<br>1.选择哪个属性作为根节点；<br>2.选择哪些属性作为子节点；<br>3.什么时候停止并得到目标状态，即叶子节点。</p>
-<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><blockquote>
-<p>（1）收集数据：可以使用任何方法<br>（2）准备数据：树构造算法只适应于标称型数据，因此数值型数据必须离散化<br>（3）分析数据：可以适应任何方法，构造树完成之后，我们应该检查图形是否符合预期。<br>（4）训练算法：构造树的数据结构<br>（5）测试算法：使用经验树计算错误率。<br>（6）使用算法：此步骤可以适应于任何监督学习算法，而使用决策树可以更好的理解数据的含义</p>
-</blockquote>
-<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><pre><code>划分数据集的最大原则：将无序的数据变得更加有序。
-在划分数据集前后的信息变化称之为信息增益，而我们可以计算每个特征值划分收获的信息增益，获得信息增益最高
-</code></pre><p>的特征就是最好的选择。<br>    熵定义为信息的期望值。如果待分类的事务可能划分在多个分类之中，则xi的信息定义为：<br>            <img src="/images/2019/03/13/ed1fe490-453e-11e9-9d60-a566f1b35488.png" alt="image.png"><br>为了计算熵，需要计算所有类别可能包含的信息期望值：<br><img src="/images/2019/03/13/2fda6990-453f-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
-<p>程序清单1 计算给定数据集的香农熵<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from math import log</span><br><span class="line">def calcShannonEnt(dataSet):</span><br><span class="line">	numEntries = len(dataSet)</span><br><span class="line">	labelCounts = &#123;&#125;</span><br><span class="line">	#为所有可能的分类创建字典</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		currentLabel = featVec[-1]</span><br><span class="line">		if currentLabel not in labelCounts.keys():</span><br><span class="line">		labelCounts[currentLabel] = 0</span><br><span class="line">		labelCounts[currentLabel] += 1</span><br><span class="line">	shannonEnt = 0.0</span><br><span class="line">	# 计算信息期望</span><br><span class="line">	for key in labelCounts:</span><br><span class="line">		prob = float(labelCounts[key])/numEntries</span><br><span class="line">		shannonEnt -= prob*log(prob,2)</span><br><span class="line">	return shannonEnt</span><br></pre></td></tr></table></figure></p>
-<p>程序清单2 按照给定的特征划分数据集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def splitDataSet(dataSet,axis,value):</span><br><span class="line">	retDataSet = []</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		if featVec[axis] == value：</span><br><span class="line">			reduceFeatVec = featVec[:axis]</span><br><span class="line">			reduceFeatVec.extend(featVec[axis+1:])</span><br><span class="line">			retDataSet.append(reducedFeatVec)</span><br><span class="line">	return retDataSet</span><br></pre></td></tr></table></figure></p>
-<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><blockquote>
-<p>剪枝就是给决策树瘦身。也即不需要过多的判断也能得到不错的结果。主要是为了防止“过拟合（Overfitting）”现象的发生。<br>过拟合现象会导致得到的模型虽然训练结果好，但是泛化能力差。<br>剪枝一般分为两种：“预剪枝”（Pre-Pruning）和“后剪枝”（Post-Pruning）</p>
-</blockquote>
-<p><img src="/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png" alt="image.png"></p>
-<p><img src="/images/2019/03/01/bc0ba040-3bc7-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2088,7 +2102,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2121,7 +2135,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2150,7 +2172,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
