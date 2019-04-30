@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-04T06:37:35.300Z</updated>
+  <updated>2019-04-30T05:57:33.638Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>kafka 集群安装 部署</title>
+    <link href="http://yoursite.com/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/"/>
+    <id>http://yoursite.com/2019/04/30/kafka-集群安装-部署/</id>
+    <published>2019-04-30T03:45:07.000Z</published>
+    <updated>2019-04-30T05:57:33.638Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p><h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p><p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p><p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p><p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p><h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure><p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p><p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p><p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p><h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p><p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p><p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p><p>到此，使用kafka自带的zookeeper安装就完成了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;kafka-集群安装部署&quot;&gt;&lt;a href=&quot;#kafka-集群安装部署&quot; class=&quot;headerlink&quot; title=&quot;kafka 集群安装部署&quot;&gt;&lt;/a&gt;kafka 集群安装部署&lt;/h1&gt;&lt;p&gt;  安装kafka首先需要安装zookeeper集群，这里使
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
+    
+  </entry>
   
   <entry>
     <title>spring 注解 笔记</title>
@@ -464,9 +489,9 @@
     <link href="http://yoursite.com/2019/01/18/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2019/01/18/学习笔记/</id>
     <published>2019-01-18T08:56:37.000Z</published>
-    <updated>2019-03-19T02:18:34.870Z</updated>
+    <updated>2019-04-29T07:35:02.633Z</updated>
     
-    <content type="html"><![CDATA[<p>chcp    查看windows系统编码格式</p><p>chcp 65001   将Windows格式编码设为utf-8模式</p><p>设置 hue 指定队列进行查询操作</p><p>set mapred.job.queue.name=QueueA;</p><p>设置 hue 使用 spark 引擎查询</p><p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p>]]></content>
+    <content type="html"><![CDATA[<p>chcp    查看windows系统编码格式</p><p>chcp 65001   将Windows格式编码设为utf-8模式</p><p>设置 hue 指定队列进行查询操作</p><p>set mapred.job.queue.name=QueueA;</p><p>设置 hue 使用 spark 引擎查询</p><p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p><p>host文件配置：</p><p>C:\Windows\System32\drivers\etc </p>]]></content>
     
     <summary type="html">
     
@@ -531,31 +556,6 @@
         &lt;pre&gt;&lt;code&gt;CDH 简易版离线安装
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一、虚拟机搭建&lt;/p&gt;
 &lt;p&gt;准备一台32G内存的电脑，安装虚拟机VMware-workstation。虚拟机下载地址：&lt;a href=&quot;http://download3.vmware.com/soft
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>NEO4J 图数据库使用APOC数据导入</title>
-    <link href="http://yoursite.com/2019/01/14/NEO4J-%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8APOC%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5/"/>
-    <id>http://yoursite.com/2019/01/14/NEO4J-图数据库使用APOC数据导入/</id>
-    <published>2019-01-14T06:33:35.000Z</published>
-    <updated>2019-01-14T06:33:35.829Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>Neo4j 数据导入</code></pre><p>一、安装与部署</p><pre><code>直接在官网下载安装包安装，解压即可。</code></pre><p>二、下载相应的jar包</p><p>1.sqlserver 数据导入neo4j的jar包</p><p>apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar</p><p>2.mysql 数据导入neo4j的jar包</p><p>apoc-3.3.0.1-all.jar    mysql-connector-java-8.0.8-dmr.jar</p><p>3.将对应jar包放在安装目录plugins文件目录里，然后conf目录里的neo4j.conf的后面加上</p><p>dbms.security.procedures.unrestricted=apoc.*</p><p>apoc.import.file.enabled=true<br>apoc.export.file.enabled=true</p><p>4.restart neo4j,运行return apoc.version(),若有版本号，则成功。</p><p>三、导数据</p><p>import org.neo4j.driver.v1.<em>;<br>public class Connect{<br>public static void main(String[] args){<br> Driver driver = GraphDatabase.driver(“bolt://localhost:7687”,AuthTokens.basic(“neo4j”,”neo4j”));<br> Session session = driver.session();<br> String cypher=”create constraint on (n:ITEM) ASSERT n.itemid is unique”; //创建唯一索引，这样可以更快的导入数据<br> Session.run(cypher);<br> cypher=”CALL apoc.periodic.iterate(\”CALL apoc.load.jdbc(‘jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8’,\\”SELECT </em> FROM TABLE1\\”)\”,\”MERGE(n:ITEM{itemid:row.mitemid}) with <em> MERGE(m:ITEM{itemid:row.itemid}) with </em> create p=(n)-[r:rel{rels:row.rels}]-&gt;(m)\”,{batchSize:10000,iterateList:true})”;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型<br> Session.run(cypher);<br> session.close();<br> driver.close();<br>   }<br>}<br>mysql数据库类似,不再赘述。</p><p>补充：1.使用neo4j-import导入数据的命令</p><p>neo4j-admin import –nodes:item  “nodes.csv”  –relationships:rel “rel_header.csv,rel.csv” –ignore-missing-nodes</p><p>2.apoc 导出命令</p><p>call apoc.export.cypher.query(<br>“MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2”,<br>“/tmp/friendships.cypher”,<br>{format:’plain’,cypherFormat:’updateStructure’})`<br>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a></p><p>call apoc.export.cypher.query(“match (n:lable) where not (n)–() and n.properties = ‘400’ return distinct(n)”,”C://User/Desktop/test”,{format:’plain’,cypherFormat:’create’})<br> 3.不用解压也能导数据load csv</p><p>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10<br>using periodic commit 1000<br>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ create (item:ITEM{id:line[0],item:line[1]})</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;Neo4j 数据导入
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一、安装与部署&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;直接在官网下载安装包安装，解压即可。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;二、下载相应的jar包&lt;/p&gt;
-&lt;p&gt;1.sqlserver 数据导入neo4j的jar
       
     
     </summary>
