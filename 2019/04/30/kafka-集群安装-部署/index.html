@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="kafka 集群安装部署  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。 jdk 安装jdk 自己下载吧，后解压12cd /usr/local/javatar -zxvf jdk-8u11-linux-x64.tar.gz 配置环境变量123456vi /etc/profile#jdk环境变量配置 e">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-30T05:57:33.638Z">
+<meta property="og:updated_time" content="2019-05-04T01:19:19.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka 集群安装 部署">
 <meta name="twitter:description" content="kafka 集群安装部署  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。 jdk 安装jdk 自己下载吧，后解压12cd /usr/local/javatar -zxvf jdk-8u11-linux-x64.tar.gz 配置环境变量123456vi /etc/profile#jdk环境变量配置 e">
@@ -354,12 +354,24 @@
                 
               
 
-              <time title="Post created: 2019-04-30 11:45:07 / Updated at: 13:57:33" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
+              <time title="Post created: 2019-04-30 11:45:07" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-05-04 09:19:19" itemprop="dateModified" datetime="2019-05-04T09:19:19+08:00">2019-05-04</time>
               
             
           </span>
@@ -423,6 +435,9 @@
 <p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
 <p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p>
 <p>到此，使用kafka自带的zookeeper安装就完成了。</p>
+<blockquote>
+<p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p>
+</blockquote>
 
       
     </div>
@@ -465,6 +480,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/kafka相关的常规操作/" rel="prev" title="kafka相关的常规操作">
+                kafka相关的常规操作 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -534,7 +553,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -577,7 +596,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -616,7 +637,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
