@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-07T08:57:14.237Z</updated>
+  <updated>2019-05-07T09:25:52.993Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,23 @@
     <link href="http://yoursite.com/2019/05/07/Linux-%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/"/>
     <id>http://yoursite.com/2019/05/07/Linux-磁盘挂载/</id>
     <published>2019-05-07T08:57:14.000Z</published>
-    <updated>2019-05-07T08:57:14.237Z</updated>
+    <updated>2019-05-07T09:25:52.993Z</updated>
     
-    <content type="html"><![CDATA[<p> 在实际的生产应用中，经常需要对服务器的磁盘进行挂载。故总结下相关的操作，以备不时之需。<br>1、fdisk -l 查看磁盘信息<br><img src="/images/2019/05/07/0fc79190-70a6-11e9-b77c-4dd7e82ca243.png" alt="image.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>在实际的生产应用中，经常需要对服务器的磁盘进行挂载。故总结下相关的操作，以备不时之需。<br>1、fdisk -l 查看磁盘信息<br><img src="/images/2019/05/07/0fc79190-70a6-11e9-b77c-4dd7e82ca243.png" alt="image.png"></p><p>2、fdisk /dev/vda 分区初始化<br><img src="/images/2019/05/07/b8555440-70a7-11e9-a040-a559da770dd7.png" alt="image.png"></p><p>各个参数解析：</p><ol><li>m 显示所有命令列表</li><li>p 显示硬盘分割情形，打印分区表</li><li>a 设定硬盘启动区</li><li>n 设定新的硬盘分割区<br>4.1 e  硬盘为延伸分割区<br>4.2 p  硬盘为主要分割区<br>5.d 删除硬盘分割区属性<br>6.q 结束不存在硬盘分割区属性<br>7.w 结束并写入硬盘分割区属性<br>umount /opt 卸载挂载<br>mke2fs  -t ext4  /dev/vda1 # ext4创建文件系统<br>df -h :查看当前硬盘使用情况</li></ol>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt; 在实际的生产应用中，经常需要对服务器的磁盘进行挂载。故总结下相关的操作，以备不时之需。&lt;br&gt;1、fdisk -l 查看磁盘信息&lt;br&gt;&lt;img src=&quot;/images/2019/05/07/0fc79190-70a6-11e9-b77c-4dd7e82ca243.pn
+        &lt;p&gt;在实际的生产应用中，经常需要对服务器的磁盘进行挂载。故总结下相关的操作，以备不时之需。&lt;br&gt;1、fdisk -l 查看磁盘信息&lt;br&gt;&lt;img src=&quot;/images/2019/05/07/0fc79190-70a6-11e9-b77c-4dd7e82ca243.png
       
     
     </summary>
     
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
   </entry>
   
