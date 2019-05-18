@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-07T09:25:52.993Z</updated>
+  <updated>2019-05-16T06:36:17.817Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL 语句记录</title>
+    <link href="http://yoursite.com/2019/05/16/MySQL-%E8%AF%AD%E5%8F%A5%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2019/05/16/MySQL-语句记录/</id>
+    <published>2019-05-16T06:36:17.000Z</published>
+    <updated>2019-05-16T06:36:17.817Z</updated>
+    
+    <content type="html"><![CDATA[<p>sqlserver 统计具有重复字段的记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;</span><br></pre></td></tr></table></figure></p><p>统计出a表有的b表没有的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a.* FROM A a left outer join B b on a.qq = b.qq</span><br><span class="line">WHERE b.qq is null;</span><br></pre></td></tr></table></figure></p><p>mysql 统计具有重复字段的记录(hive也可以)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,count(*) as count from hk_test group by username having count&gt;1;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;sqlserver 统计具有重复字段的记录：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;t
+      
+    
+    </summary>
+    
+      <category term="sql" scheme="http://yoursite.com/categories/sql/"/>
+    
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring cloud</title>
+    <link href="http://yoursite.com/2019/05/12/spring-cloud/"/>
+    <id>http://yoursite.com/2019/05/12/spring-cloud/</id>
+    <published>2019-05-12T01:57:13.000Z</published>
+    <updated>2019-05-12T01:57:43.101Z</updated>
+    
+    <content type="html"><![CDATA[<p>问题 ：找不到主类或加载不到主类<br>解决办法：尝试 mvn clean ，mvn install</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;问题 ：找不到主类或加载不到主类&lt;br&gt;解决办法：尝试 mvn clean ，mvn install&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux 磁盘挂载</title>
@@ -507,63 +558,6 @@
     
     
       <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jupyter 安装</title>
-    <link href="http://yoursite.com/2019/01/21/jupyter-%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2019/01/21/jupyter-安装/</id>
-    <published>2019-01-21T01:11:39.000Z</published>
-    <updated>2019-02-22T02:54:25.057Z</updated>
-    
-    <content type="html"><![CDATA[<p>选择管理员运行cmd,执行以下命令：</p><pre><code>pip install jupyter   </code></pre><p>进入目录 C:\Program Files\Python37\Scripts&gt;，运行命令：</p><pre><code>cd C:\Program Files\Python37\Scripts             jupyter notebook</code></pre><p>注意管理员权限问题。</p><pre><code>http://localhost:8888/tree</code></pre><p>第三方库numpy安装 </p><pre><code>pip install numpypip install -U scikit-learnpip install -U pandasqlpip install graphvizpip install pydotplus</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;选择管理员运行cmd,执行以下命令：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pip install jupyter   
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进入目录 C:\Program Files\Python37\Scripts&amp;gt;，运行命令：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-      
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习笔记</title>
-    <link href="http://yoursite.com/2019/01/18/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/01/18/学习笔记/</id>
-    <published>2019-01-18T08:56:37.000Z</published>
-    <updated>2019-04-29T07:35:02.633Z</updated>
-    
-    <content type="html"><![CDATA[<p>chcp    查看windows系统编码格式</p><p>chcp 65001   将Windows格式编码设为utf-8模式</p><p>设置 hue 指定队列进行查询操作</p><p>set mapred.job.queue.name=QueueA;</p><p>设置 hue 使用 spark 引擎查询</p><p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p><p>host文件配置：</p><p>C:\Windows\System32\drivers\etc </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;chcp    查看windows系统编码格式&lt;/p&gt;
-&lt;p&gt;chcp 65001   将Windows格式编码设为utf-8模式&lt;/p&gt;
-&lt;p&gt;设置 hue 指定队列进行查询操作&lt;/p&gt;
-&lt;p&gt;set mapred.job.queue.name=QueueA;&lt;/p&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
