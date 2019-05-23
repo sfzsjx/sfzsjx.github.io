@@ -311,6 +311,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/蓝牙信标定位/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/23/蓝牙信标定位/" itemprop="url">
+                  蓝牙信标定位
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-23 09:55:37 / Updated at: 09:55:54" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/蓝牙定位/" itemprop="url" rel="index"><span itemprop="name">蓝牙定位</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>::: hljs-center</p>
+<h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p>
+<h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote>
+<p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p>
+</blockquote>
+<p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/netty-遇到的坑/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -374,7 +537,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-23 09:44:49" itemprop="dateModified" datetime="2019-05-23T09:44:49+08:00">2019-05-23</time>
+                <time title="Updated at: 2019-05-23 09:45:59" itemprop="dateModified" datetime="2019-05-23T09:45:59+08:00">2019-05-23</time>
               
             
           </span>
@@ -1801,171 +1964,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/16/Mysql-优化原理-笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/16/Mysql-优化原理-笔记/" itemprop="url">
-                  Mysql 优化原理 笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-16 16:07:15 / Updated at: 16:26:16" itemprop="dateCreated datePublished" datetime="2019-03-16T16:07:15+08:00">2019-03-16</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql，数据库/" itemprop="url" rel="index"><span itemprop="name">mysql，数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mysql 逻辑框架<br><img src="/images/2019/03/16/7156c0e0-47be-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
-<p>MYSQL 逻辑框架整体分为三层，最上层为客户端层，并非Mysql独有，诸如：连接处理，授权认证，安全等。</p>
-<p>MYSQL 大多数核心服务均在这中间这一层，包括查询解析、分析、优化、缓存、内置函数。所有的跨存储引擎也在这层实现，如：存储过程，触发器和视图等</p>
-<p>最下层为存储引擎。负责Mysql中数据存储和提取。</p>
-<h2 id="Mysql查询过程"><a href="#Mysql查询过程" class="headerlink" title="Mysql查询过程"></a>Mysql查询过程</h2><p>  Mysql查询优化，首先得了解Mysql是如何优化和执行查询的，然后在实际的工作中就是遵循一些原则让Mysql的优化器能够按照预想的合理的方式运行而已。</p>
-<p><img src="/images/2019/03/16/bce25300-47c1-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
-<p><img src="/images/2019/03/16/cfcff250-47c2-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
-<p>参考：<a href="https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2013,7 +2011,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2064,7 +2062,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2109,7 +2109,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

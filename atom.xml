@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-23T01:44:49.399Z</updated>
+  <updated>2019-05-23T01:55:54.253Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>蓝牙信标定位</title>
+    <link href="http://yoursite.com/2019/05/23/%E8%93%9D%E7%89%99%E4%BF%A1%E6%A0%87%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://yoursite.com/2019/05/23/蓝牙信标定位/</id>
+    <published>2019-05-23T01:55:37.000Z</published>
+    <updated>2019-05-23T01:55:54.253Z</updated>
+    
+    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p><h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote><p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p></blockquote><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;::: hljs-center&lt;/p&gt;
+&lt;h1 id=&quot;蓝牙信标定位&quot;&gt;&lt;a href=&quot;#蓝牙信标定位&quot; class=&quot;headerlink&quot; title=&quot;蓝牙信标定位&quot;&gt;&lt;/a&gt;蓝牙信标定位&lt;/h1&gt;&lt;p&gt;:::&lt;/p&gt;
+&lt;h2 id=&quot;一、蓝牙信标信号强度转换&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="蓝牙定位" scheme="http://yoursite.com/categories/%E8%93%9D%E7%89%99%E5%AE%9A%E4%BD%8D/"/>
+    
+    
+      <category term="蓝牙定位" scheme="http://yoursite.com/tags/%E8%93%9D%E7%89%99%E5%AE%9A%E4%BD%8D/"/>
+    
+  </entry>
+  
+  <entry>
     <title>netty 遇到的坑</title>
     <link href="http://yoursite.com/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
     <id>http://yoursite.com/2019/05/22/netty-遇到的坑/</id>
     <published>2019-05-22T03:22:08.000Z</published>
-    <updated>2019-05-23T01:44:49.399Z</updated>
+    <updated>2019-05-23T01:45:59.225Z</updated>
     
     <content type="html"><![CDATA[<h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int valueTen = 328;</span><br><span class="line">String strHex = Integer.toHexString(valueTen)</span><br></pre></td></tr></table></figure><h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strHex = &quot;0214010977&quot;</span><br><span class="line">int valueTen = Integer.pareseInt(strHex,16)</span><br></pre></td></tr></table></figure><h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;2019&quot;;</span><br><span class="line">int i = Integer.pareseInt(str);</span><br><span class="line">int j = Integer.valuesOf(str).intValue();</span><br></pre></td></tr></table></figure><h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 2019;</span><br><span class="line">String str1 = i+&quot;&quot;;</span><br><span class="line">String str2 = String.valueOf(i);</span><br></pre></td></tr></table></figure><h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] strToByteArray(String str) &#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = str.getBytes();</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String str = new String(byteArray);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToHexStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null)&#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();</span><br><span class="line">    char[] hexChars = new char[byteArray.length * 2];</span><br><span class="line">    for (int j = 0; j &lt; byteArray.length; j++) &#123;</span><br><span class="line">        int v = byteArray[j] &amp; 0xFF;</span><br><span class="line">        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];</span><br><span class="line">        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(hexChars);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] hexStrToByteArray(String str)</span><br><span class="line">&#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (str.length() == 0) &#123;</span><br><span class="line">        return new byte[0];</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = new byte[str.length() / 2];</span><br><span class="line">    for (int i = 0; i &lt; byteArray.length; i++)&#123;</span><br><span class="line">        String subStr = str.substring(2 * i, 2 * i + 2);</span><br><span class="line">        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));</span><br><span class="line">    &#125;</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        /**</span><br><span class="line">* 合并byte[]数组 （不改变原数组）</span><br><span class="line">* @param byte_1</span><br><span class="line">* @param byte_2</span><br><span class="line">* @return 合并后的数组</span><br><span class="line">*/</span><br><span class="line">    public byte[] byteMerger(byte[] byte_1, byte[] byte_2)&#123;  </span><br><span class="line">      byte[] byte_3 = new byte[byte_1.length+byte_2.length];  </span><br><span class="line">      System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  </span><br><span class="line">      System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  </span><br><span class="line">      return byte_3;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 截取byte数组   不改变原数组</span><br><span class="line"> * @param b 原数组</span><br><span class="line"> * @param off 偏差值（索引）</span><br><span class="line"> * @param length 长度</span><br><span class="line"> * @return 截取后的数组</span><br><span class="line"> */</span><br><span class="line">public byte[] subByte(byte[] b,int off,int length)&#123;</span><br><span class="line">byte[] b1 = new byte[length];</span><br><span class="line">System.arraycopy(b, off, b1, 0, length);</span><br><span class="line">return b1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFormatTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ParseException &#123;</span><br><span class="line">        String time = &quot;2019-5-23 9:24:1&quot;;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        java.util.Date date_util = sdf.parse(time); //转换为util.date</span><br><span class="line">        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date</span><br><span class="line">        System.out.println(date_util);</span><br><span class="line">        System.out.println(date_sql);</span><br><span class="line">        String date = sdf.format(date_sql);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        date = sdf.format(date_util);</span><br><span class="line">        System.out.println(date);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -525,32 +552,6 @@
       <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
       <category term="数据挖掘" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
-    
-    
-      <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>修炼指南</title>
-    <link href="http://yoursite.com/2019/02/18/%E4%BF%AE%E7%82%BC%E6%8C%87%E5%8D%97/"/>
-    <id>http://yoursite.com/2019/02/18/修炼指南/</id>
-    <published>2019-02-18T14:04:46.000Z</published>
-    <updated>2019-02-22T05:57:28.340Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>MAS学习法</strong></p><p>认知：我们只有把知识转化为自己的语言，它才真正编程我们自己的东西。这个转换的过程就叫做认知的过程。<br><img src="/images/2019/02/22/ab30d8a0-3666-11e9-8304-57f818b3fae9.png" alt="image.png"><br>如何提高我们的学习吸收能力，就要做到知行合一。如果说认知是大脑，那么工具就是我们的双手。所以我们需要把握两点原则:</p><p>1、不要重复造轮子<br>   也即尽量选择已有的第三方工具来完成我们的项目，因为大部分的业务场景都能找到相关的工具来解决，这样既省时又省力。<br>2、工具决定效率<br>   在工作中选择工具的原则是选择使用者最多的工具。因为：Bug少、文档全、案例多。同时找到适合的工具，这样就能大大提高我们的工作效率。</p><p>选择好工具后就需要大量的积累。一般而言，我们很难记住大段的知识和相关指令。但是我们能够记住自己曾经做过的相关的项目，题目和故事。这就需要多练，练熟练透它。正所谓熟能生巧。量变引起质变。</p><p><strong>总结一下几点</strong></p><p>1、记录下自己每天的认知<br>2、这些认知对应工具的那些操作<br>3、勤加练习，巩固知识。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;MAS学习法&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;认知：我们只有把知识转化为自己的语言，它才真正编程我们自己的东西。这个转换的过程就叫做认知的过程。&lt;br&gt;&lt;img src=&quot;/images/2019/02/22/ab30d8a0-3666-11e9-8304-
-      
-    
-    </summary>
-    
-      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
       <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
