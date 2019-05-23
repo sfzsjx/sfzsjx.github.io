@@ -311,6 +311,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/netty-遇到的坑/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/22/netty-遇到的坑/" itemprop="url">
+                  netty 遇到的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-22 11:22:08" itemprop="dateCreated datePublished" datetime="2019-05-22T11:22:08+08:00">2019-05-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-05-23 09:44:49" itemprop="dateModified" datetime="2019-05-23T09:44:49+08:00">2019-05-23</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络编程/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int valueTen = 328;</span><br><span class="line">String strHex = Integer.toHexString(valueTen)</span><br></pre></td></tr></table></figure>
+<h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strHex = &quot;0214010977&quot;</span><br><span class="line">int valueTen = Integer.pareseInt(strHex,16)</span><br></pre></td></tr></table></figure>
+<h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;2019&quot;;</span><br><span class="line">int i = Integer.pareseInt(str);</span><br><span class="line">int j = Integer.valuesOf(str).intValue();</span><br></pre></td></tr></table></figure>
+<h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 2019;</span><br><span class="line">String str1 = i+&quot;&quot;;</span><br><span class="line">String str2 = String.valueOf(i);</span><br></pre></td></tr></table></figure>
+<h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] strToByteArray(String str) &#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = str.getBytes();</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String str = new String(byteArray);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToHexStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null)&#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();</span><br><span class="line">    char[] hexChars = new char[byteArray.length * 2];</span><br><span class="line">    for (int j = 0; j &lt; byteArray.length; j++) &#123;</span><br><span class="line">        int v = byteArray[j] &amp; 0xFF;</span><br><span class="line">        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];</span><br><span class="line">        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(hexChars);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] hexStrToByteArray(String str)</span><br><span class="line">&#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (str.length() == 0) &#123;</span><br><span class="line">        return new byte[0];</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = new byte[str.length() / 2];</span><br><span class="line">    for (int i = 0; i &lt; byteArray.length; i++)&#123;</span><br><span class="line">        String subStr = str.substring(2 * i, 2 * i + 2);</span><br><span class="line">        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));</span><br><span class="line">    &#125;</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        /**</span><br><span class="line">* 合并byte[]数组 （不改变原数组）</span><br><span class="line">* @param byte_1</span><br><span class="line">* @param byte_2</span><br><span class="line">* @return 合并后的数组</span><br><span class="line">*/</span><br><span class="line">    public byte[] byteMerger(byte[] byte_1, byte[] byte_2)&#123;  </span><br><span class="line">      byte[] byte_3 = new byte[byte_1.length+byte_2.length];  </span><br><span class="line">      System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  </span><br><span class="line">      System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  </span><br><span class="line">      return byte_3;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 截取byte数组   不改变原数组</span><br><span class="line"> * @param b 原数组</span><br><span class="line"> * @param off 偏差值（索引）</span><br><span class="line"> * @param length 长度</span><br><span class="line"> * @return 截取后的数组</span><br><span class="line"> */</span><br><span class="line">public byte[] subByte(byte[] b,int off,int length)&#123;</span><br><span class="line">	byte[] b1 = new byte[length];</span><br><span class="line">	System.arraycopy(b, off, b1, 0, length);</span><br><span class="line">	return b1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFormatTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ParseException &#123;</span><br><span class="line">        String time = &quot;2019-5-23 9:24:1&quot;;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        java.util.Date date_util = sdf.parse(time); //转换为util.date</span><br><span class="line">        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date</span><br><span class="line">        System.out.println(date_util);</span><br><span class="line">        System.out.println(date_sql);</span><br><span class="line">        String date = sdf.format(date_sql);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        date = sdf.format(date_util);</span><br><span class="line">        System.out.println(date);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/MySQL-语句记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1786,180 +1966,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/" itemprop="url">
-                  数据挖掘实战（2）： 信用卡诈骗分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-15 14:13:29 / Updated at: 15:31:41" itemprop="dateCreated datePublished" datetime="2019-03-15T14:13:29+08:00">2019-03-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>信用卡诈骗分析目标：通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷的风险。<br>学习目标：</p>
-<ol>
-<li>学习逻辑回归</li>
-<li>信用卡欺诈属于二分类问题，欺诈交易在所有交易中比例很小，对于这种数据不平衡情况，到底采用什么样的模型评估标准更准确；</li>
-<li>完成信用卡欺诈分析实战项目，并通过数据可视化对数据探索和模型评估进一步加强了解。</li>
-</ol>
-<p>构建逻辑回归分类器<br>  逻辑回归（logistic回归），主要解决二分类问题。在逻辑回归中使用Logistic函数<br>也称Sigmoid函数。</p>
-<p><img src="/images/2019/03/15/c13beb30-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
-<p>函数形如S状：<br><img src="/images/2019/03/15/d9159210-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
-<p>算法实现理解：我们要实现一个二分类任务，0为不发生，1为发生。而通过对历史样本学习得到一个新的模型<br>，当新的样本给出时，预测出结果。这里得到是y的一个预测概率。通常我们认为概率大于50%<br>则发生，反之，则不发生。</p>
-<p>在sklearn中，使用LogisticRegression()函数构建逻辑回归分类器，函数常用的构造参数：</p>
-<ol>
-<li>penalty ：惩罚项，取值为l1或l2，默认为l2。当模型参数满足高斯分布时用l2，当模型参数满足拉普拉斯分布时用l1;</li>
-<li>solver: 代表的是逻辑回归损失函数的优化方法。有5个参数可选，分别为liblinear、lbfgs、newton-cg、sag或saga.默认为liblinear,s适用于数据量较小的数据集，当数据量较大的时候可以选用sag或saga方法。</li>
-<li>max_iter:算法收敛最大迭代次数，默认为10.</li>
-<li>n_jobs:拟合和预测的时候CPU的核数，默认为1.</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2007,7 +2013,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2056,7 +2062,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2099,7 +2107,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

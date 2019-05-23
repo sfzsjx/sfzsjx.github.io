@@ -311,6 +311,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/" itemprop="url">
+                  数据挖掘实战（2）： 信用卡诈骗分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-15 14:13:29 / Updated at: 15:31:41" itemprop="dateCreated datePublished" datetime="2019-03-15T14:13:29+08:00">2019-03-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>信用卡诈骗分析目标：通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷的风险。<br>学习目标：</p>
+<ol>
+<li>学习逻辑回归</li>
+<li>信用卡欺诈属于二分类问题，欺诈交易在所有交易中比例很小，对于这种数据不平衡情况，到底采用什么样的模型评估标准更准确；</li>
+<li>完成信用卡欺诈分析实战项目，并通过数据可视化对数据探索和模型评估进一步加强了解。</li>
+</ol>
+<p>构建逻辑回归分类器<br>  逻辑回归（logistic回归），主要解决二分类问题。在逻辑回归中使用Logistic函数<br>也称Sigmoid函数。</p>
+<p><img src="/images/2019/03/15/c13beb30-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
+<p>函数形如S状：<br><img src="/images/2019/03/15/d9159210-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
+<p>算法实现理解：我们要实现一个二分类任务，0为不发生，1为发生。而通过对历史样本学习得到一个新的模型<br>，当新的样本给出时，预测出结果。这里得到是y的一个预测概率。通常我们认为概率大于50%<br>则发生，反之，则不发生。</p>
+<p>在sklearn中，使用LogisticRegression()函数构建逻辑回归分类器，函数常用的构造参数：</p>
+<ol>
+<li>penalty ：惩罚项，取值为l1或l2，默认为l2。当模型参数满足高斯分布时用l2，当模型参数满足拉普拉斯分布时用l1;</li>
+<li>solver: 代表的是逻辑回归损失函数的优化方法。有5个参数可选，分别为liblinear、lbfgs、newton-cg、sag或saga.默认为liblinear,s适用于数据量较小的数据集，当数据量较大的时候可以选用sag或saga方法。</li>
+<li>max_iter:算法收敛最大迭代次数，默认为10.</li>
+<li>n_jobs:拟合和预测的时候CPU的核数，默认为1.</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/shell-编写-脚本常用命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1947,192 +2121,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/数据分析全景图笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/18/数据分析全景图笔记/" itemprop="url">
-                  数据分析全景图笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-18 14:29:35" itemprop="dateCreated datePublished" datetime="2019-02-18T14:29:35+08:00">2019-02-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-19 08:48:28" itemprop="dateModified" datetime="2019-02-19T08:48:28+08:00">2019-02-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>数据分析的<strong>三个</strong>重要组成部分：</p>
-<pre><code>1、数据采集。（源头）
-2、数据挖掘。（核心，主要是挖掘数据的商业价值）
-3、数据可视化。（直观感受数据分析结果）
-</code></pre><p><img src="/images/2019/02/18/45a3d120-3343-11e9-b0b3-2d63e1557176.png" alt="image.png"></p>
-<p><strong>数据采集</strong></p>
-<pre><code>主要是各种各样的数据源打交道，然后使用不用的工具来进行采集。
-</code></pre><p><img src="/images/2019/02/18/0f33da80-3344-11e9-b0b3-2d63e1557176.png" alt="image.png"></p>
-<p><strong>数据挖掘</strong></p>
-<pre><code>第二部分主要熟悉数据挖掘的基本流程、十大算法、以及背后的数学基础。
-</code></pre><p><img src="/images/2019/02/18/d1c7dd80-3344-11e9-b0b3-2d63e1557176.png" alt="image.png"></p>
-<p><strong>数据可视化</strong></p>
-<pre><code>数据可视化可以帮我们很好的理解数据的结构，以及分析结果的呈现。主要有两种方法实现数据的可视化。
-
-第一种就是使用Python。在Python对数据进行清洗、挖掘的过程中，可以使用Matplotlib,Seaborn等第三方库进行呈现。
-第二种就是使用第三方工具。若已经生成了csv文件，想采用所见即所得的方式呈现，可以采用微图、DataV、Data GIF Maker等第三方工具。
-</code></pre><p><img src="/images/2019/02/18/b23122d0-3347-11e9-b0b3-2d63e1557176.png" alt="image.png"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2180,7 +2168,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2229,7 +2217,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2272,7 +2262,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
