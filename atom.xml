@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-23T02:08:59.468Z</updated>
+  <updated>2019-05-23T05:59:27.569Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/05/23/%E8%93%9D%E7%89%99%E4%BF%A1%E6%A0%87%E5%AE%9A%E4%BD%8D/"/>
     <id>http://yoursite.com/2019/05/23/蓝牙信标定位/</id>
     <published>2019-05-23T01:55:37.000Z</published>
-    <updated>2019-05-23T02:08:59.468Z</updated>
+    <updated>2019-05-23T05:59:27.569Z</updated>
     
-    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p><h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote><p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p></blockquote><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>]]></content>
+    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p><h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote><p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p></blockquote><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p><p>二 、base数据执行程序</p><p>1.基站数据分析</p><blockquote><p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p></blockquote><p>2.基站数据接收</p><blockquote><p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p></blockquote>]]></content>
     
     <summary type="html">
     

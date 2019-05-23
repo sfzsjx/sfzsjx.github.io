@@ -228,7 +228,7 @@
           
           <li class="menu-item menu-item-home menu-item-active">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
   </li>
         
         
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
   </li>
         
         
@@ -252,7 +252,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
   </li>
         
         
@@ -260,7 +260,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
   </li>
 
       
@@ -350,14 +350,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-23 09:55:37 / Updated at: 10:08:59" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
+              <time title="Created: 2019-05-23 09:55:37 / Modified: 13:59:27" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
             
 
             
@@ -376,7 +376,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/蓝牙定位/" itemprop="url" rel="index"><span itemprop="name">蓝牙定位</span></a></span>
@@ -421,6 +421,15 @@
 <p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p>
 </blockquote>
 <p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>
+<p>二 、base数据执行程序</p>
+<p>1.基站数据分析</p>
+<blockquote>
+<p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p>
+</blockquote>
+<p>2.基站数据接收</p>
+<blockquote>
+<p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
+</blockquote>
 
           
         
@@ -513,14 +522,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-22 11:22:08" itemprop="dateCreated datePublished" datetime="2019-05-22T11:22:08+08:00">2019-05-22</time>
+              <time title="Created: 2019-05-22 11:22:08" itemprop="dateCreated datePublished" datetime="2019-05-22T11:22:08+08:00">2019-05-22</time>
             
 
             
@@ -537,7 +546,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-23 09:45:59" itemprop="dateModified" datetime="2019-05-23T09:45:59+08:00">2019-05-23</time>
+                <time title="Modified: 2019-05-23 09:45:59" itemprop="dateModified" datetime="2019-05-23T09:45:59+08:00">2019-05-23</time>
               
             
           </span>
@@ -551,7 +560,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络编程/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a></span>
@@ -693,14 +702,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-16 14:36:17" itemprop="dateCreated datePublished" datetime="2019-05-16T14:36:17+08:00">2019-05-16</time>
+              <time title="Created: 2019-05-16 14:36:17" itemprop="dateCreated datePublished" datetime="2019-05-16T14:36:17+08:00">2019-05-16</time>
             
 
             
@@ -715,7 +724,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a></span>
@@ -849,14 +858,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-12 09:57:13 / Updated at: 09:57:43" itemprop="dateCreated datePublished" datetime="2019-05-12T09:57:13+08:00">2019-05-12</time>
+              <time title="Created: 2019-05-12 09:57:13 / Modified: 09:57:43" itemprop="dateCreated datePublished" datetime="2019-05-12T09:57:13+08:00">2019-05-12</time>
             
 
             
@@ -875,7 +884,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
@@ -1007,14 +1016,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-07 16:57:14 / Updated at: 17:25:52" itemprop="dateCreated datePublished" datetime="2019-05-07T16:57:14+08:00">2019-05-07</time>
+              <time title="Created: 2019-05-07 16:57:14 / Modified: 17:25:52" itemprop="dateCreated datePublished" datetime="2019-05-07T16:57:14+08:00">2019-05-07</time>
             
 
             
@@ -1033,7 +1042,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
@@ -1173,14 +1182,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-30 15:10:31" itemprop="dateCreated datePublished" datetime="2019-04-30T15:10:31+08:00">2019-04-30</time>
+              <time title="Created: 2019-04-30 15:10:31" itemprop="dateCreated datePublished" datetime="2019-04-30T15:10:31+08:00">2019-04-30</time>
             
 
             
@@ -1195,14 +1204,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
-                  . 
+                  , 
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/消息队列/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
@@ -1337,14 +1346,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-30 11:45:07" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
+              <time title="Created: 2019-04-30 11:45:07" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
             
 
             
@@ -1361,7 +1370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-04 09:19:19" itemprop="dateModified" datetime="2019-05-04T09:19:19+08:00">2019-05-04</time>
+                <time title="Modified: 2019-05-04 09:19:19" itemprop="dateModified" datetime="2019-05-04T09:19:19+08:00">2019-05-04</time>
               
             
           </span>
@@ -1375,7 +1384,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
@@ -1522,14 +1531,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-04 14:32:58 / Updated at: 14:37:35" itemprop="dateCreated datePublished" datetime="2019-04-04T14:32:58+08:00">2019-04-04</time>
+              <time title="Created: 2019-04-04 14:32:58 / Modified: 14:37:35" itemprop="dateCreated datePublished" datetime="2019-04-04T14:32:58+08:00">2019-04-04</time>
             
 
             
@@ -1548,7 +1557,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
@@ -1687,14 +1696,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-04 09:47:50" itemprop="dateCreated datePublished" datetime="2019-04-04T09:47:50+08:00">2019-04-04</time>
+              <time title="Created: 2019-04-04 09:47:50" itemprop="dateCreated datePublished" datetime="2019-04-04T09:47:50+08:00">2019-04-04</time>
             
 
             
@@ -1709,7 +1718,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a></span>
@@ -1844,14 +1853,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-03-18 15:11:45 / Updated at: 17:49:27" itemprop="dateCreated datePublished" datetime="2019-03-18T15:11:45+08:00">2019-03-18</time>
+              <time title="Created: 2019-03-18 15:11:45 / Modified: 17:49:27" itemprop="dateCreated datePublished" datetime="2019-03-18T15:11:45+08:00">2019-03-18</time>
             
 
             
@@ -1870,7 +1879,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
@@ -2012,7 +2021,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">29</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2065,7 +2074,7 @@
                       
                     
                     <span class="site-state-item-count">20</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   
                 </div>
               
@@ -2112,7 +2121,7 @@
                       
                     
                     <span class="site-state-item-count">17</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -2172,7 +2181,7 @@
 
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
 
 
 
