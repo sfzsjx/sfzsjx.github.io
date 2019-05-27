@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="1、启动服务器12345cd /usr/local/kafka/kafka_2.11-2.2.0bin/zookeeper-server-start.sh  -daemon config/zookeeper.propertiesbin/kafka-server-start.sh  -daemon config/server.properties 2、创建主题创建一个名为“test”的主题，它只包含">
-<meta name="keywords" content="kafka,消息队列">
+  <meta name="description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka相关的常规操作">
-<meta property="og:url" content="http://yoursite.com/2019/04/30/kafka相关的常规操作/index.html">
+<meta property="og:title" content="Linux 常用命令">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/Linux-常用命令/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="1、启动服务器12345cd /usr/local/kafka/kafka_2.11-2.2.0bin/zookeeper-server-start.sh  -daemon config/zookeeper.propertiesbin/kafka-server-start.sh  -daemon config/server.properties 2、创建主题创建一个名为“test”的主题，它只包含">
+<meta property="og:description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-30T07:10:31.431Z">
+<meta property="og:updated_time" content="2019-05-27T01:43:36.262Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka相关的常规操作">
-<meta name="twitter:description" content="1、启动服务器12345cd /usr/local/kafka/kafka_2.11-2.2.0bin/zookeeper-server-start.sh  -daemon config/zookeeper.propertiesbin/kafka-server-start.sh  -daemon config/server.properties 2、创建主题创建一个名为“test”的主题，它只包含">
+<meta name="twitter:title" content="Linux 常用命令">
+<meta name="twitter:description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/30/kafka相关的常规操作/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/Linux-常用命令/">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>kafka相关的常规操作 | 上善若水博客</title>
+  <title>Linux 常用命令 | 上善若水博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/kafka相关的常规操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Linux-常用命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="上善若水">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka相关的常规操作
+          <h1 class="post-title" itemprop="name headline">Linux 常用命令
               
             
           </h1>
@@ -354,7 +354,7 @@
                 
               
 
-              <time title="Post created: 2019-04-30 15:10:31" itemprop="dateCreated datePublished" datetime="2019-04-30T15:10:31+08:00">2019-04-30</time>
+              <time title="Post created: 2019-05-27 09:43:36" itemprop="dateCreated datePublished" datetime="2019-05-27T09:43:36+08:00">2019-05-27</time>
             
 
             
@@ -372,14 +372,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
-
-                
-                
-                  . 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/消息队列/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
 
                 
                 
@@ -413,10 +406,11 @@
       
 
       
-        <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
-<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
-<p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
-<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
+        <p>linux系统中清空文件内容的三种方法</p>
+<p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p>
+<p>2.使用cat命令情况，命令如下：<br>cat /dev/null &gt; file_name</p>
+<p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：<br>echo “”&gt;file_name</p>
+<p>推荐使用cat命令</p>
 
       
     </div>
@@ -437,9 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/kafka/" rel="tag"># kafka</a>
-          
-            <a href="/tags/消息队列/" rel="tag"># 消息队列</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -452,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/30/kafka-集群安装-部署/" rel="next" title="kafka 集群安装 部署">
-                <i class="fa fa-chevron-left"></i> kafka 集群安装 部署
+              <a href="/2019/05/23/蓝牙信标定位/" rel="next" title="蓝牙信标定位">
+                <i class="fa fa-chevron-left"></i> 蓝牙信标定位
               </a>
             
           </div>
@@ -461,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/07/Linux-磁盘挂载/" rel="prev" title="Linux 磁盘挂载">
-                Linux 磁盘挂载 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -509,17 +497,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -669,22 +648,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、启动服务器"><span class="nav-number">1.</span> <span class="nav-text">1、启动服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、创建主题"><span class="nav-number">2.</span> <span class="nav-text">2、创建主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、生产者发送消息"><span class="nav-number">3.</span> <span class="nav-text">3、生产者发送消息</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

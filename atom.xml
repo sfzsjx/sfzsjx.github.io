@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-23T05:59:27.569Z</updated>
+  <updated>2019-05-27T01:43:36.262Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux 常用命令</title>
+    <link href="http://yoursite.com/2019/05/27/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2019/05/27/Linux-常用命令/</id>
+    <published>2019-05-27T01:43:36.000Z</published>
+    <updated>2019-05-27T01:43:36.262Z</updated>
+    
+    <content type="html"><![CDATA[<p>linux系统中清空文件内容的三种方法</p><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p><p>2.使用cat命令情况，命令如下：<br>cat /dev/null &gt; file_name</p><p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：<br>echo “”&gt;file_name</p><p>推荐使用cat命令</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;linux系统中清空文件内容的三种方法&lt;/p&gt;
+&lt;p&gt;1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：&lt;br&gt;vim file_name&lt;br&gt;:%d&lt;br&gt;:wq&lt;/p&gt;
+&lt;p&gt;2.使用cat命令情况，命令如下：&lt;
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>蓝牙信标定位</title>
     <link href="http://yoursite.com/2019/05/23/%E8%93%9D%E7%89%99%E4%BF%A1%E6%A0%87%E5%AE%9A%E4%BD%8D/"/>
     <id>http://yoursite.com/2019/05/23/蓝牙信标定位/</id>
     <published>2019-05-23T01:55:37.000Z</published>
-    <updated>2019-05-23T05:59:27.569Z</updated>
+    <updated>2019-05-23T06:12:27.309Z</updated>
     
-    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p><h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote><p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p></blockquote><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p><p>二 、base数据执行程序</p><p>1.基站数据分析</p><blockquote><p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p></blockquote><p>2.基站数据接收</p><blockquote><p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p><h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote><p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p></blockquote><p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p><p>二 、base数据执行程序</p><p>1.基站数据分析</p><blockquote><p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p></blockquote><p>2.基站数据接收</p><blockquote><p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p></blockquote><p>3.Linux jar 包后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">nohup java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=127.0.0.1:9876 &gt; log.out &amp;</span><br></pre></td></tr></table></figure></p><blockquote><p>解释：<br>1、目的是使rocketmq-console-ng-1.0.0.jar在后台运行；<br>2、nohup 就是linux后台挂起的命令<br>3、“&gt; log.out” 指定日志输出位置为log.out</p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -98,16 +125,17 @@
     <link href="http://yoursite.com/2019/05/12/spring-cloud/"/>
     <id>http://yoursite.com/2019/05/12/spring-cloud/</id>
     <published>2019-05-12T01:57:13.000Z</published>
-    <updated>2019-05-12T01:57:43.101Z</updated>
+    <updated>2019-05-27T03:26:02.492Z</updated>
     
-    <content type="html"><![CDATA[<p>问题 ：找不到主类或加载不到主类<br>解决办法：尝试 mvn clean ，mvn install</p>]]></content>
+    <content type="html"><![CDATA[<p>::: hljs-center</p><p>spring cloud 常见错误以及解决办法<br>:::</p><h3 id="问题-1：找不到主类或加载不到主类"><a href="#问题-1：找不到主类或加载不到主类" class="headerlink" title="问题 1：找不到主类或加载不到主类"></a>问题 1：找不到主类或加载不到主类</h3><p>解决办法：尝试 mvn clean ，mvn install</p><h3 id="问题2：Module-“spring-cloud-itoken”"><a href="#问题2：Module-“spring-cloud-itoken”" class="headerlink" title="问题2：Module “spring-cloud-itoken”"></a>问题2：Module “spring-cloud-itoken”</h3><p>must not contain source root “C:\Users\hadoop\IdeaProjects\spring-cloud-itoken\spring-cloud-itoken-admin\src\main\java”.<br>The root already belongs to module “spring-cloud-itoken-admin”<br>解决办法：这类问题通常是由于多模块项目，删除了root 模块的src 目录造成的</p><p><img src="/images/2019/05/27/a4fe2200-802e-11e9-b471-85e9a7e0c091.png" alt="image.png"></p><p>所有找到root模块，然后将其右侧的sources 下的多余文件找到并删除即可。</p><h3 id="问题3-：java程序找不到包"><a href="#问题3-：java程序找不到包" class="headerlink" title="问题3 ：java程序找不到包"></a>问题3 ：java程序找不到包</h3><p>解决办法：<img src="/images/2019/05/27/0e0fb740-802f-11e9-b471-85e9a7e0c091.png" alt="image.png"></p><p>重新设置module sdk 的路径一般能够解决。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;问题 ：找不到主类或加载不到主类&lt;br&gt;解决办法：尝试 mvn clean ，mvn install&lt;/p&gt;
-
+        &lt;p&gt;::: hljs-center&lt;/p&gt;
+&lt;p&gt;spring cloud 常见错误以及解决办法&lt;br&gt;:::&lt;/p&gt;
+&lt;h3 id=&quot;问题-1：找不到主类或加载不到主类&quot;&gt;&lt;a href=&quot;#问题-1：找不到主类或加载不到主类&quot; class=&quot;headerlink&quot; titl
       
     
     </summary>
@@ -528,33 +556,6 @@
     
     
       <category term="决策树" scheme="http://yoursite.com/tags/%E5%86%B3%E7%AD%96%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>02 数据分析实战笔记--学习数据挖掘的最佳路径</title>
-    <link href="http://yoursite.com/2019/02/18/02-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0-%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E7%9A%84%E6%9C%80%E4%BD%B3%E8%B7%AF%E5%BE%84/"/>
-    <id>http://yoursite.com/2019/02/18/02-数据分析实战笔记-学习数据挖掘的最佳路径/</id>
-    <published>2019-02-18T14:26:38.000Z</published>
-    <updated>2019-02-22T05:59:14.544Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/2019/02/22/dc70e0e0-3666-11e9-8304-57f818b3fae9.png" alt="image.png"><br><strong>数据挖掘的基本流程（六大步骤）</strong>：<br>1、商业理解：先从商业的角度理解项目的需求，然后再对数据挖掘的目标进行定义。<br>2、数据理解：尝试收集部分数据，然后对数据进行探索，包括数据描述、数据质量验证<br>3、数据准备：收集数据，并对数据进行清洗、数据集成等操作<br>4、模型建立：选择和应用各种数据挖掘模型，并进行优化<br>5、模型评估：对模型进行评价，并检查构建模型的每个步骤，确认模型是否实现预定的商业目标<br>6、上线发布：项目只有落地实施才能体现价值。当然后序还需要一定的日常运维。</p><p><strong>数据挖掘的十大算法</strong><br>按照不同的目的，算法主要分为四类：<br>|分类算法：C4.5,朴素贝叶斯（Naive Bayes）,SVM,KNN,Adaboost,CART<br>|聚类算法：K-Means,EM<br>|关联分析：Apriori<br>|连接分析：PageRank</p><p><strong>数据挖掘的数学原理</strong></p><p>1、概率论与数理统计<br>2、线性代数<br>3、图论<br>4、最优化方法</p><p><img src="/images/2019/02/22/ec89f8e0-3666-11e9-8304-57f818b3fae9.png" alt="image.png"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/images/2019/02/22/dc70e0e0-3666-11e9-8304-57f818b3fae9.png&quot; alt=&quot;image.png&quot;&gt;&lt;br&gt;&lt;strong&gt;数据挖掘的基本流程（六大步骤）&lt;/strong&gt;：&lt;br&gt;1、商业理解：先从
-      
-    
-    </summary>
-    
-      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-      <category term="数据挖掘" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
-    
-    
-      <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
   </entry>
   

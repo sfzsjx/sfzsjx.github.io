@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="::: hljs-center 蓝牙信标定位::: 一、蓝牙信标信号强度转换 计算公式： d = 10^((abs(RSSI) - A) / (10 * n))其中：d - 计算所得距离RSSI - 接收信号强度（负值）A - 发射端和接收端相隔1米时的信号强度 n - 环境衰减因子  代码实现：123//信号强度转距离Integer signal_power = (Integer.valueOf">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-23T05:59:27.569Z">
+<meta property="og:updated_time" content="2019-05-23T06:12:27.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蓝牙信标定位">
 <meta name="twitter:description" content="::: hljs-center 蓝牙信标定位::: 一、蓝牙信标信号强度转换 计算公式： d = 10^((abs(RSSI) - A) / (10 * n))其中：d - 计算所得距离RSSI - 接收信号强度（负值）A - 发射端和接收端相隔1米时的信号强度 n - 环境衰减因子  代码实现：123//信号强度转距离Integer signal_power = (Integer.valueOf">
@@ -229,7 +229,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
   </li>
         
         
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
   </li>
         
         
@@ -253,7 +253,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
   </li>
 
       
@@ -347,14 +347,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-05-23 09:55:37 / Modified: 13:59:27" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
+              <time title="Post created: 2019-05-23 09:55:37 / Updated at: 14:12:27" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
             
 
             
@@ -373,7 +373,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/蓝牙定位/" itemprop="url" rel="index"><span itemprop="name">蓝牙定位</span></a></span>
@@ -425,6 +425,10 @@
 <blockquote>
 <p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
 </blockquote>
+<p>3.Linux jar 包后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">nohup java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=127.0.0.1:9876 &gt; log.out &amp;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>解释：<br>1、目的是使rocketmq-console-ng-1.0.0.jar在后台运行；<br>2、nohup 就是linux后台挂起的命令<br>3、“&gt; log.out” 指定日志输出位置为log.out</p>
+</blockquote>
 
       
     </div>
@@ -467,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/27/Linux-常用命令/" rel="prev" title="Linux 常用命令">
+                Linux 常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -513,10 +521,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -536,8 +544,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">29</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -590,7 +598,7 @@
                       
                     
                     <span class="site-state-item-count">20</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
               
@@ -636,8 +644,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">Tags</span>
                   
                 </div>
               
@@ -713,7 +723,7 @@
 
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
 
 
 
