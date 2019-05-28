@@ -1044,7 +1044,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-27 11:26:02" itemprop="dateModified" datetime="2019-05-27T11:26:02+08:00">2019-05-27</time>
+                <time title="Updated at: 2019-05-28 13:51:16" itemprop="dateModified" datetime="2019-05-28T13:51:16+08:00">2019-05-28</time>
               
             
           </span>
@@ -1062,6 +1062,20 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud </span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/spring-cloud/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
 
                 
                 
@@ -1105,6 +1119,9 @@
 <p>所有找到root模块，然后将其右侧的sources 下的多余文件找到并删除即可。</p>
 <h3 id="问题3-：java程序找不到包"><a href="#问题3-：java程序找不到包" class="headerlink" title="问题3 ：java程序找不到包"></a>问题3 ：java程序找不到包</h3><p>解决办法：<img src="/images/2019/05/27/0e0fb740-802f-11e9-b471-85e9a7e0c091.png" alt="image.png"></p>
 <p>重新设置module sdk 的路径一般能够解决。</p>
+<h3 id="问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true"><a href="#问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true" class="headerlink" title="问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}"></a>问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: <a href="mailto:{@org.springframework.beans.factory.annotation.Autowired" target="_blank" rel="noopener">{@org.springframework.beans.factory.annotation.Autowired</a>(required=true)}</h3><p> 解决办法啊： 在 serviceImpl 加上注解 @Service</p>
+<h3 id="问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext"><a href="#问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext" class="headerlink" title="问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext"></a>问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext</h3><p> 解决办法 ：未启动ConfigApplication,验证方法：打开<a href="http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod" target="_blank" rel="noopener">http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod</a></p>
+<h3 id="问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect"><a href="#问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect" class="headerlink" title="问题6 ：Caused by: java.net.ConnectException: Connection refused: connect"></a>问题6 ：Caused by: java.net.ConnectException: Connection refused: connect</h3><p>解决办法： 未加载注解 @ActiveProfiles(value = “prod”)</p>
 
           
         
@@ -2080,7 +2097,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2129,7 +2150,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
