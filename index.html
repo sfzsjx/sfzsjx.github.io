@@ -311,6 +311,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/scala-正则匹配/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/30/scala-正则匹配/" itemprop="url">
+                  scala 正则匹配
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-30 09:54:57 / Updated at: 09:59:23" itemprop="dateCreated datePublished" datetime="2019-05-30T09:54:57+08:00">2019-05-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/scala/正则匹配/" itemprop="url" rel="index"><span itemprop="name">正则匹配</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>::: hljs-center</p>
+<p>scala正则匹配</p>
+<p>:::</p>
+<ul>
+<li><p>中文字符匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//匹配中文字符,正则表达式</span><br><span class="line">val  regrex =&quot;[\u4e00-\u9fa5]&quot;.r</span><br><span class="line">//匹配字符串中第一个中文字符</span><br><span class="line">val matches = regrex.findFirstMatchIn(dsca_part1).mkString(&quot;&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常规括号加数字匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def get_dsca2(dsac_part2:String): String =&#123;</span><br><span class="line">	  var dsca_use = dsac_part2</span><br><span class="line">          //匹配左括号加5个数字，其中括号需要转义</span><br><span class="line">	  val partment = &quot;\\([0-9]&#123;5&#125;&quot;.r</span><br><span class="line">          //匹配多个括号，？代表多次匹配</span><br><span class="line">	  val partment3 = &quot;\\((.*?)\\)&quot;.r</span><br><span class="line">	  val result = partment3.findAllMatchIn(dsca_use)</span><br><span class="line">	  result.foreach(x =&gt;&#123;</span><br><span class="line">      if (partment.findAllMatchIn(x.toString()).isEmpty)&#123;</span><br><span class="line">	  dsca_use =  dsca_use.split(&quot;\\(&quot; +x.toString()+&quot;\\)&quot;)(0)</span><br><span class="line">      &#125;</span><br><span class="line">	  &#125;)</span><br><span class="line">	  return dsca_use</span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><p>Scala 的正则表达式继承了 Java 的语法规则，Java 则大部分使用了 Perl 语言的规则。</p>
+<p>下表我们给出了常用的一些正则表达式规则：</p>
+<p>表达式    匹配规则<br>^    匹配输入字符串开始的位置。<br>$    匹配输入字符串结尾的位置。<br>.    匹配除”\r\n”之外的任何单个字符。<br>[…]    字符集。匹配包含的任一字符。例如，”[abc]”匹配”plain”中的”a”。<br>[^…]    反向字符集。匹配未包含的任何字符。例如，”[^abc]”匹配”plain”中”p”，”l”，”i”，”n”。<br>\A    匹配输入字符串开始的位置（无多行支持）<br>\z    字符串结尾(类似$，但不受处理多行选项的影响)<br>\Z    字符串结尾或行尾(不受处理多行选项的影响)<br>re<em>    重复零次或更多次<br>re+    重复一次或更多次<br>re?    重复零次或一次<br>re{ n}    重复n次<br>re{ n,}<br>re{ n, m}    重复n到m次<br>a|b    匹配 a 或者 b<br>(re)    匹配 re,并捕获文本到自动命名的组里<br>(?: re)    匹配 re,不捕获匹配的文本，也不给此分组分配组号<br>(?&gt; re)    贪婪子表达式<br>\w    匹配字母或数字或下划线或汉字<br>\W    匹配任意不是字母，数字，下划线，汉字的字符<br>\s    匹配任意的空白符,相等于 [\t\n\r\f]<br>\S    匹配任意不是空白符的字符<br>\d    匹配数字，类似 [0-9]<br>\D    匹配任意非数字的字符<br>\G    当前搜索的开头<br>\n    换行符<br>\b    通常是单词分界位置，但如果在字符类里使用代表退格<br>\B    匹配不是单词开头或结束的位置<br>\t    制表符<br>\Q    开始引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)<em>3”。<br>\E    结束引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)*3”。</p>
+<h3 id="正则表达式实例"><a href="#正则表达式实例" class="headerlink" title="正则表达式实例"></a>正则表达式实例</h3><p>实例    描述<br>.    匹配除”\r\n”之外的任何单个字符。<br>[Rr]uby    匹配 “Ruby” 或 “ruby”<br>rub[ye]    匹配 “ruby” 或 “rube”<br>[aeiou]    匹配小写字母 ：aeiou<br>[0-9]    匹配任何数字，类似 [0123456789]<br>[a-z]    匹配任何 ASCII 小写字母<br>[A-Z]    匹配任何 ASCII 大写字母<br>[a-zA-Z0-9]    匹配数字，大小写字母<br>[^aeiou]    匹配除了 aeiou 其他字符<br>[^0-9]    匹配除了数字的其他字符<br>\d    匹配数字，类似: [0-9]<br>\D    匹配非数字，类似: [^0-9]<br>\s    匹配空格，类似: [ \t\r\n\f]<br>\S    匹配非空格，类似: [^ \t\r\n\f]<br>\w    匹配字母，数字，下划线，类似: [A-Za-z0-9_]<br>\W    匹配非字母，数字，下划线，类似: [^A-Za-z0-9_]<br>ruby?    匹配 “rub” 或 “ruby”: y 是可选的<br>ruby*    匹配 “rub” 加上 0 个或多个的 y。<br>ruby+    匹配 “rub” 加上 1 个或多个的 y。<br>\d{3}    刚好匹配 3 个数字。<br>\d{3,}    匹配 3 个或多个数字。<br>\d{3,5}    匹配 3 个、4 个或 5 个数字。<br>\D\d+    无分组： + 重复 \d<br>(\D\d)+/    分组： + 重复 \D\d 对<br>([Rr]uby(, )?)+    匹配 “Ruby”、”Ruby, ruby, ruby”，等等<br>注意上表中的每个字符使用了两个反斜线。这是因为在 Java 和 Scala 中字符串中的反斜线是转义字符。所以如果你要输出 ..，你需要在字符串中写成 .\. 来获取一个反斜线</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Linux-常用命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1840,168 +2019,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/hive-笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/hive-笔记/" itemprop="url">
-                  hive 笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-04 09:47:50" itemprop="dateCreated datePublished" datetime="2019-04-04T09:47:50+08:00">2019-04-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>hive设置队列三种方式：</p>
-<blockquote>
-<p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2044,7 +2066,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2101,7 +2123,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2154,7 +2180,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
