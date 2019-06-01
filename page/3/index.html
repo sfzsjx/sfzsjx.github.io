@@ -1926,8 +1926,42 @@ public class KylinJdbc {
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-01 14:27:17" itemprop="dateModified" datetime="2019-06-01T14:27:17+08:00">2019-06-01</time>
+              
+            
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图数据库/" itemprop="url" rel="index"><span itemprop="name">图数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1958,26 +1992,31 @@ public class KylinJdbc {
       
         
           
-            <pre><code>Neo4j 数据导入
-</code></pre><p>一、安装与部署</p>
+            <p>Neo4j 数据导入</p>
+<p>一、安装与部署</p>
 <pre><code>直接在官网下载安装包安装，解压即可。
 </code></pre><p>二、下载相应的jar包</p>
 <p>1.sqlserver 数据导入neo4j的jar包</p>
+<blockquote>
 <p>apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar</p>
+</blockquote>
 <p>2.mysql 数据导入neo4j的jar包</p>
+<blockquote>
 <p>apoc-3.3.0.1-all.jar    mysql-connector-java-8.0.8-dmr.jar</p>
+</blockquote>
 <p>3.将对应jar包放在安装目录plugins文件目录里，然后conf目录里的neo4j.conf的后面加上</p>
-<p>dbms.security.procedures.unrestricted=apoc.*</p>
-<p>apoc.import.file.enabled=true<br>apoc.export.file.enabled=true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.security.procedures.unrestricted=apoc.*</span><br><span class="line"></span><br><span class="line">apoc.import.file.enabled=true</span><br><span class="line">apoc.export.file.enabled=true</span><br></pre></td></tr></table></figure>
 <p>4.restart neo4j,运行return apoc.version(),若有版本号，则成功。</p>
 <p>三、导数据</p>
-<p>import org.neo4j.driver.v1.<em>;<br>public class Connect{<br>public static void main(String[] args){<br> Driver driver = GraphDatabase.driver(“bolt://localhost:7687”,AuthTokens.basic(“neo4j”,”neo4j”));<br> Session session = driver.session();<br> String cypher=”create constraint on (n:ITEM) ASSERT n.itemid is unique”; //创建唯一索引，这样可以更快的导入数据<br> Session.run(cypher);<br> cypher=”CALL apoc.periodic.iterate(\”CALL apoc.load.jdbc(‘jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8’,\\”SELECT </em> FROM TABLE1\\”)\”,\”MERGE(n:ITEM{itemid:row.mitemid}) with <em> MERGE(m:ITEM{itemid:row.itemid}) with </em> create p=(n)-[r:rel{rels:row.rels}]-&gt;(m)\”,{batchSize:10000,iterateList:true})”;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型<br> Session.run(cypher);<br> session.close();<br> driver.close();<br>   }<br>}<br>mysql数据库类似,不再赘述。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org.neo4j.driver.v1.*;</span><br><span class="line">public class Connect&#123;</span><br><span class="line">public static void main(String[] args)&#123;</span><br><span class="line"> Driver driver = GraphDatabase.driver(&quot;bolt://localhost:7687&quot;,AuthTokens.basic(&quot;neo4j&quot;,&quot;neo4j&quot;));</span><br><span class="line"> Session session = driver.session();</span><br><span class="line"> String cypher=&quot;create constraint on (n:ITEM) ASSERT n.itemid is unique&quot;; //创建唯一索引，这样可以更快的导入数据</span><br><span class="line"> Session.run(cypher);</span><br><span class="line"> cypher=&quot;CALL apoc.periodic.iterate(\&quot;CALL apoc.load.jdbc(&apos;jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8&apos;,\\\&quot;SELECT * FROM TABLE1\\\&quot;)\&quot;,\&quot;MERGE(n:ITEM&#123;itemid:row.mitemid&#125;) with * MERGE(m:ITEM&#123;itemid:row.itemid&#125;) with * create p=(n)-[r:rel&#123;rels:row.rels&#125;]-&gt;(m)\&quot;,&#123;batchSize:10000,iterateList:true&#125;)&quot;;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型</span><br><span class="line"> Session.run(cypher);</span><br><span class="line"> session.close();</span><br><span class="line"> driver.close();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mysql数据库类似,不再赘述。</p>
 <p>补充：1.使用neo4j-import导入数据的命令</p>
-<p>neo4j-admin import –nodes:item  “nodes.csv”  –relationships:rel “rel_header.csv,rel.csv” –ignore-missing-nodes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neo4j-admin import --nodes:item  &quot;nodes.csv&quot;  --relationships:rel &quot;rel_header.csv,rel.csv&quot; --ignore-missing-nodes</span><br></pre></td></tr></table></figure>
 <p>2.apoc 导出命令</p>
-<p>call apoc.export.cypher.query(<br>“MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2”,<br>“/tmp/friendships.cypher”,<br>{format:’plain’,cypherFormat:’updateStructure’})`<br>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a></p>
-<p>call apoc.export.cypher.query(“match (n:lable) where not (n)–() and n.properties = ‘400’ return distinct(n)”,”C://User/Desktop/test”,{format:’plain’,cypherFormat:’create’})<br> 3.不用解压也能导数据load csv</p>
-<p>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10<br>using periodic commit 1000<br>load csv from “file:/twitter-2010.txt.gz” as line fieldterminator ‘ ‘ create (item:ITEM{id:line[0],item:line[1]})</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call apoc.export.cypher.query(</span><br><span class="line">&quot;MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2&quot;,</span><br><span class="line">&quot;/tmp/friendships.cypher&quot;,</span><br><span class="line">&#123;format:&apos;plain&apos;,cypherFormat:&apos;updateStructure&apos;&#125;)`</span><br></pre></td></tr></table></figure>
+<p>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">call apoc.export.cypher.query(&quot;match (n:lable) where not (n)--() and n.properties = &apos;400&apos; return distinct(n)&quot;,&quot;C://User/Desktop/test&quot;,&#123;format:&apos;plain&apos;,cypherFormat:&apos;create&apos;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p> 3.不用解压也能导数据load csv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load csv from &quot;file:/twitter-2010.txt.gz&quot; as line fieldterminator &apos; &apos; with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10</span><br><span class="line">using periodic commit 1000</span><br><span class="line">load csv from &quot;file:/twitter-2010.txt.gz&quot; as line fieldterminator &apos; &apos; create (item:ITEM&#123;id:line[0],item:line[1]&#125;)</span><br></pre></td></tr></table></figure>
 
           
         
