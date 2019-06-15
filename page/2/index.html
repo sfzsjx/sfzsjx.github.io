@@ -311,6 +311,355 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/kafka相关的常规操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/30/kafka相关的常规操作/" itemprop="url">
+                  kafka相关的常规操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-30 15:10:31" itemprop="dateCreated datePublished" datetime="2019-04-30T15:10:31+08:00">2019-04-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/消息队列/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
+<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
+<p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
+<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/kafka-集群安装-部署/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/30/kafka-集群安装-部署/" itemprop="url">
+                  kafka 集群安装 部署
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-30 11:45:07" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-05-04 09:19:19" itemprop="dateModified" datetime="2019-05-04T09:19:19+08:00">2019-05-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p>
+<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p>
+<p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p>
+<h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure>
+<p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p>
+<p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
+<h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p>
+<p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
+<p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p>
+<p>到此，使用kafka自带的zookeeper安装就完成了。</p>
+<blockquote>
+<p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/spring-注解-笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1708,353 +2057,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/neo4j-连接-spark/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/11/neo4j-连接-spark/" itemprop="url">
-                  neo4j 连接 spark
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-11 09:29:30 / Updated at: 09:32:45" itemprop="dateCreated datePublished" datetime="2019-03-11T09:29:30+08:00">2019-03-11</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图数据库/" itemprop="url" rel="index"><span itemprop="name">图数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天使用neo4j连接spark<br>neo4j版本3.4<br>spark版本1.6.0</p>
-<blockquote>
-<p>(1) 首先，需要添加jar包 neo4j-spark-connector_2.10-1.0.0-RC1.jar或者添加maven依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.neo4j.spark    </span><br><span class="line">neo4j-spark-connector_2.10  </span><br><span class="line">1.0.0-RC1</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>(2) 设置spark连接信息<br>val  conf : SparkConf = new SparkConf().setAppName(“InitSpark”).setMaster(“local[*]”)       conf.set(“spark.neo4j.bolt.url”,”bolt://localhost:7687”)<br>conf.set(“spark.neo4j.bolt.user”,”neo4j”)<br>conf.set(“spark.neo4j.bolt.password”,”123456”)</p>
-</blockquote>
-<blockquote>
-</blockquote>
-<p>简单例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jDataFrameTest &#123; </span><br><span class="line"> def main(args: Array[String]): Unit = &#123;      </span><br><span class="line">val sQLContext = InitSpark.getSqlContext   </span><br><span class="line">val query =&quot; MATCH p=(m:ITEM)&lt;-[r:rel*]-(n:ITEM) where m.item = &apos;84010420&apos; and  ALL(c in r where c.exdt&gt;&apos;2018-12-15&apos;)&quot; +  &quot; with  m.item as mark,length(r) as len, last(r).number as num,reduce(s=1.0 ,x in rels(p)| s*tofloat(x.number)) as nums, last(r).mitem as mitem , last(r) as bom  &quot; +  &quot; return  mark,bom.erpid as erpid, bom.virtual as virtual,mitem,bom.item as item,bom.pono as pono,&quot; +  &quot; bom.comment as comment, bom.warehouse as warehouse, bom.exdt as exdt, bom.indt as indt,tofloat(num) as num,nums,len &quot;   </span><br><span class="line">val df = Neo4jDataFrame.withDataType(sQLContext,query,Seq.empty,&quot;mark&quot; -&gt;    StringType,&quot;erpid&quot; -&gt;StringType,&quot;virtual&quot;-&gt;LongType,  &quot;mitem&quot;-&gt;StringType,&quot;item&quot;-&gt;StringType,&quot;pono&quot;-&gt;LongType,&quot;comment&quot;-&gt;StringType,&quot;warehouse&quot;-&gt;StringType,&quot;exdt&quot;-&gt;StringType,  &quot;indt&quot; -&gt;StringType,&quot;num&quot;-&gt;DoubleType,&quot;nums&quot;-&gt; DoubleType ,&quot;len&quot;-&gt;LongType)    </span><br><span class="line">df.show(1000)  &#125;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jConnectSparkGraph &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">     val sc = InitSpark.getSC</span><br><span class="line">     val sQLContext = InitSpark.getSqlContext</span><br><span class="line">     val cypher = &quot;match (n:ITEM) return n.item limit 10&quot;</span><br><span class="line">     val neo = Neo4jRowRDD(sc,cypher)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/18-决策树（中）-CART算法笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/07/18-决策树（中）-CART算法笔记/" itemprop="url">
-                  18| 决策树（中） : CART算法笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-07 09:16:53 / Updated at: 10:45:30" itemprop="dateCreated datePublished" datetime="2019-03-07T09:16:53+08:00">2019-03-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/" itemprop="url" rel="index"><span itemprop="name">决策树</span></a></span>
-
-                
-                
-                  . 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/决策树/数据挖掘/" itemprop="url" rel="index"><span itemprop="name">数据挖掘</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/2019/03/07/95366780-4076-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
-<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><blockquote>
-<p>基于信息度量的不同方式，我们把决策树分为ID3算法、C4.5算法和CART算法。CART算法（Classification And Regression Tree）,<br>又称分类回归树。也就是说CART决策树既可以作为分类树，又可以作为回归树。而且CART只支持二叉树。<br>分类树和回归树的区别<br>分类树可以处理离散数据，也就是数据种类有限的数据，它输出的是样本类别，而回归树可以对连续型的数值进行预测<br>也就是数据在某个区间都有取值的可能，它输出的是一个数值。</p>
-</blockquote>
-<h2 id="CART分类树工作流程"><a href="#CART分类树工作流程" class="headerlink" title="CART分类树工作流程"></a>CART分类树工作流程</h2><p>在属性选择上CART算法采用基尼系数作为衡量指标。</p>
-<blockquote>
-<p>假设t为节点，那么该节点是GINI系数为：<br><img src="/images/2019/03/07/4fe1cf50-4079-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中p(Ck|t)表示节点t属于类别Ck的概率，节点t的基尼系数为1减去个类别Ck概率平方和。<br>在CART算法中，基于基尼系数对特征属性进行二元分裂，假设属性A将节点D划分为D1和D2，如下图所示：<br><img src="/images/2019/03/07/d4b50920-407b-11e9-8a4c-37398b64114f.png" alt="image.png"><br>那么节点D的基尼系数等于子节点D1和D2的归一化基尼系数之和，用公式表示为：<br><img src="/images/2019/03/07/0e9e5290-407c-11e9-8a4c-37398b64114f.png" alt="image.png"><br>归一化基尼系数代表的是每个子节点的基尼系数乘以该节点占整体父节点D中的比例。节点D被属性A划分后基尼系数越大，样本集合的<br>不确定性越大，也就是不纯度越高。</p>
-</blockquote>
-<h2 id="如何使用CART算法来创建分类树"><a href="#如何使用CART算法来创建分类树" class="headerlink" title="如何使用CART算法来创建分类树"></a>如何使用CART算法来创建分类树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line"># 准备数据集</span><br><span class="line">iris=load_iris()</span><br><span class="line"># 获取特征集和分类标识</span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.33, random_state=0)</span><br><span class="line"># 创建 CART 分类树</span><br><span class="line">clf = DecisionTreeClassifier(criterion=&apos;gini&apos;)</span><br><span class="line"># 拟合构造 CART 分类树</span><br><span class="line">clf = clf.fit(train_features, train_labels)</span><br><span class="line"># 用 CART 分类树做预测</span><br><span class="line">test_predict = clf.predict(test_features)</span><br><span class="line"># 预测结果与测试集结果作比对</span><br><span class="line">score = accuracy_score(test_labels, test_predict)</span><br><span class="line">print(&quot;CART 分类树准确率 %.4lf&quot; % score)</span><br></pre></td></tr></table></figure>
-<h2 id="CART回归树工作流程"><a href="#CART回归树工作流程" class="headerlink" title="CART回归树工作流程"></a>CART回归树工作流程</h2><blockquote>
-<p>在CART回归树中，通过样本的混乱程度，也就是样本的离散程度来评价“不纯度”。<br>设x为样本的个体，均值为u。可以通过取差值的绝对值或者方差来评价。<br>差值绝对值：<br><img src="/images/2019/03/07/ee8fa8c0-407e-11e9-8a4c-37398b64114f.png" alt="image.png"><br>方差：<br><img src="/images/2019/03/07/096e0420-407f-11e9-8a4c-37398b64114f.png" alt="image.png"><br>以上两种节点划分标准，分别对应着两种目标函数最优化的标准。最小绝对偏差（LAD）和最小二乘偏差（LSD）。</p>
-</blockquote>
-<h2 id="CART回归树预测"><a href="#CART回归树预测" class="headerlink" title="CART回归树预测"></a>CART回归树预测</h2><p>例子：波士顿房价预测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.metrics import mean_squared_error</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.datasets import load_boston</span><br><span class="line">from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error</span><br><span class="line">from sklearn.tree import DecisionTreeRegressor</span><br><span class="line"># 准备数据集</span><br><span class="line">boston=load_boston()</span><br><span class="line"># 探索数据</span><br><span class="line">print(boston.feature_names)</span><br><span class="line"># 获取特征集和房价</span><br><span class="line">features = boston.data</span><br><span class="line">prices = boston.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_price, test_price = train_test_split(features, prices, test_size=0.33)</span><br><span class="line"># 创建 CART 回归树</span><br><span class="line">dtr=DecisionTreeRegressor()</span><br><span class="line"># 拟合构造 CART 回归树</span><br><span class="line">dtr.fit(train_features, train_price)</span><br><span class="line"># 预测测试集中的房价</span><br><span class="line">predict_price = dtr.predict(test_features)</span><br><span class="line"># 测试集的结果评价</span><br><span class="line">print(&apos;回归树二乘偏差均值:&apos;, mean_squared_error(test_price, predict_price))</span><br><span class="line">print(&apos;回归树绝对值偏差均值:&apos;, mean_absolute_error(test_price, predict_price))</span><br></pre></td></tr></table></figure></p>
-<h2 id="CART决策树的剪枝"><a href="#CART决策树的剪枝" class="headerlink" title="CART决策树的剪枝"></a>CART决策树的剪枝</h2><p>CART决策树的剪枝主要采用的是CCP（cost-complexity prune）方法,又称代价复杂度。这种剪枝方式采用了节点的表面误差率增益值作为评估：<br><img src="/images/2019/03/07/7d6460c0-4081-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中Tt代表以t为根节点的子树，C(Tt)表示节点t的子树没被裁剪时子树Tt的误差，C(t)表示节点t的子树被裁剪时节点t的误差，|Tt|代表子树Tt的叶子树，剪枝后，T的叶子数减少了|Tt|-1。<br>所以节点的表面误差率增益值等于节点t的子树被剪枝后的误差变化除以减掉的叶子数量。</p>
-<p><img src="/images/2019/03/07/ce361dd0-4082-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2102,7 +2104,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2165,7 +2167,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2222,7 +2228,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
