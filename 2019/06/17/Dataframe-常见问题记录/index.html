@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式 设置 hue 指定队列进行查询操作 set mapred.job.queue.name=QueueA; 设置 hue 使用 spark 引擎查询 set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置set hiv">
-<meta name="keywords" content="学习">
+  <meta name="description" content="问题1、不能够解析某个字段 解决办法：查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。">
+<meta name="keywords" content="Dataframe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记">
-<meta property="og:url" content="http://yoursite.com/2019/01/18/学习笔记/index.html">
+<meta property="og:title" content="Dataframe 常见问题记录">
+<meta property="og:url" content="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式 设置 hue 指定队列进行查询操作 set mapred.job.queue.name=QueueA; 设置 hue 使用 spark 引擎查询 set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置set hiv">
+<meta property="og:description" content="问题1、不能够解析某个字段 解决办法：查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T01:12:45.143Z">
+<meta property="og:updated_time" content="2019-06-17T08:26:48.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习笔记">
-<meta name="twitter:description" content="chcp    查看windows系统编码格式 chcp 65001   将Windows格式编码设为utf-8模式 设置 hue 指定队列进行查询操作 set mapred.job.queue.name=QueueA; 设置 hue 使用 spark 引擎查询 set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置set hiv">
+<meta name="twitter:title" content="Dataframe 常见问题记录">
+<meta name="twitter:description" content="问题1、不能够解析某个字段 解决办法：查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/18/学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>学习笔记 | 上善若水博客</title>
+  <title>Dataframe 常见问题记录 | 上善若水博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="上善若水">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习笔记
+          <h1 class="post-title" itemprop="name headline">Dataframe 常见问题记录
               
             
           </h1>
@@ -354,25 +354,9 @@
                 
               
 
-              <time title="Post created: 2019-01-18 16:56:37" itemprop="dateCreated datePublished" datetime="2019-01-18T16:56:37+08:00">2019-01-18</time>
+              <time title="Post created: 2019-06-17 16:26:48" itemprop="dateCreated datePublished" datetime="2019-06-17T16:26:48+08:00">2019-06-17</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-06-01 09:12:45" itemprop="dateModified" datetime="2019-06-01T09:12:45+08:00">2019-06-01</time>
-              
             
           </span>
 
@@ -388,7 +372,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/DataFrame/" itemprop="url" rel="index"><span itemprop="name">DataFrame</span></a></span>
 
                 
                 
@@ -422,20 +406,9 @@
       
 
       
-        <p>chcp    查看windows系统编码格式</p>
-<p>chcp 65001   将Windows格式编码设为utf-8模式</p>
-<p>设置 hue 指定队列进行查询操作</p>
-<p>set mapred.job.queue.name=QueueA;</p>
-<p>设置 hue 使用 spark 引擎查询</p>
-<p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p>
-<p>host文件配置：</p>
-<p>C:\Windows\System32\drivers\etc</p>
-<p>后台运行Java程序<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
-<p>7z Linux 解压命令<br>7za x ***.7z</p>
-<p>restful api linux 测试<br>get方法  ： curl “<a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;</a><br>post方法 ： curl -d ‘info={“mlotno”:”9840021904060061”}’ <a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail</a></p>
-<p>注意空格。</p>
-<p>在windows下执行java包命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar</span><br></pre></td></tr></table></figure></p>
-<p>后台执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将jdk 重新命名项目名（如bom.exe）</span><br><span class="line"></span><br><span class="line">bom.exe -jar xx.jar</span><br></pre></td></tr></table></figure></p>
+        <h3 id="问题1、不能够解析某个字段"><a href="#问题1、不能够解析某个字段" class="headerlink" title="问题1、不能够解析某个字段"></a>问题1、不能够解析某个字段</h3><blockquote>
+<p>解决办法：<br>查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。</p>
+</blockquote>
 
       
     </div>
@@ -456,7 +429,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag"># 学习</a>
+            <a href="/tags/Dataframe/" rel="tag"># Dataframe</a>
           
         </div>
       
@@ -469,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/18/kylin-jdbc-连接/" rel="next" title="kylin jdbc 连接">
-                <i class="fa fa-chevron-left"></i> kylin jdbc 连接
+              <a href="/2019/06/17/mybatis/" rel="next" title="mybatis">
+                <i class="fa fa-chevron-left"></i> mybatis
               </a>
             
           </div>
@@ -478,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/21/jupyter-安装/" rel="prev" title="jupyter 安装">
-                jupyter 安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -526,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -709,6 +687,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1、不能够解析某个字段"><span class="nav-number">1.</span> <span class="nav-text">问题1、不能够解析某个字段</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

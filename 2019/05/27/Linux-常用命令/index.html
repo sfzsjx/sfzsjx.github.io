@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
+  <meta name="description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用c">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 常用命令">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/Linux-常用命令/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
+<meta property="og:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-27T01:43:36.262Z">
+<meta property="og:updated_time" content="2019-06-18T08:24:58.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令">
-<meta name="twitter:description" content="linux系统中清空文件内容的三种方法 1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用">
+<meta name="twitter:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用c">
 
 
 
@@ -358,6 +358,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-18 16:24:58" itemprop="dateModified" datetime="2019-06-18T16:24:58+08:00">2019-06-18</time>
+              
+            
           </span>
 
           
@@ -406,11 +422,18 @@
       
 
       
-        <p>linux系统中清空文件内容的三种方法</p>
-<p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p>
+        <h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p>
 <p>2.使用cat命令情况，命令如下：<br>cat /dev/null &gt; file_name</p>
 <p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：<br>echo “”&gt;file_name</p>
 <p>推荐使用cat命令</p>
+<h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p>
+<blockquote>
+<p>:$ 跳到最后一行<br>:1 跳到第一行</p>
+</blockquote>
+<p>第二种方式：</p>
+<blockquote>
+<p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
+</blockquote>
 
       
     </div>
@@ -501,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -517,7 +549,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -584,7 +616,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">27</span>
+                      
+                    
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -647,7 +681,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -680,6 +716,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux系统中清空文件内容的三种方法"><span class="nav-number">1.</span> <span class="nav-text">linux系统中清空文件内容的三种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-跳转最后一行和跳到行首"><span class="nav-number">2.</span> <span class="nav-text">vim 跳转最后一行和跳到行首</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
