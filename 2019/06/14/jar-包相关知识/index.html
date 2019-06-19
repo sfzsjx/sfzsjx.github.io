@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 123nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.log 3、杀死进程 1kill -9 pid">
+  <meta name="description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 12345678nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.lognohup java -jar">
 <meta name="keywords" content="Java,jar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jar 包相关知识">
 <meta property="og:url" content="http://yoursite.com/2019/06/14/jar-包相关知识/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 123nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.log 3、杀死进程 1kill -9 pid">
+<meta property="og:description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 12345678nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.lognohup java -jar">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-15T00:43:32.633Z">
+<meta property="og:updated_time" content="2019-06-19T02:15:03.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jar 包相关知识">
-<meta name="twitter:description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 123nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.log 3、杀死进程 1kill -9 pid">
+<meta name="twitter:description" content="1、查看jar包 1ps -aux | grep java 2、jar 包后台运行 12345678nohup java -jar xxx.jar &amp;gt; xxx.log &amp;amp;nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &amp;gt; analysisbasedata-0.0.1-SNAPSHOT.lognohup java -jar">
 
 
 
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-15 08:43:32" itemprop="dateModified" datetime="2019-06-15T08:43:32+08:00">2019-06-15</time>
+                <time title="Updated at: 2019-06-19 10:15:03" itemprop="dateModified" datetime="2019-06-19T10:15:03+08:00">2019-06-19</time>
               
             
           </span>
@@ -425,7 +425,7 @@
         <p>1、查看jar包</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep java</span><br></pre></td></tr></table></figure>
 <p>2、jar 包后台运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; xxx.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &gt; analysisbasedata-0.0.1-SNAPSHOT.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; xxx.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &gt; analysisbasedata-0.0.1-SNAPSHOT.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/comsumer/analysisbasedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/comsumer/analysisbasedata.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;</span><br></pre></td></tr></table></figure>
 <p>3、杀死进程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 pid</span><br></pre></td></tr></table></figure>
 <p>4、查找文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;17:46:49&quot; nohup.out</span><br></pre></td></tr></table></figure></p>
