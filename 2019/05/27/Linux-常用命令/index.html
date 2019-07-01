@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-18T08:24:58.854Z">
+<meta property="og:updated_time" content="2019-07-01T02:18:53.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令">
 <meta name="twitter:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：vim file_name:%d:wq 2.使用cat命令情况，命令如下：cat /dev/null &amp;gt; file_name 3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：echo “”&amp;gt;file_name 推荐使用c">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-18 16:24:58" itemprop="dateModified" datetime="2019-06-18T16:24:58+08:00">2019-06-18</time>
+                <time title="Updated at: 2019-07-01 10:18:53" itemprop="dateModified" datetime="2019-07-01T10:18:53+08:00">2019-07-01</time>
               
             
           </span>
@@ -434,6 +434,37 @@
 <blockquote>
 <p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
 </blockquote>
+<p>查找文件关键字内容</p>
+<blockquote>
+<p>grep -r “test”  /data/reports</p>
+</blockquote>
+<p>搜索命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/string</td>
+<td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td>
+</tr>
+<tr>
+<td>n</td>
+<td>搜索指定字符串的下一个出现位置</td>
+</tr>
+<tr>
+<td>:%s/old/new/g</td>
+<td>全文替换指定字符串</td>
+</tr>
+<tr>
+<td>:n1,n2s/old/new/g</td>
+<td>在一定范围内替换指定字符串</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
