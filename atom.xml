@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-17T08:26:48.250Z</updated>
+  <updated>2019-07-18T08:22:27.928Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,113 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spark sql  java 自定义函数</title>
+    <link href="http://yoursite.com/2019/07/18/spark-sql-java-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2019/07/18/spark-sql-java-自定义函数/</id>
+    <published>2019-07-18T08:22:27.000Z</published>
+    <updated>2019-07-18T08:22:27.928Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>::: hljs-center</code></pre><p>java自定义函数</p><p>:::</p><p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题<br>      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.udf().register(&quot;transsinglepower&quot;, new UDF1&lt;Integer,Double&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Double call(Integer single_poer) throws Exception &#123;</span><br><span class="line">                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));</span><br><span class="line">                return mesure_distinct;</span><br><span class="line">            &#125;&#125;, DataTypes.DoubleType);</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;::: hljs-center
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;java自定义函数&lt;/p&gt;
+&lt;p&gt;:::&lt;/p&gt;
+&lt;p&gt;//自定义函数将信号强度转距离&lt;br&gt;        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型&lt;br&gt;   
+      
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring boot 注解</title>
+    <link href="http://yoursite.com/2019/07/16/spring-boot-%E6%B3%A8%E8%A7%A3/"/>
+    <id>http://yoursite.com/2019/07/16/spring-boot-注解/</id>
+    <published>2019-07-16T09:05:47.000Z</published>
+    <updated>2019-07-16T09:09:46.592Z</updated>
+    
+    <content type="html"><![CDATA[<p>问题一、</p><p>Could not autowire. No beans of ‘RestTemplate’ type found</p><p>在mapper 类添加注解@Repository 即可解决，简单有效</p><p>方法2：在mapper文件上加@Component注解，把普通pojo实例化到spring容器中</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;问题一、&lt;/p&gt;
+&lt;p&gt;Could not autowire. No beans of ‘RestTemplate’ type found&lt;/p&gt;
+&lt;p&gt;在mapper 类添加注解@Repository 即可解决，简单有效&lt;/p&gt;
+&lt;p&gt;方法2：在mapper文件上加@Co
+      
+    
+    </summary>
+    
+      <category term="spring boot" scheme="http://yoursite.com/categories/spring-boot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala 安装问题</title>
+    <link href="http://yoursite.com/2019/07/10/Scala-%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/07/10/Scala-安装问题/</id>
+    <published>2019-07-10T05:09:01.000Z</published>
+    <updated>2019-07-10T05:09:02.055Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、此时不应有 \scala\bin。<br>由于Scala 安装路径中包含空格，需要重新安装。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、此时不应有 \scala\bin。&lt;br&gt;由于Scala 安装路径中包含空格，需要重新安装。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Scala" scheme="http://yoursite.com/categories/Scala/"/>
+    
+    
+      <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>日志切割脚本</title>
+    <link href="http://yoursite.com/2019/07/02/%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E8%84%9A%E6%9C%AC/"/>
+    <id>http://yoursite.com/2019/07/02/日志切割脚本/</id>
+    <published>2019-07-02T01:18:44.000Z</published>
+    <updated>2019-07-02T01:18:44.973Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">log_dir=&apos;/home/lyxbdw/basedata/server/split&apos;</span><br><span class="line">monitor_file=$1</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;` &apos;初始化切割日志文件为：&apos; $monitor_file &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ ! $1 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;输入参数为空，使用默认路径：/home/lyxbdw/basedata/server/basedata.log&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    monitor_file=/home/lyxbdw/basedata/server/basedata.log #文件的绝对路径</span><br><span class="line">fi</span><br><span class="line">log_name=`basename $monitor_file`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件名称为：&apos;$log_name   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">file_size=`du $monitor_file | awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件大小为：&apos;$file_size   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ $file_size -ge 1024000 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;文件大小大于 1024000 开始切割&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    if [ ! -d $log_dir ]</span><br><span class="line">    then</span><br><span class="line">        echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割路径不存在，新建....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">        mkdir /home/lyxbdw/basedata/server/split  #创建保存切割文件目录,这个路径可以自行修改，保存到你想要的目录</span><br><span class="line">    fi</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;</span><br><span class="line">    cp  $monitor_file  /home/lyxbdw/basedata/server/$log_name-`date +%Y%m%d%H%M%S`.log #保存日志文件</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;</span><br><span class="line">    echo `date &apos;+%Y-%m-%d-%H:%M:%S&apos;`&apos;文件切割&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log #记录切割日志</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos;</span><br><span class="line">    echo &quot;&quot; &gt; $monitor_file  #清空tomcat的log/catalina.out文件内容</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="http://yoursite.com/categories/shell/"/>
+    
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Dataframe 常见问题记录</title>
@@ -47,21 +154,26 @@
     <link href="http://yoursite.com/2019/06/17/mybatis/"/>
     <id>http://yoursite.com/2019/06/17/mybatis/</id>
     <published>2019-06-17T02:36:51.000Z</published>
-    <updated>2019-06-17T02:36:51.863Z</updated>
+    <updated>2019-07-24T03:36:24.924Z</updated>
     
-    <content type="html"><![CDATA[<p>1、什么是mybatis</p><blockquote><p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h2 id="1、什么是mybatis"><a href="#1、什么是mybatis" class="headerlink" title="1、什么是mybatis"></a>1、什么是mybatis</h2><blockquote><p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p></blockquote><h2 id="2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名"><a href="#2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名" class="headerlink" title="2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名"></a>2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名</h2><p>导包选择：<br>import tk.mybatis.spring.annotation.MapperScan;</p><h2 id="3-tk-mybatis与springboot结合使用案例"><a href="#3-tk-mybatis与springboot结合使用案例" class="headerlink" title="3.tk.mybatis与springboot结合使用案例"></a>3.tk.mybatis与springboot结合使用案例</h2><p>（1）引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 数据库连接--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.0.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- 数据库连接 end --&gt;</span><br></pre></td></tr></table></figure></p><p>可以看出tk.mybatis常常结合druid德鲁伊使用</p><p>（2）引入插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;configurationFile&gt;$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">                   &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                   &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">               &lt;dependencies&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;3.4.4&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">               &lt;/dependencies&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p><p>可以看见接下来需要配置${basedir}/src/main/resources/generator/<strong>generatorConfig.xml</strong>配置文件</p><p>（3）在下图目录下创建generatorConfig.xml配置文件，并设置相应的参数<br><img src="/images/2019/07/24/7b143a00-adc0-11e9-a2e4-21ce6d685454.png" alt="image.png"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!-- 引入数据库连接配置 --&gt;</span><br><span class="line">    &lt;properties resource=&quot;jdbc.properties&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 tk.mybatis 插件 --&gt;</span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.gree.cn.mybatistest.mapper.MyMapper&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置数据库连接 --&gt;</span><br><span class="line">        &lt;jdbcConnection</span><br><span class="line">                driverClass=&quot;$&#123;jdbc.driverClass&#125;&quot;</span><br><span class="line">                connectionURL=&quot;$&#123;jdbc.connectionURL&#125;&quot;</span><br><span class="line">                userId=&quot;$&#123;jdbc.username&#125;&quot;</span><br><span class="line">                password=&quot;$&#123;jdbc.password&#125;&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置实体类存放路径 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.gree.cn.mybatistest.entity&quot; targetProject=&quot;src/main/java&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 XML 存放路径 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 DAO 存放路径 --&gt;</span><br><span class="line">        &lt;javaClientGenerator</span><br><span class="line">                targetPackage=&quot;com.gree.cn.mybatistest.mapper&quot;</span><br><span class="line">                targetProject=&quot;src/main/java&quot;</span><br><span class="line">                type=&quot;XMLMAPPER&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要指定生成的数据库和表，% 代表所有表 --&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;basestation_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">           &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;buffer_area_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">            &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure><ul><li><p>可以在上面的配置文件中需要创建数据库连接jdbc.properties配置文件,如下：<br><img src="/images/2019/07/24/28a3af20-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 8.x: com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.driverClass=com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.connectionURL=jdbc:mysql://localhost:3306/bluetooth_location?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=lyxbdw</span><br></pre></td></tr></table></figure></li><li><p>然后配置实体类存放路径</p></li><li>配置 XML 存放路径</li><li>配置 DAO 存放路径</li><li>配置需要指定生成的数据库和表</li></ul><p>（4）这些配置完成后，将创建通用的父级接口MyMapper<br>需要注意这个文件的创建目录，注释中有解释<br><img src="/images/2019/07/24/ca4edc50-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.tk.mybatis.mapper;</span><br><span class="line"></span><br><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> *  自己的 Mapper</span><br><span class="line"> *  特别注意，该接口不能被扫描到，否则会出错</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>（5）最后再在application.properties配置<br>实体类路径和xml配置文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis.mapper-locations=classpath:mapper/*.xml</span><br><span class="line">mybatis.type-aliases-package=com.gree.cn.mybatistest.entity</span><br></pre></td></tr></table></figure></p><p>并在主程序入口添加注解@MapperScan(basePackages = “com.gree.cn.mybatistest.mapper”)扫描mapper包<br>需要注意的是引入的依赖为 <strong>import tk.mybatis.spring.annotation.MapperScan;</strong></p><p>再点击下图中的mybatis-generator:generate</p><p><img src="/images/2019/07/24/085050a0-adc3-11e9-a2e4-21ce6d685454.png" alt="image.png"></p><p>前期的准备工作就完成。当然在使用前有两点需要注意下<br>1、自动生成的mapper文件可能不会集成通用的父类mapper接口，手动引入jar包<br>2、生成的实体类中表名可能会有两个点，需要手动删除一个</p><h2 id="4、tk-mybatis查询数据库"><a href="#4、tk-mybatis查询数据库" class="headerlink" title="4、tk.mybatis查询数据库"></a>4、tk.mybatis查询数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.service.impl;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.mybatistest.entity.BasestationInfo;</span><br><span class="line">import com.gree.cn.mybatistest.entity.BufferAreaInfo;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BasestationInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BufferAreaInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.service.MybatisTest;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import tk.mybatis.mapper.entity.Example;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line">@Service</span><br><span class="line">public class MybatisTestimpl implements MybatisTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">   private BufferAreaInfoMapper bufferAreaInfoMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private BasestationInfoMapper basestationInfoMapper;</span><br><span class="line">    @Override</span><br><span class="line">    public void mybatistest() &#123;</span><br><span class="line">        Example example = new Example(BufferAreaInfo.class);</span><br><span class="line"></span><br><span class="line">        example.createCriteria().andEqualTo(&quot;stationxcoordinate&quot;, 811)</span><br><span class="line">                .andEqualTo(&quot;stationycoordinate&quot;, 130);</span><br><span class="line"></span><br><span class="line">        List&lt;BufferAreaInfo&gt; bufferAreaInfos = bufferAreaInfoMapper.selectByExample(example);</span><br><span class="line"></span><br><span class="line">        BasestationInfo uu = basestationInfoMapper.selectByPrimaryKey(&quot;E07DEACF031C&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(bufferAreaInfos.size());</span><br><span class="line">        System.out.println(uu.getStationid());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>大概步骤就是注入mapper,然后使用mapper调用sql算子进行查询，其他的都类似。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;1、什么是mybatis&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解
+        &lt;h2 id=&quot;1、什么是mybatis&quot;&gt;&lt;a href=&quot;#1、什么是mybatis&quot; class=&quot;headerlink&quot; title=&quot;1、什么是mybatis&quot;&gt;&lt;/a&gt;1、什么是mybatis&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;MyBatis 是一款优秀的持久层
       
     
     </summary>
     
+      <category term="数据库 " scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mybatis" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mybatis/"/>
+    
+    
+      <category term="数据库 mybatis" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mybatis/"/>
     
   </entry>
   
@@ -183,9 +295,9 @@
     <link href="http://yoursite.com/2019/05/27/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://yoursite.com/2019/05/27/Linux-常用命令/</id>
     <published>2019-05-27T01:43:36.000Z</published>
-    <updated>2019-07-01T02:18:53.317Z</updated>
+    <updated>2019-07-01T02:20:50.053Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p><p>2.使用cat命令情况，命令如下：<br>cat /dev/null &gt; file_name</p><p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：<br>echo “”&gt;file_name</p><p>推荐使用cat命令</p><h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p><blockquote><p>:$ 跳到最后一行<br>:1 跳到第一行</p></blockquote><p>第二种方式：</p><blockquote><p>shift+g 跳到最后一行<br>gg 跳转到第一行</p></blockquote><p>查找文件关键字内容</p><blockquote><p>grep -r “test”  /data/reports</p></blockquote><p>搜索命令</p><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td>/string</td><td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td></tr><tr><td>n</td><td>搜索指定字符串的下一个出现位置</td></tr><tr><td>:%s/old/new/g</td><td>全文替换指定字符串</td></tr><tr><td>:n1,n2s/old/new/g</td><td>在一定范围内替换指定字符串</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p><blockquote><p>vim file_name<br>:%d<br>:wq</p></blockquote><p>2.使用cat命令情况，命令如下：</p><blockquote><p>cat /dev/null &gt; file_name</p></blockquote><p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p><blockquote><p>echo “”&gt;file_name</p></blockquote><p>推荐使用cat命令</p><h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p><blockquote><p>:$ 跳到最后一行<br>:1 跳到第一行</p></blockquote><p>第二种方式：</p><blockquote><p>shift+g 跳到最后一行<br>gg 跳转到第一行</p></blockquote><p>查找文件关键字内容</p><blockquote><p>grep -r “test”  /data/reports</p></blockquote><p>搜索命令</p><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td>/string</td><td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td></tr><tr><td>n</td><td>搜索指定字符串的下一个出现位置</td></tr><tr><td>:%s/old/new/g</td><td>全文替换指定字符串</td></tr><tr><td>:n1,n2s/old/new/g</td><td>在一定范围内替换指定字符串</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
@@ -443,114 +555,6 @@
     
     
       <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据挖掘实战（3） ： 如何对比特币走势进行预测</title>
-    <link href="http://yoursite.com/2019/03/18/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%EF%BC%883%EF%BC%89-%EF%BC%9A-%E5%A6%82%E4%BD%95%E5%AF%B9%E6%AF%94%E7%89%B9%E5%B8%81%E8%B5%B0%E5%8A%BF%E8%BF%9B%E8%A1%8C%E9%A2%84%E6%B5%8B/"/>
-    <id>http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/</id>
-    <published>2019-03-18T07:11:45.000Z</published>
-    <updated>2019-03-18T09:49:27.963Z</updated>
-    
-    <content type="html"><![CDATA[<p>时间序列分析：<br>   时间序列分析模型建立了观察结果与时间变化的关系，能够帮助我们预测未来一段时间内的结果变化情况。</p><p>需要掌握的目标：</p><ol><li>了解时间序列预测的概念，以及常用的算法，包括AR、MA、ARMA、ARIMA模型等；</li><li>掌握并使用ARMA模型工具，对一个时间序列数据进行建模和预测；</li><li>对比特币的历史数据进行时间序列建模，并预测未来6个月的走势。</li></ol><p><strong>时间序列预测</strong><br>   关于时间序列，可以简单理解为按照时间组成的数字序列。在时间序列预测模型中，经典模型有：<br>AR、MA、ARIMA、ARMA。<br>   AR(Auto Regressive) 又叫自回归模型。它认为过去若干个时刻的点通过线性组合，再加上白噪声就可以预测未来某个时刻的点。白噪声可以理解成一个期望为0，方差为常数的纯随机过程。AR模型还存在一个阶数，称为 AR（p）模型，也叫做 p 阶自回归模型。他指的是通过这个时刻的前p个点，通过线性组合再加上白噪声来预测当前时刻点的值。</p><p>   MA（Moving Average）,又叫滑动平均模型。它与 AR模型大同小异，AR模型是历史时序值的线性组合，MA是通过历史白噪声点进行线性组合来 影响当前时刻点。同样MA模型也存在一个阶数，称为MA(q)阶模型，也叫做q阶移动平均模型。</p><p>   ARMA（Auto Regressive Moving Average）,又叫自回归滑动平均模型，也是AR和MA两者的混合。相较于ARMA,ARIMA多了个差分的过程，作用是对不平稳数据进行差分平稳，在差分平稳后再进行建模。ARMA(p,q) 两个阶数，ARIMA（p,d,q）三个阶数，其中d 表示差分阶数。</p><p><strong>  ARMA 模型工具</strong><br>  引入相关工具包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br></pre></td></tr></table></figure></p><p>然后通过ARMA(endog,order,exog=None)创建ARMA类，参数说明：<br>  endog: endogenous variable,代表内生变量，又叫非政策性变量，它由模型决定，不被政策左右，可以说是我们想要分析的变量，或者说是我们这次项目需要用到的变量。</p><p>  order ：代表是p和q的值，也就是ARMA中的阶数。</p><p>  exog: exogenous variables,代表外生变量。外生变量和内生变量一样是经济模型中重要变量。相较于内生变量而言，外生变量有称为政策性变量，在经济机制内受外部的影响，不是我们模型要研究的变量。</p><p>代码例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import statsmodels.api as sm</span><br><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br><span class="line">from statsmodels.graphics.api import qqplot</span><br><span class="line"></span><br><span class="line"># 创建数据</span><br><span class="line">data = [5922, 5308, 5546, 5975, 2704, 1767, 4111, 5542, 4726, 5866, 6183, 3199, 1471, 1325, 6618, 6644, 5337, 7064, 2912, 1456, 4705, 4579, 4990, 4331, 4481, 1813, 1258, 4383, 5451, 5169, 5362, 6259, 3743, 2268, 5397, 5821, 6115, 6631, 6474, 4134, 2728, 5753, 7130, 7860, 6991, 7499, 5301, 2808, 6755, 6658, 7644, 6472, 8680, 6366, 5252, 8223, 8181, 10548, 11823, 14640, 9873, 6613, 14415, 13204, 14982, 9690, 10693, 8276, 4519, 7865, 8137, 10022, 7646, 8749, 5246, 4736, 9705, 7501, 9587, 10078, 9732, 6986, 4385, 8451, 9815, 10894, 10287, 9666, 6072, 5418]</span><br><span class="line">data = pd.Series(data)</span><br><span class="line">data_index = sm.tsa.datetools.dates_from_range(&apos;1901&apos;,&apos;1990&apos;)</span><br><span class="line"></span><br><span class="line"># 绘制数据图</span><br><span class="line">data.index = pd.Index(data_index)</span><br><span class="line">data.plot(figsize=(12,8))</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"># 创建 ARMA 模型</span><br><span class="line">arma = ARMA(data,(7,0)).fit()</span><br><span class="line">print(&apos;AIC: %0.4lf&apos;  %arma.aic)</span><br><span class="line"></span><br><span class="line"># 模型预测</span><br><span class="line">predict_y = arma.predict(&apos;1990&apos;,&apos;2000&apos;)</span><br><span class="line"></span><br><span class="line"># 预测结果绘制</span><br><span class="line">fig,ax = plt.subplots(figsize=(12,8))</span><br><span class="line">ax = data.ix[&apos;1901&apos;:].plot(ax=ax)</span><br><span class="line">predict_y.plot(ax= ax)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p><p>如何判断一个模型是否合适？<br> 需要引入AIC准则，也叫赤池准则，数值越小代表模型拟合的越好。</p><p><strong>比特币预测</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># 比特币走势预测，使用时间序列 ARMA</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br><span class="line">import warnings</span><br><span class="line">from itertools import product</span><br><span class="line">from datetime import datetime</span><br><span class="line">warnings.filterwarnings(&apos;ignore&apos;)</span><br><span class="line"># 数据加载</span><br><span class="line">df = pd.read_csv(&apos;./bitcoin_2012-01-01_to_2018-10-31.csv&apos;)</span><br><span class="line"># 将时间作为 df 的索引</span><br><span class="line">df.Timestamp = pd.to_datetime(df.Timestamp)</span><br><span class="line">df.index = df.Timestamp</span><br><span class="line"># 数据探索</span><br><span class="line">print(df.head())</span><br><span class="line"># 按照月，季度，年来统计</span><br><span class="line">df_month = df.resample(&apos;M&apos;).mean()</span><br><span class="line">df_Q = df.resample(&apos;Q-DEC&apos;).mean()</span><br><span class="line">df_year = df.resample(&apos;A-DEC&apos;).mean()</span><br><span class="line"># 按照天，月，季度，年来显示比特币的走势</span><br><span class="line">fig = plt.figure(figsize=[15, 7])</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] # 用来正常显示中文标签</span><br><span class="line">plt.suptitle(&apos;比特币金额（美金）&apos;, fontsize=20)</span><br><span class="line">plt.subplot(221)</span><br><span class="line">plt.plot(df.Weighted_Price, &apos;-&apos;, label=&apos;按天&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(222)</span><br><span class="line">plt.plot(df_month.Weighted_Price, &apos;-&apos;, label=&apos;按月&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(223)</span><br><span class="line">plt.plot(df_Q.Weighted_Price, &apos;-&apos;, label=&apos;按季度&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(224)</span><br><span class="line">plt.plot(df_year.Weighted_Price, &apos;-&apos;, label=&apos;按年&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"># 设置参数范围</span><br><span class="line">ps = range(0, 3)</span><br><span class="line">qs = range(0, 3)</span><br><span class="line">parameters = product(ps, qs)</span><br><span class="line">parameters_list = list(parameters)</span><br><span class="line"># 寻找最优 ARMA 模型参数，即 best_aic 最小</span><br><span class="line">results = []</span><br><span class="line">best_aic = float(&quot;inf&quot;) # 正无穷</span><br><span class="line">for param in parameters_list:</span><br><span class="line">    try:</span><br><span class="line">        model = ARMA(df_month.Weighted_Price,order=(param[0], param[1])).fit()</span><br><span class="line">    except ValueError:</span><br><span class="line">        print(&apos;参数错误:&apos;, param)</span><br><span class="line">        continue</span><br><span class="line">    aic = model.aic</span><br><span class="line">    if aic &lt; best_aic:</span><br><span class="line">        best_model = model</span><br><span class="line">        best_aic = aic</span><br><span class="line">        best_param = param</span><br><span class="line">    results.append([param, model.aic])</span><br><span class="line"># 输出最优模型</span><br><span class="line">result_table = pd.DataFrame(results)</span><br><span class="line">result_table.columns = [&apos;parameters&apos;, &apos;aic&apos;]</span><br><span class="line">print(&apos;最优模型: &apos;, best_model.summary())</span><br><span class="line"># 比特币预测</span><br><span class="line">df_month2 = df_month[[&apos;Weighted_Price&apos;]]</span><br><span class="line">date_list = [datetime(2018, 11, 30), datetime(2018, 12, 31), datetime(2019, 1, 31), datetime(2019, 2, 28), datetime(2019, 3, 31), </span><br><span class="line">             datetime(2019, 4, 30), datetime(2019, 5, 31), datetime(2019, 6, 30)]</span><br><span class="line">future = pd.DataFrame(index=date_list, columns= df_month.columns)</span><br><span class="line">df_month2 = pd.concat([df_month2, future])</span><br><span class="line">df_month2[&apos;forecast&apos;] = best_model.predict(start=0, end=91)</span><br><span class="line"># 比特币预测结果显示</span><br><span class="line">plt.figure(figsize=(20,7))</span><br><span class="line">df_month2.Weighted_Price.plot(label=&apos;实际金额&apos;)</span><br><span class="line">df_month2.forecast.plot(color=&apos;r&apos;, ls=&apos;--&apos;, label=&apos;预测金额&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(&apos;比特币金额（月）&apos;)</span><br><span class="line">plt.xlabel(&apos;时间&apos;)</span><br><span class="line">plt.ylabel(&apos;美金&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;时间序列分析：&lt;br&gt;   时间序列分析模型建立了观察结果与时间变化的关系，能够帮助我们预测未来一段时间内的结果变化情况。&lt;/p&gt;
-&lt;p&gt;需要掌握的目标：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;了解时间序列预测的概念，以及常用的算法，包括AR、MA、ARMA、ARIMA模型等；&lt;/li
-      
-    
-    </summary>
-    
-      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql 优化原理 笔记</title>
-    <link href="http://yoursite.com/2019/03/16/Mysql-%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86-%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/03/16/Mysql-优化原理-笔记/</id>
-    <published>2019-03-16T08:07:15.000Z</published>
-    <updated>2019-03-16T08:26:16.286Z</updated>
-    
-    <content type="html"><![CDATA[<p>Mysql 逻辑框架<br><img src="/images/2019/03/16/7156c0e0-47be-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p>MYSQL 逻辑框架整体分为三层，最上层为客户端层，并非Mysql独有，诸如：连接处理，授权认证，安全等。</p><p>MYSQL 大多数核心服务均在这中间这一层，包括查询解析、分析、优化、缓存、内置函数。所有的跨存储引擎也在这层实现，如：存储过程，触发器和视图等</p><p>最下层为存储引擎。负责Mysql中数据存储和提取。</p><h2 id="Mysql查询过程"><a href="#Mysql查询过程" class="headerlink" title="Mysql查询过程"></a>Mysql查询过程</h2><p>  Mysql查询优化，首先得了解Mysql是如何优化和执行查询的，然后在实际的工作中就是遵循一些原则让Mysql的优化器能够按照预想的合理的方式运行而已。</p><p><img src="/images/2019/03/16/bce25300-47c1-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p><img src="/images/2019/03/16/cfcff250-47c2-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p><p>参考：<a href="https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Mysql 逻辑框架&lt;br&gt;&lt;img src=&quot;/images/2019/03/16/7156c0e0-47be-11e9-898c-d1fd811fe7b6.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;MYSQL 逻辑框架整体分为三层，最上层为客户端层，并非
-      
-    
-    </summary>
-    
-      <category term="mysql，数据库" scheme="http://yoursite.com/categories/mysql%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据挖掘实战（2）： 信用卡诈骗分析</title>
-    <link href="http://yoursite.com/2019/03/15/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%EF%BC%882%EF%BC%89%EF%BC%9A-%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AF%88%E9%AA%97%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/</id>
-    <published>2019-03-15T06:13:29.000Z</published>
-    <updated>2019-03-15T07:31:41.410Z</updated>
-    
-    <content type="html"><![CDATA[<p>信用卡诈骗分析目标：通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷的风险。<br>学习目标：</p><ol><li>学习逻辑回归</li><li>信用卡欺诈属于二分类问题，欺诈交易在所有交易中比例很小，对于这种数据不平衡情况，到底采用什么样的模型评估标准更准确；</li><li>完成信用卡欺诈分析实战项目，并通过数据可视化对数据探索和模型评估进一步加强了解。</li></ol><p>构建逻辑回归分类器<br>  逻辑回归（logistic回归），主要解决二分类问题。在逻辑回归中使用Logistic函数<br>也称Sigmoid函数。</p><p><img src="/images/2019/03/15/c13beb30-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p><p>函数形如S状：<br><img src="/images/2019/03/15/d9159210-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p><p>算法实现理解：我们要实现一个二分类任务，0为不发生，1为发生。而通过对历史样本学习得到一个新的模型<br>，当新的样本给出时，预测出结果。这里得到是y的一个预测概率。通常我们认为概率大于50%<br>则发生，反之，则不发生。</p><p>在sklearn中，使用LogisticRegression()函数构建逻辑回归分类器，函数常用的构造参数：</p><ol><li>penalty ：惩罚项，取值为l1或l2，默认为l2。当模型参数满足高斯分布时用l2，当模型参数满足拉普拉斯分布时用l1;</li><li>solver: 代表的是逻辑回归损失函数的优化方法。有5个参数可选，分别为liblinear、lbfgs、newton-cg、sag或saga.默认为liblinear,s适用于数据量较小的数据集，当数据量较大的时候可以选用sag或saga方法。</li><li>max_iter:算法收敛最大迭代次数，默认为10.</li><li>n_jobs:拟合和预测的时候CPU的核数，默认为1.</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;信用卡诈骗分析目标：通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷的风险。&lt;br&gt;学习目标：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;学习逻辑回归&lt;/li&gt;
-&lt;li&gt;信用卡欺诈属于二分类问题，欺诈交易在所有交易中比例很小，对于这种数据不平衡情况，到底采用什么样的模型评估标准更准确
-      
-    
-    </summary>
-    
-      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="数据分析" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell 编写 脚本常用命令</title>
-    <link href="http://yoursite.com/2019/03/15/shell-%E7%BC%96%E5%86%99-%E8%84%9A%E6%9C%AC%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2019/03/15/shell-编写-脚本常用命令/</id>
-    <published>2019-03-15T01:22:52.000Z</published>
-    <updated>2019-03-29T01:17:24.200Z</updated>
-    
-    <content type="html"><![CDATA[<p>统计test.sh 文件命令的行数<br>sed -n ‘$=’ /home/hadoop/test/test.sh</p><p>shell 脚本日志写入追加时间文件夹<br>date_time=<code>date +&#39;%Y-%m-%d&#39;</code> &amp;&amp; sh /home/greesj2b/jiaoben/bomrank.sh &gt;&gt; /home/greesj2b/jiaoben/bomrank/log/bomrank_$date_time.log 2&gt;&amp;1</p><p>hive 查看表锁情况</p><p>show locks;</p><p>对表解锁<br>unlock table tablename;</p><p>关闭锁机制<br>set hive.support.concurrency=false;默认为true</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;统计test.sh 文件命令的行数&lt;br&gt;sed -n ‘$=’ /home/hadoop/test/test.sh&lt;/p&gt;
-&lt;p&gt;shell 脚本日志写入追加时间文件夹&lt;br&gt;date_time=&lt;code&gt;date +&amp;#39;%Y-%m-%d&amp;#39;&lt;/code&gt; 
-      
-    
-    </summary>
-    
-      <category term="脚本" scheme="http://yoursite.com/categories/%E8%84%9A%E6%9C%AC/"/>
-    
-    
-      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
     
   </entry>
   

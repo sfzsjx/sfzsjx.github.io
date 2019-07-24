@@ -311,6 +311,636 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/spark-sql-java-自定义函数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/spark-sql-java-自定义函数/" itemprop="url">
+                  spark sql  java 自定义函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-18 16:22:27" itemprop="dateCreated datePublished" datetime="2019-07-18T16:22:27+08:00">2019-07-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>::: hljs-center
+</code></pre><p>java自定义函数</p>
+<p>:::</p>
+<p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题<br>      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.udf().register(&quot;transsinglepower&quot;, new UDF1&lt;Integer,Double&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Double call(Integer single_poer) throws Exception &#123;</span><br><span class="line">                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));</span><br><span class="line">                return mesure_distinct;</span><br><span class="line">            &#125;&#125;, DataTypes.DoubleType);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/spring-boot-注解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/16/spring-boot-注解/" itemprop="url">
+                  spring boot 注解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-16 17:05:47 / Updated at: 17:09:46" itemprop="dateCreated datePublished" datetime="2019-07-16T17:05:47+08:00">2019-07-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring-boot/" itemprop="url" rel="index"><span itemprop="name">spring boot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>问题一、</p>
+<p>Could not autowire. No beans of ‘RestTemplate’ type found</p>
+<p>在mapper 类添加注解@Repository 即可解决，简单有效</p>
+<p>方法2：在mapper文件上加@Component注解，把普通pojo实例化到spring容器中</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/Scala-安装问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/10/Scala-安装问题/" itemprop="url">
+                  Scala 安装问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-10 13:09:01 / Updated at: 13:09:02" itemprop="dateCreated datePublished" datetime="2019-07-10T13:09:01+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Scala/" itemprop="url" rel="index"><span itemprop="name">Scala</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、此时不应有 \scala\bin。<br>由于Scala 安装路径中包含空格，需要重新安装。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/日志切割脚本/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/02/日志切割脚本/" itemprop="url">
+                  日志切割脚本
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-02 09:18:44" itemprop="dateCreated datePublished" datetime="2019-07-02T09:18:44+08:00">2019-07-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">log_dir=&apos;/home/lyxbdw/basedata/server/split&apos;</span><br><span class="line">monitor_file=$1</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;` &apos;初始化切割日志文件为：&apos; $monitor_file &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ ! $1 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;输入参数为空，使用默认路径：/home/lyxbdw/basedata/server/basedata.log&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    monitor_file=/home/lyxbdw/basedata/server/basedata.log #文件的绝对路径</span><br><span class="line">fi</span><br><span class="line">log_name=`basename $monitor_file`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件名称为：&apos;$log_name   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">file_size=`du $monitor_file | awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件大小为：&apos;$file_size   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ $file_size -ge 1024000 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;文件大小大于 1024000 开始切割&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    if [ ! -d $log_dir ]</span><br><span class="line">    then</span><br><span class="line">        echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割路径不存在，新建....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">        mkdir /home/lyxbdw/basedata/server/split  #创建保存切割文件目录,这个路径可以自行修改，保存到你想要的目录</span><br><span class="line">    fi</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;</span><br><span class="line">    cp  $monitor_file  /home/lyxbdw/basedata/server/$log_name-`date +%Y%m%d%H%M%S`.log #保存日志文件</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;</span><br><span class="line">    echo `date &apos;+%Y-%m-%d-%H:%M:%S&apos;`&apos;文件切割&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log #记录切割日志</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos;</span><br><span class="line">    echo &quot;&quot; &gt; $monitor_file  #清空tomcat的log/catalina.out文件内容</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -517,8 +1147,49 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-24 11:36:24" itemprop="dateModified" datetime="2019-07-24T11:36:24+08:00">2019-07-24</time>
+              
+            
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库 </span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -549,10 +1220,34 @@
       
         
           
-            <p>1、什么是mybatis</p>
-<blockquote>
+            <h2 id="1、什么是mybatis"><a href="#1、什么是mybatis" class="headerlink" title="1、什么是mybatis"></a>1、什么是mybatis</h2><blockquote>
 <p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p>
 </blockquote>
+<h2 id="2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名"><a href="#2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名" class="headerlink" title="2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名"></a>2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名</h2><p>导包选择：<br>import tk.mybatis.spring.annotation.MapperScan;</p>
+<h2 id="3-tk-mybatis与springboot结合使用案例"><a href="#3-tk-mybatis与springboot结合使用案例" class="headerlink" title="3.tk.mybatis与springboot结合使用案例"></a>3.tk.mybatis与springboot结合使用案例</h2><p>（1）引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 数据库连接--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.0.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- 数据库连接 end --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出tk.mybatis常常结合druid德鲁伊使用</p>
+<p>（2）引入插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;configurationFile&gt;$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">                   &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                   &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">               &lt;dependencies&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;3.4.4&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">               &lt;/dependencies&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看见接下来需要配置${basedir}/src/main/resources/generator/<strong>generatorConfig.xml</strong>配置文件</p>
+<p>（3）在下图目录下创建generatorConfig.xml配置文件，并设置相应的参数<br><img src="/images/2019/07/24/7b143a00-adc0-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!-- 引入数据库连接配置 --&gt;</span><br><span class="line">    &lt;properties resource=&quot;jdbc.properties&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 tk.mybatis 插件 --&gt;</span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.gree.cn.mybatistest.mapper.MyMapper&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置数据库连接 --&gt;</span><br><span class="line">        &lt;jdbcConnection</span><br><span class="line">                driverClass=&quot;$&#123;jdbc.driverClass&#125;&quot;</span><br><span class="line">                connectionURL=&quot;$&#123;jdbc.connectionURL&#125;&quot;</span><br><span class="line">                userId=&quot;$&#123;jdbc.username&#125;&quot;</span><br><span class="line">                password=&quot;$&#123;jdbc.password&#125;&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置实体类存放路径 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.gree.cn.mybatistest.entity&quot; targetProject=&quot;src/main/java&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 XML 存放路径 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 DAO 存放路径 --&gt;</span><br><span class="line">        &lt;javaClientGenerator</span><br><span class="line">                targetPackage=&quot;com.gree.cn.mybatistest.mapper&quot;</span><br><span class="line">                targetProject=&quot;src/main/java&quot;</span><br><span class="line">                type=&quot;XMLMAPPER&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要指定生成的数据库和表，% 代表所有表 --&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;basestation_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">           &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;buffer_area_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">            &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以在上面的配置文件中需要创建数据库连接jdbc.properties配置文件,如下：<br><img src="/images/2019/07/24/28a3af20-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 8.x: com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.driverClass=com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.connectionURL=jdbc:mysql://localhost:3306/bluetooth_location?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=lyxbdw</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后配置实体类存放路径</p>
+</li>
+<li>配置 XML 存放路径</li>
+<li>配置 DAO 存放路径</li>
+<li>配置需要指定生成的数据库和表</li>
+</ul>
+<p>（4）这些配置完成后，将创建通用的父级接口MyMapper<br>需要注意这个文件的创建目录，注释中有解释<br><img src="/images/2019/07/24/ca4edc50-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.tk.mybatis.mapper;</span><br><span class="line"></span><br><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> *  自己的 Mapper</span><br><span class="line"> *  特别注意，该接口不能被扫描到，否则会出错</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>（5）最后再在application.properties配置<br>实体类路径和xml配置文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis.mapper-locations=classpath:mapper/*.xml</span><br><span class="line">mybatis.type-aliases-package=com.gree.cn.mybatistest.entity</span><br></pre></td></tr></table></figure></p>
+<p>并在主程序入口添加注解@MapperScan(basePackages = “com.gree.cn.mybatistest.mapper”)扫描mapper包<br>需要注意的是引入的依赖为 <strong>import tk.mybatis.spring.annotation.MapperScan;</strong></p>
+<p>再点击下图中的mybatis-generator:generate</p>
+<p><img src="/images/2019/07/24/085050a0-adc3-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<p>前期的准备工作就完成。当然在使用前有两点需要注意下<br>1、自动生成的mapper文件可能不会集成通用的父类mapper接口，手动引入jar包<br>2、生成的实体类中表名可能会有两个点，需要手动删除一个</p>
+<h2 id="4、tk-mybatis查询数据库"><a href="#4、tk-mybatis查询数据库" class="headerlink" title="4、tk.mybatis查询数据库"></a>4、tk.mybatis查询数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.service.impl;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.mybatistest.entity.BasestationInfo;</span><br><span class="line">import com.gree.cn.mybatistest.entity.BufferAreaInfo;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BasestationInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BufferAreaInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.service.MybatisTest;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import tk.mybatis.mapper.entity.Example;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line">@Service</span><br><span class="line">public class MybatisTestimpl implements MybatisTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">   private BufferAreaInfoMapper bufferAreaInfoMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private BasestationInfoMapper basestationInfoMapper;</span><br><span class="line">    @Override</span><br><span class="line">    public void mybatistest() &#123;</span><br><span class="line">        Example example = new Example(BufferAreaInfo.class);</span><br><span class="line"></span><br><span class="line">        example.createCriteria().andEqualTo(&quot;stationxcoordinate&quot;, 811)</span><br><span class="line">                .andEqualTo(&quot;stationycoordinate&quot;, 130);</span><br><span class="line"></span><br><span class="line">        List&lt;BufferAreaInfo&gt; bufferAreaInfos = bufferAreaInfoMapper.selectByExample(example);</span><br><span class="line"></span><br><span class="line">        BasestationInfo uu = basestationInfoMapper.selectByPrimaryKey(&quot;E07DEACF031C&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(bufferAreaInfos.size());</span><br><span class="line">        System.out.println(uu.getStationid());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大概步骤就是注入mapper,然后使用mapper调用sql算子进行查询，其他的都类似。</p>
 
           
         
@@ -1260,768 +1955,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Linux-常用命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/Linux-常用命令/" itemprop="url">
-                  Linux 常用命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-27 09:43:36" itemprop="dateCreated datePublished" datetime="2019-05-27T09:43:36+08:00">2019-05-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-07-01 10:18:53" itemprop="dateModified" datetime="2019-07-01T10:18:53+08:00">2019-07-01</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：<br>vim file_name<br>:%d<br>:wq</p>
-<p>2.使用cat命令情况，命令如下：<br>cat /dev/null &gt; file_name</p>
-<p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：<br>echo “”&gt;file_name</p>
-<p>推荐使用cat命令</p>
-<h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p>
-<blockquote>
-<p>:$ 跳到最后一行<br>:1 跳到第一行</p>
-</blockquote>
-<p>第二种方式：</p>
-<blockquote>
-<p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
-</blockquote>
-<p>查找文件关键字内容</p>
-<blockquote>
-<p>grep -r “test”  /data/reports</p>
-</blockquote>
-<p>搜索命令</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/string</td>
-<td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td>
-</tr>
-<tr>
-<td>n</td>
-<td>搜索指定字符串的下一个出现位置</td>
-</tr>
-<tr>
-<td>:%s/old/new/g</td>
-<td>全文替换指定字符串</td>
-</tr>
-<tr>
-<td>:n1,n2s/old/new/g</td>
-<td>在一定范围内替换指定字符串</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/蓝牙信标定位/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/23/蓝牙信标定位/" itemprop="url">
-                  蓝牙信标定位
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-23 09:55:37" itemprop="dateCreated datePublished" datetime="2019-05-23T09:55:37+08:00">2019-05-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-06-19 10:17:17" itemprop="dateModified" datetime="2019-06-19T10:17:17+08:00">2019-06-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/蓝牙定位/" itemprop="url" rel="index"><span itemprop="name">蓝牙定位</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>::: hljs-center</p>
-<h1 id="蓝牙信标定位"><a href="#蓝牙信标定位" class="headerlink" title="蓝牙信标定位"></a>蓝牙信标定位</h1><p>:::</p>
-<h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote>
-<p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p>
-</blockquote>
-<p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>
-<p>二 、base数据执行程序</p>
-<p>1.基站数据分析</p>
-<blockquote>
-<p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p>
-</blockquote>
-<p>2.基站数据接收</p>
-<blockquote>
-<p>cd /home/lyxbdw/basedata/server/target/<br>java -jar basedata-1.0-SNAPSHOT.jar<br>//后台运行<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
-</blockquote>
-<h3 id="基站分析数据"><a href="#基站分析数据" class="headerlink" title="基站分析数据"></a><strong>基站分析数据</strong></h3><blockquote>
-<p>nohup java -jar /home/lyxbdw/basedata/comsumer/analysisbasedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/comsumer/analysisbasedata.log &amp;</p>
-</blockquote>
-<h3 id="基站接收数据"><a href="#基站接收数据" class="headerlink" title="基站接收数据"></a><strong>基站接收数据</strong></h3><blockquote>
-<p>nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;</p>
-</blockquote>
-<p>3.Linux jar 包后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">nohup java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=127.0.0.1:9876 &gt; log.out &amp;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>解释：<br>1、目的是使rocketmq-console-ng-1.0.0.jar在后台运行；<br>2、nohup 就是linux后台挂起的命令<br>3、“&gt; log.out” 指定日志输出位置为log.out</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/netty-遇到的坑/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/22/netty-遇到的坑/" itemprop="url">
-                  netty 遇到的坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-22 11:22:08" itemprop="dateCreated datePublished" datetime="2019-05-22T11:22:08+08:00">2019-05-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-05-23 09:45:59" itemprop="dateModified" datetime="2019-05-23T09:45:59+08:00">2019-05-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络编程/" itemprop="url" rel="index"><span itemprop="name">网络编程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int valueTen = 328;</span><br><span class="line">String strHex = Integer.toHexString(valueTen)</span><br></pre></td></tr></table></figure>
-<h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strHex = &quot;0214010977&quot;</span><br><span class="line">int valueTen = Integer.pareseInt(strHex,16)</span><br></pre></td></tr></table></figure>
-<h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;2019&quot;;</span><br><span class="line">int i = Integer.pareseInt(str);</span><br><span class="line">int j = Integer.valuesOf(str).intValue();</span><br></pre></td></tr></table></figure>
-<h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 2019;</span><br><span class="line">String str1 = i+&quot;&quot;;</span><br><span class="line">String str2 = String.valueOf(i);</span><br></pre></td></tr></table></figure>
-<h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] strToByteArray(String str) &#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = str.getBytes();</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String str = new String(byteArray);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToHexStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null)&#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();</span><br><span class="line">    char[] hexChars = new char[byteArray.length * 2];</span><br><span class="line">    for (int j = 0; j &lt; byteArray.length; j++) &#123;</span><br><span class="line">        int v = byteArray[j] &amp; 0xFF;</span><br><span class="line">        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];</span><br><span class="line">        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(hexChars);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] hexStrToByteArray(String str)</span><br><span class="line">&#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (str.length() == 0) &#123;</span><br><span class="line">        return new byte[0];</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = new byte[str.length() / 2];</span><br><span class="line">    for (int i = 0; i &lt; byteArray.length; i++)&#123;</span><br><span class="line">        String subStr = str.substring(2 * i, 2 * i + 2);</span><br><span class="line">        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));</span><br><span class="line">    &#125;</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        /**</span><br><span class="line">* 合并byte[]数组 （不改变原数组）</span><br><span class="line">* @param byte_1</span><br><span class="line">* @param byte_2</span><br><span class="line">* @return 合并后的数组</span><br><span class="line">*/</span><br><span class="line">    public byte[] byteMerger(byte[] byte_1, byte[] byte_2)&#123;  </span><br><span class="line">      byte[] byte_3 = new byte[byte_1.length+byte_2.length];  </span><br><span class="line">      System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  </span><br><span class="line">      System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  </span><br><span class="line">      return byte_3;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 截取byte数组   不改变原数组</span><br><span class="line"> * @param b 原数组</span><br><span class="line"> * @param off 偏差值（索引）</span><br><span class="line"> * @param length 长度</span><br><span class="line"> * @return 截取后的数组</span><br><span class="line"> */</span><br><span class="line">public byte[] subByte(byte[] b,int off,int length)&#123;</span><br><span class="line">	byte[] b1 = new byte[length];</span><br><span class="line">	System.arraycopy(b, off, b1, 0, length);</span><br><span class="line">	return b1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFormatTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ParseException &#123;</span><br><span class="line">        String time = &quot;2019-5-23 9:24:1&quot;;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        java.util.Date date_util = sdf.parse(time); //转换为util.date</span><br><span class="line">        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date</span><br><span class="line">        System.out.println(date_util);</span><br><span class="line">        System.out.println(date_sql);</span><br><span class="line">        String date = sdf.format(date_sql);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        date = sdf.format(date_util);</span><br><span class="line">        System.out.println(date);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/MySQL-语句记录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/16/MySQL-语句记录/" itemprop="url">
-                  MySQL 语句记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-16 14:36:17" itemprop="dateCreated datePublished" datetime="2019-05-16T14:36:17+08:00">2019-05-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-06-28 15:25:00" itemprop="dateModified" datetime="2019-06-28T15:25:00+08:00">2019-06-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>sqlserver 统计具有重复字段的记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;</span><br></pre></td></tr></table></figure></p>
-<p>统计出a表有的b表没有的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a.* FROM A a left outer join B b on a.qq = b.qq</span><br><span class="line">WHERE b.qq is null;</span><br></pre></td></tr></table></figure></p>
-<p>mysql 统计具有重复字段的记录(hive也可以)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,count(*) as count from hk_test group by username having count&gt;1;</span><br></pre></td></tr></table></figure></p>
-<h3 id="MySQL8-x-连接"><a href="#MySQL8-x-连接" class="headerlink" title="MySQL8.x 连接"></a>MySQL8.x 连接</h3><blockquote>
-<p>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://127.0.0.1:3306/spring-cloud-itoken-service-admin?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=123456</p>
-</blockquote>
-<p>主要关注的驱动不同，新加了cj这个东东，然后可能时区问题新加serverTimezone=GMT</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2069,7 +2002,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2138,7 +2071,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2203,7 +2148,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

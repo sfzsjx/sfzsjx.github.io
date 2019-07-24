@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="统计test.sh 文件命令的行数sed -n ‘$=’ /home/hadoop/test/test.sh shell 脚本日志写入追加时间文件夹date_time=date +&amp;#39;%Y-%m-%d&amp;#39; &amp;amp;&amp;amp; sh /home/greesj2b/jiaoben/bomrank.sh &amp;gt;&amp;gt; /home/greesj2b/jiaoben/bomrank/log">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-29T01:17:24.200Z">
+<meta property="og:updated_time" content="2019-07-02T01:16:27.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell 编写 脚本常用命令">
 <meta name="twitter:description" content="统计test.sh 文件命令的行数sed -n ‘$=’ /home/hadoop/test/test.sh shell 脚本日志写入追加时间文件夹date_time=date +&amp;#39;%Y-%m-%d&amp;#39; &amp;amp;&amp;amp; sh /home/greesj2b/jiaoben/bomrank.sh &amp;gt;&amp;gt; /home/greesj2b/jiaoben/bomrank/log">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-29 09:17:24" itemprop="dateModified" datetime="2019-03-29T09:17:24+08:00">2019-03-29</time>
+                <time title="Updated at: 2019-07-02 09:16:27" itemprop="dateModified" datetime="2019-07-02T09:16:27+08:00">2019-07-02</time>
               
             
           </span>
@@ -428,6 +428,10 @@
 <p>show locks;</p>
 <p>对表解锁<br>unlock table tablename;</p>
 <p>关闭锁机制<br>set hive.support.concurrency=false;默认为true</p>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><blockquote>
+<p>syntax error: unexpected end of file<br>原因：最后发现我的脚本是在window环境下编写的，然后传到linux服务器上的，这时候问题来了，doc下的文本内容格式和unix下的格式有所不同，比如dos文件传输到unix系统时,会在每行的结尾多一个^M结束符。（我的就是这个原因）<br>解决办法：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim serverDeploy.sh</span><br><span class="line">:set fileformat=unix</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -518,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -534,7 +547,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -603,7 +616,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -668,7 +693,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -701,6 +734,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一"><span class="nav-number">1.</span> <span class="nav-text">问题一</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
