@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-05 10:14:23" itemprop="dateModified" datetime="2019-08-05T10:14:23+08:00">2019-08-05</time>
+                <time title="Updated at: 2019-08-05 18:38:12" itemprop="dateModified" datetime="2019-08-05T18:38:12+08:00">2019-08-05</time>
               
             
           </span>
@@ -480,6 +480,12 @@
 </tbody>
 </table>
 <p>端口占用查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p>
+<p>查看内存使用情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p>
+<p>查看磁盘使用情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<p>查看文件创建数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
+<p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
 
           
         
