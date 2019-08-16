@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：  vim file_name:%d:wq  2.使用cat命令情况，命令如下：  cat /dev/null &amp;gt; file_name  3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：  echo “”&amp;gt;file_na">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-05T10:38:12.579Z">
+<meta property="og:updated_time" content="2019-08-13T09:23:29.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令">
 <meta name="twitter:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：  vim file_name:%d:wq  2.使用cat命令情况，命令如下：  cat /dev/null &amp;gt; file_name  3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：  echo “”&amp;gt;file_na">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-05 18:38:12" itemprop="dateModified" datetime="2019-08-05T18:38:12+08:00">2019-08-05</time>
+                <time title="Updated at: 2019-08-13 17:23:29" itemprop="dateModified" datetime="2019-08-13T17:23:29+08:00">2019-08-13</time>
               
             
           </span>
@@ -481,6 +481,11 @@
 <p>查看文件创建数量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
 <p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
+<p>查看占用线程最大的程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>修改服务最大线程数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p>
+<p>监控java线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>监控网络客户连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>linux 将本地文件传给其他服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -596,7 +601,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -677,7 +682,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -750,7 +757,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

@@ -311,6 +311,675 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/15/校验工具类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/15/校验工具类/" itemprop="url">
+                  校验工具类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-06-15 09:33:40" itemprop="dateCreated datePublished" datetime="2019-06-15T09:33:40+08:00">2019-06-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/校验/" itemprop="url" rel="index"><span itemprop="name">校验</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、异或校验<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf out = Unpooled.buffer();   </span><br><span class="line">byte[] b = new byte[out.readableBytes()];</span><br><span class="line">// 进行异或校验</span><br><span class="line">byte temp=b[3];</span><br><span class="line">   for (int i = 4; i &lt;b.length-1; i++) &#123;</span><br><span class="line">       temp ^=b[i];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/14/jar-包相关知识/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/14/jar-包相关知识/" itemprop="url">
+                  jar 包相关知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-06-14 14:43:48" itemprop="dateCreated datePublished" datetime="2019-06-14T14:43:48+08:00">2019-06-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-19 10:15:03" itemprop="dateModified" datetime="2019-06-19T10:15:03+08:00">2019-06-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java，jar/" itemprop="url" rel="index"><span itemprop="name">Java，jar</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、查看jar包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep java</span><br></pre></td></tr></table></figure>
+<p>2、jar 包后台运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; xxx.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &gt; analysisbasedata-0.0.1-SNAPSHOT.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/comsumer/analysisbasedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/comsumer/analysisbasedata.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;</span><br></pre></td></tr></table></figure>
+<p>3、杀死进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 pid</span><br></pre></td></tr></table></figure>
+<p>4、查找文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;17:46:49&quot; nohup.out</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/14/时间工具类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/14/时间工具类/" itemprop="url">
+                  时间工具类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-06-14 11:32:37 / Updated at: 11:33:57" itemprop="dateCreated datePublished" datetime="2019-06-14T11:32:37+08:00">2019-06-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具类，Java/" itemprop="url" rel="index"><span itemprop="name">工具类，Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>::: hljs-center</p>
+<p>时间工具类</p>
+<p>:::</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.utils;</span><br><span class="line"></span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 日期时间工具类</span><br><span class="line"> * @author Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class DateUtils &#123;</span><br><span class="line"></span><br><span class="line">    public static final SimpleDateFormat TIME_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATEKEY_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMdd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_NOW =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取某个时刻的时间信息</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    public static String getTimeNow()&#123;</span><br><span class="line"></span><br><span class="line">        return DATE_NOW.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 获取格式化某个时间</span><br><span class="line">     */</span><br><span class="line">    public  static String getFormatTimeNow()&#123;</span><br><span class="line">        return TIME_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之前</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean before(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.before(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之后</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean after(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.after(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 计算时间差值（单位为秒）</span><br><span class="line">     * @param time1 时间1</span><br><span class="line">     * @param time2 时间2</span><br><span class="line">     * @return 差值</span><br><span class="line">     */</span><br><span class="line">    public static int minus(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date datetime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date datetime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            long millisecond = datetime1.getTime() - datetime2.getTime();</span><br><span class="line"></span><br><span class="line">            return Integer.valueOf(String.valueOf(millisecond / 1000));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取年月日和小时</span><br><span class="line">     * @param datetime 时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @return 结果（yyyy-MM-dd_HH）</span><br><span class="line">     */</span><br><span class="line">    public static String getDateHour(String datetime) &#123;</span><br><span class="line">        String date = datetime.split(&quot; &quot;)[0];</span><br><span class="line">        String hourMinuteSecond = datetime.split(&quot; &quot;)[1];</span><br><span class="line">        String hour = hourMinuteSecond.split(&quot;:&quot;)[0];</span><br><span class="line">        return date + &quot;_&quot; + hour;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当天日期（yyyy-MM-dd）</span><br><span class="line">     * @return 当天日期</span><br><span class="line">     */</span><br><span class="line">    public static String getTodayDate() &#123;</span><br><span class="line">        return DATE_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取昨天的日期（yyyy-MM-dd）</span><br><span class="line">     * @return 昨天的日期</span><br><span class="line">     */</span><br><span class="line">    public static String getYesterdayDate() &#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        cal.setTime(new Date());</span><br><span class="line">        cal.add(Calendar.DAY_OF_YEAR, -1);</span><br><span class="line"></span><br><span class="line">        Date date = cal.getTime();</span><br><span class="line"></span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期（yyyy-MM-dd）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的日期</span><br><span class="line">     */</span><br><span class="line">    public static String formatDate(Date date) &#123;</span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的时间</span><br><span class="line">     */</span><br><span class="line">    public static String formatTime(Date date) &#123;</span><br><span class="line">        return TIME_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解析时间字符串</span><br><span class="line">     * @param time 时间字符串</span><br><span class="line">     * @return Date</span><br><span class="line">     */</span><br><span class="line">    public static Date parseTime(String time) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return TIME_FORMAT.parse(time);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatDateKey(Date date) &#123;</span><br><span class="line">        return DATEKEY_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param datekey</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Date parseDateKey(String datekey) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return DATEKEY_FORMAT.parse(datekey);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间，保留到分钟级别</span><br><span class="line">     * yyyyMMddHHmm</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatTimeMinute(Date date) &#123;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMddHHmm&quot;);</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/scala-正则匹配/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/30/scala-正则匹配/" itemprop="url">
+                  scala 正则匹配
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-30 09:54:57 / Updated at: 09:59:23" itemprop="dateCreated datePublished" datetime="2019-05-30T09:54:57+08:00">2019-05-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/scala/正则匹配/" itemprop="url" rel="index"><span itemprop="name">正则匹配</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>::: hljs-center</p>
+<p>scala正则匹配</p>
+<p>:::</p>
+<ul>
+<li><p>中文字符匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//匹配中文字符,正则表达式</span><br><span class="line">val  regrex =&quot;[\u4e00-\u9fa5]&quot;.r</span><br><span class="line">//匹配字符串中第一个中文字符</span><br><span class="line">val matches = regrex.findFirstMatchIn(dsca_part1).mkString(&quot;&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常规括号加数字匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def get_dsca2(dsac_part2:String): String =&#123;</span><br><span class="line">	  var dsca_use = dsac_part2</span><br><span class="line">          //匹配左括号加5个数字，其中括号需要转义</span><br><span class="line">	  val partment = &quot;\\([0-9]&#123;5&#125;&quot;.r</span><br><span class="line">          //匹配多个括号，？代表多次匹配</span><br><span class="line">	  val partment3 = &quot;\\((.*?)\\)&quot;.r</span><br><span class="line">	  val result = partment3.findAllMatchIn(dsca_use)</span><br><span class="line">	  result.foreach(x =&gt;&#123;</span><br><span class="line">      if (partment.findAllMatchIn(x.toString()).isEmpty)&#123;</span><br><span class="line">	  dsca_use =  dsca_use.split(&quot;\\(&quot; +x.toString()+&quot;\\)&quot;)(0)</span><br><span class="line">      &#125;</span><br><span class="line">	  &#125;)</span><br><span class="line">	  return dsca_use</span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><p>Scala 的正则表达式继承了 Java 的语法规则，Java 则大部分使用了 Perl 语言的规则。</p>
+<p>下表我们给出了常用的一些正则表达式规则：</p>
+<p>表达式    匹配规则<br>^    匹配输入字符串开始的位置。<br>$    匹配输入字符串结尾的位置。<br>.    匹配除”\r\n”之外的任何单个字符。<br>[…]    字符集。匹配包含的任一字符。例如，”[abc]”匹配”plain”中的”a”。<br>[^…]    反向字符集。匹配未包含的任何字符。例如，”[^abc]”匹配”plain”中”p”，”l”，”i”，”n”。<br>\A    匹配输入字符串开始的位置（无多行支持）<br>\z    字符串结尾(类似$，但不受处理多行选项的影响)<br>\Z    字符串结尾或行尾(不受处理多行选项的影响)<br>re<em>    重复零次或更多次<br>re+    重复一次或更多次<br>re?    重复零次或一次<br>re{ n}    重复n次<br>re{ n,}<br>re{ n, m}    重复n到m次<br>a|b    匹配 a 或者 b<br>(re)    匹配 re,并捕获文本到自动命名的组里<br>(?: re)    匹配 re,不捕获匹配的文本，也不给此分组分配组号<br>(?&gt; re)    贪婪子表达式<br>\w    匹配字母或数字或下划线或汉字<br>\W    匹配任意不是字母，数字，下划线，汉字的字符<br>\s    匹配任意的空白符,相等于 [\t\n\r\f]<br>\S    匹配任意不是空白符的字符<br>\d    匹配数字，类似 [0-9]<br>\D    匹配任意非数字的字符<br>\G    当前搜索的开头<br>\n    换行符<br>\b    通常是单词分界位置，但如果在字符类里使用代表退格<br>\B    匹配不是单词开头或结束的位置<br>\t    制表符<br>\Q    开始引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)<em>3”。<br>\E    结束引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)*3”。</p>
+<h3 id="正则表达式实例"><a href="#正则表达式实例" class="headerlink" title="正则表达式实例"></a>正则表达式实例</h3><p>实例    描述<br>.    匹配除”\r\n”之外的任何单个字符。<br>[Rr]uby    匹配 “Ruby” 或 “ruby”<br>rub[ye]    匹配 “ruby” 或 “rube”<br>[aeiou]    匹配小写字母 ：aeiou<br>[0-9]    匹配任何数字，类似 [0123456789]<br>[a-z]    匹配任何 ASCII 小写字母<br>[A-Z]    匹配任何 ASCII 大写字母<br>[a-zA-Z0-9]    匹配数字，大小写字母<br>[^aeiou]    匹配除了 aeiou 其他字符<br>[^0-9]    匹配除了数字的其他字符<br>\d    匹配数字，类似: [0-9]<br>\D    匹配非数字，类似: [^0-9]<br>\s    匹配空格，类似: [ \t\r\n\f]<br>\S    匹配非空格，类似: [^ \t\r\n\f]<br>\w    匹配字母，数字，下划线，类似: [A-Za-z0-9_]<br>\W    匹配非字母，数字，下划线，类似: [^A-Za-z0-9_]<br>ruby?    匹配 “rub” 或 “ruby”: y 是可选的<br>ruby*    匹配 “rub” 加上 0 个或多个的 y。<br>ruby+    匹配 “rub” 加上 1 个或多个的 y。<br>\d{3}    刚好匹配 3 个数字。<br>\d{3,}    匹配 3 个或多个数字。<br>\d{3,5}    匹配 3 个、4 个或 5 个数字。<br>\D\d+    无分组： + 重复 \d<br>(\D\d)+/    分组： + 重复 \D\d 对<br>([Rr]uby(, )?)+    匹配 “Ruby”、”Ruby, ruby, ruby”，等等<br>注意上表中的每个字符使用了两个反斜线。这是因为在 Java 和 Scala 中字符串中的反斜线是转义字符。所以如果你要输出 ..，你需要在字符串中写成 .\. 来获取一个反斜线</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Linux-常用命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -374,7 +1043,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-05 18:38:12" itemprop="dateModified" datetime="2019-08-05T18:38:12+08:00">2019-08-05</time>
+                <time title="Updated at: 2019-08-13 17:23:29" itemprop="dateModified" datetime="2019-08-13T17:23:29+08:00">2019-08-13</time>
               
             
           </span>
@@ -486,6 +1155,11 @@
 <p>查看文件创建数量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
 <p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
+<p>查看占用线程最大的程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>修改服务最大线程数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p>
+<p>监控java线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>监控网络客户连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>linux 将本地文件传给其他服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1435,682 +2109,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/kafka相关的常规操作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/30/kafka相关的常规操作/" itemprop="url">
-                  kafka相关的常规操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-30 15:10:31" itemprop="dateCreated datePublished" datetime="2019-04-30T15:10:31+08:00">2019-04-30</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
-
-                
-                
-                  . 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/消息队列/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
-<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
-<p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
-<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/kafka-集群安装-部署/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/30/kafka-集群安装-部署/" itemprop="url">
-                  kafka 集群安装 部署
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-30 11:45:07" itemprop="dateCreated datePublished" datetime="2019-04-30T11:45:07+08:00">2019-04-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-05-04 09:19:19" itemprop="dateModified" datetime="2019-05-04T09:19:19+08:00">2019-05-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p>
-<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p>
-<p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p>
-<h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure>
-<p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p>
-<p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
-<h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p>
-<p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p>
-<p>到此，使用kafka自带的zookeeper安装就完成了。</p>
-<blockquote>
-<p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/spring-注解-笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/spring-注解-笔记/" itemprop="url">
-                  spring 注解 笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-04 14:32:58 / Updated at: 14:37:35" itemprop="dateCreated datePublished" datetime="2019-04-04T14:32:58+08:00">2019-04-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Controller和-RestController的区别"><a href="#Controller和-RestController的区别" class="headerlink" title="@Controller和@RestController的区别"></a>@Controller和@RestController的区别</h3><p>知识点：@RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。</p>
-<p>1) 如果只是使用@RestController注解Controller，则Controller中的方法无法返回jsp页面，或者html，配置的视图解析器 InternalResourceViewResolver不起作用，返回的内容就是Return 里的内容。</p>
-<p>2) 如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。<br>    如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。</p>
-<p>例如：</p>
-<p>1.使用@Controller 注解，在对应的方法上，视图解析器可以解析return 的jsp,html页面，并且跳转到相应页面</p>
-<p>若返回json等内容到页面，则需要加@ResponseBody注解</p>
-<h3 id="RequestMapping-和-GetMapping-PostMapping-区别"><a href="#RequestMapping-和-GetMapping-PostMapping-区别" class="headerlink" title="@RequestMapping   和  @GetMapping @PostMapping 区别"></a>@RequestMapping   和  @GetMapping @PostMapping 区别</h3><p>@GetMapping是一个组合注解，是@RequestMapping(method = RequestMethod.GET)的缩写。</p>
-<p>@PostMapping是一个组合注解，是@RequestMapping(method = RequestMethod.POST)的缩写。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/hive-笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/hive-笔记/" itemprop="url">
-                  hive 笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-04 09:47:50" itemprop="dateCreated datePublished" datetime="2019-04-04T09:47:50+08:00">2019-04-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>hive设置队列三种方式：</p>
-<blockquote>
-<p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2153,7 +2156,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2234,7 +2237,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2307,7 +2312,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

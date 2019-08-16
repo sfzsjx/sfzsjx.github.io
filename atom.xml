@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-18T08:22:27.928Z</updated>
+  <updated>2019-08-15T08:03:58.470Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,109 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Intellij IDEA 问题记录</title>
+    <link href="http://yoursite.com/2019/08/15/Intellij-IDEA-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2019/08/15/Intellij-IDEA-问题记录/</id>
+    <published>2019-08-15T08:03:58.000Z</published>
+    <updated>2019-08-15T08:03:58.470Z</updated>
+    
+    <content type="html"><![CDATA[<p>Intellij IDEA 问题记录 </p><p>问题一、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Intellij idea Language level和Java Compiler版本自动变化问题</span><br><span class="line">该问题主要是由于刷新pom.xml文件时，IDEA的这两个参数就会恢复成默认值</span><br><span class="line">解决办法：</span><br><span class="line">在pom.xml中加入以下配置</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Intellij IDEA 问题记录 &lt;/p&gt;
+&lt;p&gt;问题一、&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;spa
+      
+    
+    </summary>
+    
+      <category term="IDEA" scheme="http://yoursite.com/categories/IDEA/"/>
+    
+    
+      <category term="IDEA" scheme="http://yoursite.com/tags/IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql 8.0以后授权</title>
+    <link href="http://yoursite.com/2019/08/14/mysql-8-0%E4%BB%A5%E5%90%8E%E6%8E%88%E6%9D%83/"/>
+    <id>http://yoursite.com/2019/08/14/mysql-8-0以后授权/</id>
+    <published>2019-08-14T08:25:52.000Z</published>
+    <updated>2019-08-14T08:49:04.520Z</updated>
+    
+    <content type="html"><![CDATA[<p>mysql 授权操作</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">首先创建一个用户</span><br><span class="line">create user &apos;root&apos;@&apos;172.16.247.129&apos; identified by &apos;lyxbdw&apos;;</span><br><span class="line"></span><br><span class="line">然后进行授权</span><br><span class="line"> grant all privileges on *.* to &apos;root&apos;@&apos;172.16.247.129&apos;</span><br><span class="line">    -&gt; ;</span><br><span class="line"></span><br><span class="line">刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">开启管理员权限，重启mysql</span><br><span class="line">![image.png](/images/2019/08/14/6a9ca990-be6f-11e9-8d50-b3f800759cdf.png)</span><br></pre></td></tr></table></figure><p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p><p>查看某个用户权限</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for  &apos;root&apos;@&apos;172.16.247.129&apos;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;mysql 授权操作&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/sp
+      
+    
+    </summary>
+    
+      <category term="mysql，数据库" scheme="http://yoursite.com/categories/mysql%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spark Windows10 安装部署</title>
+    <link href="http://yoursite.com/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/"/>
+    <id>http://yoursite.com/2019/08/12/Spark-Windows10-安装部署/</id>
+    <published>2019-08-12T01:18:10.000Z</published>
+    <updated>2019-08-12T01:18:10.297Z</updated>
+    
+    <content type="html"><![CDATA[<p>::: hljs-center</p><h1 id="Spark-Windows10-安装部署"><a href="#Spark-Windows10-安装部署" class="headerlink" title="Spark Windows10 安装部署"></a>Spark Windows10 安装部署</h1><p>:::</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;::: hljs-center&lt;/p&gt;
+&lt;h1 id=&quot;Spark-Windows10-安装部署&quot;&gt;&lt;a href=&quot;#Spark-Windows10-安装部署&quot; class=&quot;headerlink&quot; title=&quot;Spark Windows10 安装部署&quot;&gt;&lt;/a&gt;Spa
+      
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="Spark" scheme="http://yoursite.com/tags/Spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spark 常用参数设置</title>
+    <link href="http://yoursite.com/2019/08/09/spark-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://yoursite.com/2019/08/09/spark-常用参数设置/</id>
+    <published>2019-08-09T08:50:32.000Z</published>
+    <updated>2019-08-09T08:50:32.983Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+    
+  </entry>
   
   <entry>
     <title>spark sql  java 自定义函数</title>
@@ -295,9 +398,9 @@
     <link href="http://yoursite.com/2019/05/27/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://yoursite.com/2019/05/27/Linux-常用命令/</id>
     <published>2019-05-27T01:43:36.000Z</published>
-    <updated>2019-08-05T10:38:12.579Z</updated>
+    <updated>2019-08-13T09:23:29.566Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p><blockquote><p>vim file_name<br>:%d<br>:wq</p></blockquote><p>2.使用cat命令情况，命令如下：</p><blockquote><p>cat /dev/null &gt; file_name</p></blockquote><p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p><blockquote><p>echo “”&gt;file_name</p></blockquote><p>推荐使用cat命令</p><h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p><blockquote><p>:$ 跳到最后一行<br>:1 跳到第一行</p></blockquote><p>第二种方式：</p><blockquote><p>shift+g 跳到最后一行<br>gg 跳转到第一行</p></blockquote><p>查找文件关键字内容</p><blockquote><p>grep -r “test”  /data/reports</p></blockquote><p>搜索命令</p><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td>/string</td><td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td></tr><tr><td>n</td><td>搜索指定字符串的下一个出现位置</td></tr><tr><td>:%s/old/new/g</td><td>全文替换指定字符串</td></tr><tr><td>:n1,n2s/old/new/g</td><td>在一定范围内替换指定字符串</td></tr></tbody></table><p>端口占用查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p><p>查看内存使用情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p><p>查看磁盘使用情况</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure><p>查看文件创建数量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure><p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p><blockquote><p>vim file_name<br>:%d<br>:wq</p></blockquote><p>2.使用cat命令情况，命令如下：</p><blockquote><p>cat /dev/null &gt; file_name</p></blockquote><p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p><blockquote><p>echo “”&gt;file_name</p></blockquote><p>推荐使用cat命令</p><h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p><blockquote><p>:$ 跳到最后一行<br>:1 跳到第一行</p></blockquote><p>第二种方式：</p><blockquote><p>shift+g 跳到最后一行<br>gg 跳转到第一行</p></blockquote><p>查找文件关键字内容</p><blockquote><p>grep -r “test”  /data/reports</p></blockquote><p>搜索命令</p><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td>/string</td><td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td></tr><tr><td>n</td><td>搜索指定字符串的下一个出现位置</td></tr><tr><td>:%s/old/new/g</td><td>全文替换指定字符串</td></tr><tr><td>:n1,n2s/old/new/g</td><td>在一定范围内替换指定字符串</td></tr></tbody></table><p>端口占用查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p><p>查看内存使用情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p><p>查看磁盘使用情况</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure><p>查看文件创建数量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure><p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p><p>查看占用线程最大的程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p><p>修改服务最大线程数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p><p>监控java线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p><p>监控网络客户连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p><p>linux 将本地文件传给其他服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>]]></content>
     
     <summary type="html">
     
@@ -449,112 +552,6 @@
     
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kafka相关的常规操作</title>
-    <link href="http://yoursite.com/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2019/04/30/kafka相关的常规操作/</id>
-    <published>2019-04-30T07:10:31.000Z</published>
-    <updated>2019-04-30T07:10:31.431Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure><h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p><p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p><h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1、启动服务器&quot;&gt;&lt;a href=&quot;#1、启动服务器&quot; class=&quot;headerlink&quot; title=&quot;1、启动服务器&quot;&gt;&lt;/a&gt;1、启动服务器&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=
-      
-    
-    </summary>
-    
-      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
-    
-      <category term="消息队列" scheme="http://yoursite.com/categories/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
-    
-    
-      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
-    
-      <category term="消息队列" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kafka 集群安装 部署</title>
-    <link href="http://yoursite.com/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/"/>
-    <id>http://yoursite.com/2019/04/30/kafka-集群安装-部署/</id>
-    <published>2019-04-30T03:45:07.000Z</published>
-    <updated>2019-05-04T01:19:19.782Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p><h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p><p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p><p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p><p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p><h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure><p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p><p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p><p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p><h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p><p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p><p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p><p>到此，使用kafka自带的zookeeper安装就完成了。</p><blockquote><p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;kafka-集群安装部署&quot;&gt;&lt;a href=&quot;#kafka-集群安装部署&quot; class=&quot;headerlink&quot; title=&quot;kafka 集群安装部署&quot;&gt;&lt;/a&gt;kafka 集群安装部署&lt;/h1&gt;&lt;p&gt;  安装kafka首先需要安装zookeeper集群，这里使
-      
-    
-    </summary>
-    
-      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
-    
-    
-      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring 注解 笔记</title>
-    <link href="http://yoursite.com/2019/04/04/spring-%E6%B3%A8%E8%A7%A3-%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/04/04/spring-注解-笔记/</id>
-    <published>2019-04-04T06:32:58.000Z</published>
-    <updated>2019-04-04T06:37:35.300Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Controller和-RestController的区别"><a href="#Controller和-RestController的区别" class="headerlink" title="@Controller和@RestController的区别"></a>@Controller和@RestController的区别</h3><p>知识点：@RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。</p><p>1) 如果只是使用@RestController注解Controller，则Controller中的方法无法返回jsp页面，或者html，配置的视图解析器 InternalResourceViewResolver不起作用，返回的内容就是Return 里的内容。</p><p>2) 如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。<br>    如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。</p><p>例如：</p><p>1.使用@Controller 注解，在对应的方法上，视图解析器可以解析return 的jsp,html页面，并且跳转到相应页面</p><p>若返回json等内容到页面，则需要加@ResponseBody注解</p><h3 id="RequestMapping-和-GetMapping-PostMapping-区别"><a href="#RequestMapping-和-GetMapping-PostMapping-区别" class="headerlink" title="@RequestMapping   和  @GetMapping @PostMapping 区别"></a>@RequestMapping   和  @GetMapping @PostMapping 区别</h3><p>@GetMapping是一个组合注解，是@RequestMapping(method = RequestMethod.GET)的缩写。</p><p>@PostMapping是一个组合注解，是@RequestMapping(method = RequestMethod.POST)的缩写。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Controller和-RestController的区别&quot;&gt;&lt;a href=&quot;#Controller和-RestController的区别&quot; class=&quot;headerlink&quot; title=&quot;@Controller和@RestController的区别&quot;&gt;&lt;/
-      
-    
-    </summary>
-    
-      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
-    
-    
-      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hive 笔记</title>
-    <link href="http://yoursite.com/2019/04/04/hive-%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/04/04/hive-笔记/</id>
-    <published>2019-04-04T01:47:50.000Z</published>
-    <updated>2019-04-04T01:47:50.971Z</updated>
-    
-    <content type="html"><![CDATA[<p>hive设置队列三种方式：</p><blockquote><p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;hive设置队列三种方式：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;set mapred.job.queue.name=queue3;&lt;br&gt;SET mapreduce.job.queuename=queue3;&lt;br&gt;set mapred.queue.names=queu
-      
-    
-    </summary>
-    
-      <category term="hive" scheme="http://yoursite.com/categories/hive/"/>
-    
-    
-      <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
     
   </entry>
   
