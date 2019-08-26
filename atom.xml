@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-26T09:08:19.468Z</updated>
+  <updated>2019-08-26T10:51:15.589Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/08/26/%E8%93%9D%E7%89%99%E4%BF%A1%E6%A0%87%E5%AE%9A%E4%BD%8D%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2019/08/26/蓝牙信标定位项目总结/</id>
     <published>2019-08-26T07:54:34.000Z</published>
-    <updated>2019-08-26T09:08:19.468Z</updated>
+    <updated>2019-08-26T10:51:15.589Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="一、项目简介："><a href="#一、项目简介：" class="headerlink" title="一、项目简介："></a>一、项目简介：</h2><blockquote><p>  蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，<br>采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。<br>以下是蓝牙基站数据处理时序图：</p></blockquote><p><img src="/images/2019/08/26/d389bdf0-c7d2-11e9-82cd-b1912fd86647.png" alt="image.png"></p><p>数据处理流程：</p><ol><li>作为服务端，需要接受来自客户端tcp/ip数据。(netty)</li><li>数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验成功的数据都写入kafka。(kafka producer)</li><li>消费kafka中的数据，主要有三个部分，一是信标电量信息采集，二是基站状态信息的采集，三是小车位置的计算和物料信息的绑定（structured streaming/flink）</li><li>读取redis小车位置以及状态信息，通过websocket每隔五秒准实时推送一次最新数据到前端。(websocket)</li></ol><p>关于netty使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="一、项目简介："><a href="#一、项目简介：" class="headerlink" title="一、项目简介："></a>一、项目简介：</h2><blockquote><p>  蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，<br>采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。<br>以下是蓝牙基站数据处理时序图：</p></blockquote><p><img src="/images/2019/08/26/d389bdf0-c7d2-11e9-82cd-b1912fd86647.png" alt="image.png"></p><p>数据处理流程：</p><ol><li>作为服务端，需要接受来自客户端tcp/ip数据。(netty)</li><li>数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验成功的数据都写入kafka。(kafka producer)</li><li>消费kafka中的数据，主要有三个部分，一是信标电量信息采集，二是基站状态信息的采集，三是小车位置的计算和物料信息的绑定（structured streaming/flink）</li><li>读取redis小车位置以及状态信息，通过websocket每隔五秒准实时推送一次最新数据到前端。(websocket)</li></ol><p><strong>说明</strong>：<br>1.使用netty作为数据接入使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a><br>2.数据接收后需要写入kafka集群中，关于kafka集群部署可以参考<a href="https://sfzsjx.github.io/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">kafka集群安装部署</a><br>3.kafka安装后，数据写入kafka,需要创建kafka producer，可以参考<a href="https://sfzsjx.github.io/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="noopener">kafka相关操作</a><br>4.读取kafka数据，并做相应的计算，需要用到structed streaming/flink技术，相应的需要部署spark 集群或flink集群<br>spark集群部署可以参考<a href="https://sfzsjx.github.io/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">spark 集群安装部署</a></p>]]></content>
     
     <summary type="html">
     
