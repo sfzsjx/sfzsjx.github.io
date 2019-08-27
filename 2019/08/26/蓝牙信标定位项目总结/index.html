@@ -117,7 +117,7 @@
 <meta property="og:description" content="一、项目简介：   蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。以下是蓝牙基站数据处理时序图：   数据处理流程：  作为服务端，需要接受来自客户端tcp/ip数据。(netty) 数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/2019/08/26/d389bdf0-c7d2-11e9-82cd-b1912fd86647.png">
-<meta property="og:updated_time" content="2019-08-26T10:57:41.337Z">
+<meta property="og:updated_time" content="2019-08-27T02:52:54.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蓝牙信标定位项目总结">
 <meta name="twitter:description" content="一、项目简介：   蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。以下是蓝牙基站数据处理时序图：   数据处理流程：  作为服务端，需要接受来自客户端tcp/ip数据。(netty) 数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验">
@@ -356,12 +356,24 @@
                 
               
 
-              <time title="Post created: 2019-08-26 15:54:34 / Updated at: 18:57:41" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
+              <time title="Post created: 2019-08-26 15:54:34" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-27 10:52:54" itemprop="dateModified" datetime="2019-08-27T10:52:54+08:00">2019-08-27</time>
               
             
           </span>
@@ -423,7 +435,7 @@
 <li>消费kafka中的数据，主要有三个部分，一是信标电量信息采集，二是基站状态信息的采集，三是小车位置的计算和物料信息的绑定（structured streaming/flink）</li>
 <li>读取redis小车位置以及状态信息，通过websocket每隔五秒准实时推送一次最新数据到前端。(websocket)</li>
 </ol>
-<p><strong>说明</strong>：<br>1.使用netty作为数据接入使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a><br>2.数据接收后需要写入kafka集群中，关于kafka集群部署可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">kafka集群安装部署</a><br>3.kafka安装后，数据写入kafka,需要创建kafka producer，可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="noopener">kafka相关操作</a><br>4.读取kafka数据，并做相应的计算，需要用到structed streaming/flink技术，相应的需要部署spark 集群或flink集群<br>spark集群部署可以参考：<a href="https://sfzsjx.github.io/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">spark 集群安装部署</a></p>
+<p><strong>说明</strong>：<br>1.使用netty作为数据接入使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a><br>2.数据接收后需要写入kafka集群中，关于kafka集群部署可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">kafka集群安装部署</a><br>3.kafka安装后，数据写入kafka,需要创建kafka producer，可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="noopener">kafka相关操作</a><br>4.读取kafka数据，并做相应的计算，需要用到structed streaming/flink技术，相应的需要部署spark 集群或flink集群<br>spark集群部署可以参考：<a href="https://sfzsjx.github.io/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">spark 集群安装部署</a><br>5.structed streaming 读取kafka 数据并做实时计算可以参考 ：<a href="https://sfzsjx.github.io/2019/08/27/spark-structed-streaming-%E8%AF%BB%E5%8F%96kafka%E6%95%B0%E6%8D%AE/" target="_blank" rel="noopener">structed streaming 读取kafka 数据</a></p>
 
       
     </div>
