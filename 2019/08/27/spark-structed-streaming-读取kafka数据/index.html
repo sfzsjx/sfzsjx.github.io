@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":"ture","onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="structed streaming :  Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine.  Structed streaming 官方文档 2.4.3官方文档 一、部分关于如何连接kafka数据，并做计算。1234567891">
+<meta name="keywords" content="spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark structed streaming 读取kafka数据">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/spark-structed-streaming-读取kafka数据/index.html">
+<meta property="og:site_name" content="上善若水博客">
+<meta property="og:description" content="structed streaming :  Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine.  Structed streaming 官方文档 2.4.3官方文档 一、部分关于如何连接kafka数据，并做计算。1234567891">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-27T02:48:45.767Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark structed streaming 读取kafka数据">
+<meta name="twitter:description" content="structed streaming :  Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine.  Structed streaming 官方文档 2.4.3官方文档 一、部分关于如何连接kafka数据，并做计算。1234567891">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="上善若水博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/spark-structed-streaming-读取kafka数据/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>spark structed streaming 读取kafka数据 | 上善若水博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://github.com/sfzsjx"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">上善若水博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">大数据</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/spark-structed-streaming-读取kafka数据/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spark structed streaming 读取kafka数据
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-08-27 10:34:36 / Updated at: 10:48:45" itemprop="dateCreated datePublished" datetime="2019-08-27T10:34:36+08:00">2019-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>structed streaming :</p>
+<blockquote>
+<p>Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine.</p>
+</blockquote>
+<p>Structed streaming 官方文档 <a href="http://spark.apache.org/docs/latest/structured-streaming-programming-guide.html" target="_blank" rel="noopener">2.4.3官方文档</a></p>
+<h3 id="一、部分关于如何连接kafka数据，并做计算。"><a href="#一、部分关于如何连接kafka数据，并做计算。" class="headerlink" title="一、部分关于如何连接kafka数据，并做计算。"></a>一、部分关于如何连接kafka数据，并做计算。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.location;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.entity.*;</span><br><span class="line">import com.gree.cn.sink.BaseHeartSink;</span><br><span class="line">import com.gree.cn.sink.LabelSink;</span><br><span class="line">import com.gree.cn.sink.MaterialInfoSink;</span><br><span class="line">import com.gree.cn.sink.MaterialRedisSink;</span><br><span class="line">import com.gree.cn.utils.DruidPoolUtils;</span><br><span class="line">import org.apache.spark.api.java.function.MapFunction;</span><br><span class="line">import org.apache.spark.sql.*;</span><br><span class="line">import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder;</span><br><span class="line">import org.apache.spark.sql.streaming.StreamingQuery;</span><br><span class="line">import org.apache.spark.sql.streaming.StreamingQueryException;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.PreparedStatement;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">import static org.apache.spark.sql.functions.*;</span><br><span class="line"></span><br><span class="line">public class LocationMap &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建SparkSession</span><br><span class="line">        SparkSession spark = SparkSession</span><br><span class="line">                .builder()</span><br><span class="line">                .appName(&quot;小车定位程序&quot;)</span><br><span class="line">                //.master(&quot;local[2]&quot;)</span><br><span class="line">                .config(&quot;spark.serializer&quot;,&quot;org.apache.spark.serializer.KryoSerializer&quot;)</span><br><span class="line">                .config(&quot;spark.local.dir&quot;, &quot;/lvm/data1/bluetooth_location/spark/location&quot;)</span><br><span class="line">                .config(&quot;spark.ui.port&quot;, &quot;8083&quot;)</span><br><span class="line">                .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;50&quot;)</span><br><span class="line">                .config(&quot;spark.default.parallelism&quot;, &quot;12&quot;)</span><br><span class="line">                .getOrCreate();</span><br><span class="line"></span><br><span class="line">        //读取kafka数据</span><br><span class="line">        Dataset&lt;Row&gt; kafkaValue = spark.readStream()</span><br><span class="line">                .format(&quot;kafka&quot;)</span><br><span class="line">                .option(&quot;kafka.bootstrap.servers&quot;, &quot;10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092&quot;)</span><br><span class="line">                .option(&quot;subscribe&quot;, &quot;topic0619&quot;)</span><br><span class="line">                //.option(&quot;kafka.bootstrap.servers&quot;,&quot;172.16.247.129:9092&quot;)</span><br><span class="line">                //.option(&quot;subscribe&quot;,&quot;test06&quot;)</span><br><span class="line">                .option(&quot;startingOffsets&quot;, &quot;latest&quot;)</span><br><span class="line">                .load()</span><br><span class="line">                .selectExpr(&quot;CAST(value AS STRING)&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //基站数据包括 接收时间，基站ID，信标ID，信号强度</span><br><span class="line">        Dataset&lt;BaseTable&gt; baseTableDs = kafkaValue.as(Encoders.STRING()).map(</span><br><span class="line">                (MapFunction&lt;String, BaseTable&gt;) values -&gt; &#123;</span><br><span class="line">                    BaseTable baseTable = new BaseTable();</span><br><span class="line">			//具体逻辑</span><br><span class="line">                  	...</span><br><span class="line">			...</span><br><span class="line">			...</span><br><span class="line">                    return baseTable;</span><br><span class="line">                &#125; , ExpressionEncoder.javaBean(BaseTable.class));</span><br><span class="line"></span><br><span class="line">        //获取信标电量表数据</span><br><span class="line">        Dataset&lt;LabelData&gt; labelData = baseTableDs</span><br><span class="line">                .filter(col(&quot;orderName&quot;).equalTo(&quot;66&quot;))</span><br><span class="line">                .select(col(&quot;labelID&quot;), col(&quot;electricity&quot;),</span><br><span class="line">                        col(&quot;baseID&quot;),col(&quot;recDatetime&quot;))</span><br><span class="line">                .as(ExpressionEncoder.javaBean(LabelData.class));</span><br><span class="line"></span><br><span class="line">        /*StreamingQuery labelDataStart =*/ labelData.repartition(2, col(&quot;labelID&quot;))</span><br><span class="line">                .writeStream()</span><br><span class="line">                .outputMode(&quot;append&quot;)</span><br><span class="line">                .foreach(new LabelSink())</span><br><span class="line">                .start();</span><br><span class="line"></span><br><span class="line">        //labelData.writeStream().format(&quot;console&quot;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二、如何将数据sink到mysql"><a href="#二、如何将数据sink到mysql" class="headerlink" title="二、如何将数据sink到mysql"></a>二、如何将数据sink到mysql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.sink;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.gree.cn.entity.LabelData;</span><br><span class="line">import com.gree.cn.utils.DruidPoolUtils;</span><br><span class="line">import org.apache.spark.sql.ForeachWriter;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.PreparedStatement;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class LabelSink extends ForeachWriter&lt;LabelData&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     * sink 信标数据到MySQL中</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    private PreparedStatement statement;</span><br><span class="line">    private Connection connection;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public boolean open(long arg0, long arg1) &#123;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void process(LabelData labelData) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = DruidPoolUtils.getConnection();</span><br><span class="line"></span><br><span class="line">            String insertSql = &quot; REPLACE INTO bluetooth_location.beacon_info (beaconId,electricity,stationId,updateTime) VALUES(?,?,?,?) &quot;;</span><br><span class="line"></span><br><span class="line">            statement = connection.prepareStatement(insertSql);</span><br><span class="line">            statement.setString(1,labelData.getLabelID());</span><br><span class="line">            statement.setInt(2,labelData.getElectricity());</span><br><span class="line">            statement.setString(3,labelData.getBaseID());</span><br><span class="line">            statement.setString(4,labelData.getRecDatetime());</span><br><span class="line">            statement.executeUpdate();</span><br><span class="line"></span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            DruidPoolUtils.close(connection,statement);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void close(Throwable arg0) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、数据库连接池配置"><a href="#三、数据库连接池配置" class="headerlink" title="三、数据库连接池配置"></a>三、数据库连接池配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.utils;</span><br><span class="line"></span><br><span class="line">import com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 数据库连接池工具类</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class DruidPoolUtils &#123;</span><br><span class="line"></span><br><span class="line">    //创建成员变量</span><br><span class="line">    private static DataSource dataSource;</span><br><span class="line">    //加载配置文件</span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Properties properties = new Properties();</span><br><span class="line">            //加载类路径</span><br><span class="line">            properties.load(DruidPoolUtils.class.getResourceAsStream(&quot;/druid.properties&quot;));</span><br><span class="line"></span><br><span class="line">            //读取属性文件，创建连接池</span><br><span class="line">            dataSource = DruidDataSourceFactory.createDataSource(properties);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取数据源</span><br><span class="line">    public static DataSource getDataSource()&#123;</span><br><span class="line">        return dataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取连接对象</span><br><span class="line">    public static Connection getConnection()&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return dataSource.getConnection();</span><br><span class="line">        &#125;catch (SQLException e)&#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //释放资源</span><br><span class="line"></span><br><span class="line">    public static void close(Connection connection, Statement statement, ResultSet resultSet)&#123;</span><br><span class="line">        if (resultSet != null )&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                resultSet.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (statement != null)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (connection != null)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void close(Connection connection,Statement statement)&#123;</span><br><span class="line">        close(connection,statement,null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>druid.properties</p>
+<blockquote>
+<p>driverClassName=com.mysql.cj.jdbc.Driver<br>url=jdbc:mysql://localhost:3306?serverTimezone=GMT&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>username=root<br>password=lyxbdw<br>initialSize=5<br>maxActive=20<br>maxWait=3000<br>minIdle=3</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag"># spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/26/蓝牙信标定位项目总结/" rel="next" title="蓝牙信标定位项目总结">
+                <i class="fa fa-chevron-left"></i> 蓝牙信标定位项目总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">上善若水</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">Tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、部分关于如何连接kafka数据，并做计算。"><span class="nav-number">1.</span> <span class="nav-text">一、部分关于如何连接kafka数据，并做计算。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、如何将数据sink到mysql"><span class="nav-number">2.</span> <span class="nav-text">二、如何将数据sink到mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、数据库连接池配置"><span class="nav-number">3.</span> <span class="nav-text">三、数据库连接池配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">上善若水</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
