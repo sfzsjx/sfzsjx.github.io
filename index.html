@@ -228,7 +228,7 @@
           
           <li class="menu-item menu-item-home menu-item-active">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Accueil</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
         
         
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />A propos</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
   </li>
         
         
@@ -311,6 +311,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/flink-基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/30/flink-基础/" itemprop="url">
+                  flink 基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-30 16:54:39" itemprop="dateCreated datePublished" datetime="2019-08-30T16:54:39+08:00">2019-08-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-04 15:48:46" itemprop="dateModified" datetime="2019-09-04T15:48:46+08:00">2019-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/大数据/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、Apache-Flink"><a href="#一、Apache-Flink" class="headerlink" title="一、Apache Flink"></a>一、Apache Flink</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><pre><code>Apache Flink 是一个分布式大数据处理引擎，可以对有限流和无线流进行有状态和无状态进行计算，
+</code></pre><p>能够在各种集群环境上部署，对各种大小的数据集进行快速计算。</p>
+<h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux</span><br><span class="line">./bin/start-cluster.sh</span><br><span class="line">windows</span><br><span class="line">.\start-cluster.bat</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" alt="image.png"></p>
+<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Scala版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 关联 kafka 依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 推荐使用shade插件打包maven项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">			&lt;executions&gt;</span><br><span class="line">				&lt;execution&gt;</span><br><span class="line">					&lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">					&lt;goals&gt;</span><br><span class="line">						&lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">					&lt;/goals&gt;</span><br><span class="line">					&lt;configuration&gt;</span><br><span class="line">						&lt;artifactSet&gt;</span><br><span class="line">							&lt;excludes&gt;</span><br><span class="line">								&lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;log4j:*&lt;/exclude&gt;</span><br><span class="line">							&lt;/excludes&gt;</span><br><span class="line">						&lt;/artifactSet&gt;</span><br><span class="line">						&lt;filters&gt;</span><br><span class="line">							&lt;filter&gt;</span><br><span class="line">								&lt;!-- Do not copy the signatures in the META-INF folder.</span><br><span class="line">								Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span><br><span class="line">								&lt;artifact&gt;*:*&lt;/artifact&gt;</span><br><span class="line">								&lt;excludes&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</span><br><span class="line">								&lt;/excludes&gt;</span><br><span class="line">							&lt;/filter&gt;</span><br><span class="line">						&lt;/filters&gt;</span><br><span class="line">						&lt;transformers&gt;</span><br><span class="line">							&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">								&lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;</span><br><span class="line">							&lt;/transformer&gt;</span><br><span class="line">						&lt;/transformers&gt;</span><br><span class="line">					&lt;/configuration&gt;</span><br><span class="line">				&lt;/execution&gt;</span><br><span class="line">			&lt;/executions&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
+<p>DataSet and DataStream:<br>    Flink具有特殊类DataSet并DataStream在程序中表示数据。您可以将它们视为可以包含重复项的不可变数据集合。在DataSet数据有限的情况下，对于一个DataStream元素的数量可以是无界的。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/spark-structed-streaming-读取kafka数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -350,14 +530,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-27 10:34:36 / Updated at: 11:09:29" itemprop="dateCreated datePublished" datetime="2019-08-27T10:34:36+08:00">2019-08-27</time>
+              <time title="Created: 2019-08-27 10:34:36 / Modified: 11:09:29" itemprop="dateCreated datePublished" datetime="2019-08-27T10:34:36+08:00">2019-08-27</time>
             
 
             
@@ -528,14 +708,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-26 15:54:34" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
+              <time title="Created: 2019-08-26 15:54:34" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
             
 
             
@@ -552,7 +732,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-27 10:55:50" itemprop="dateModified" datetime="2019-08-27T10:55:50+08:00">2019-08-27</time>
+                <time title="Modified: 2019-08-27 10:55:50" itemprop="dateModified" datetime="2019-08-27T10:55:50+08:00">2019-08-27</time>
               
             
           </span>
@@ -709,14 +889,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-26 10:31:37 / Updated at: 15:03:21" itemprop="dateCreated datePublished" datetime="2019-08-26T10:31:37+08:00">2019-08-26</time>
+              <time title="Created: 2019-08-26 10:31:37 / Modified: 15:03:21" itemprop="dateCreated datePublished" datetime="2019-08-26T10:31:37+08:00">2019-08-26</time>
             
 
             
@@ -897,14 +1077,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-22 19:00:10" itemprop="dateCreated datePublished" datetime="2019-08-22T19:00:10+08:00">2019-08-22</time>
+              <time title="Created: 2019-08-22 19:00:10" itemprop="dateCreated datePublished" datetime="2019-08-22T19:00:10+08:00">2019-08-22</time>
             
 
             
@@ -1056,14 +1236,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-15 16:03:58" itemprop="dateCreated datePublished" datetime="2019-08-15T16:03:58+08:00">2019-08-15</time>
+              <time title="Created: 2019-08-15 16:03:58" itemprop="dateCreated datePublished" datetime="2019-08-15T16:03:58+08:00">2019-08-15</time>
             
 
             
@@ -1211,14 +1391,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-14 16:25:52 / Updated at: 16:49:04" itemprop="dateCreated datePublished" datetime="2019-08-14T16:25:52+08:00">2019-08-14</time>
+              <time title="Created: 2019-08-14 16:25:52 / Modified: 16:49:04" itemprop="dateCreated datePublished" datetime="2019-08-14T16:25:52+08:00">2019-08-14</time>
             
 
             
@@ -1373,14 +1553,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-12 09:18:10" itemprop="dateCreated datePublished" datetime="2019-08-12T09:18:10+08:00">2019-08-12</time>
+              <time title="Created: 2019-08-12 09:18:10" itemprop="dateCreated datePublished" datetime="2019-08-12T09:18:10+08:00">2019-08-12</time>
             
 
             
@@ -1397,7 +1577,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-24 17:12:41" itemprop="dateModified" datetime="2019-08-24T17:12:41+08:00">2019-08-24</time>
+                <time title="Modified: 2019-08-24 17:12:41" itemprop="dateModified" datetime="2019-08-24T17:12:41+08:00">2019-08-24</time>
               
             
           </span>
@@ -1570,14 +1750,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-09 16:50:32" itemprop="dateCreated datePublished" datetime="2019-08-09T16:50:32+08:00">2019-08-09</time>
+              <time title="Created: 2019-08-09 16:50:32" itemprop="dateCreated datePublished" datetime="2019-08-09T16:50:32+08:00">2019-08-09</time>
             
 
             
@@ -1724,14 +1904,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-07-18 16:22:27" itemprop="dateCreated datePublished" datetime="2019-07-18T16:22:27+08:00">2019-07-18</time>
+              <time title="Created: 2019-07-18 16:22:27" itemprop="dateCreated datePublished" datetime="2019-07-18T16:22:27+08:00">2019-07-18</time>
             
 
             
@@ -1827,167 +2007,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/spring-boot-注解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/16/spring-boot-注解/" itemprop="url">
-                  spring boot 注解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posté le</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-07-16 17:05:47 / Updated at: 17:09:46" itemprop="dateCreated datePublished" datetime="2019-07-16T17:05:47+08:00">2019-07-16</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-boot/" itemprop="url" rel="index"><span itemprop="name">spring boot</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>问题一、</p>
-<p>Could not autowire. No beans of ‘RestTemplate’ type found</p>
-<p>在mapper 类添加注解@Repository 即可解决，简单有效</p>
-<p>方法2：在mapper文件上加@Component注解，把普通pojo实例化到spring容器中</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2035,8 +2054,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2118,7 +2137,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">categories</span>
                   
                 </div>
@@ -2195,7 +2216,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -2264,7 +2289,7 @@
 
 
 
-  <div class="theme-info">Thème – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
 
 
 
