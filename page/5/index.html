@@ -1748,7 +1748,7 @@ public class KylinJdbc {
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-09-06 09:59:02" itemprop="dateModified" datetime="2019-09-06T09:59:02+08:00">2019-09-06</time>
+                <time title="Updated at: 2019-09-06 14:23:04" itemprop="dateModified" datetime="2019-09-06T14:23:04+08:00">2019-09-06</time>
               
             
           </span>
@@ -1842,8 +1842,12 @@ public class KylinJdbc {
 <li>将jar包放入到plugin 目录中</li>
 <li>重启neo4j,./neo4j restart</li>
 <li>加载驱动，call apoc.load.driver(‘org.apache.hive.jdbc.HiveDriver’)</li>
-<li>执行查询 call apoc.load.jdbc(‘jdbc:hive2://ip:1000/database;user=hdfs;password=hdfs’,’select * from user’)  YIELD row<br>RETURN row.name, row.price;</li>
+<li>执行查询 call apoc.load.jdbc(‘jdbc:hive2://ip:1000/database;user=hdfs;password=hdfs’,’select name,age from user’)  YIELD row<br>RETURN row.name, row.age;</li>
 </ol>
+<p>注意：</p>
+<blockquote>
+<p>1.hive 查询的时候需要将字段查出来，例如：select name，age from user ,如果使用 select * from user 则返回的数据为null<br>2.hive 表中数据若是太大可能需要查询很久才能，会将数据全部查询出来才才开始进行图的构建。</p>
+</blockquote>
 
           
         
