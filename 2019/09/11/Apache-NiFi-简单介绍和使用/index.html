@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/header.jpg?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":"ture","onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、什么是Apache NiFi简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。 二、NIFI 核心概念 三、NIFI 架构 四、 NIFI 使用界面介绍  主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有Processor:The Processor is the Ni">
+<meta name="keywords" content="ETL,NIFI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache NiFi 简单介绍和使用">
+<meta property="og:url" content="http://yoursite.com/2019/09/11/Apache-NiFi-简单介绍和使用/index.html">
+<meta property="og:site_name" content="上善若水博客">
+<meta property="og:description" content="一、什么是Apache NiFi简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。 二、NIFI 核心概念 三、NIFI 架构 四、 NIFI 使用界面介绍  主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有Processor:The Processor is the Ni">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/a544b020-d45d-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/dd2a1340-d45d-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/79ee7e20-d461-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/b8052b50-d466-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/f0cefb00-d466-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/52a49ab0-d467-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/5e82d2b0-d468-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/3459dd70-d469-11e9-b427-5d1ae987f58a.png">
+<meta property="og:image" content="http://yoursite.com/images/2019/09/11/c980d930-d469-11e9-b427-5d1ae987f58a.png">
+<meta property="og:updated_time" content="2019-09-11T07:59:02.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache NiFi 简单介绍和使用">
+<meta name="twitter:description" content="一、什么是Apache NiFi简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。 二、NIFI 核心概念 三、NIFI 架构 四、 NIFI 使用界面介绍  主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有Processor:The Processor is the Ni">
+<meta name="twitter:image" content="http://yoursite.com/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="上善若水博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/11/Apache-NiFi-简单介绍和使用/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Apache NiFi 简单介绍和使用 | 上善若水博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://github.com/sfzsjx"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">上善若水博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">大数据</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Über</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/Apache-NiFi-简单介绍和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Apache NiFi 简单介绍和使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-09-11 14:59:39 / Updated at: 15:59:02" itemprop="dateCreated datePublished" datetime="2019-09-11T14:59:39+08:00">2019-09-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/" itemprop="url" rel="index"><span itemprop="name">ETL</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/NIFI/" itemprop="url" rel="index"><span itemprop="name">NIFI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、什么是Apache-NiFi"><a href="#一、什么是Apache-NiFi" class="headerlink" title="一、什么是Apache NiFi"></a>一、什么是Apache NiFi</h2><pre><code>简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。
+</code></pre><h2 id="二、NIFI-核心概念"><a href="#二、NIFI-核心概念" class="headerlink" title="二、NIFI 核心概念"></a>二、NIFI 核心概念</h2><p><img src="/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/a544b020-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="三、NIFI-架构"><a href="#三、NIFI-架构" class="headerlink" title="三、NIFI 架构"></a>三、NIFI 架构</h2><p><img src="/images/2019/09/11/dd2a1340-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="四、-NIFI-使用界面介绍"><a href="#四、-NIFI-使用界面介绍" class="headerlink" title="四、 NIFI 使用界面介绍"></a>四、 NIFI 使用界面介绍</h2><p><img src="/images/2019/09/11/79ee7e20-d461-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<blockquote>
+<p>主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有<br>Processor:The Processor is the NiFi component that is used to listen for incoming data; pull data from external sources; publish data to external sources; and route, transform, or extract information from FlowFiles.</p>
+</blockquote>
+<blockquote>
+<p>Processor Group:When a dataflow becomes complex, it often is beneficial to reason about the dataflow at a higher, more abstract level. NiFi allows multiple components, such as Processors, to be grouped together into a Process Group. The NiFi User Interface then makes it easy for a DFM to connect together multiple Process Groups into a logical dataflow, as well as allowing the DFM to enter a Process Group in order to see and manipulate the components within the Process Group.</p>
+</blockquote>
+<blockquote>
+<p>我认为 Processor 就是一个数据处理器，它不仅可以从各种数据源中加载数据，转成Fiedflow基本nifi元素，还能够将数据处理成各种常见的格式以及将数据输出到各种数据库中<br>而Processor Group 则是一个装载 Processor的容器。</p>
+</blockquote>
+<h2 id="五、案例（JSON-TO-MYSQL）"><a href="#五、案例（JSON-TO-MYSQL）" class="headerlink" title="五、案例（JSON_TO_MYSQL）"></a>五、案例（JSON_TO_MYSQL）</h2><ol>
+<li>创建一个Processor Group ,将其拖到画布当中<br><img src="/images/2019/09/11/b8052b50-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>然后修改名字<br><img src="/images/2019/09/11/f0cefb00-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/52a49ab0-d467-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>读取json文件，GetFile –&gt; 将JSON 转为sql语句，ConvertJSONToSQL –&gt; 运行sql语句，PutSQL</li>
+<li>GetFile 设置输入目录Input Directory，目标文件 File Filter<br><img src="/images/2019/09/11/5e82d2b0-d468-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>ConvertJSONToSQL  设置数据库连接池JDBC Connection Pool ,SQL 类型 Statement Type ,表名 Table Name,其他默认 ，注意 ConvertJSONToSQL 只适用一个json值的文件<br><img src="/images/2019/09/11/3459dd70-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>PutSQL 设置 数据库连接池，SQL Statement ，其他默认。一般来说只需要设置加黑的参数，但这里需要设置sql语句。<br><img src="/images/2019/09/11/c980d930-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ETL/" rel="tag"># ETL</a>
+          
+            <a href="/tags/NIFI/" rel="tag"># NIFI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/NIFI-安装部署/" rel="next" title="NIFI 安装部署">
+                <i class="fa fa-chevron-left"></i> NIFI 安装部署
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">上善若水</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">Tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、什么是Apache-NiFi"><span class="nav-number">1.</span> <span class="nav-text">一、什么是Apache NiFi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、NIFI-核心概念"><span class="nav-number">2.</span> <span class="nav-text">二、NIFI 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、NIFI-架构"><span class="nav-number">3.</span> <span class="nav-text">三、NIFI 架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、-NIFI-使用界面介绍"><span class="nav-number">4.</span> <span class="nav-text">四、 NIFI 使用界面介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、案例（JSON-TO-MYSQL）"><span class="nav-number">5.</span> <span class="nav-text">五、案例（JSON_TO_MYSQL）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">上善若水</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

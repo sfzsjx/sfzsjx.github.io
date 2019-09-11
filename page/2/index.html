@@ -311,6 +311,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/Spark-Windows10-安装部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/12/Spark-Windows10-安装部署/" itemprop="url">
+                  Spark Windows10 安装部署
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-08-12 09:18:10" itemprop="dateCreated datePublished" datetime="2019-08-12T09:18:10+08:00">2019-08-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-24 17:12:41" itemprop="dateModified" datetime="2019-08-24T17:12:41+08:00">2019-08-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Spark centos 安装部署 </p>
+<h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
+<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>解压安装后配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
+</blockquote>
+<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
+<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
+</blockquote>
+<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
+<p>进入到配置目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>然后进入sbin目录,启动集群<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>至此spark安装完成。</p>
+<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
+<p>执行脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/spark-常用参数设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1770,166 +1967,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/14/时间工具类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/14/时间工具类/" itemprop="url">
-                  时间工具类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-06-14 11:32:37 / Updated at: 11:33:57" itemprop="dateCreated datePublished" datetime="2019-06-14T11:32:37+08:00">2019-06-14</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具类，Java/" itemprop="url" rel="index"><span itemprop="name">工具类，Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>::: hljs-center</p>
-<p>时间工具类</p>
-<p>:::</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.utils;</span><br><span class="line"></span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 日期时间工具类</span><br><span class="line"> * @author Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class DateUtils &#123;</span><br><span class="line"></span><br><span class="line">    public static final SimpleDateFormat TIME_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATEKEY_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMdd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_NOW =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取某个时刻的时间信息</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    public static String getTimeNow()&#123;</span><br><span class="line"></span><br><span class="line">        return DATE_NOW.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 获取格式化某个时间</span><br><span class="line">     */</span><br><span class="line">    public  static String getFormatTimeNow()&#123;</span><br><span class="line">        return TIME_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之前</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean before(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.before(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之后</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean after(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.after(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 计算时间差值（单位为秒）</span><br><span class="line">     * @param time1 时间1</span><br><span class="line">     * @param time2 时间2</span><br><span class="line">     * @return 差值</span><br><span class="line">     */</span><br><span class="line">    public static int minus(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date datetime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date datetime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            long millisecond = datetime1.getTime() - datetime2.getTime();</span><br><span class="line"></span><br><span class="line">            return Integer.valueOf(String.valueOf(millisecond / 1000));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取年月日和小时</span><br><span class="line">     * @param datetime 时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @return 结果（yyyy-MM-dd_HH）</span><br><span class="line">     */</span><br><span class="line">    public static String getDateHour(String datetime) &#123;</span><br><span class="line">        String date = datetime.split(&quot; &quot;)[0];</span><br><span class="line">        String hourMinuteSecond = datetime.split(&quot; &quot;)[1];</span><br><span class="line">        String hour = hourMinuteSecond.split(&quot;:&quot;)[0];</span><br><span class="line">        return date + &quot;_&quot; + hour;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当天日期（yyyy-MM-dd）</span><br><span class="line">     * @return 当天日期</span><br><span class="line">     */</span><br><span class="line">    public static String getTodayDate() &#123;</span><br><span class="line">        return DATE_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取昨天的日期（yyyy-MM-dd）</span><br><span class="line">     * @return 昨天的日期</span><br><span class="line">     */</span><br><span class="line">    public static String getYesterdayDate() &#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        cal.setTime(new Date());</span><br><span class="line">        cal.add(Calendar.DAY_OF_YEAR, -1);</span><br><span class="line"></span><br><span class="line">        Date date = cal.getTime();</span><br><span class="line"></span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期（yyyy-MM-dd）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的日期</span><br><span class="line">     */</span><br><span class="line">    public static String formatDate(Date date) &#123;</span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的时间</span><br><span class="line">     */</span><br><span class="line">    public static String formatTime(Date date) &#123;</span><br><span class="line">        return TIME_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解析时间字符串</span><br><span class="line">     * @param time 时间字符串</span><br><span class="line">     * @return Date</span><br><span class="line">     */</span><br><span class="line">    public static Date parseTime(String time) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return TIME_FORMAT.parse(time);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatDateKey(Date date) &#123;</span><br><span class="line">        return DATEKEY_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param datekey</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Date parseDateKey(String datekey) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return DATEKEY_FORMAT.parse(datekey);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间，保留到分钟级别</span><br><span class="line">     * yyyyMMddHHmm</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatTimeMinute(Date date) &#123;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMddHHmm&quot;);</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1977,7 +2014,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2062,7 +2099,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2143,7 +2184,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>

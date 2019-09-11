@@ -311,6 +311,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/Apache-NiFi-简单介绍和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/11/Apache-NiFi-简单介绍和使用/" itemprop="url">
+                  Apache NiFi 简单介绍和使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-09-11 14:59:39 / Updated at: 15:59:02" itemprop="dateCreated datePublished" datetime="2019-09-11T14:59:39+08:00">2019-09-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/" itemprop="url" rel="index"><span itemprop="name">ETL</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/NIFI/" itemprop="url" rel="index"><span itemprop="name">NIFI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、什么是Apache-NiFi"><a href="#一、什么是Apache-NiFi" class="headerlink" title="一、什么是Apache NiFi"></a>一、什么是Apache NiFi</h2><pre><code>简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。
+</code></pre><h2 id="二、NIFI-核心概念"><a href="#二、NIFI-核心概念" class="headerlink" title="二、NIFI 核心概念"></a>二、NIFI 核心概念</h2><p><img src="/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/a544b020-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="三、NIFI-架构"><a href="#三、NIFI-架构" class="headerlink" title="三、NIFI 架构"></a>三、NIFI 架构</h2><p><img src="/images/2019/09/11/dd2a1340-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="四、-NIFI-使用界面介绍"><a href="#四、-NIFI-使用界面介绍" class="headerlink" title="四、 NIFI 使用界面介绍"></a>四、 NIFI 使用界面介绍</h2><p><img src="/images/2019/09/11/79ee7e20-d461-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<blockquote>
+<p>主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有<br>Processor:The Processor is the NiFi component that is used to listen for incoming data; pull data from external sources; publish data to external sources; and route, transform, or extract information from FlowFiles.</p>
+</blockquote>
+<blockquote>
+<p>Processor Group:When a dataflow becomes complex, it often is beneficial to reason about the dataflow at a higher, more abstract level. NiFi allows multiple components, such as Processors, to be grouped together into a Process Group. The NiFi User Interface then makes it easy for a DFM to connect together multiple Process Groups into a logical dataflow, as well as allowing the DFM to enter a Process Group in order to see and manipulate the components within the Process Group.</p>
+</blockquote>
+<blockquote>
+<p>我认为 Processor 就是一个数据处理器，它不仅可以从各种数据源中加载数据，转成Fiedflow基本nifi元素，还能够将数据处理成各种常见的格式以及将数据输出到各种数据库中<br>而Processor Group 则是一个装载 Processor的容器。</p>
+</blockquote>
+<h2 id="五、案例（JSON-TO-MYSQL）"><a href="#五、案例（JSON-TO-MYSQL）" class="headerlink" title="五、案例（JSON_TO_MYSQL）"></a>五、案例（JSON_TO_MYSQL）</h2><ol>
+<li>创建一个Processor Group ,将其拖到画布当中<br><img src="/images/2019/09/11/b8052b50-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>然后修改名字<br><img src="/images/2019/09/11/f0cefb00-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/52a49ab0-d467-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>读取json文件，GetFile –&gt; 将JSON 转为sql语句，ConvertJSONToSQL –&gt; 运行sql语句，PutSQL</li>
+<li>GetFile 设置输入目录Input Directory，目标文件 File Filter<br><img src="/images/2019/09/11/5e82d2b0-d468-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>ConvertJSONToSQL  设置数据库连接池JDBC Connection Pool ,SQL 类型 Statement Type ,表名 Table Name,其他默认 ，注意 ConvertJSONToSQL 只适用一个json值的文件<br><img src="/images/2019/09/11/3459dd70-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>PutSQL 设置 数据库连接池，SQL Statement ，其他默认。一般来说只需要设置加黑的参数，但这里需要设置sql语句。<br><img src="/images/2019/09/11/c980d930-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/NIFI-安装部署/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -361,8 +546,49 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-09-11 14:14:07" itemprop="dateModified" datetime="2019-09-11T14:14:07+08:00">2019-09-11</time>
+              
+            
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/" itemprop="url" rel="index"><span itemprop="name">ETL</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/NIFI/" itemprop="url" rel="index"><span itemprop="name">NIFI</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1803,203 +2029,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/Spark-Windows10-安装部署/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/12/Spark-Windows10-安装部署/" itemprop="url">
-                  Spark Windows10 安装部署
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-08-12 09:18:10" itemprop="dateCreated datePublished" datetime="2019-08-12T09:18:10+08:00">2019-08-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-08-24 17:12:41" itemprop="dateModified" datetime="2019-08-24T17:12:41+08:00">2019-08-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Spark centos 安装部署 </p>
-<h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
-<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>解压安装后配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
-<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
-<p>进入到配置目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>然后进入sbin目录,启动集群<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>至此spark安装完成。</p>
-<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
-<p>执行脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2047,7 +2076,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2132,7 +2161,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -2213,7 +2246,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
