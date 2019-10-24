@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10">
+  <meta name="description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10 spark提交部署程序脚本12345#!/bin/shresult_time=$(date +%Y%m%d)echo &amp;quot;小车定位程序&amp;quot;spark-submit --class com.gree.cn.location">
 <meta name="keywords" content="spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark 常用参数设置">
 <meta property="og:url" content="http://yoursite.com/2019/08/09/spark-常用参数设置/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10">
+<meta property="og:description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10 spark提交部署程序脚本12345#!/bin/shresult_time=$(date +%Y%m%d)echo &amp;quot;小车定位程序&amp;quot;spark-submit --class com.gree.cn.location">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-09T08:50:32.983Z">
+<meta property="og:updated_time" content="2019-10-07T00:56:12.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark 常用参数设置">
-<meta name="twitter:description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10">
+<meta name="twitter:description" content="1234// task数量设置spark.sql.shuffle.partitions 50//并行度设置spark.default.parallelism 10 spark提交部署程序脚本12345#!/bin/shresult_time=$(date +%Y%m%d)echo &amp;quot;小车定位程序&amp;quot;spark-submit --class com.gree.cn.location">
 
 
 
@@ -358,6 +358,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-10-07 08:56:12" itemprop="dateModified" datetime="2019-10-07T08:56:12+08:00">2019-10-07</time>
+              
+            
           </span>
 
           
@@ -407,6 +423,7 @@
 
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
+<h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -497,8 +514,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -513,7 +539,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -602,7 +628,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -687,7 +715,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -720,6 +750,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#spark提交部署程序脚本"><span class="nav-number">1.</span> <span class="nav-text">spark提交部署程序脚本</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

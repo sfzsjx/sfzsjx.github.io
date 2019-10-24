@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="Neo4j 数据导入 一、安装与部署 直接在官网下载安装包安装，解压即可。 二、下载相应的jar包 1.sqlserver 数据导入neo4j的jar包  apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar  2.mysql 数据导入neo4j的jar包  apoc-3.3.0.1-all.jar    m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-06T06:29:15.321Z">
+<meta property="og:updated_time" content="2019-09-25T02:00:24.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NEO4J 图数据库使用APOC数据导入">
 <meta name="twitter:description" content="Neo4j 数据导入 一、安装与部署 直接在官网下载安装包安装，解压即可。 二、下载相应的jar包 1.sqlserver 数据导入neo4j的jar包  apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar  2.mysql 数据导入neo4j的jar包  apoc-3.3.0.1-all.jar    m">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-09-06 14:29:15" itemprop="dateModified" datetime="2019-09-06T14:29:15+08:00">2019-09-06</time>
+                <time title="Updated at: 2019-09-25 10:00:24" itemprop="dateModified" datetime="2019-09-25T10:00:24+08:00">2019-09-25</time>
               
             
           </span>
@@ -457,6 +457,9 @@
 </blockquote>
 <blockquote>
 <p>问题三：<br>neo4j由于查询数据量过多导致数据库挂掉。<br>neo4j可能会因一次性查询数据太多，而挂掉。进入neo4j目录bin下。<br>cd到bin目录下，执行启动命令：./neo4j stop<br>另外neo4j还有其他命令，执行方式相同：neo4j { console | start | stop | restart | status }<br>如果，./neo4j stop不能停止neo4j，<br><strong>用kill -s 9 强制杀掉进程。 </strong><br>然后，调用./neo4j start 启动neo4j</p>
+</blockquote>
+<blockquote>
+<p>问题四：<br>neo4j 导数据时程序未出现报错信息，但是一直卡着，数据导入失败。<br>可以查看进程：jps、ps -p pid,直接将所有的关于neo4j的进程kill ,再重新执行数据导入程序<br>在查看进行可以看到有两个进程CommunityEntryPoint和jar.<br>可能造成的原因是由于上次导完数据后的链接数据库为关闭。</p>
 </blockquote>
 <h3 id="hive数据迁移到neo4j操作"><a href="#hive数据迁移到neo4j操作" class="headerlink" title="hive数据迁移到neo4j操作"></a>hive数据迁移到neo4j操作</h3><ol>
 <li>下载与hive版本一致的jar包，如（hadoop-common-2.7.3.jar，hive-exec-1.2.1.jar，hive-jdbc-1.2.1.jar，hive-metastore-1.2.1.jar，hive-service-1.2.1.jar，httpclient-4.4.jar，httpcore-4.4.jar，libfb303-0.9.2.jar，libthrift-0.9.3.jar）</li>
@@ -584,7 +587,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -673,7 +676,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
@@ -758,7 +763,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
