@@ -228,7 +228,7 @@
           
           <li class="menu-item menu-item-home menu-item-active">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
   </li>
         
         
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Über</a>
   </li>
         
         
@@ -252,7 +252,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
   </li>
         
         
@@ -260,7 +260,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
   </li>
 
       
@@ -295,6 +295,147 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/Docker-三剑客之-Docker-Compose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/25/Docker-三剑客之-Docker-Compose/" itemprop="url">
+                  Docker 三剑客之 Docker Compose
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-10-25 08:55:10 / Updated at: 11:11:03" itemprop="dateCreated datePublished" datetime="2019-10-25T08:55:10+08:00">2019-10-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Docker Compose 定位是 定义和运行多个docker容器应用（Defining and running multi-container Docker applications）</span><br><span class="line"></span><br><span class="line">它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）</span><br><span class="line"></span><br><span class="line">Compose 中有两个重要的概念：</span><br><span class="line"></span><br><span class="line">服务 (service)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。</span><br><span class="line">项目 (project)：由一组关联的应用容器组成的一个完整业务单元，在 docker-compose.yml 文件中定义。</span><br></pre></td></tr></table></figure>
+<h1 id="安装与卸载"><a href="#安装与卸载" class="headerlink" title="安装与卸载"></a>安装与卸载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.安装</span><br><span class="line">$ sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">2.卸载</span><br><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -350,14 +491,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-10-23 15:13:40" itemprop="dateCreated datePublished" datetime="2019-10-23T15:13:40+08:00">2019-10-23</time>
+              <time title="Post created: 2019-10-23 15:13:40" itemprop="dateCreated datePublished" datetime="2019-10-23T15:13:40+08:00">2019-10-23</time>
             
 
             
@@ -374,7 +515,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-10-24 14:24:56" itemprop="dateModified" datetime="2019-10-24T14:24:56+08:00">2019-10-24</time>
+                <time title="Updated at: 2019-10-24 14:24:56" itemprop="dateModified" datetime="2019-10-24T14:24:56+08:00">2019-10-24</time>
               
             
           </span>
@@ -388,7 +529,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
@@ -530,14 +671,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-10-17 10:13:36 / Modified: 10:13:37" itemprop="dateCreated datePublished" datetime="2019-10-17T10:13:36+08:00">2019-10-17</time>
+              <time title="Post created: 2019-10-17 10:13:36 / Updated at: 10:13:37" itemprop="dateCreated datePublished" datetime="2019-10-17T10:13:36+08:00">2019-10-17</time>
             
 
             
@@ -670,14 +811,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-09-11 14:59:39 / Modified: 15:59:02" itemprop="dateCreated datePublished" datetime="2019-09-11T14:59:39+08:00">2019-09-11</time>
+              <time title="Post created: 2019-09-11 14:59:39 / Updated at: 15:59:02" itemprop="dateCreated datePublished" datetime="2019-09-11T14:59:39+08:00">2019-09-11</time>
             
 
             
@@ -696,14 +837,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/" itemprop="url" rel="index"><span itemprop="name">ETL</span></a></span>
 
                 
                 
-                  , 
+                  . 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/NIFI/" itemprop="url" rel="index"><span itemprop="name">NIFI</span></a></span>
@@ -855,14 +996,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-09-09 09:43:41" itemprop="dateCreated datePublished" datetime="2019-09-09T09:43:41+08:00">2019-09-09</time>
+              <time title="Post created: 2019-09-09 09:43:41" itemprop="dateCreated datePublished" datetime="2019-09-09T09:43:41+08:00">2019-09-09</time>
             
 
             
@@ -879,7 +1020,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-09-11 14:14:07" itemprop="dateModified" datetime="2019-09-11T14:14:07+08:00">2019-09-11</time>
+                <time title="Updated at: 2019-09-11 14:14:07" itemprop="dateModified" datetime="2019-09-11T14:14:07+08:00">2019-09-11</time>
               
             
           </span>
@@ -893,14 +1034,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/" itemprop="url" rel="index"><span itemprop="name">ETL</span></a></span>
 
                 
                 
-                  , 
+                  . 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ETL/NIFI/" itemprop="url" rel="index"><span itemprop="name">NIFI</span></a></span>
@@ -1051,14 +1192,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-09-05 10:20:06 / Modified: 10:23:17" itemprop="dateCreated datePublished" datetime="2019-09-05T10:20:06+08:00">2019-09-05</time>
+              <time title="Post created: 2019-09-05 10:20:06 / Updated at: 10:23:17" itemprop="dateCreated datePublished" datetime="2019-09-05T10:20:06+08:00">2019-09-05</time>
             
 
             
@@ -1194,14 +1335,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-30 16:54:39" itemprop="dateCreated datePublished" datetime="2019-08-30T16:54:39+08:00">2019-08-30</time>
+              <time title="Post created: 2019-08-30 16:54:39" itemprop="dateCreated datePublished" datetime="2019-08-30T16:54:39+08:00">2019-08-30</time>
             
 
             
@@ -1218,7 +1359,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-09-04 17:31:17" itemprop="dateModified" datetime="2019-09-04T17:31:17+08:00">2019-09-04</time>
+                <time title="Updated at: 2019-09-04 17:31:17" itemprop="dateModified" datetime="2019-09-04T17:31:17+08:00">2019-09-04</time>
               
             
           </span>
@@ -1232,7 +1373,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/大数据/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a></span>
@@ -1380,14 +1521,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-27 10:34:36 / Modified: 11:09:29" itemprop="dateCreated datePublished" datetime="2019-08-27T10:34:36+08:00">2019-08-27</time>
+              <time title="Post created: 2019-08-27 10:34:36 / Updated at: 11:09:29" itemprop="dateCreated datePublished" datetime="2019-08-27T10:34:36+08:00">2019-08-27</time>
             
 
             
@@ -1406,7 +1547,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
@@ -1558,14 +1699,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-26 15:54:34" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
+              <time title="Post created: 2019-08-26 15:54:34" itemprop="dateCreated datePublished" datetime="2019-08-26T15:54:34+08:00">2019-08-26</time>
             
 
             
@@ -1582,7 +1723,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-27 10:55:50" itemprop="dateModified" datetime="2019-08-27T10:55:50+08:00">2019-08-27</time>
+                <time title="Updated at: 2019-08-27 10:55:50" itemprop="dateModified" datetime="2019-08-27T10:55:50+08:00">2019-08-27</time>
               
             
           </span>
@@ -1596,7 +1737,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/蓝牙定位/" itemprop="url" rel="index"><span itemprop="name">蓝牙定位</span></a></span>
@@ -1739,14 +1880,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-26 10:31:37 / Modified: 15:03:21" itemprop="dateCreated datePublished" datetime="2019-08-26T10:31:37+08:00">2019-08-26</time>
+              <time title="Post created: 2019-08-26 10:31:37 / Updated at: 15:03:21" itemprop="dateCreated datePublished" datetime="2019-08-26T10:31:37+08:00">2019-08-26</time>
             
 
             
@@ -1765,7 +1906,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
@@ -1873,249 +2014,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/redis-数据库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/22/redis-数据库/" itemprop="url">
-                  redis 数据库
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-22 19:00:10" itemprop="dateCreated datePublished" datetime="2019-08-22T19:00:10+08:00">2019-08-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-09-23 15:14:47" itemprop="dateModified" datetime="2019-09-23T15:14:47+08:00">2019-09-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库 </span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>Redis 数据库</strong></p>
-<blockquote>
-<p>Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。<br>它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。</p>
-</blockquote>
-<p>Redis 安装参考<a href="https://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">redis基础教程</a></p>
-<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis/redis-5.0.5/src</span><br><span class="line">./redis-cli --raw</span><br><span class="line">hvals materialinfo</span><br></pre></td></tr></table></figure>
-<h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置依赖文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># redisspring.redis.host = 172.80.122.33</span><br><span class="line">spring.redis.port = 6379</span><br><span class="line">spring.redis.database = 0</span><br><span class="line">spring.redis.timeout = 100ms</span><br><span class="line">spring.redis.lettuce.pool.max-active = 8</span><br><span class="line">spring.redis.lettuce.pool.max-idle = 8</span><br><span class="line">spring.redis.lettuce.pool.min-idle = 0</span><br><span class="line">spring.redis.lettuce.pool.max-wait = 100ms</span><br></pre></td></tr></table></figure></p>
-<p>3.使用redisTemplate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired </span><br><span class="line">private RedisTemplate&lt;String,String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Redis客户端 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置数据库连接池<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static JedisPool jedisPool;</span><br><span class="line">    private Jedis jedis;</span><br><span class="line">    static &#123;</span><br><span class="line">        JedisPoolConfig config = new JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(20);</span><br><span class="line">        config.setMaxIdle(5);</span><br><span class="line">        config.setMaxWaitMillis(1000);</span><br><span class="line">        config.setMinIdle(2);</span><br><span class="line">        config.setTestOnBorrow(false);</span><br><span class="line">        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);</span><br><span class="line">    &#125;</span><br><span class="line">    private static synchronized Jedis getJedis()&#123;</span><br><span class="line">        return jedisPool.getResource();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.操作数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jedis = getJedis();</span><br><span class="line">jedis.hvals(&quot;materialinfo&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
-</code></pre><ul>
-<li>set(Key,value) :给数据库中名称为Key的String赋值value</li>
-<li>get(Key):返回数据库中名称为Key的String的value</li>
-<li>getset(key, value)：给名称为 key 的 string 赋予上一次的 value</li>
-<li>mget(key1, key2,…, key N)：返回库中多个 string 的 value</li>
-<li>setnx(key, value)：添加 string，名称为 key，值为 value</li>
-<li>setex(key, time, value)：向库中添加 string，设定过期时间 time</li>
-<li>mset(key N, value N)：批量设置多个 string 的值</li>
-<li>msetnx(key N, value N)：如果所有名称为 key i 的 string 都不存在</li>
-<li>incr(key)：名称为 key 的 string 增 1 操作</li>
-<li>incrby(key, integer)：名称为 key 的 string 增加 integer</li>
-<li>decr(key)：名称为 key 的 string 减 1 操作</li>
-<li>decrby(key, integer)：名称为 key 的 string 减少 integer</li>
-<li>append(key, value)：名称为 key 的 string 的值附加 value</li>
-<li>substr(key, start, end)：返回名称为 key 的 string 的 value 的子串</li>
-</ul>
-<pre><code>对List操作命令
-</code></pre><ul>
-<li>rpush(key, value)：在名称为 key 的 list 尾添加一个值为 value 的元素</li>
-<li>lpush(key, value)：在名称为 key 的 list 头添加一个值为 value 的元素</li>
-<li>llen(key)：返回名称为 key 的 list 的长度</li>
-<li>lrange(key, start, end)：返回名称为 key 的 list 中 start 至 end 之间的元素</li>
-<li>ltrim(key, start, end)：截取名称为 key 的 list</li>
-<li>lindex(key, index)：返回名称为 key 的 list 中 index 位置的元素</li>
-<li>lset(key, index, value)：给名称为 key 的 list 中 index 位置的元素赋值</li>
-<li>lrem(key, count, value)：删除 count 个 key 的 list 中值为 value 的元素</li>
-<li>lpop(key)：返回并删除名称为 key 的 list 中的首元素</li>
-<li>rpop(key)：返回并删除名称为 key 的 list 中的尾元素</li>
-<li>blpop(key1, key2,… key N, timeout)：lpop 命令的 block 版本。</li>
-<li>brpop(key1, key2,… key N, timeout)：rpop 的 block 版本。</li>
-<li><p>rpoplpush(srckey, dstkey)：返回并删除名称为 srckey 的 list 的尾元素，并将该元素添加到名称为 dstkey 的 list 的头部</p>
-<p>  对Set操作命令    </p>
-</li>
-<li>sadd(key, member)：向名称为 key 的 set 中添加元素 member</li>
-<li>srem(key, member) ：删除名称为 key 的 set 中的元素 member</li>
-<li>spop(key) ：随机返回并删除名称为 key 的 set 中一个元素</li>
-<li>smove(srckey, dstkey, member) ：移到集合元素</li>
-<li>scard(key) ：返回名称为 key 的 set 的基数</li>
-<li>sismember(key, member) ：member 是否是名称为 key 的 set 的元素</li>
-<li>sinter(key1, key2,…key N) ：求交集</li>
-<li>sinterstore(dstkey, (keys)) ：求交集并将交集保存到 dstkey 的集合</li>
-<li>sunion(key1, (keys)) ：求并集</li>
-<li>sunionstore(dstkey, (keys)) ：求并集并将并集保存到 dstkey 的集合</li>
-<li>sdiff(key1, (keys)) ：求差集</li>
-<li>sdiffstore(dstkey, (keys)) ：求差集并将差集保存到 dstkey 的集合</li>
-<li>smembers(key) ：返回名称为 key 的 set 的所有元素</li>
-<li><p>srandmember(key) ：随机返回名称为 key 的 set 的一个元素</p>
-<p>  对 Hash 操作的命令</p>
-</li>
-<li>hset(key, field, value)：向名称为 key 的 hash 中添加元素 field</li>
-<li>hget(key, field)：返回名称为 key 的 hash 中 field 对应的 value</li>
-<li>hmget(key, (fields))：返回名称为 key 的 hash 中 field i 对应的 value</li>
-<li>hmset(key, (fields))：向名称为 key 的 hash 中添加元素 field</li>
-<li>hincrby(key, field, integer)：将名称为 key 的 hash 中 field 的 value 增加 integer</li>
-<li>hexists(key, field)：名称为 key 的 hash 中是否存在键为 field 的域</li>
-<li>hdel(key, field)：删除名称为 key 的 hash 中键为 field 的域</li>
-<li>hlen(key)：返回名称为 key 的 hash 中元素个数</li>
-<li>hkeys(key)：返回名称为 key 的 hash 中所有键</li>
-<li>hvals(key)：返回名称为 key 的 hash 中所有键对应的 value</li>
-<li>hgetall(key)：返回名称为 key 的 hash 中所有的键（field）及其对应的 value</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2163,8 +2061,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -2255,7 +2153,7 @@
                       
                     
                     <span class="site-state-item-count">39</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   
                 </div>
               
@@ -2342,7 +2240,7 @@
                       
                     
                     <span class="site-state-item-count">37</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   
                 </div>
               
@@ -2402,7 +2300,7 @@
 
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
 
 
 
