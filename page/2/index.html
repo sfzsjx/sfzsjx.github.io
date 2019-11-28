@@ -311,6 +311,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/spark-standalone-运行原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="上善若水">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="上善若水博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/26/spark-standalone-运行原理/" itemprop="url">
+                  spark standalone  运行原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-08-26 10:31:37 / Updated at: 15:03:21" itemprop="dateCreated datePublished" datetime="2019-08-26T10:31:37+08:00">2019-08-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<blockquote>
+<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint</span><br><span class="line">2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。</span><br><span class="line">3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。</span><br><span class="line">4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。</span><br><span class="line">5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)</span><br><span class="line">6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。</span><br><span class="line">7.应用程序运行完成后，SparkContext会进行资源回收。</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="二、spark-standalone两种提交模式"><a href="#二、spark-standalone两种提交模式" class="headerlink" title="二、spark standalone两种提交模式"></a>二、spark standalone两种提交模式</h3><h4 id="1-standalone-client-任务提交模式"><a href="#1-standalone-client-任务提交模式" class="headerlink" title="1. standalone-client 任务提交模式"></a>1. standalone-client 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in client deploy mode</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
+<p>standalone client 模式任务流程<br><img src="/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<p>执行流程</p>
+<ol>
+<li>client 模式提交任务后，会在客户端启动Driver进程。</li>
+<li>Driver 会向Master申请启动Application启动资源。</li>
+<li>资源申请成功后，Driver端会将task发送到worker端执行。</li>
+<li>worker端执行成功后将执行结果返回给Driver端</li>
+</ol>
+<h4 id="1-standalone-cluster-任务提交模式"><a href="#1-standalone-cluster-任务提交模式" class="headerlink" title="1. standalone-cluster 任务提交模式"></a>1. standalone-cluster 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in cluster deploy mode with supervise</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --deploy-mode cluster \</span><br><span class="line">  --supervise \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
+</blockquote>
+<p>standalone-cluster模式提交任务<br><img src="/images/2019/08/26/b76b5dc0-c7ac-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<p>执行流程：</p>
+<ol>
+<li>客户端使用命令spark-submit –deploy-mode cluster 后会启动spark-submit进程</li>
+<li>此进程为Driver向Master 申请资源。</li>
+<li>Master会随机在一台Worker节点来启动Driver进程。</li>
+<li>Driver启动成功后，spark-submit关闭，然后Driver向Master申请资源。</li>
+<li>Master接收到请求后，会在资源充足的Worker节点上启动Executor进程。</li>
+<li>Driver分发Task到Executor中执行。</li>
+</ol>
+<p>建议：<strong>在平时调试时使用client模式，在正式生产环境时建议使用cluster模式</strong></p>
+<p>参考文章：<a href="https://www.cnblogs.com/wangtcc/p/da-huaSpark-5san-tu-xiang-shuSpark-StandaloneClien.html" target="_blank" rel="noopener">1、大话Spark(5)-三图详述Spark Standalone/Client/Cluster运行模式</a><br><a href="https://blog.csdn.net/qq_39131779/article/details/83539608" target="_blank" rel="noopener">2、Spark中Standalone的两种提交模式（Standalone-client模式与Standalone-cluster模式）</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/redis-数据库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1854,162 +2042,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="上善若水">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="上善若水博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/17/Dataframe-常见问题记录/" itemprop="url">
-                  Dataframe 常见问题记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-06-17 16:26:48" itemprop="dateCreated datePublished" datetime="2019-06-17T16:26:48+08:00">2019-06-17</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DataFrame/" itemprop="url" rel="index"><span itemprop="name">DataFrame</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题1、不能够解析某个字段"><a href="#问题1、不能够解析某个字段" class="headerlink" title="问题1、不能够解析某个字段"></a>问题1、不能够解析某个字段</h3><blockquote>
-<p>解决办法：<br>查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2057,7 +2089,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

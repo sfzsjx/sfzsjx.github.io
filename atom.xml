@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-25T03:11:03.972Z</updated>
+  <updated>2019-11-26T03:21:31.521Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spark 常用 api</title>
+    <link href="http://yoursite.com/2019/11/26/spark-%E5%B8%B8%E7%94%A8-api/"/>
+    <id>http://yoursite.com/2019/11/26/spark-常用-api/</id>
+    <published>2019-11-26T03:20:57.000Z</published>
+    <updated>2019-11-26T03:21:31.521Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.spark 中采用部分关联字段</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接</span><br><span class="line">  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.spark 中采用部分关联字段&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line
+      
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker 三剑客之 Docker Compose</title>
@@ -506,32 +532,6 @@
     
     
       <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dataframe 常见问题记录</title>
-    <link href="http://yoursite.com/2019/06/17/Dataframe-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2019/06/17/Dataframe-常见问题记录/</id>
-    <published>2019-06-17T08:26:48.000Z</published>
-    <updated>2019-06-17T08:26:48.250Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="问题1、不能够解析某个字段"><a href="#问题1、不能够解析某个字段" class="headerlink" title="问题1、不能够解析某个字段"></a>问题1、不能够解析某个字段</h3><blockquote><p>解决办法：<br>查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;问题1、不能够解析某个字段&quot;&gt;&lt;a href=&quot;#问题1、不能够解析某个字段&quot; class=&quot;headerlink&quot; title=&quot;问题1、不能够解析某个字段&quot;&gt;&lt;/a&gt;问题1、不能够解析某个字段&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;解决办法：&lt;br&gt;查看表名
-      
-    
-    </summary>
-    
-      <category term="DataFrame" scheme="http://yoursite.com/categories/DataFrame/"/>
-    
-    
-      <category term="Dataframe" scheme="http://yoursite.com/tags/Dataframe/"/>
     
   </entry>
   
