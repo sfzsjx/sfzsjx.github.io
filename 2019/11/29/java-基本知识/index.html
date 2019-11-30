@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="上善若水博客">
 <meta property="og:description" content="1.泛型  通过泛型可以定义类型安全的数据结构（类型安全），而无须使用实际的数据类型（可扩展）。这能够显著提高性能并得到更高质量的代码（高性能），因为您可以重用数据处理算法，而无须复制类型特定的代码（可重用）。 2.java.sql.SQLException: Unknown system variable ‘query_cache_size’12345&amp;lt;dependency&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-29T08:48:46.067Z">
+<meta property="og:updated_time" content="2019-11-30T03:09:48.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 基本知识">
 <meta name="twitter:description" content="1.泛型  通过泛型可以定义类型安全的数据结构（类型安全），而无须使用实际的数据类型（可扩展）。这能够显著提高性能并得到更高质量的代码（高性能），因为您可以重用数据处理算法，而无须复制类型特定的代码（可重用）。 2.java.sql.SQLException: Unknown system variable ‘query_cache_size’12345&amp;lt;dependency&amp;gt;">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="Post created: 2019-11-29 10:00:58 / Updated at: 16:48:46" itemprop="dateCreated datePublished" datetime="2019-11-29T10:00:58+08:00">2019-11-29</time>
+              <time title="Post created: 2019-11-29 10:00:58" itemprop="dateCreated datePublished" datetime="2019-11-29T10:00:58+08:00">2019-11-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-11-30 11:09:48" itemprop="dateModified" datetime="2019-11-30T11:09:48+08:00">2019-11-30</time>
               
             
           </span>
@@ -395,6 +407,14 @@
 <p>2.java.sql.SQLException: Unknown system variable ‘query_cache_size’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
 <p>3.java.sql.SQLException: The server time zone value ‘ÖÐ¹ú±ê×¼Ê±¼ä’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/springboot_jpa?charset=utf8mb4&amp;useSSL=false&amp;serverTimezone=GMT</span><br></pre></td></tr></table></figure>
+<p>4.java.lang.Exception: No runnable methods</p>
+<blockquote>
+<p>测试时 未在test方法上加上 @test 注解，同时保证注解依赖org.junit.test</p>
+</blockquote>
+<p>5.STRING…</p>
+<blockquote>
+<p>类型后面三个点(String…)，是从Java 5开始，Java语言对方法参数支持一种新写法，叫可变长度参数列表，其语法就是类型后跟…，表示此处接受的参数为0到多个Object类型的对象，或者是一个Object[]。</p>
+</blockquote>
 
       
     </div>
