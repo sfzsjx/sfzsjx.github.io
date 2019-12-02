@@ -87,65 +87,14 @@ function activateLightMode(){
 <li>使用算法：一个常见的朴素贝叶斯应用是文档分类。</li>
 </ol>
 <p>程序清单 1 ： 词表到向量的转换函数</p>
-<pre><code>def loadDataSet():
-    postingList = [[&#39;my&#39;,&#39;dog&#39;,&#39;has&#39;,&#39;flea&#39;,\
-    &#39;problems&#39;,&#39;help&#39;,&#39;please&#39;],
-    [&#39;maybe&#39;,&#39;not&#39;,&#39;take&#39;,&#39;him&#39;,\
-    &#39;I&#39;,&#39;love&#39;,&#39;him&#39;]]
-classVec = [0,1] # 1代表有侮辱性文字，0代表正常言论
-return postingList,classVec
-
-def createVocabList(dataSet):
-    vocabSet = set([])
-    for document in dataSet:
-        vocabSet = vocabSet | set(document)
-    return list(vocabSet)
-
-def setOfWords2Vec(vocabList,inputSet):
-returnVec = [0]*len(vocabList)
-for word in inputSet:
-    if word in vocabList:
-        returnVec[vocabList.index(word)] = 1
-    else:print &quot;the Word : %s is not in my Vocabulary!&quot; % word
-return returnVec
-
-</code></pre><h4 id="训练算法"><a href="#训练算法" class="headerlink" title="训练算法"></a>训练算法</h4><p>函数伪代码：</p>
-<pre><code>计算每个类别中的文档数目
-对每篇训练文档：
-    对每个类别：
-        如果词条出现文档中 --&gt; 增加该词条的计数值
-        增加所有词条的计数值
-    对每个类别：
-        对每个词条：
-            将该词条的数目除以总词条数目得到条件概率
-    返回每个类别的条件概率
-
-</code></pre><p>程序清单2 朴素贝叶斯分类器训练函数</p>
-<pre><code>def trainNB0(trainMatrix,trainCategory):
-    # 初始化概率
-    numTrainDocs = len(trainMatrix)
-    numWords = len(trainMatrix[0])
-    pAbusive = sum(trainCategory)/float(numTrainDocs)
-    p0Num = zeros(numWords);plNum = zeros(numWords)
-    p0Denom = 0.0;plDenom = 0.0
-    # 向量相加
-    for i in range(numTrainDocs):
-        if trainCategory[i] ==1;
-            p1Num += trainMatrix[i]
-            p1Denom += sum(trainMatrix[i])
-        else:
-            p0Num += trainMatrix[i]
-            p0Denom += sum(trainMatrix[i])    
-    p1Vect = p1Num/p1Denom
-    p0Vect = p0Num/p0Denom
-    return p0Vect,p1Vect,pAbusive
-
-
-</code></pre><h3 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h3><h4 id="离散数据案例（判断性别【高，中，中】）"><a href="#离散数据案例（判断性别【高，中，中】）" class="headerlink" title="离散数据案例（判断性别【高，中，中】）"></a>离散数据案例（判断性别【高，中，中】）</h4><p><img alt="image.png" data-src="/images/2019/03/30/636a22f0-528c-11e9-a83e-453cdda717bc.png" class="lazyload"><br> 可知 共有三个属性，用A代表属性，A1,A2,A3分别表示 身高 = 高、体重 = 中、鞋码 = 中。<br>      共有两个类别，用C代表类别，C1,C2 分别表示为 男、女，未知情况用C~j~ 表示。<br>补充：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def loadDataSet():</span><br><span class="line">	postingList = [[&apos;my&apos;,&apos;dog&apos;,&apos;has&apos;,&apos;flea&apos;,\</span><br><span class="line">	&apos;problems&apos;,&apos;help&apos;,&apos;please&apos;],</span><br><span class="line">	[&apos;maybe&apos;,&apos;not&apos;,&apos;take&apos;,&apos;him&apos;,\</span><br><span class="line">	&apos;I&apos;,&apos;love&apos;,&apos;him&apos;]]</span><br><span class="line">classVec = [0,1] # 1代表有侮辱性文字，0代表正常言论</span><br><span class="line">return postingList,classVec</span><br><span class="line"></span><br><span class="line">def createVocabList(dataSet):</span><br><span class="line">	vocabSet = set([])</span><br><span class="line">	for document in dataSet:</span><br><span class="line">		vocabSet = vocabSet | set(document)</span><br><span class="line">	return list(vocabSet)</span><br><span class="line"></span><br><span class="line">def setOfWords2Vec(vocabList,inputSet):</span><br><span class="line">returnVec = [0]*len(vocabList)</span><br><span class="line">for word in inputSet:</span><br><span class="line">	if word in vocabList:</span><br><span class="line">		returnVec[vocabList.index(word)] = 1</span><br><span class="line">	else:print &quot;the Word : %s is not in my Vocabulary!&quot; % word</span><br><span class="line">return returnVec</span><br></pre></td></tr></table></figure>
+<h4 id="训练算法"><a href="#训练算法" class="headerlink" title="训练算法"></a>训练算法</h4><p>函数伪代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">计算每个类别中的文档数目</span><br><span class="line">对每篇训练文档：</span><br><span class="line">	对每个类别：</span><br><span class="line">		如果词条出现文档中 --&gt; 增加该词条的计数值</span><br><span class="line">		增加所有词条的计数值</span><br><span class="line">	对每个类别：</span><br><span class="line">		对每个词条：</span><br><span class="line">			将该词条的数目除以总词条数目得到条件概率</span><br><span class="line">	返回每个类别的条件概率</span><br></pre></td></tr></table></figure></p>
+<p>程序清单2 朴素贝叶斯分类器训练函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def trainNB0(trainMatrix,trainCategory):</span><br><span class="line">	# 初始化概率</span><br><span class="line">	numTrainDocs = len(trainMatrix)</span><br><span class="line">	numWords = len(trainMatrix[0])</span><br><span class="line">	pAbusive = sum(trainCategory)/float(numTrainDocs)</span><br><span class="line">	p0Num = zeros(numWords);plNum = zeros(numWords)</span><br><span class="line">	p0Denom = 0.0;plDenom = 0.0</span><br><span class="line">	# 向量相加</span><br><span class="line">	for i in range(numTrainDocs):</span><br><span class="line">		if trainCategory[i] ==1;</span><br><span class="line">			p1Num += trainMatrix[i]</span><br><span class="line">			p1Denom += sum(trainMatrix[i])</span><br><span class="line">		else:</span><br><span class="line">			p0Num += trainMatrix[i]</span><br><span class="line">			p0Denom += sum(trainMatrix[i])	</span><br><span class="line">	p1Vect = p1Num/p1Denom</span><br><span class="line">	p0Vect = p0Num/p0Denom</span><br><span class="line">	return p0Vect,p1Vect,pAbusive</span><br></pre></td></tr></table></figure></p>
+<h3 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h3><h4 id="离散数据案例（判断性别【高，中，中】）"><a href="#离散数据案例（判断性别【高，中，中】）" class="headerlink" title="离散数据案例（判断性别【高，中，中】）"></a>离散数据案例（判断性别【高，中，中】）</h4><p><img alt="image.png" data-src="/images/2019/03/30/636a22f0-528c-11e9-a83e-453cdda717bc.png" class="lazyload"><br> 可知 共有三个属性，用A代表属性，A1,A2,A3分别表示 身高 = 高、体重 = 中、鞋码 = 中。<br>      共有两个类别，用C代表类别，C1,C2 分别表示为 男、女，未知情况用C~j~ 表示。<br>补充：</p>
 <blockquote>
 <p>（1）条件概率：<br>                 P(A|B)=P(AB)/P(B)  （P(B)&gt;0）<br>   (2) 乘法公式：</p>
-<pre><code>             -  P(AB)=P(A|B)P(B)=P(B|A)P(A)
-             -  P(A1A2...An-1An)=P(A1)P(A2|A1)P(A3|A1A2)...P(An|A1A2...An-1)   （n≥2，P(A1A2...An-1) &gt; 0）
+<pre><code>-  P(AB)=P(A|B)P(B)=P(B|A)P(A)
+-  P(A1A2...An-1An)=P(A1)P(A2|A1)P(A3|A1A2)...P(An|A1A2...An-1)   （n≥2，P(A1A2...An-1) &gt; 0）
 </code></pre><p>  （3）全概率公式:<br>             如果事件组B1，B2，…. 满足<br>               1.B1，B2….两两互斥，即 Bi ∩ Bj = ∅ ，i≠j ， i,j=1，2，….，且P(Bi)&gt;0,i=1,2,….;<br>               2.B1∪B2∪….=Ω ，则称事件组 B1,B2,…是样本空间Ω的一个划分<br>             设 B1,B2,…是样本空间Ω的一个划分，A为任一事件，则：<br>                 <img alt="image.png" data-src="/images/2019/03/30/0e323350-5290-11e9-a83e-453cdda717bc.png" class="lazyload"></p>
 </blockquote>
 <p>现在需要求得在 A1,A2,A3 下 C~j~ 的概率：<br>           <img alt="image.png" data-src="/images/2019/03/30/5e230640-5291-11e9-a83e-453cdda717bc.png" class="lazyload"></p>

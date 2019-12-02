@@ -68,132 +68,13 @@ function activateLightMode(){
   medium_zoom: 'false',
   Snackbar: undefined
   
-}</script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">上善若水博客</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">37</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">39</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">kafka相关的常规操作</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-04-30<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-08-26</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/kafka/">kafka</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/kafka/消息队列/">消息队列</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><pre><code>cd /usr/local/kafka/kafka_2.11-2.2.0
-
-bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties
-
-bin/kafka-server-start.sh  -daemon config/server.properties
-
-</code></pre><h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：</p>
-<pre><code>bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test
-
-</code></pre><p>查看主题：</p>
-<pre><code>bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test
-
-</code></pre><h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
-
-</code></pre><h3 id="4-kafka生产者创建消息"><a href="#4-kafka生产者创建消息" class="headerlink" title="4.kafka生产者创建消息"></a>4.kafka生产者创建消息</h3><pre><code>package com.gree.cn.basedata.kafka_netty;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-
-
-public final class KafkaProducerSingleton {
-
-    private static KafkaProducer&lt;Integer, Object&gt; kafkaProducer;
-
-    private String topic;
-
-    private KafkaProducerSingleton() {
-
-    }
-
-
-    /**
-     * 静态内部类
-     *
-     * @author tanjie
-     *
-     */
-    private static class LazyHandler {
-
-        private static final KafkaProducerSingleton instance = new KafkaProducerSingleton();
-    }
-
-    /**
-     * 单例模式,kafkaProducer是线程安全的,可以多线程共享一个实例
-     *
-     * @return
-     */
-    public static final KafkaProducerSingleton getInstance() {
-        return LazyHandler.instance;
-    }
-
-    /**
-     * kafka生产者进行初始化
-     *
-     * @return KafkaProducer
-     */
-    public void init(String topic) {
-        this.topic = topic;
-        if (null == kafkaProducer) {
-            Properties props = new Properties();
-            InputStream inStream = null;
-            try {
-                inStream = this.getClass().getClassLoader()
-                        .getResourceAsStream(&quot;producer.properties&quot;);
-                props.load(inStream);
-                kafkaProducer = new KafkaProducer&lt;Integer, Object&gt;(props);
-            } catch (IOException e) {
-               e.printStackTrace();
-            } finally {
-                if (null != inStream) {
-                    try {
-                        inStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * 通过kafkaProducer发送消息
-     *  具体消息值
-     */
-    public void sendKafkaMessage( String message) {
-        /**
-         * 1、如果指定了某个分区,会只讲消息发到这个分区上 2、如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用
-         * 3、如果没有指定分区和key,那么将会随机发送到topic的分区中 4、如果指定了key,那么将会以hash&lt;key&gt;的方式发送到分区中
-         */
-        ProducerRecord&lt;Integer, Object&gt; record = new ProducerRecord&lt;Integer, Object&gt;(
-                topic, message);
-        // send方法是异步的,添加消息到缓存区等待发送,并立即返回，这使生产者通过批量发送消息来提高效率
-        // kafka生产者是线程安全的,可以单实例发送消息
-        kafkaProducer.send(record);
-    }
-
-
-    /**
-     * kafka实例销毁
-     */
-    public void close() {
-        if (null != kafkaProducer) {
-            kafkaProducer.close();
-        }
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-}
-
-
-</code></pre><p>然后调用用producer实例</p>
-<pre><code> KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton
-                .getInstance();
-        kafkaProducerSingleton.init(&quot;topic0619&quot;);
-        kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());
-
-</code></pre><p>注意配置producer.properties文件</p>
+}</script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">上善若水博客</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">37</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">39</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">kafka相关的常规操作</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-04-30<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-08-26</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/kafka/">kafka</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/kafka/消息队列/">消息队列</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
+<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
+<p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
+<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
+<h3 id="4-kafka生产者创建消息"><a href="#4-kafka生产者创建消息" class="headerlink" title="4.kafka生产者创建消息"></a>4.kafka生产者创建消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.kafka_netty;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.util.Properties;</span><br><span class="line">import org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line">import org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public final class KafkaProducerSingleton &#123;</span><br><span class="line"></span><br><span class="line">    private static KafkaProducer&lt;Integer, Object&gt; kafkaProducer;</span><br><span class="line"></span><br><span class="line">    private String topic;</span><br><span class="line"></span><br><span class="line">    private KafkaProducerSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态内部类</span><br><span class="line">     *</span><br><span class="line">     * @author tanjie</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    private static class LazyHandler &#123;</span><br><span class="line"></span><br><span class="line">        private static final KafkaProducerSingleton instance = new KafkaProducerSingleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 单例模式,kafkaProducer是线程安全的,可以多线程共享一个实例</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static final KafkaProducerSingleton getInstance() &#123;</span><br><span class="line">        return LazyHandler.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka生产者进行初始化</span><br><span class="line">     *</span><br><span class="line">     * @return KafkaProducer</span><br><span class="line">     */</span><br><span class="line">    public void init(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">        if (null == kafkaProducer) &#123;</span><br><span class="line">            Properties props = new Properties();</span><br><span class="line">            InputStream inStream = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                inStream = this.getClass().getClassLoader()</span><br><span class="line">                        .getResourceAsStream(&quot;producer.properties&quot;);</span><br><span class="line">                props.load(inStream);</span><br><span class="line">                kafkaProducer = new KafkaProducer&lt;Integer, Object&gt;(props);</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                if (null != inStream) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        inStream.close();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过kafkaProducer发送消息</span><br><span class="line">     *  具体消息值</span><br><span class="line">     */</span><br><span class="line">    public void sendKafkaMessage( String message) &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 1、如果指定了某个分区,会只讲消息发到这个分区上 2、如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用</span><br><span class="line">         * 3、如果没有指定分区和key,那么将会随机发送到topic的分区中 4、如果指定了key,那么将会以hash&lt;key&gt;的方式发送到分区中</span><br><span class="line">         */</span><br><span class="line">        ProducerRecord&lt;Integer, Object&gt; record = new ProducerRecord&lt;Integer, Object&gt;(</span><br><span class="line">                topic, message);</span><br><span class="line">        // send方法是异步的,添加消息到缓存区等待发送,并立即返回，这使生产者通过批量发送消息来提高效率</span><br><span class="line">        // kafka生产者是线程安全的,可以单实例发送消息</span><br><span class="line">        kafkaProducer.send(record);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka实例销毁</span><br><span class="line">     */</span><br><span class="line">    public void close() &#123;</span><br><span class="line">        if (null != kafkaProducer) &#123;</span><br><span class="line">            kafkaProducer.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getTopic() &#123;</span><br><span class="line">        return topic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setTopic(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后调用用producer实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton</span><br><span class="line">               .getInstance();</span><br><span class="line">       kafkaProducerSingleton.init(&quot;topic0619&quot;);</span><br><span class="line">       kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());</span><br></pre></td></tr></table></figure></p>
+<p>注意配置producer.properties文件</p>
 <blockquote>
 <p>#指定节点列表<br>bootstrap.servers=10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092</p>
 </blockquote>

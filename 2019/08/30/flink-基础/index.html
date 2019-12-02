@@ -69,89 +69,13 @@ function activateLightMode(){
   Snackbar: undefined
   
 }</script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">上善若水博客</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">37</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">39</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">flink 基础</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-08-30<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-09-04</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/大数据/">大数据</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h2 id="一、Apache-Flink"><a href="#一、Apache-Flink" class="headerlink" title="一、Apache Flink"></a>一、Apache Flink</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><pre><code>Apache Flink 是一个分布式大数据处理引擎，可以对有限流和无线流进行有状态和无状态进行计算，能够在各种集群环境上部署，对各种大小的数据集进行快速计算。
-</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><pre><code>linux
-./bin/start-cluster.sh
-windows
-.\start-cluster.bat
-</code></pre><p><img alt="image.png" data-src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" class="lazyload"></p>
-<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：</p>
-<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
-  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;
-  &lt;version&gt;1.8.0&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
-  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;
-  &lt;version&gt;1.8.0&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-</code></pre><p>Scala版本：</p>
-<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
-  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;
-  &lt;version&gt;1.8.0&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
-  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;
-  &lt;version&gt;1.8.0&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-</code></pre><p>flink 关联 kafka 依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
-    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;
-    &lt;version&gt;1.8.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>flink 推荐使用shade插件打包maven项目</p>
-<pre><code>&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.0.0&lt;/version&gt;
-            &lt;executions&gt;
-                &lt;execution&gt;
-                    &lt;phase&gt;package&lt;/phase&gt;
-                    &lt;goals&gt;
-                        &lt;goal&gt;shade&lt;/goal&gt;
-                    &lt;/goals&gt;
-                    &lt;configuration&gt;
-                        &lt;artifactSet&gt;
-                            &lt;excludes&gt;
-                                &lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;
-                                &lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;
-                                &lt;exclude&gt;log4j:*&lt;/exclude&gt;
-                            &lt;/excludes&gt;
-                        &lt;/artifactSet&gt;
-                        &lt;filters&gt;
-                            &lt;filter&gt;
-                                &lt;!-- Do not copy the signatures in the META-INF folder.
-                                Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;
-                                &lt;artifact&gt;*:*&lt;/artifact&gt;
-                                &lt;excludes&gt;
-                                    &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;
-                                    &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;
-                                    &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;
-                                &lt;/excludes&gt;
-                            &lt;/filter&gt;
-                        &lt;/filters&gt;
-                        &lt;transformers&gt;
-                            &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
-                                &lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;
-                            &lt;/transformer&gt;
-                        &lt;/transformers&gt;
-                    &lt;/configuration&gt;
-                &lt;/execution&gt;
-            &lt;/executions&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-
-</code></pre><h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
+</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux</span><br><span class="line">./bin/start-cluster.sh</span><br><span class="line">windows</span><br><span class="line">.\start-cluster.bat</span><br></pre></td></tr></table></figure>
+<p><img alt="image.png" data-src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" class="lazyload"></p>
+<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Scala版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 关联 kafka 依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 推荐使用shade插件打包maven项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">			&lt;executions&gt;</span><br><span class="line">				&lt;execution&gt;</span><br><span class="line">					&lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">					&lt;goals&gt;</span><br><span class="line">						&lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">					&lt;/goals&gt;</span><br><span class="line">					&lt;configuration&gt;</span><br><span class="line">						&lt;artifactSet&gt;</span><br><span class="line">							&lt;excludes&gt;</span><br><span class="line">								&lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;log4j:*&lt;/exclude&gt;</span><br><span class="line">							&lt;/excludes&gt;</span><br><span class="line">						&lt;/artifactSet&gt;</span><br><span class="line">						&lt;filters&gt;</span><br><span class="line">							&lt;filter&gt;</span><br><span class="line">								&lt;!-- Do not copy the signatures in the META-INF folder.</span><br><span class="line">								Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span><br><span class="line">								&lt;artifact&gt;*:*&lt;/artifact&gt;</span><br><span class="line">								&lt;excludes&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</span><br><span class="line">								&lt;/excludes&gt;</span><br><span class="line">							&lt;/filter&gt;</span><br><span class="line">						&lt;/filters&gt;</span><br><span class="line">						&lt;transformers&gt;</span><br><span class="line">							&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">								&lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;</span><br><span class="line">							&lt;/transformer&gt;</span><br><span class="line">						&lt;/transformers&gt;</span><br><span class="line">					&lt;/configuration&gt;</span><br><span class="line">				&lt;/execution&gt;</span><br><span class="line">			&lt;/executions&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
 <p>DataSet and DataStream:<br>    Flink具有特殊类DataSet并DataStream在程序中表示数据。您可以将它们视为可以包含重复项的不可变数据集合。在DataSet数据有限的情况下，对于一个DataStream元素的数量可以是无界的。</p>
 </blockquote>
 <h3 id="flink-一般处理步骤"><a href="#flink-一般处理步骤" class="headerlink" title="flink 一般处理步骤"></a>flink 一般处理步骤</h3><ol>
