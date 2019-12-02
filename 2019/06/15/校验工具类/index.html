@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -74,12 +74,20 @@
       
 
       
-        <p>1、异或校验<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf out = Unpooled.buffer();   </span><br><span class="line">byte[] b = new byte[out.readableBytes()];</span><br><span class="line">// 进行异或校验</span><br><span class="line">byte temp=b[3];</span><br><span class="line">   for (int i = 4; i &lt;b.length-1; i++) &#123;</span><br><span class="line">       temp ^=b[i];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+        <p>1、异或校验</p>
+<pre><code>     ByteBuf out = Unpooled.buffer();   
+     byte[] b = new byte[out.readableBytes()];
+     // 进行异或校验
+     byte temp=b[3];
+        for (int i = 4; i &lt;b.length-1; i++) {
+            temp ^=b[i];
+        }
 
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/15/校验工具类/" data-id="ck3o5qljj004ghkujmsaux8qn"
+      <a data-url="http://yoursite.com/2019/06/15/校验工具类/" data-id="ck3o5xx8u004g8wujeixkcqvk"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/校验/">校验</a></li></ul>

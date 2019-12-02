@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -102,12 +102,20 @@
       
 
       
-        <p>1、异或校验<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf out = Unpooled.buffer();   </span><br><span class="line">byte[] b = new byte[out.readableBytes()];</span><br><span class="line">// 进行异或校验</span><br><span class="line">byte temp=b[3];</span><br><span class="line">   for (int i = 4; i &lt;b.length-1; i++) &#123;</span><br><span class="line">       temp ^=b[i];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+        <p>1、异或校验</p>
+<pre><code>     ByteBuf out = Unpooled.buffer();   
+     byte[] b = new byte[out.readableBytes()];
+     // 进行异或校验
+     byte temp=b[3];
+        for (int i = 4; i &lt;b.length-1; i++) {
+            temp ^=b[i];
+        }
 
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/15/校验工具类/" data-id="ck3o5qljj004ghkujmsaux8qn"
+      <a data-url="http://yoursite.com/2019/06/15/校验工具类/" data-id="ck3o5xx8u004g8wujeixkcqvk"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/校验/">校验</a></li></ul>
@@ -169,17 +177,29 @@
 
       
         <p>1、查看jar包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep java</span><br></pre></td></tr></table></figure>
-<p>2、jar 包后台运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; xxx.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &gt; analysisbasedata-0.0.1-SNAPSHOT.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/comsumer/analysisbasedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/comsumer/analysisbasedata.log &amp;</span><br><span class="line"></span><br><span class="line">nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;</span><br></pre></td></tr></table></figure>
-<p>3、杀死进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 pid</span><br></pre></td></tr></table></figure>
-<p>4、查找文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;17:46:49&quot; nohup.out</span><br></pre></td></tr></table></figure></p>
+<pre><code>ps -aux | grep java
 
+</code></pre><p>2、jar 包后台运行</p>
+<pre><code>nohup java -jar xxx.jar &gt; xxx.log &amp;
+
+nohup java -jar analysisbasedata-0.0.1-SNAPSHOT.jar &gt; analysisbasedata-0.0.1-SNAPSHOT.log
+
+
+nohup java -jar /home/lyxbdw/basedata/comsumer/analysisbasedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/comsumer/analysisbasedata.log &amp;
+
+nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;
+
+</code></pre><p>3、杀死进程</p>
+<pre><code>kill -9 pid
+
+</code></pre><p>4、查找文件内容</p>
+<pre><code>grep &quot;17:46:49&quot; nohup.out
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/14/jar-包相关知识/" data-id="ck3o5qlg6001ghkujegcio23m"
+      <a data-url="http://yoursite.com/2019/06/14/jar-包相关知识/" data-id="ck3o5xx6r001g8wujw7l95y44"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
@@ -243,11 +263,213 @@
         <p>::: hljs-center</p>
 <p>时间工具类</p>
 <p>:::</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.utils;</span><br><span class="line"></span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 日期时间工具类</span><br><span class="line"> * @author Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class DateUtils &#123;</span><br><span class="line"></span><br><span class="line">    public static final SimpleDateFormat TIME_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATEKEY_FORMAT =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMdd&quot;);</span><br><span class="line">    public static final SimpleDateFormat DATE_NOW =</span><br><span class="line">            new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取某个时刻的时间信息</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    public static String getTimeNow()&#123;</span><br><span class="line"></span><br><span class="line">        return DATE_NOW.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 获取格式化某个时间</span><br><span class="line">     */</span><br><span class="line">    public  static String getFormatTimeNow()&#123;</span><br><span class="line">        return TIME_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之前</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean before(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.before(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断一个时间是否在另一个时间之后</span><br><span class="line">     * @param time1 第一个时间</span><br><span class="line">     * @param time2 第二个时间</span><br><span class="line">     * @return 判断结果</span><br><span class="line">     */</span><br><span class="line">    public static boolean after(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dateTime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date dateTime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            if(dateTime1.after(dateTime2)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 计算时间差值（单位为秒）</span><br><span class="line">     * @param time1 时间1</span><br><span class="line">     * @param time2 时间2</span><br><span class="line">     * @return 差值</span><br><span class="line">     */</span><br><span class="line">    public static int minus(String time1, String time2) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date datetime1 = TIME_FORMAT.parse(time1);</span><br><span class="line">            Date datetime2 = TIME_FORMAT.parse(time2);</span><br><span class="line"></span><br><span class="line">            long millisecond = datetime1.getTime() - datetime2.getTime();</span><br><span class="line"></span><br><span class="line">            return Integer.valueOf(String.valueOf(millisecond / 1000));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取年月日和小时</span><br><span class="line">     * @param datetime 时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @return 结果（yyyy-MM-dd_HH）</span><br><span class="line">     */</span><br><span class="line">    public static String getDateHour(String datetime) &#123;</span><br><span class="line">        String date = datetime.split(&quot; &quot;)[0];</span><br><span class="line">        String hourMinuteSecond = datetime.split(&quot; &quot;)[1];</span><br><span class="line">        String hour = hourMinuteSecond.split(&quot;:&quot;)[0];</span><br><span class="line">        return date + &quot;_&quot; + hour;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当天日期（yyyy-MM-dd）</span><br><span class="line">     * @return 当天日期</span><br><span class="line">     */</span><br><span class="line">    public static String getTodayDate() &#123;</span><br><span class="line">        return DATE_FORMAT.format(new Date());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取昨天的日期（yyyy-MM-dd）</span><br><span class="line">     * @return 昨天的日期</span><br><span class="line">     */</span><br><span class="line">    public static String getYesterdayDate() &#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        cal.setTime(new Date());</span><br><span class="line">        cal.add(Calendar.DAY_OF_YEAR, -1);</span><br><span class="line"></span><br><span class="line">        Date date = cal.getTime();</span><br><span class="line"></span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期（yyyy-MM-dd）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的日期</span><br><span class="line">     */</span><br><span class="line">    public static String formatDate(Date date) &#123;</span><br><span class="line">        return DATE_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间（yyyy-MM-dd HH:mm:ss）</span><br><span class="line">     * @param date Date对象</span><br><span class="line">     * @return 格式化后的时间</span><br><span class="line">     */</span><br><span class="line">    public static String formatTime(Date date) &#123;</span><br><span class="line">        return TIME_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解析时间字符串</span><br><span class="line">     * @param time 时间字符串</span><br><span class="line">     * @return Date</span><br><span class="line">     */</span><br><span class="line">    public static Date parseTime(String time) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return TIME_FORMAT.parse(time);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatDateKey(Date date) &#123;</span><br><span class="line">        return DATEKEY_FORMAT.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化日期key</span><br><span class="line">     * @param datekey</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Date parseDateKey(String datekey) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return DATEKEY_FORMAT.parse(datekey);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间，保留到分钟级别</span><br><span class="line">     * yyyyMMddHHmm</span><br><span class="line">     * @param date</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String formatTimeMinute(Date date) &#123;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMddHHmm&quot;);</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package com.gree.cn.basedata.utils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+/**
+ * 日期时间工具类
+ * @author Administrator
+ *
+ */
+public class DateUtils {
+
+    public static final SimpleDateFormat TIME_FORMAT =
+            new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+    public static final SimpleDateFormat DATE_FORMAT =
+            new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+    public static final SimpleDateFormat DATEKEY_FORMAT =
+            new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+    public static final SimpleDateFormat DATE_NOW =
+            new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);
+
+
+    /**
+     * 获取某个时刻的时间信息
+     *
+     */
+    public static String getTimeNow(){
+
+        return DATE_NOW.format(new Date());
+    }
+    /**
+     * 获取格式化某个时间
+     */
+    public  static String getFormatTimeNow(){
+        return TIME_FORMAT.format(new Date());
+    }
+
+    /**
+     * 判断一个时间是否在另一个时间之前
+     * @param time1 第一个时间
+     * @param time2 第二个时间
+     * @return 判断结果
+     */
+    public static boolean before(String time1, String time2) {
+        try {
+            Date dateTime1 = TIME_FORMAT.parse(time1);
+            Date dateTime2 = TIME_FORMAT.parse(time2);
+
+            if(dateTime1.before(dateTime2)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 判断一个时间是否在另一个时间之后
+     * @param time1 第一个时间
+     * @param time2 第二个时间
+     * @return 判断结果
+     */
+    public static boolean after(String time1, String time2) {
+        try {
+            Date dateTime1 = TIME_FORMAT.parse(time1);
+            Date dateTime2 = TIME_FORMAT.parse(time2);
+
+            if(dateTime1.after(dateTime2)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 计算时间差值（单位为秒）
+     * @param time1 时间1
+     * @param time2 时间2
+     * @return 差值
+     */
+    public static int minus(String time1, String time2) {
+        try {
+            Date datetime1 = TIME_FORMAT.parse(time1);
+            Date datetime2 = TIME_FORMAT.parse(time2);
+
+            long millisecond = datetime1.getTime() - datetime2.getTime();
+
+            return Integer.valueOf(String.valueOf(millisecond / 1000));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * 获取年月日和小时
+     * @param datetime 时间（yyyy-MM-dd HH:mm:ss）
+     * @return 结果（yyyy-MM-dd_HH）
+     */
+    public static String getDateHour(String datetime) {
+        String date = datetime.split(&quot; &quot;)[0];
+        String hourMinuteSecond = datetime.split(&quot; &quot;)[1];
+        String hour = hourMinuteSecond.split(&quot;:&quot;)[0];
+        return date + &quot;_&quot; + hour;
+    }
+
+    /**
+     * 获取当天日期（yyyy-MM-dd）
+     * @return 当天日期
+     */
+    public static String getTodayDate() {
+        return DATE_FORMAT.format(new Date());
+    }
+
+    /**
+     * 获取昨天的日期（yyyy-MM-dd）
+     * @return 昨天的日期
+     */
+    public static String getYesterdayDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+
+        Date date = cal.getTime();
+
+        return DATE_FORMAT.format(date);
+    }
+
+    /**
+     * 格式化日期（yyyy-MM-dd）
+     * @param date Date对象
+     * @return 格式化后的日期
+     */
+    public static String formatDate(Date date) {
+        return DATE_FORMAT.format(date);
+    }
+
+    /**
+     * 格式化时间（yyyy-MM-dd HH:mm:ss）
+     * @param date Date对象
+     * @return 格式化后的时间
+     */
+    public static String formatTime(Date date) {
+        return TIME_FORMAT.format(date);
+    }
+
+    /**
+     * 解析时间字符串
+     * @param time 时间字符串
+     * @return Date
+     */
+    public static Date parseTime(String time) {
+        try {
+            return TIME_FORMAT.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 格式化日期key
+     * @param date
+     * @return
+     */
+    public static String formatDateKey(Date date) {
+        return DATEKEY_FORMAT.format(date);
+    }
+
+    /**
+     * 格式化日期key
+     * @param datekey
+     * @return
+     */
+    public static Date parseDateKey(String datekey) {
+        try {
+            return DATEKEY_FORMAT.parse(datekey);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 格式化时间，保留到分钟级别
+     * yyyyMMddHHmm
+     * @param date
+     * @return
+     */
+    public static String formatTimeMinute(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMddHHmm&quot;);
+        return sdf.format(date);
+    }
+
+}
+
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/14/时间工具类/" data-id="ck3o5qljb0048hkujtc93b6mx"
+      <a data-url="http://yoursite.com/2019/06/14/时间工具类/" data-id="ck3o5xx8r004c8wujxpo85oje"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具类，时间工具类/">工具类，时间工具类</a></li></ul>
@@ -312,13 +534,11 @@
 <p>scala正则匹配</p>
 <p>:::</p>
 <ul>
-<li><p>中文字符匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//匹配中文字符,正则表达式</span><br><span class="line">val  regrex =&quot;[\u4e00-\u9fa5]&quot;.r</span><br><span class="line">//匹配字符串中第一个中文字符</span><br><span class="line">val matches = regrex.findFirstMatchIn(dsca_part1).mkString(&quot;&quot;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常规括号加数字匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def get_dsca2(dsac_part2:String): String =&#123;</span><br><span class="line">	  var dsca_use = dsac_part2</span><br><span class="line">          //匹配左括号加5个数字，其中括号需要转义</span><br><span class="line">	  val partment = &quot;\\([0-9]&#123;5&#125;&quot;.r</span><br><span class="line">          //匹配多个括号，？代表多次匹配</span><br><span class="line">	  val partment3 = &quot;\\((.*?)\\)&quot;.r</span><br><span class="line">	  val result = partment3.findAllMatchIn(dsca_use)</span><br><span class="line">	  result.foreach(x =&gt;&#123;</span><br><span class="line">      if (partment.findAllMatchIn(x.toString()).isEmpty)&#123;</span><br><span class="line">	  dsca_use =  dsca_use.split(&quot;\\(&quot; +x.toString()+&quot;\\)&quot;)(0)</span><br><span class="line">      &#125;</span><br><span class="line">	  &#125;)</span><br><span class="line">	  return dsca_use</span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>中文字符匹配<br><code>`</code><br>//匹配中文字符,正则表达式<br>val  regrex =”[\u4e00-\u9fa5]”.r<br>//匹配字符串中第一个中文字符<br>val matches = regrex.findFirstMatchIn(dsca_part1).mkString(“”)</li>
 </ul>
+<pre><code>- 常规括号加数字匹配
+</code></pre><p>def get_dsca2(dsac_part2:String): String ={<br>      var dsca_use = dsac_part2<br>          //匹配左括号加5个数字，其中括号需要转义<br>      val partment = “\([0-9]{5}”.r<br>          //匹配多个括号，？代表多次匹配<br>      val partment3 = “\((.*?)\)”.r<br>      val result = partment3.findAllMatchIn(dsca_use)<br>      result.foreach(x =&gt;{<br>      if (partment.findAllMatchIn(x.toString()).isEmpty){<br>      dsca_use =  dsca_use.split(“\(“ +x.toString()+”\)”)(0)<br>      }<br>      })<br>      return dsca_use<br>      }</p>
+<p><code>`</code></p>
 <h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><p>Scala 的正则表达式继承了 Java 的语法规则，Java 则大部分使用了 Perl 语言的规则。</p>
 <p>下表我们给出了常用的一些正则表达式规则：</p>
 <p>表达式    匹配规则<br>^    匹配输入字符串开始的位置。<br>$    匹配输入字符串结尾的位置。<br>.    匹配除”\r\n”之外的任何单个字符。<br>[…]    字符集。匹配包含的任一字符。例如，”[abc]”匹配”plain”中的”a”。<br>[^…]    反向字符集。匹配未包含的任何字符。例如，”[^abc]”匹配”plain”中”p”，”l”，”i”，”n”。<br>\A    匹配输入字符串开始的位置（无多行支持）<br>\z    字符串结尾(类似$，但不受处理多行选项的影响)<br>\Z    字符串结尾或行尾(不受处理多行选项的影响)<br>re<em>    重复零次或更多次<br>re+    重复一次或更多次<br>re?    重复零次或一次<br>re{ n}    重复n次<br>re{ n,}<br>re{ n, m}    重复n到m次<br>a|b    匹配 a 或者 b<br>(re)    匹配 re,并捕获文本到自动命名的组里<br>(?: re)    匹配 re,不捕获匹配的文本，也不给此分组分配组号<br>(?&gt; re)    贪婪子表达式<br>\w    匹配字母或数字或下划线或汉字<br>\W    匹配任意不是字母，数字，下划线，汉字的字符<br>\s    匹配任意的空白符,相等于 [\t\n\r\f]<br>\S    匹配任意不是空白符的字符<br>\d    匹配数字，类似 [0-9]<br>\D    匹配任意非数字的字符<br>\G    当前搜索的开头<br>\n    换行符<br>\b    通常是单词分界位置，但如果在字符类里使用代表退格<br>\B    匹配不是单词开头或结束的位置<br>\t    制表符<br>\Q    开始引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)<em>3”。<br>\E    结束引号：\Q(a+b)</em>3\E 可匹配文本 “(a+b)*3”。</p>
@@ -327,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/30/scala-正则匹配/" data-id="ck3o5qlhk002mhkujrrcjlku4"
+      <a data-url="http://yoursite.com/2019/05/30/scala-正则匹配/" data-id="ck3o5xx7p002l8wujcsk9ahl8"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则匹配/">正则匹配</a></li></ul>
@@ -440,26 +660,53 @@
 </tr>
 </tbody>
 </table>
-<p>端口占用查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p>
-<p>查看内存使用情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p>
-<p>查看磁盘使用情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
-<p>查看文件创建数量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
-<p>删除某个文件的小文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
-<p>查看占用线程最大的程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>修改服务最大线程数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p>
-<p>监控java线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>监控网络客户连接数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>linux 将本地文件传给其他服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>
-<p>查看某个目录下大文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -size +50M | xargs du -h</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看CPU情况："><a href="#查看CPU情况：" class="headerlink" title="查看CPU情况："></a>查看CPU情况：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo |grep &quot;model name&quot; &amp;&amp; cat /proc/cpuinfo |grep &quot;physical id&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="查看内存大小"><a href="#查看内存大小" class="headerlink" title="查看内存大小"></a>查看内存大小</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo | grep MemTotal</span><br></pre></td></tr></table></figure>
+<p>端口占用查询：</p>
+<pre><code>netstat -anlp | grep 80
 
+lsof -i:80
+
+</code></pre><p>查看内存使用情况</p>
+<pre><code>free -h
+
+</code></pre><p>查看磁盘使用情况</p>
+<pre><code>df -h
+
+
+</code></pre><p>查看文件创建数量</p>
+<pre><code>df -i
+
+</code></pre><p>删除某个文件的小文件</p>
+<pre><code>find . -type f -delete
+find . -type d -print -delete
+
+</code></pre><p>查看占用线程最大的程序</p>
+<pre><code>ps -eLf | wc -l
+
+</code></pre><p>修改服务最大线程数</p>
+<pre><code>echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000
+echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效
+</code></pre><p>监控java线程</p>
+<pre><code>ps -eLf | grep java | wc -l
+
+</code></pre><p>监控网络客户连接数：</p>
+<pre><code>netstat -n | grep tcp | grep 侦听端口 | wc -l
+</code></pre><p>linux 将本地文件传给其他服务器</p>
+<pre><code>scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark
+
+注意第二个路径与冒号之间不能有空格
+
+</code></pre><p>查看某个目录下大文件</p>
+<pre><code>find / -size +50M | xargs du -h
+
+</code></pre><h2 id="查看CPU情况："><a href="#查看CPU情况：" class="headerlink" title="查看CPU情况："></a>查看CPU情况：</h2><pre><code>cat /proc/cpuinfo |grep &quot;model name&quot; &amp;&amp; cat /proc/cpuinfo |grep &quot;physical id&quot;
+
+</code></pre><h2 id="查看内存大小"><a href="#查看内存大小" class="headerlink" title="查看内存大小"></a>查看内存大小</h2><pre><code>cat /proc/meminfo | grep MemTotal
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/27/Linux-常用命令/" data-id="ck3o5qlf9000ohkujmzuyk6br"
+      <a data-url="http://yoursite.com/2019/05/27/Linux-常用命令/" data-id="ck3o5xx67000l8wuj71x3h8d7"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -525,8 +772,11 @@
 <h2 id="一、蓝牙信标信号强度转换"><a href="#一、蓝牙信标信号强度转换" class="headerlink" title="一、蓝牙信标信号强度转换"></a>一、蓝牙信标信号强度转换</h2><blockquote>
 <p>计算公式： d = 10^((abs(RSSI) - A) / (10 * n))<br>其中：<br>d - 计算所得距离<br>RSSI - 接收信号强度（负值）<br>A - 发射端和接收端相隔1米时的信号强度<br> n - 环境衰减因子</p>
 </blockquote>
-<p>代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//信号强度转距离</span><br><span class="line">Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;</span><br><span class="line">Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));</span><br></pre></td></tr></table></figure></p>
-<p>二 、base数据执行程序</p>
+<p>代码实现：</p>
+<pre><code>//信号强度转距离
+Integer signal_power = (Integer.valueOf(values.substring(34, 36), 16).shortValue()) -256 ;
+Double mesure_distinct = Math.pow(10, (Math.abs(signal_power) - 59) / (10 * 2.0));
+</code></pre><p>二 、base数据执行程序</p>
 <p>1.基站数据分析</p>
 <blockquote>
 <p>cd /home/lyxbdw/basedata/comsumer/target/<br>java -jar analysisbasedata-1.0-SNAPSHOT.jar<br>//后台运行程序<br>nohup java -jar analysisbasedata-1.0-SNAPSHOT.jar &amp;</p>
@@ -541,15 +791,17 @@
 <h3 id="基站接收数据"><a href="#基站接收数据" class="headerlink" title="基站接收数据"></a><strong>基站接收数据</strong></h3><blockquote>
 <p>nohup java -jar /home/lyxbdw/basedata/server/basedata-0.0.1-SNAPSHOT.jar &gt; /home/lyxbdw/basedata/server/basedata.log &amp;</p>
 </blockquote>
-<p>3.Linux jar 包后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">nohup java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=127.0.0.1:9876 &gt; log.out &amp;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
+<p>3.Linux jar 包后台运行</p>
+<pre><code>#!/bin/bash
+nohup java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=127.0.0.1:9876 &gt; log.out &amp;
+</code></pre><blockquote>
 <p>解释：<br>1、目的是使rocketmq-console-ng-1.0.0.jar在后台运行；<br>2、nohup 就是linux后台挂起的命令<br>3、“&gt; log.out” 指定日志输出位置为log.out</p>
 </blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/23/蓝牙信标定位/" data-id="ck3o5qljp004ohkuje0xoqoyk"
+      <a data-url="http://yoursite.com/2019/05/23/蓝牙信标定位/" data-id="ck3o5xxao007p8wuj5roejtwl"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蓝牙定位/">蓝牙定位</a></li></ul>
@@ -610,28 +862,550 @@
       
 
       
-        <h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int valueTen = 328;</span><br><span class="line">String strHex = Integer.toHexString(valueTen)</span><br></pre></td></tr></table></figure>
-<h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strHex = &quot;0214010977&quot;</span><br><span class="line">int valueTen = Integer.pareseInt(strHex,16)</span><br></pre></td></tr></table></figure>
-<h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;2019&quot;;</span><br><span class="line">int i = Integer.pareseInt(str);</span><br><span class="line">int j = Integer.valuesOf(str).intValue();</span><br></pre></td></tr></table></figure>
-<h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 2019;</span><br><span class="line">String str1 = i+&quot;&quot;;</span><br><span class="line">String str2 = String.valueOf(i);</span><br></pre></td></tr></table></figure>
-<h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] strToByteArray(String str) &#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = str.getBytes();</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String str = new String(byteArray);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static String byteArrayToHexStr(byte[] byteArray) &#123;</span><br><span class="line">    if (byteArray == null)&#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();</span><br><span class="line">    char[] hexChars = new char[byteArray.length * 2];</span><br><span class="line">    for (int j = 0; j &lt; byteArray.length; j++) &#123;</span><br><span class="line">        int v = byteArray[j] &amp; 0xFF;</span><br><span class="line">        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];</span><br><span class="line">        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(hexChars);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static byte[] hexStrToByteArray(String str)</span><br><span class="line">&#123;</span><br><span class="line">    if (str == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (str.length() == 0) &#123;</span><br><span class="line">        return new byte[0];</span><br><span class="line">    &#125;</span><br><span class="line">    byte[] byteArray = new byte[str.length() / 2];</span><br><span class="line">    for (int i = 0; i &lt; byteArray.length; i++)&#123;</span><br><span class="line">        String subStr = str.substring(2 * i, 2 * i + 2);</span><br><span class="line">        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));</span><br><span class="line">    &#125;</span><br><span class="line">    return byteArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        /**</span><br><span class="line">* 合并byte[]数组 （不改变原数组）</span><br><span class="line">* @param byte_1</span><br><span class="line">* @param byte_2</span><br><span class="line">* @return 合并后的数组</span><br><span class="line">*/</span><br><span class="line">    public byte[] byteMerger(byte[] byte_1, byte[] byte_2)&#123;  </span><br><span class="line">      byte[] byte_3 = new byte[byte_1.length+byte_2.length];  </span><br><span class="line">      System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  </span><br><span class="line">      System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  </span><br><span class="line">      return byte_3;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 截取byte数组   不改变原数组</span><br><span class="line"> * @param b 原数组</span><br><span class="line"> * @param off 偏差值（索引）</span><br><span class="line"> * @param length 长度</span><br><span class="line"> * @return 截取后的数组</span><br><span class="line"> */</span><br><span class="line">public byte[] subByte(byte[] b,int off,int length)&#123;</span><br><span class="line">	byte[] b1 = new byte[length];</span><br><span class="line">	System.arraycopy(b, off, b1, 0, length);</span><br><span class="line">	return b1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFormatTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ParseException &#123;</span><br><span class="line">        String time = &quot;2019-5-23 9:24:1&quot;;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">        java.util.Date date_util = sdf.parse(time); //转换为util.date</span><br><span class="line">        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date</span><br><span class="line">        System.out.println(date_util);</span><br><span class="line">        System.out.println(date_sql);</span><br><span class="line">        String date = sdf.format(date_sql);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        date = sdf.format(date_util);</span><br><span class="line">        System.out.println(date);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="五、-netty和springboot整合"><a href="#五、-netty和springboot整合" class="headerlink" title="五、 netty和springboot整合"></a>五、 netty和springboot整合</h2><p>引入pom.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.1.5.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;groupId&gt;com.gree.cn&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;basedata&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;basedata&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;get base data&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- spring boot begin--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- springboot 和 netty 整合 socket--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.1.31.Final&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- spring boot 和 netty整合 socket 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.16.20&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.2.0&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--kafka 依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--mysql 依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.44&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!-- log4j--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.8.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
-<p>其中主要引入包为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;4.1.31.Final&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="第一步创建NettyTcoServer服务端"><a href="#第一步创建NettyTcoServer服务端" class="headerlink" title="第一步创建NettyTcoServer服务端"></a>第一步创建NettyTcoServer服务端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.server;</span><br><span class="line">import io.netty.bootstrap.ServerBootstrap;</span><br><span class="line">import io.netty.channel.Channel;</span><br><span class="line">import io.netty.channel.ChannelFuture;</span><br><span class="line">import io.netty.channel.ChannelOption;</span><br><span class="line">import io.netty.channel.EventLoopGroup;</span><br><span class="line">import io.netty.channel.nio.NioEventLoopGroup;</span><br><span class="line">import io.netty.channel.socket.nio.NioServerSocketChannel;</span><br><span class="line">import io.netty.util.concurrent.Future;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.annotation.PreDestroy;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class NettyTcpServer &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger log = LoggerFactory.getLogger(NettyTcpServer.class);</span><br><span class="line">    //boss事件轮询线程组</span><br><span class="line">    //处理Accept连接事件的线程，这里线程数设置为1即可，netty处理链接事件默认为单线程，过度设置反而浪费cpu资源</span><br><span class="line">    private EventLoopGroup boss = new NioEventLoopGroup(1);</span><br><span class="line">    //worker事件轮询线程组</span><br><span class="line">    //处理hadnler的工作线程，其实也就是处理IO读写 。线程数据默认为 CPU 核心数乘以2</span><br><span class="line">    private EventLoopGroup worker = new NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ServerChannelInitializer serverChannelInitializer;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;netty.tcp.client.port&#125;&quot;)</span><br><span class="line">    private Integer port;</span><br><span class="line"></span><br><span class="line">    //与客户端建立连接后得到的通道对象</span><br><span class="line">    private Channel channel;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 存储client的channel</span><br><span class="line">     * key:ip，value:Channel</span><br><span class="line">     */</span><br><span class="line">    public static Map&lt;String, Channel&gt; map = new ConcurrentHashMap&lt;String, Channel&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 开启Netty tcp server服务</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public ChannelFuture start() &#123;</span><br><span class="line">        //启动类</span><br><span class="line">        ServerBootstrap serverBootstrap = new ServerBootstrap();</span><br><span class="line">        serverBootstrap.group(boss, worker)//组配置，初始化ServerBootstrap的线程组</span><br><span class="line">                .channel(NioServerSocketChannel.class)///构造channel通道工厂//bossGroup的通道，只是负责连接</span><br><span class="line">                .childHandler(serverChannelInitializer)//设置通道处理者ChannelHandler////workerGroup的处理器</span><br><span class="line">                .option(ChannelOption.SO_BACKLOG, 1024)//socket参数，当服务器请求处理程全满时，用于临时存放已完成三次握手请求的队列的最大长度。如果未设置或所设置的值小于1，Java将使用默认值50。</span><br><span class="line">                .childOption(ChannelOption.SO_KEEPALIVE, true);//启用心跳保活机制，tcp，默认2小时发一次心跳</span><br><span class="line">        //Future：异步任务的生命周期，可用来获取任务结果</span><br><span class="line">        ChannelFuture channelFuture1 = serverBootstrap.bind(port).syncUninterruptibly();//绑定端口，开启监听，同步等待</span><br><span class="line">        if (channelFuture1 != null &amp;&amp; channelFuture1.isSuccess()) &#123;</span><br><span class="line">            channel = channelFuture1.channel();//获取通道</span><br><span class="line">            log.info(&quot;Netty tcp server start success, port = &#123;&#125;&quot;, port);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            log.error(&quot;Netty tcp server start fail&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return channelFuture1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 停止Netty tcp server服务</span><br><span class="line">     */</span><br><span class="line">    @PreDestroy</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        if (channel != null) &#123;</span><br><span class="line">            channel.close();</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            Future&lt;?&gt; future = worker.shutdownGracefully().await();</span><br><span class="line">            if (!future.isSuccess()) &#123;</span><br><span class="line">                log.error(&quot;netty tcp workerGroup shutdown fail, &#123;&#125;&quot;, future.cause());</span><br><span class="line">            &#125;</span><br><span class="line">            Future&lt;?&gt; future1 = boss.shutdownGracefully().await();</span><br><span class="line">            if (!future1.isSuccess()) &#123;</span><br><span class="line">                log.error(&quot;netty tcp bossGroup shutdown fail, &#123;&#125;&quot;, future1.cause());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        log.info(&quot;Netty tcp server shutdown success&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="第二步编写通道初始化流程"><a href="#第二步编写通道初始化流程" class="headerlink" title="第二步编写通道初始化流程"></a>第二步编写通道初始化流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.server;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.basedata.utils.decodeutil.MyDecoder;</span><br><span class="line">import io.netty.buffer.ByteBuf;</span><br><span class="line">import io.netty.buffer.Unpooled;</span><br><span class="line">import io.netty.channel.ChannelInitializer;</span><br><span class="line">import io.netty.channel.ChannelPipeline;</span><br><span class="line">import io.netty.channel.socket.SocketChannel;</span><br><span class="line">import io.netty.handler.codec.DelimiterBasedFrameDecoder;</span><br><span class="line">import io.netty.handler.codec.string.StringDecoder;</span><br><span class="line">import io.netty.handler.codec.string.StringEncoder;</span><br><span class="line">import io.netty.handler.timeout.IdleStateHandler;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class ServerChannelInitializer extends ChannelInitializer&lt;SocketChannel&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ServerChannelHandler serverChannelHandler;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void initChannel(SocketChannel socketChannel) throws Exception &#123;</span><br><span class="line">        ChannelPipeline pipeline = socketChannel.pipeline();</span><br><span class="line">        //IdleStateHandler心跳机制,如果超时触发Handle中userEventTrigger()方法</span><br><span class="line">        pipeline.addLast(&quot;idleStateHandler&quot;,</span><br><span class="line">                new IdleStateHandler(10, 0, 0, TimeUnit.MINUTES));</span><br><span class="line">        //自定义编码器</span><br><span class="line">        byte[] delimiterByte = new byte[2];</span><br><span class="line">        delimiterByte[0] = 0x02;</span><br><span class="line">        delimiterByte[1] = 0x14;</span><br><span class="line">        ByteBuf delimiterCode = Unpooled.copiedBuffer(delimiterByte);</span><br><span class="line">        pipeline.addLast(new DelimiterBasedFrameDecoder(64,delimiterCode));</span><br><span class="line">        pipeline.addLast(&quot;decoder&quot;,new MyDecoder());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //字符串编解码器</span><br><span class="line">      pipeline.addLast(</span><br><span class="line">               new StringDecoder(),</span><br><span class="line">               new StringEncoder());</span><br><span class="line">        //自定义Handler</span><br><span class="line">        pipeline.addLast(&quot;serverChannelHandler&quot;, serverChannelHandler);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="第三步自定义处理数据，并存入kafka"><a href="#第三步自定义处理数据，并存入kafka" class="headerlink" title="第三步自定义处理数据，并存入kafka"></a>第三步自定义处理数据，并存入kafka</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.server;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.basedata.kafka_netty.KafkaProducerSingleton;</span><br><span class="line">import com.gree.cn.basedata.utils.DateUtils;</span><br><span class="line">import io.netty.buffer.ByteBuf;</span><br><span class="line">import io.netty.buffer.Unpooled;</span><br><span class="line">import io.netty.channel.ChannelHandler;</span><br><span class="line">import io.netty.channel.ChannelHandlerContext;</span><br><span class="line">import io.netty.channel.SimpleChannelInboundHandler;</span><br><span class="line">import io.netty.handler.timeout.IdleState;</span><br><span class="line">import io.netty.handler.timeout.IdleStateEvent;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@ChannelHandler.Sharable</span><br><span class="line">@Slf4j</span><br><span class="line">public class ServerChannelHandler extends SimpleChannelInboundHandler&lt;Object&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     * @param ctx 通道</span><br><span class="line">     * @param msg 消息</span><br><span class="line">     * @throws Exception 异常消息</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        //kafka 生产者配置</span><br><span class="line">        Properties properties = new Properties();</span><br><span class="line">        //加载配置文件</span><br><span class="line">        InputStream is = ServerChannelHandler.class.getResourceAsStream(&quot;/producer.properties&quot;);</span><br><span class="line">        properties.load(is);</span><br><span class="line">        String substring = msg.toString().substring(8, 10);</span><br><span class="line"></span><br><span class="line">        // 返回时间戳</span><br><span class="line">        if (substring.equals(&quot;77&quot;)) &#123;</span><br><span class="line">            short yeardate = Short.parseShort(DateUtils.getTimeNow().substring(0, 4));</span><br><span class="line">            int monthdate = Integer.parseInt(DateUtils.getTimeNow().substring(4, 6));</span><br><span class="line">            int daydate = Integer.parseInt(DateUtils.getTimeNow().substring(6, 8));</span><br><span class="line">            int hoursdate = Integer.parseInt(DateUtils.getTimeNow().substring(8, 10));</span><br><span class="line">            int mindate = Integer.parseInt(DateUtils.getTimeNow().substring(10, 12));</span><br><span class="line">            int seconddate = Integer.parseInt(DateUtils.getTimeNow().substring(12, 14));</span><br><span class="line"></span><br><span class="line">            byte[] test = new byte[13];</span><br><span class="line">            test[0] = 0x02;</span><br><span class="line">            test[1] = 0x14;</span><br><span class="line">            test[2] = 0x01;</span><br><span class="line">            test[3] = 0x09;</span><br><span class="line">            test[4] = 0x77;</span><br><span class="line">            test[5] = (byte) (0x00FF &amp; yeardate);</span><br><span class="line">            test[6] = (byte) (0x00FF &amp; (yeardate &gt;&gt; 8));</span><br><span class="line">            test[7] = ((byte) monthdate);</span><br><span class="line">            test[8] = ((byte) daydate);</span><br><span class="line">            test[9] = ((byte) hoursdate);</span><br><span class="line">            test[10] = ((byte) mindate);</span><br><span class="line">            test[11] = ((byte) seconddate);</span><br><span class="line"></span><br><span class="line">            //生成异或校验码</span><br><span class="line">            byte temp = test[3];</span><br><span class="line">            for (int i = 4; i &lt; test.length; i++) &#123;</span><br><span class="line">                temp ^= test[i];</span><br><span class="line">            &#125;</span><br><span class="line">            test[12] = temp;</span><br><span class="line">            ByteBuf out = Unpooled.buffer();</span><br><span class="line">           // ByteOrder order;</span><br><span class="line">           // order = ByteOrder.LITTLE_ENDIAN;</span><br><span class="line">            //out.order(order);</span><br><span class="line">            out.writeBytes(test);</span><br><span class="line">            ctx.channel().writeAndFlush(out);</span><br><span class="line">        &#125;</span><br><span class="line">        //然后将传入的数据全部写入到kafka内，并加上接收时间</span><br><span class="line">       // VoteProduceSendmsg voteProduceSendmsg = new VoteProduceSendmsg();</span><br><span class="line">        // voteProduceSendmsg.sendMsg(msg+DateUtils.getFormatTimeNow(),properties);</span><br><span class="line"> //      ExecutorService executorService = Executors.newFixedThreadPool(2);</span><br><span class="line">//        executorService.submit(new HandlerProducer(msg));</span><br><span class="line">        KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton</span><br><span class="line">                .getInstance();</span><br><span class="line">        kafkaProducerSingleton.init(&quot;topic0619&quot;);</span><br><span class="line">        kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());</span><br><span class="line">        //kafkaProducerSingleton.close();</span><br><span class="line">        ctx.channel().flush();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 活跃的、有效的通道</span><br><span class="line">     * 第一次连接成功后进入的方法</span><br><span class="line">     *</span><br><span class="line">     * @param ctx 有效的通道</span><br><span class="line">     * @throws Exception 异常</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void channelActive(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        super.channelActive(ctx);</span><br><span class="line">        log.info(&quot;tcp client &quot; + getRemoteAddress(ctx) + &quot; connect success&quot;);</span><br><span class="line">        //往channel map中添加channel信息</span><br><span class="line">        NettyTcpServer.map.put(getIPString(ctx), ctx.channel());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 不活动的通道</span><br><span class="line">     * 连接丢失后执行的方法（client端可据此实现断线重连）</span><br><span class="line">     *</span><br><span class="line">     * @param ctx 不活动的通道</span><br><span class="line">     * @throws Exception 异常</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void channelInactive(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        //删除Channel Map中的失效Client</span><br><span class="line">        log.info(&quot;不活动通道关闭!&quot;);</span><br><span class="line">        NettyTcpServer.map.remove(getIPString(ctx));</span><br><span class="line">        ctx.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 异常处理</span><br><span class="line">     * @param ctx 通道</span><br><span class="line">     * @throws Exception 异常</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception &#123;</span><br><span class="line">        super.exceptionCaught(ctx, cause);</span><br><span class="line">        //发生异常，关闭连接</span><br><span class="line">        log.error(&quot;引擎 &#123;&#125; 的通道发生异常，即将断开连接&quot;, getRemoteAddress(ctx));</span><br><span class="line">        ctx.close();//再次建议close</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 心跳机制，超时处理</span><br><span class="line">     * @param ctx 通道</span><br><span class="line">     * @param evt 事件</span><br><span class="line">     * @throws Exception 异常</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception &#123;</span><br><span class="line">        String socketString = ctx.channel().remoteAddress().toString();</span><br><span class="line">        if (evt instanceof IdleStateEvent) &#123;</span><br><span class="line">            IdleStateEvent event = (IdleStateEvent) evt;</span><br><span class="line">            if (event.state() == IdleState.READER_IDLE) &#123;</span><br><span class="line">                log.info(&quot;Client: &quot; + socketString + &quot; READER_IDLE 读超时&quot;);</span><br><span class="line">                ctx.disconnect();//断开</span><br><span class="line">            &#125; else if (event.state() == IdleState.WRITER_IDLE) &#123;</span><br><span class="line">                log.info(&quot;Client: &quot; + socketString + &quot; WRITER_IDLE 写超时&quot;);</span><br><span class="line">                ctx.disconnect();</span><br><span class="line"></span><br><span class="line">            &#125; else if (event.state() == IdleState.ALL_IDLE) &#123;</span><br><span class="line">                log.info(&quot;Client: &quot; + socketString + &quot; ALL_IDLE 总超时&quot;);</span><br><span class="line">                ctx.disconnect();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取client对象：ip+port</span><br><span class="line">     *</span><br><span class="line">     * @param ctx 通道</span><br><span class="line">     * @return 返回值</span><br><span class="line">     */</span><br><span class="line">    private String getRemoteAddress(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        String socketString = &quot;&quot;;</span><br><span class="line">        socketString = ctx.channel().remoteAddress().toString();</span><br><span class="line">        return socketString;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取client的ip</span><br><span class="line">     * @param ctx 通道</span><br><span class="line">     * @return 返回值</span><br><span class="line">     */</span><br><span class="line">    private String getIPString(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        String ipString = &quot;&quot;;</span><br><span class="line">        String socketString = ctx.channel().remoteAddress().toString();</span><br><span class="line">        int colonAt = socketString.indexOf(&quot;:&quot;);</span><br><span class="line">        ipString = socketString.substring(1, colonAt);</span><br><span class="line">        return ipString;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建necat </span><br><span class="line">.\nc.exe -l  -p 9000</span><br></pre></td></tr></table></figure>
+        <h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><pre><code>int valueTen = 328;
+String strHex = Integer.toHexString(valueTen)
 
+</code></pre><h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><pre><code>String strHex = &quot;0214010977&quot;
+int valueTen = Integer.pareseInt(strHex,16)
+
+</code></pre><h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><pre><code>String str = &quot;2019&quot;;
+int i = Integer.pareseInt(str);
+int j = Integer.valuesOf(str).intValue();
+
+</code></pre><h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><pre><code>int i = 2019;
+String str1 = i+&quot;&quot;;
+String str2 = String.valueOf(i);
+
+</code></pre><h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><pre><code>public static byte[] strToByteArray(String str) {
+    if (str == null) {
+        return null;
+    }
+    byte[] byteArray = str.getBytes();
+    return byteArray;
+}
+
+</code></pre><h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><pre><code>public static String byteArrayToStr(byte[] byteArray) {
+    if (byteArray == null) {
+        return null;
+    }
+    String str = new String(byteArray);
+    return str;
+}
+
+</code></pre><h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><pre><code>public static String byteArrayToHexStr(byte[] byteArray) {
+    if (byteArray == null){
+        return null;
+    }
+    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();
+    char[] hexChars = new char[byteArray.length * 2];
+    for (int j = 0; j &lt; byteArray.length; j++) {
+        int v = byteArray[j] &amp; 0xFF;
+        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];
+        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];
+    }
+    return new String(hexChars);
+}
+
+</code></pre><h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><pre><code>public static byte[] hexStrToByteArray(String str)
+{
+    if (str == null) {
+        return null;
+    }
+    if (str.length() == 0) {
+        return new byte[0];
+    }
+    byte[] byteArray = new byte[str.length() / 2];
+    for (int i = 0; i &lt; byteArray.length; i++){
+        String subStr = str.substring(2 * i, 2 * i + 2);
+        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));
+    }
+    return byteArray;
+}
+
+</code></pre><h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><pre><code>        /**
+     * 合并byte[]数组 （不改变原数组）
+     * @param byte_1
+     * @param byte_2
+     * @return 合并后的数组
+     */
+    public byte[] byteMerger(byte[] byte_1, byte[] byte_2){  
+        byte[] byte_3 = new byte[byte_1.length+byte_2.length];  
+        System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  
+        System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  
+        return byte_3;  
+    }
+
+</code></pre><h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><pre><code>    /**
+     * 截取byte数组   不改变原数组
+     * @param b 原数组
+     * @param off 偏差值（索引）
+     * @param length 长度
+     * @return 截取后的数组
+     */
+    public byte[] subByte(byte[] b,int off,int length){
+        byte[] b1 = new byte[length];
+        System.arraycopy(b, off, b1, 0, length);
+        return b1;
+    }
+
+</code></pre><h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><pre><code>public class TimeFormatTest {
+    public static void main(String[] args) throws ParseException {
+        String time = &quot;2019-5-23 9:24:1&quot;;
+        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+
+        java.util.Date date_util = sdf.parse(time); //转换为util.date
+        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date
+        System.out.println(date_util);
+        System.out.println(date_sql);
+        String date = sdf.format(date_sql);
+        System.out.println(date);
+        date = sdf.format(date_util);
+        System.out.println(date);
+
+    }
+    }
+
+</code></pre><h2 id="五、-netty和springboot整合"><a href="#五、-netty和springboot整合" class="headerlink" title="五、 netty和springboot整合"></a>五、 netty和springboot整合</h2><p>引入pom.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.1.5.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.gree.cn&lt;/groupId&gt;
+    &lt;artifactId&gt;basedata&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;basedata&lt;/name&gt;
+    &lt;description&gt;get base data&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- spring boot begin--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- springboot 和 netty 整合 socket--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;4.1.31.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- spring boot 和 netty整合 socket 结束--&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.16.20&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+            &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
+            &lt;version&gt;5.2.0&lt;/version&gt;
+            &lt;scope&gt;compile&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--kafka 依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+            &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+            &lt;version&gt;2.1.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--mysql 依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.44&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;!-- log4j--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-log4j&lt;/artifactId&gt;
+            &lt;version&gt;1.3.8.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+
+
+</code></pre><p>其中主要引入包为：</p>
+<pre><code> &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;4.1.31.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+
+</code></pre><h3 id="第一步创建NettyTcoServer服务端"><a href="#第一步创建NettyTcoServer服务端" class="headerlink" title="第一步创建NettyTcoServer服务端"></a>第一步创建NettyTcoServer服务端</h3><pre><code>package com.gree.cn.basedata.server;
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.Future;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PreDestroy;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Component
+public class NettyTcpServer {
+
+    private static final Logger log = LoggerFactory.getLogger(NettyTcpServer.class);
+    //boss事件轮询线程组
+    //处理Accept连接事件的线程，这里线程数设置为1即可，netty处理链接事件默认为单线程，过度设置反而浪费cpu资源
+    private EventLoopGroup boss = new NioEventLoopGroup(1);
+    //worker事件轮询线程组
+    //处理hadnler的工作线程，其实也就是处理IO读写 。线程数据默认为 CPU 核心数乘以2
+    private EventLoopGroup worker = new NioEventLoopGroup();
+
+    @Autowired
+    ServerChannelInitializer serverChannelInitializer;
+
+    @Value(&quot;${netty.tcp.client.port}&quot;)
+    private Integer port;
+
+    //与客户端建立连接后得到的通道对象
+    private Channel channel;
+
+    /**
+     * 存储client的channel
+     * key:ip，value:Channel
+     */
+    public static Map&lt;String, Channel&gt; map = new ConcurrentHashMap&lt;String, Channel&gt;();
+
+    /**
+     * 开启Netty tcp server服务
+     *
+     * @return
+     */
+    public ChannelFuture start() {
+        //启动类
+        ServerBootstrap serverBootstrap = new ServerBootstrap();
+        serverBootstrap.group(boss, worker)//组配置，初始化ServerBootstrap的线程组
+                .channel(NioServerSocketChannel.class)///构造channel通道工厂//bossGroup的通道，只是负责连接
+                .childHandler(serverChannelInitializer)//设置通道处理者ChannelHandler////workerGroup的处理器
+                .option(ChannelOption.SO_BACKLOG, 1024)//socket参数，当服务器请求处理程全满时，用于临时存放已完成三次握手请求的队列的最大长度。如果未设置或所设置的值小于1，Java将使用默认值50。
+                .childOption(ChannelOption.SO_KEEPALIVE, true);//启用心跳保活机制，tcp，默认2小时发一次心跳
+        //Future：异步任务的生命周期，可用来获取任务结果
+        ChannelFuture channelFuture1 = serverBootstrap.bind(port).syncUninterruptibly();//绑定端口，开启监听，同步等待
+        if (channelFuture1 != null &amp;&amp; channelFuture1.isSuccess()) {
+            channel = channelFuture1.channel();//获取通道
+            log.info(&quot;Netty tcp server start success, port = {}&quot;, port);
+        } else {
+            log.error(&quot;Netty tcp server start fail&quot;);
+        }
+        return channelFuture1;
+    }
+
+    /**
+     * 停止Netty tcp server服务
+     */
+    @PreDestroy
+    public void destroy() {
+        if (channel != null) {
+            channel.close();
+        }
+        try {
+            Future&lt;?&gt; future = worker.shutdownGracefully().await();
+            if (!future.isSuccess()) {
+                log.error(&quot;netty tcp workerGroup shutdown fail, {}&quot;, future.cause());
+            }
+            Future&lt;?&gt; future1 = boss.shutdownGracefully().await();
+            if (!future1.isSuccess()) {
+                log.error(&quot;netty tcp bossGroup shutdown fail, {}&quot;, future1.cause());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info(&quot;Netty tcp server shutdown success&quot;);
+    }
+
+}
+
+</code></pre><h3 id="第二步编写通道初始化流程"><a href="#第二步编写通道初始化流程" class="headerlink" title="第二步编写通道初始化流程"></a>第二步编写通道初始化流程</h3><pre><code>package com.gree.cn.basedata.server;
+
+import com.gree.cn.basedata.utils.decodeutil.MyDecoder;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
+
+
+@Component
+public class ServerChannelInitializer extends ChannelInitializer&lt;SocketChannel&gt; {
+
+    @Autowired
+    ServerChannelHandler serverChannelHandler;
+
+    @Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        ChannelPipeline pipeline = socketChannel.pipeline();
+        //IdleStateHandler心跳机制,如果超时触发Handle中userEventTrigger()方法
+        pipeline.addLast(&quot;idleStateHandler&quot;,
+                new IdleStateHandler(10, 0, 0, TimeUnit.MINUTES));
+        //自定义编码器
+        byte[] delimiterByte = new byte[2];
+        delimiterByte[0] = 0x02;
+        delimiterByte[1] = 0x14;
+        ByteBuf delimiterCode = Unpooled.copiedBuffer(delimiterByte);
+        pipeline.addLast(new DelimiterBasedFrameDecoder(64,delimiterCode));
+        pipeline.addLast(&quot;decoder&quot;,new MyDecoder());
+
+
+        //字符串编解码器
+      pipeline.addLast(
+               new StringDecoder(),
+               new StringEncoder());
+        //自定义Handler
+        pipeline.addLast(&quot;serverChannelHandler&quot;, serverChannelHandler);
+    }
+}
+
+</code></pre><h3 id="第三步自定义处理数据，并存入kafka"><a href="#第三步自定义处理数据，并存入kafka" class="headerlink" title="第三步自定义处理数据，并存入kafka"></a>第三步自定义处理数据，并存入kafka</h3><pre><code>package com.gree.cn.basedata.server;
+
+import com.gree.cn.basedata.kafka_netty.KafkaProducerSingleton;
+import com.gree.cn.basedata.utils.DateUtils;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.io.InputStream;
+import java.util.Properties;
+
+@Component
+@ChannelHandler.Sharable
+@Slf4j
+public class ServerChannelHandler extends SimpleChannelInboundHandler&lt;Object&gt; {
+    /**
+     * @param ctx 通道
+     * @param msg 消息
+     * @throws Exception 异常消息
+     */
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
+
+        //kafka 生产者配置
+        Properties properties = new Properties();
+        //加载配置文件
+        InputStream is = ServerChannelHandler.class.getResourceAsStream(&quot;/producer.properties&quot;);
+        properties.load(is);
+        String substring = msg.toString().substring(8, 10);
+
+        // 返回时间戳
+        if (substring.equals(&quot;77&quot;)) {
+            short yeardate = Short.parseShort(DateUtils.getTimeNow().substring(0, 4));
+            int monthdate = Integer.parseInt(DateUtils.getTimeNow().substring(4, 6));
+            int daydate = Integer.parseInt(DateUtils.getTimeNow().substring(6, 8));
+            int hoursdate = Integer.parseInt(DateUtils.getTimeNow().substring(8, 10));
+            int mindate = Integer.parseInt(DateUtils.getTimeNow().substring(10, 12));
+            int seconddate = Integer.parseInt(DateUtils.getTimeNow().substring(12, 14));
+
+            byte[] test = new byte[13];
+            test[0] = 0x02;
+            test[1] = 0x14;
+            test[2] = 0x01;
+            test[3] = 0x09;
+            test[4] = 0x77;
+            test[5] = (byte) (0x00FF &amp; yeardate);
+            test[6] = (byte) (0x00FF &amp; (yeardate &gt;&gt; 8));
+            test[7] = ((byte) monthdate);
+            test[8] = ((byte) daydate);
+            test[9] = ((byte) hoursdate);
+            test[10] = ((byte) mindate);
+            test[11] = ((byte) seconddate);
+
+            //生成异或校验码
+            byte temp = test[3];
+            for (int i = 4; i &lt; test.length; i++) {
+                temp ^= test[i];
+            }
+            test[12] = temp;
+            ByteBuf out = Unpooled.buffer();
+           // ByteOrder order;
+           // order = ByteOrder.LITTLE_ENDIAN;
+            //out.order(order);
+            out.writeBytes(test);
+            ctx.channel().writeAndFlush(out);
+        }
+        //然后将传入的数据全部写入到kafka内，并加上接收时间
+       // VoteProduceSendmsg voteProduceSendmsg = new VoteProduceSendmsg();
+        // voteProduceSendmsg.sendMsg(msg+DateUtils.getFormatTimeNow(),properties);
+ //      ExecutorService executorService = Executors.newFixedThreadPool(2);
+//        executorService.submit(new HandlerProducer(msg));
+        KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton
+                .getInstance();
+        kafkaProducerSingleton.init(&quot;topic0619&quot;);
+        kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());
+        //kafkaProducerSingleton.close();
+        ctx.channel().flush();
+
+    }
+
+    /**
+     * 活跃的、有效的通道
+     * 第一次连接成功后进入的方法
+     *
+     * @param ctx 有效的通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        log.info(&quot;tcp client &quot; + getRemoteAddress(ctx) + &quot; connect success&quot;);
+        //往channel map中添加channel信息
+        NettyTcpServer.map.put(getIPString(ctx), ctx.channel());
+
+    }
+
+    /**
+     * 不活动的通道
+     * 连接丢失后执行的方法（client端可据此实现断线重连）
+     *
+     * @param ctx 不活动的通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //删除Channel Map中的失效Client
+        log.info(&quot;不活动通道关闭!&quot;);
+        NettyTcpServer.map.remove(getIPString(ctx));
+        ctx.close();
+
+    }
+
+    /**
+     * 异常处理
+     * @param ctx 通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        super.exceptionCaught(ctx, cause);
+        //发生异常，关闭连接
+        log.error(&quot;引擎 {} 的通道发生异常，即将断开连接&quot;, getRemoteAddress(ctx));
+        ctx.close();//再次建议close
+    }
+
+    /**
+     * 心跳机制，超时处理
+     * @param ctx 通道
+     * @param evt 事件
+     * @throws Exception 异常
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        String socketString = ctx.channel().remoteAddress().toString();
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            if (event.state() == IdleState.READER_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; READER_IDLE 读超时&quot;);
+                ctx.disconnect();//断开
+            } else if (event.state() == IdleState.WRITER_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; WRITER_IDLE 写超时&quot;);
+                ctx.disconnect();
+
+            } else if (event.state() == IdleState.ALL_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; ALL_IDLE 总超时&quot;);
+                ctx.disconnect();
+            }
+        }
+    }
+
+    /**
+     * 获取client对象：ip+port
+     *
+     * @param ctx 通道
+     * @return 返回值
+     */
+    private String getRemoteAddress(ChannelHandlerContext ctx) {
+        String socketString = &quot;&quot;;
+        socketString = ctx.channel().remoteAddress().toString();
+        return socketString;
+    }
+
+    /**
+     * 获取client的ip
+     * @param ctx 通道
+     * @return 返回值
+     */
+    private String getIPString(ChannelHandlerContext ctx) {
+        String ipString = &quot;&quot;;
+        String socketString = ctx.channel().remoteAddress().toString();
+        int colonAt = socketString.indexOf(&quot;:&quot;);
+        ipString = socketString.substring(1, colonAt);
+        return ipString;
+    }
+
+}
+
+</code></pre><pre><code>创建necat 
+.\nc.exe -l  -p 9000
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/22/netty-遇到的坑/" data-id="ck3o5qlhc002ghkujkmwnxj54"
+      <a data-url="http://yoursite.com/2019/05/22/netty-遇到的坑/" data-id="ck3o5xx7f002f8wujvykjgcap"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netty/">netty</a></li></ul>
@@ -692,10 +1466,18 @@
       
 
       
-        <p>sqlserver 统计具有重复字段的记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;</span><br></pre></td></tr></table></figure></p>
-<p>统计出a表有的b表没有的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a.* FROM A a left outer join B b on a.qq = b.qq</span><br><span class="line">WHERE b.qq is null;</span><br></pre></td></tr></table></figure></p>
-<p>mysql 统计具有重复字段的记录(hive也可以)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,count(*) as count from hk_test group by username having count&gt;1;</span><br></pre></td></tr></table></figure></p>
-<h3 id="MySQL8-x-连接"><a href="#MySQL8-x-连接" class="headerlink" title="MySQL8.x 连接"></a>MySQL8.x 连接</h3><blockquote>
+        <p>sqlserver 统计具有重复字段的记录：</p>
+<pre><code>SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;
+
+</code></pre><p>统计出a表有的b表没有的数据：</p>
+<pre><code>select a.* FROM A a left outer join B b on a.qq = b.qq
+WHERE b.qq is null;
+
+
+</code></pre><p>mysql 统计具有重复字段的记录(hive也可以)：</p>
+<pre><code>select username,count(*) as count from hk_test group by username having count&gt;1;
+
+</code></pre><h3 id="MySQL8-x-连接"><a href="#MySQL8-x-连接" class="headerlink" title="MySQL8.x 连接"></a>MySQL8.x 连接</h3><blockquote>
 <p>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://127.0.0.1:3306/spring-cloud-itoken-service-admin?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=123456</p>
 </blockquote>
 <p>主要关注的驱动不同，新加了cj这个东东，然后可能时区问题新加serverTimezone=GMT</p>
@@ -703,7 +1485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/16/MySQL-语句记录/" data-id="ck3o5qlfd000shkujk8c78qf0"
+      <a data-url="http://yoursite.com/2019/05/16/MySQL-语句记录/" data-id="ck3o5xx6e000u8wuj28utk12l"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -776,12 +1558,16 @@
 <h3 id="问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext"><a href="#问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext" class="headerlink" title="问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext"></a>问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext</h3><p> 解决办法 ：未启动ConfigApplication,验证方法：打开<a href="http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod" target="_blank" rel="noopener">http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod</a></p>
 <h3 id="问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect"><a href="#问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect" class="headerlink" title="问题6 ：Caused by: java.net.ConnectException: Connection refused: connect"></a>问题6 ：Caused by: java.net.ConnectException: Connection refused: connect</h3><p>解决办法： 未加载注解 @ActiveProfiles(value = “prod”)</p>
 <h3 id="问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1"><a href="#问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1" class="headerlink" title="问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in https://oss.sonatype.org/content/repositories/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]"></a>问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank" rel="noopener">https://oss.sonatype.org/content/repositories/snapshots</a> was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]</h3><p>解决办法： 在父项目下有的子项目在首次运行clean 和install前应该先运行父项目的clean和install</p>
-<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-
+<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖</p>
+<pre><code>&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/12/spring-cloud/" data-id="ck3o5qlic003bhkujussm6907"
+      <a data-url="http://yoursite.com/2019/05/12/spring-cloud/" data-id="ck3o5xx8a003i8wujt9ziuq8j"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-cloud/">spring cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
@@ -855,7 +1641,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/07/Linux-磁盘挂载/" data-id="ck3o5qlf6000lhkujk8pcknm4"
+      <a data-url="http://yoursite.com/2019/05/07/Linux-磁盘挂载/" data-id="ck3o5xx6a000p8wujwseau5yl"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -916,13 +1702,132 @@
       
 
       
-        <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
-<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
-<p>查看主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
-<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
-<h3 id="4-kafka生产者创建消息"><a href="#4-kafka生产者创建消息" class="headerlink" title="4.kafka生产者创建消息"></a>4.kafka生产者创建消息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.kafka_netty;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.util.Properties;</span><br><span class="line">import org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line">import org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public final class KafkaProducerSingleton &#123;</span><br><span class="line"></span><br><span class="line">    private static KafkaProducer&lt;Integer, Object&gt; kafkaProducer;</span><br><span class="line"></span><br><span class="line">    private String topic;</span><br><span class="line"></span><br><span class="line">    private KafkaProducerSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态内部类</span><br><span class="line">     *</span><br><span class="line">     * @author tanjie</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    private static class LazyHandler &#123;</span><br><span class="line"></span><br><span class="line">        private static final KafkaProducerSingleton instance = new KafkaProducerSingleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 单例模式,kafkaProducer是线程安全的,可以多线程共享一个实例</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static final KafkaProducerSingleton getInstance() &#123;</span><br><span class="line">        return LazyHandler.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka生产者进行初始化</span><br><span class="line">     *</span><br><span class="line">     * @return KafkaProducer</span><br><span class="line">     */</span><br><span class="line">    public void init(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">        if (null == kafkaProducer) &#123;</span><br><span class="line">            Properties props = new Properties();</span><br><span class="line">            InputStream inStream = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                inStream = this.getClass().getClassLoader()</span><br><span class="line">                        .getResourceAsStream(&quot;producer.properties&quot;);</span><br><span class="line">                props.load(inStream);</span><br><span class="line">                kafkaProducer = new KafkaProducer&lt;Integer, Object&gt;(props);</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                if (null != inStream) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        inStream.close();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过kafkaProducer发送消息</span><br><span class="line">     *  具体消息值</span><br><span class="line">     */</span><br><span class="line">    public void sendKafkaMessage( String message) &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 1、如果指定了某个分区,会只讲消息发到这个分区上 2、如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用</span><br><span class="line">         * 3、如果没有指定分区和key,那么将会随机发送到topic的分区中 4、如果指定了key,那么将会以hash&lt;key&gt;的方式发送到分区中</span><br><span class="line">         */</span><br><span class="line">        ProducerRecord&lt;Integer, Object&gt; record = new ProducerRecord&lt;Integer, Object&gt;(</span><br><span class="line">                topic, message);</span><br><span class="line">        // send方法是异步的,添加消息到缓存区等待发送,并立即返回，这使生产者通过批量发送消息来提高效率</span><br><span class="line">        // kafka生产者是线程安全的,可以单实例发送消息</span><br><span class="line">        kafkaProducer.send(record);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka实例销毁</span><br><span class="line">     */</span><br><span class="line">    public void close() &#123;</span><br><span class="line">        if (null != kafkaProducer) &#123;</span><br><span class="line">            kafkaProducer.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getTopic() &#123;</span><br><span class="line">        return topic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setTopic(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后调用用producer实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton</span><br><span class="line">               .getInstance();</span><br><span class="line">       kafkaProducerSingleton.init(&quot;topic0619&quot;);</span><br><span class="line">       kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());</span><br></pre></td></tr></table></figure></p>
-<p>注意配置producer.properties文件</p>
+        <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><pre><code>cd /usr/local/kafka/kafka_2.11-2.2.0
+
+bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties
+
+bin/kafka-server-start.sh  -daemon config/server.properties
+
+</code></pre><h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：</p>
+<pre><code>bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test
+
+</code></pre><p>查看主题：</p>
+<pre><code>bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test
+
+</code></pre><h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+</code></pre><h3 id="4-kafka生产者创建消息"><a href="#4-kafka生产者创建消息" class="headerlink" title="4.kafka生产者创建消息"></a>4.kafka生产者创建消息</h3><pre><code>package com.gree.cn.basedata.kafka_netty;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+
+public final class KafkaProducerSingleton {
+
+    private static KafkaProducer&lt;Integer, Object&gt; kafkaProducer;
+
+    private String topic;
+
+    private KafkaProducerSingleton() {
+
+    }
+
+
+    /**
+     * 静态内部类
+     *
+     * @author tanjie
+     *
+     */
+    private static class LazyHandler {
+
+        private static final KafkaProducerSingleton instance = new KafkaProducerSingleton();
+    }
+
+    /**
+     * 单例模式,kafkaProducer是线程安全的,可以多线程共享一个实例
+     *
+     * @return
+     */
+    public static final KafkaProducerSingleton getInstance() {
+        return LazyHandler.instance;
+    }
+
+    /**
+     * kafka生产者进行初始化
+     *
+     * @return KafkaProducer
+     */
+    public void init(String topic) {
+        this.topic = topic;
+        if (null == kafkaProducer) {
+            Properties props = new Properties();
+            InputStream inStream = null;
+            try {
+                inStream = this.getClass().getClassLoader()
+                        .getResourceAsStream(&quot;producer.properties&quot;);
+                props.load(inStream);
+                kafkaProducer = new KafkaProducer&lt;Integer, Object&gt;(props);
+            } catch (IOException e) {
+               e.printStackTrace();
+            } finally {
+                if (null != inStream) {
+                    try {
+                        inStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 通过kafkaProducer发送消息
+     *  具体消息值
+     */
+    public void sendKafkaMessage( String message) {
+        /**
+         * 1、如果指定了某个分区,会只讲消息发到这个分区上 2、如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用
+         * 3、如果没有指定分区和key,那么将会随机发送到topic的分区中 4、如果指定了key,那么将会以hash&lt;key&gt;的方式发送到分区中
+         */
+        ProducerRecord&lt;Integer, Object&gt; record = new ProducerRecord&lt;Integer, Object&gt;(
+                topic, message);
+        // send方法是异步的,添加消息到缓存区等待发送,并立即返回，这使生产者通过批量发送消息来提高效率
+        // kafka生产者是线程安全的,可以单实例发送消息
+        kafkaProducer.send(record);
+    }
+
+
+    /**
+     * kafka实例销毁
+     */
+    public void close() {
+        if (null != kafkaProducer) {
+            kafkaProducer.close();
+        }
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+}
+
+
+</code></pre><p>然后调用用producer实例</p>
+<pre><code> KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton
+                .getInstance();
+        kafkaProducerSingleton.init(&quot;topic0619&quot;);
+        kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());
+
+</code></pre><p>注意配置producer.properties文件</p>
 <blockquote>
 <p>#指定节点列表<br>bootstrap.servers=10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092</p>
 </blockquote>
@@ -934,7 +1839,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/30/kafka相关的常规操作/" data-id="ck3o5qlgt0022hkuj9gczqlp8"
+      <a data-url="http://yoursite.com/2019/04/30/kafka相关的常规操作/" data-id="ck3o5xx6z001u8wujktir6mha"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/">kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息队列/">消息队列</a></li></ul>
@@ -996,18 +1901,54 @@
 
       
         <h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p>
-<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p>
+<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压</p>
+<pre><code>cd /usr/local/java
+tar -zxvf jdk-8u11-linux-x64.tar.gz
+</code></pre><p>配置环境变量</p>
+<pre><code>vi /etc/profile
+#jdk环境变量配置
+ export JAVA_HOME=/usr/local/java/jdk1.8.0_11
+ export JRE_HOME=${JAVA_HOME}/jre
+ export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+ export PATH=${JAVA_HOME}/bin:$PATH
+
+</code></pre><p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p>
 <p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p>
-<h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure>
-<p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p>
-<p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
-<h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p>
-<p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p>
-<p>到此，使用kafka自带的zookeeper安装就完成了。</p>
+<h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><pre><code>cd /usr/local/kafka
+tar -xzf kafka_2.12-2.2.0.tgz
+cd kafka_2.12-2.2.0
+</code></pre><p>配置zookeeper配置文件 zookeeper.properties</p>
+<pre><code>vim config/zookeeper.properties
+====================================================
+dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper
+Time=2000  
+initLimit=10  
+syncLimit=5
+
+server.1=lyxbdw-01:2888:3888  
+server.2=lyxbdw-02:2888:3888  
+server.3=lyxbdw-03:2888:3888
+</code></pre><p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑</p>
+<pre><code>vi myid
+==================
+1
+</code></pre><p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动</p>
+<pre><code>bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties
+
+</code></pre><h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties</p>
+<pre><code>vim config/server.properties
+=====================================
+broker.id=1
+host.name=lyxbdw-02
+log.dirs=/tmp/kafka-logs
+zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181
+</code></pre><p>然后进入到log日志目录下，修改meta.properties文件</p>
+<pre><code>vim /tmp/kafka-logs/meta.properties
+======================================
+broker.id=1
+</code></pre><p>其他机器类似，最后启动kafak 服务</p>
+<pre><code>bin/kafka-server-start.sh  -daemon config/server.properties
+</code></pre><p>到此，使用kafka自带的zookeeper安装就完成了。</p>
 <blockquote>
 <p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p>
 </blockquote>
@@ -1015,7 +1956,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/30/kafka-集群安装-部署/" data-id="ck3o5qlgm001uhkujzb870mrf"
+      <a data-url="http://yoursite.com/2019/04/30/kafka-集群安装-部署/" data-id="ck3o5xx6z001s8wujyolvmdh0"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/">kafka</a></li></ul>

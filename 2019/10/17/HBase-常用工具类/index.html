@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -70,12 +70,177 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">object HBaseUtils &#123;</span><br><span class="line">  def logger: Logger = LoggerFactory.getLogger(getClass)</span><br><span class="line">  /**</span><br><span class="line">    * 获取配置参数信息</span><br><span class="line">    * @return    </span><br><span class="line">*/ </span><br><span class="line"> def getHBaseConf : Configuration = &#123;</span><br><span class="line">    val conf : Configuration = HBaseConfiguration.create</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)</span><br><span class="line">    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)</span><br><span class="line">    conf</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取连接</span><br><span class="line">    * @param conf 配置信息</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">  def getConnection(conf:Configuration): Connection =&#123;</span><br><span class="line">    ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取管理员权限</span><br><span class="line">    * @param conn 连接信息</span><br><span class="line">    * @return HBaseAdmin</span><br><span class="line">    */</span><br><span class="line">  def getAdmin(conn:Connection) : HBaseAdmin = &#123;</span><br><span class="line">    conn.getAdmin.asInstanceOf[HBaseAdmin]</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 创建表</span><br><span class="line">    * @param admin 管理员</span><br><span class="line">    * @param tableName 表名</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常</span><br><span class="line">    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常</span><br><span class="line">    * @throws java.io.IOException 异常</span><br><span class="line">    */</span><br><span class="line">  @throws(classOf[MasterNotRunningException])</span><br><span class="line">  @throws(classOf[ZooKeeperConnectionException])</span><br><span class="line">  @throws(classOf[IOException])</span><br><span class="line">  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = &#123;</span><br><span class="line">    val createTableName = TableName.valueOf(tableName)</span><br><span class="line">    if (admin.tableExists(createTableName))&#123;</span><br><span class="line">      logger.info(tableName + &quot;table exists!&quot;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      val tableDesc = new HTableDescriptor(createTableName)      </span><br><span class="line">      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)</span><br><span class="line">      for (singleColumnFamily &lt;- columnFamily)&#123;</span><br><span class="line">        val columnDesc = new HColumnDescriptor(singleColumnFamily)</span><br><span class="line">        tableDesc.addFamily(columnDesc)</span><br><span class="line">      &#125; </span><br><span class="line">admin.createTable(tableDesc)</span><br><span class="line">      logger.info(tableName + &quot; create table success!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">admin.close() </span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 载入数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @param quorum 分布式信息</span><br><span class="line">    * @param value 数值</span><br><span class="line">    */</span><br><span class="line">  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit =&#123;</span><br><span class="line">    val rowPut:Put = new Put(Bytes.toBytes(rowKey))</span><br><span class="line">    if (value == null)&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)</span><br><span class="line">    &#125;</span><br><span class="line">    table.put(rowPut)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 获取表数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @return HBase result</span><br><span class="line">    */</span><br><span class="line">  def getRow(table: Table,rowKey: String ):Result = &#123;</span><br><span class="line">    val get:Get = new Get(Bytes.toBytes(rowKey))</span><br><span class="line">    val result:Result = table.get(get)</span><br><span class="line">    for (rowKv &lt;- result.rawCells())&#123;</span><br><span class="line">      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)</span><br><span class="line">      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))</span><br><span class="line">      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))</span><br><span class="line">   &#125;</span><br><span class="line">    result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 批量添加数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param list 数据列表</span><br><span class="line">    */</span><br><span class="line">  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = &#123;</span><br><span class="line">    try&#123;</span><br><span class="line">      table.put(list)</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; </span><br><span class="line">       logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 查询所有记录</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @return resultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryAll(table: Table):ResultScanner = &#123;</span><br><span class="line">    val scan: Scan = new Scan</span><br><span class="line">    try &#123;</span><br><span class="line">      val result: ResultScanner = table.getScanner(scan)</span><br><span class="line">      result</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: IOException =&gt;</span><br><span class="line">      logger.error(e.getMessage)</span><br><span class="line">        null</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 单条记录查询</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param queryColumn 查询列 </span><br><span class="line">    * @param value 数值</span><br><span class="line">    * @param columns 列集合</span><br><span class="line">    * @return ResultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = &#123;</span><br><span class="line">    if (columns == null || queryColumn == null || value == null )&#123;</span><br><span class="line">      null</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))</span><br><span class="line">        val scan: Scan = new Scan</span><br><span class="line">        for (column  logger.error(e.getMessage)</span><br><span class="line">          null</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 删除表</span><br><span class="line">    * @param hBaseConnection 链接</span><br><span class="line">    * @param tableName HBase表</span><br><span class="line">    */</span><br><span class="line">  def dropTable(hBaseConnection: Connection,tableName: String): Unit = &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))</span><br><span class="line">      admin.deleteTable(TableName.valueOf(tableName))</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.hbase </span><br><span class="line">hbase-client</span><br><span class="line">$&#123;hbase.version&#125;</span><br><span class="line">org.apache.hadoop </span><br><span class="line">hadoop-annotations</span><br></pre></td></tr></table></figure>
+        <pre><code>object HBaseUtils {
+  def logger: Logger = LoggerFactory.getLogger(getClass)
+  /**
+    * 获取配置参数信息
+    * @return    
+*/ 
+ def getHBaseConf : Configuration = {
+    val conf : Configuration = HBaseConfiguration.create
+    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)
+    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)
+    conf
+  }
+  /**
+    * 获取连接
+    * @param conf 配置信息
+    * @return
+    */
+  def getConnection(conf:Configuration): Connection ={
+    ConnectionFactory.createConnection(conf)
+  }
+  /**
+    * 获取管理员权限
+    * @param conn 连接信息
+    * @return HBaseAdmin
+    */
+  def getAdmin(conn:Connection) : HBaseAdmin = {
+    conn.getAdmin.asInstanceOf[HBaseAdmin]
+  }
+  /**
+    * 创建表
+    * @param admin 管理员
+    * @param tableName 表名
+    * @param columnFamily 列族
+    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常
+    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常
+    * @throws java.io.IOException 异常
+    */
+  @throws(classOf[MasterNotRunningException])
+  @throws(classOf[ZooKeeperConnectionException])
+  @throws(classOf[IOException])
+  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = {
+    val createTableName = TableName.valueOf(tableName)
+    if (admin.tableExists(createTableName)){
+      logger.info(tableName + &quot;table exists!&quot;)
+    }else{
+      val tableDesc = new HTableDescriptor(createTableName)      
+      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)
+      for (singleColumnFamily &lt;- columnFamily){
+        val columnDesc = new HColumnDescriptor(singleColumnFamily)
+        tableDesc.addFamily(columnDesc)
+      } 
+admin.createTable(tableDesc)
+      logger.info(tableName + &quot; create table success!&quot;)
+    }
+admin.close() 
+ }
 
+ /**
+    * 载入数据
+    * @param table HBase表
+    * @param rowKey 行键
+    * @param columnFamily 列族
+    * @param quorum 分布式信息
+    * @param value 数值
+    */
+  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit ={
+    val rowPut:Put = new Put(Bytes.toBytes(rowKey))
+    if (value == null){
+      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)
+    }else{
+      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)
+    }
+    table.put(rowPut)
+  }
+
+  /**
+    * 获取表数据
+    * @param table HBase表
+    * @param rowKey 行键
+    * @return HBase result
+    */
+  def getRow(table: Table,rowKey: String ):Result = {
+    val get:Get = new Get(Bytes.toBytes(rowKey))
+    val result:Result = table.get(get)
+    for (rowKv &lt;- result.rawCells()){
+      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)
+      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))
+      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))
+   }
+    result
+  }
+
+  /**
+    * 批量添加数据
+    * @param table HBase表
+    * @param list 数据列表
+    */
+  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = {
+    try{
+      table.put(list)
+    }catch{
+        logger.error(e.getMessage)
+      case e: IOException =&gt; 
+       logger.error(e.getMessage)
+    }
+  }
+  /**
+    * 查询所有记录
+    * @param table HBase表
+    * @return resultScanner
+    */
+  def queryAll(table: Table):ResultScanner = {
+    val scan: Scan = new Scan
+    try {
+      val result: ResultScanner = table.getScanner(scan)
+      result
+    }catch {
+      case e: IOException =&gt;
+      logger.error(e.getMessage)
+        null
+    }
+  }
+
+ /**
+    * 单条记录查询
+    * @param table HBase表
+    * @param queryColumn 查询列 
+    * @param value 数值
+    * @param columns 列集合
+    * @return ResultScanner
+    */
+  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = {
+    if (columns == null || queryColumn == null || value == null ){
+      null
+    }else{
+      try {
+        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))
+        val scan: Scan = new Scan
+        for (column  logger.error(e.getMessage)
+          null
+      }
+    }
+  }
+  /**
+    * 删除表
+    * @param hBaseConnection 链接
+    * @param tableName HBase表
+    */
+  def dropTable(hBaseConnection: Connection,tableName: String): Unit = {
+    try {
+      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))
+      admin.deleteTable(TableName.valueOf(tableName))
+    }catch {
+      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)
+      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)
+      case e: IOException =&gt; logger.error(e.getMessage)
+    }
+  }
+}
+
+org.apache.hbase 
+hbase-client
+${hbase.version}
+org.apache.hadoop 
+hadoop-annotations                                            
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/17/HBase-常用工具类/" data-id="ck3o5qlf3000jhkujk1m2z6f5"
+      <a data-url="http://yoursite.com/2019/10/17/HBase-常用工具类/" data-id="ck3o5xx5x000d8wujkadwpb9r"
          class="article-share-link">Share</a>
       
     </footer>

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -75,13 +75,89 @@
 
       
         <h2 id="一、Apache-Flink"><a href="#一、Apache-Flink" class="headerlink" title="一、Apache Flink"></a>一、Apache Flink</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><pre><code>Apache Flink 是一个分布式大数据处理引擎，可以对有限流和无线流进行有状态和无状态进行计算，能够在各种集群环境上部署，对各种大小的数据集进行快速计算。
-</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux</span><br><span class="line">./bin/start-cluster.sh</span><br><span class="line">windows</span><br><span class="line">.\start-cluster.bat</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" alt="image.png"></p>
-<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Scala版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>flink 关联 kafka 依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>flink 推荐使用shade插件打包maven项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">			&lt;executions&gt;</span><br><span class="line">				&lt;execution&gt;</span><br><span class="line">					&lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">					&lt;goals&gt;</span><br><span class="line">						&lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">					&lt;/goals&gt;</span><br><span class="line">					&lt;configuration&gt;</span><br><span class="line">						&lt;artifactSet&gt;</span><br><span class="line">							&lt;excludes&gt;</span><br><span class="line">								&lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;log4j:*&lt;/exclude&gt;</span><br><span class="line">							&lt;/excludes&gt;</span><br><span class="line">						&lt;/artifactSet&gt;</span><br><span class="line">						&lt;filters&gt;</span><br><span class="line">							&lt;filter&gt;</span><br><span class="line">								&lt;!-- Do not copy the signatures in the META-INF folder.</span><br><span class="line">								Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span><br><span class="line">								&lt;artifact&gt;*:*&lt;/artifact&gt;</span><br><span class="line">								&lt;excludes&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</span><br><span class="line">								&lt;/excludes&gt;</span><br><span class="line">							&lt;/filter&gt;</span><br><span class="line">						&lt;/filters&gt;</span><br><span class="line">						&lt;transformers&gt;</span><br><span class="line">							&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">								&lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;</span><br><span class="line">							&lt;/transformer&gt;</span><br><span class="line">						&lt;/transformers&gt;</span><br><span class="line">					&lt;/configuration&gt;</span><br><span class="line">				&lt;/execution&gt;</span><br><span class="line">			&lt;/executions&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
+</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><pre><code>linux
+./bin/start-cluster.sh
+windows
+.\start-cluster.bat
+</code></pre><p><img src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" alt="image.png"></p>
+<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
+  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;
+  &lt;version&gt;1.8.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
+  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;
+  &lt;version&gt;1.8.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>Scala版本：</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
+  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;
+  &lt;version&gt;1.8.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
+  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;
+  &lt;version&gt;1.8.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>flink 关联 kafka 依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;
+    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;
+    &lt;version&gt;1.8.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>flink 推荐使用shade插件打包maven项目</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.0.0&lt;/version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;phase&gt;package&lt;/phase&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;shade&lt;/goal&gt;
+                    &lt;/goals&gt;
+                    &lt;configuration&gt;
+                        &lt;artifactSet&gt;
+                            &lt;excludes&gt;
+                                &lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;
+                                &lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;
+                                &lt;exclude&gt;log4j:*&lt;/exclude&gt;
+                            &lt;/excludes&gt;
+                        &lt;/artifactSet&gt;
+                        &lt;filters&gt;
+                            &lt;filter&gt;
+                                &lt;!-- Do not copy the signatures in the META-INF folder.
+                                Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;
+                                &lt;artifact&gt;*:*&lt;/artifact&gt;
+                                &lt;excludes&gt;
+                                    &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;
+                                    &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;
+                                    &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;
+                                &lt;/excludes&gt;
+                            &lt;/filter&gt;
+                        &lt;/filters&gt;
+                        &lt;transformers&gt;
+                            &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
+                                &lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;
+                            &lt;/transformer&gt;
+                        &lt;/transformers&gt;
+                    &lt;/configuration&gt;
+                &lt;/execution&gt;
+            &lt;/executions&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+
+</code></pre><h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
 <p>DataSet and DataStream:<br>    Flink具有特殊类DataSet并DataStream在程序中表示数据。您可以将它们视为可以包含重复项的不可变数据集合。在DataSet数据有限的情况下，对于一个DataStream元素的数量可以是无界的。</p>
 </blockquote>
 <h3 id="flink-一般处理步骤"><a href="#flink-一般处理步骤" class="headerlink" title="flink 一般处理步骤"></a>flink 一般处理步骤</h3><ol>
@@ -95,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/30/flink-基础/" data-id="ck3o5qlg3001ehkujuoiggzjb"
+      <a data-url="http://yoursite.com/2019/08/30/flink-基础/" data-id="ck3o5xx6q001e8wujx9g7n87o"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flink/">flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流处理/">流处理</a></li></ul>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -104,20 +104,35 @@
       
         <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
 <blockquote>
-<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint</span><br><span class="line">2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。</span><br><span class="line">3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。</span><br><span class="line">4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。</span><br><span class="line">5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)</span><br><span class="line">6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。</span><br><span class="line">7.应用程序运行完成后，SparkContext会进行资源回收。</span><br></pre></td></tr></table></figure></p>
+<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><code>`</code><br>1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint<br>2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。<br>3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。<br>4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。<br>5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)<br>6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。<br>7.应用程序运行完成后，SparkContext会进行资源回收。</p>
 </blockquote>
-<h3 id="二、spark-standalone两种提交模式"><a href="#二、spark-standalone两种提交模式" class="headerlink" title="二、spark standalone两种提交模式"></a>二、spark standalone两种提交模式</h3><h4 id="1-standalone-client-任务提交模式"><a href="#1-standalone-client-任务提交模式" class="headerlink" title="1. standalone-client 任务提交模式"></a>1. standalone-client 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in client deploy mode</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-<p>standalone client 模式任务流程<br><img src="/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程</p>
-<ol>
-<li>client 模式提交任务后，会在客户端启动Driver进程。</li>
-<li>Driver 会向Master申请启动Application启动资源。</li>
-<li>资源申请成功后，Driver端会将task发送到worker端执行。</li>
-<li>worker端执行成功后将执行结果返回给Driver端</li>
-</ol>
-<h4 id="1-standalone-cluster-任务提交模式"><a href="#1-standalone-cluster-任务提交模式" class="headerlink" title="1. standalone-cluster 任务提交模式"></a>1. standalone-cluster 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in cluster deploy mode with supervise</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --deploy-mode cluster \</span><br><span class="line">  --supervise \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure></p>
+<pre><code>
+### 二、spark standalone两种提交模式
+
+#### 1. standalone-client 任务提交模式
+
+提交命令：
+</code></pre><h1 id="Run-on-a-Spark-standalone-cluster-in-client-deploy-mode"><a href="#Run-on-a-Spark-standalone-cluster-in-client-deploy-mode" class="headerlink" title="Run on a Spark standalone cluster in client deploy mode"></a>Run on a Spark standalone cluster in client deploy mode</h1><p>./bin/spark-submit \<br>  –class org.apache.spark.examples.SparkPi \<br>  –master spark://207.184.161.138:7077 \<br>  –executor-memory 20G \<br>  –total-executor-cores 100 \<br>  /path/to/examples.jar \<br>  1000</p>
+<pre><code>例子：
+</code></pre><p>#!/bin/sh<br>result_time=$(date +%Y%m%d)<br>echo “小车定位程序”</p>
+<p>nohup spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 –executor-memory 4G –total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/${result_time}_result.log &amp;</p>
+<pre><code>standalone client 模式任务流程
+![image.png](/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png)
+
+执行流程
+1. client 模式提交任务后，会在客户端启动Driver进程。
+2. Driver 会向Master申请启动Application启动资源。
+3. 资源申请成功后，Driver端会将task发送到worker端执行。
+4. worker端执行成功后将执行结果返回给Driver端
+
+
+#### 1. standalone-cluster 任务提交模式
+提交命令：
+</code></pre><h1 id="Run-on-a-Spark-standalone-cluster-in-cluster-deploy-mode-with-supervise"><a href="#Run-on-a-Spark-standalone-cluster-in-cluster-deploy-mode-with-supervise" class="headerlink" title="Run on a Spark standalone cluster in cluster deploy mode with supervise"></a>Run on a Spark standalone cluster in cluster deploy mode with supervise</h1><p>./bin/spark-submit \<br>  –class org.apache.spark.examples.SparkPi \<br>  –master spark://207.184.161.138:7077 \<br>  –deploy-mode cluster \<br>  –supervise \<br>  –executor-memory 20G \<br>  –total-executor-cores 100 \<br>  /path/to/examples.jar \<br>  1000</p>
+<pre><code>例子： 
+</code></pre><p>#!/bin/sh<br>result_time=$(date +%Y%m%d)<br>echo “小车定位程序”</p>
+<p>spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –deploy-mode cluster –supervise  –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 –executor-memory 4G –total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</p>
+<p><code>`</code></p>
 <blockquote>
 <p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
 </blockquote>
@@ -137,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/26/spark-standalone-运行原理/" data-id="ck3o5qlht002vhkujzv7luio9"
+      <a data-url="http://yoursite.com/2019/08/26/spark-standalone-运行原理/" data-id="ck3o5xx7s002r8wujys52bvyz"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
@@ -203,14 +218,65 @@
 <p>Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。<br>它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。</p>
 </blockquote>
 <p>Redis 安装参考<a href="https://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">redis基础教程</a></p>
-<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis/redis-5.0.5/src</span><br><span class="line">./redis-cli --raw</span><br><span class="line">hvals materialinfo</span><br></pre></td></tr></table></figure>
-<h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置依赖文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># redisspring.redis.host = 172.80.122.33</span><br><span class="line">spring.redis.port = 6379</span><br><span class="line">spring.redis.database = 0</span><br><span class="line">spring.redis.timeout = 100ms</span><br><span class="line">spring.redis.lettuce.pool.max-active = 8</span><br><span class="line">spring.redis.lettuce.pool.max-idle = 8</span><br><span class="line">spring.redis.lettuce.pool.min-idle = 0</span><br><span class="line">spring.redis.lettuce.pool.max-wait = 100ms</span><br></pre></td></tr></table></figure></p>
-<p>3.使用redisTemplate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired </span><br><span class="line">private RedisTemplate&lt;String,String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Redis客户端 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置数据库连接池<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static JedisPool jedisPool;</span><br><span class="line">    private Jedis jedis;</span><br><span class="line">    static &#123;</span><br><span class="line">        JedisPoolConfig config = new JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(20);</span><br><span class="line">        config.setMaxIdle(5);</span><br><span class="line">        config.setMaxWaitMillis(1000);</span><br><span class="line">        config.setMinIdle(2);</span><br><span class="line">        config.setTestOnBorrow(false);</span><br><span class="line">        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);</span><br><span class="line">    &#125;</span><br><span class="line">    private static synchronized Jedis getJedis()&#123;</span><br><span class="line">        return jedisPool.getResource();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.操作数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jedis = getJedis();</span><br><span class="line">jedis.hvals(&quot;materialinfo&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
+<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><pre><code>cd /usr/local/redis/redis-5.0.5/src
+./redis-cli --raw
+hvals materialinfo
+</code></pre><h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+</code></pre><p>2.配置依赖文件</p>
+<pre><code># redisspring.redis.host = 172.80.122.33
+spring.redis.port = 6379
+spring.redis.database = 0
+spring.redis.timeout = 100ms
+spring.redis.lettuce.pool.max-active = 8
+spring.redis.lettuce.pool.max-idle = 8
+spring.redis.lettuce.pool.min-idle = 0
+spring.redis.lettuce.pool.max-wait = 100ms
+
+</code></pre><p>3.使用redisTemplate</p>
+<pre><code>  @Autowired 
+  private RedisTemplate&lt;String,String&gt; redisTemplate;
+
+  redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);
+
+</code></pre><h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖</p>
+<pre><code> &lt;!-- Redis客户端 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+            &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+            &lt;version&gt;2.7.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+</code></pre><p>2.配置数据库连接池</p>
+<pre><code>private static JedisPool jedisPool;
+    private Jedis jedis;
+    static {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(20);
+        config.setMaxIdle(5);
+        config.setMaxWaitMillis(1000);
+        config.setMinIdle(2);
+        config.setTestOnBorrow(false);
+        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);
+    }
+    private static synchronized Jedis getJedis(){
+        return jedisPool.getResource();
+    }
+
+</code></pre><p>3.操作数据库</p>
+<pre><code> jedis = getJedis();
+ jedis.hvals(&quot;materialinfo&quot;);
+
+</code></pre><h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
 </code></pre><ul>
 <li>set(Key,value) :给数据库中名称为Key的String赋值value</li>
 <li>get(Key):返回数据库中名称为Key的String的value</li>
@@ -276,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/22/redis-数据库/" data-id="ck3o5qlhh002khkujj8rbrda8"
+      <a data-url="http://yoursite.com/2019/08/22/redis-数据库/" data-id="ck3o5xx7r002o8wujxub24doy"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -338,12 +404,31 @@
 
       
         <p>Intellij IDEA 问题记录 </p>
-<p>问题一、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Intellij idea Language level和Java Compiler版本自动变化问题</span><br><span class="line">该问题主要是由于刷新pom.xml文件时，IDEA的这两个参数就会恢复成默认值</span><br><span class="line">解决办法：</span><br><span class="line">在pom.xml中加入以下配置</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
+<p>问题一、</p>
+<pre><code>Intellij idea Language level和Java Compiler版本自动变化问题
+该问题主要是由于刷新pom.xml文件时，IDEA的这两个参数就会恢复成默认值
+解决办法：
+在pom.xml中加入以下配置
 
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.5.1&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;1.8&lt;/source&gt;
+                &lt;target&gt;1.8&lt;/target&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/15/Intellij-IDEA-问题记录/" data-id="ck3o5qlfb000phkujkag79vp0"
+      <a data-url="http://yoursite.com/2019/08/15/Intellij-IDEA-问题记录/" data-id="ck3o5xx65000j8wujb4kqrpfc"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li></ul>
@@ -405,15 +490,29 @@
 
       
         <p>mysql 授权操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">首先创建一个用户</span><br><span class="line">create user &apos;root&apos;@&apos;172.16.247.129&apos; identified by &apos;lyxbdw&apos;;</span><br><span class="line"></span><br><span class="line">然后进行授权</span><br><span class="line"> grant all privileges on *.* to &apos;root&apos;@&apos;172.16.247.129&apos;</span><br><span class="line">    -&gt; ;</span><br><span class="line"></span><br><span class="line">刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">开启管理员权限，重启mysql</span><br><span class="line">![image.png](/images/2019/08/14/6a9ca990-be6f-11e9-8d50-b3f800759cdf.png)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p>
-<p>查看某个用户权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for  &apos;root&apos;@&apos;172.16.247.129&apos;;</span><br></pre></td></tr></table></figure>
+<pre><code>首先创建一个用户
+create user &#39;root&#39;@&#39;172.16.247.129&#39; identified by &#39;lyxbdw&#39;;
 
+然后进行授权
+ grant all privileges on *.* to &#39;root&#39;@&#39;172.16.247.129&#39;
+    -&gt; ;
+
+刷新权限
+flush privileges;
+
+
+开启管理员权限，重启mysql
+![image.png](/images/2019/08/14/6a9ca990-be6f-11e9-8d50-b3f800759cdf.png)
+
+</code></pre><p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p>
+<p>查看某个用户权限</p>
+<pre><code>show grants for  &#39;root&#39;@&#39;172.16.247.129&#39;;
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/14/mysql-8-0以后授权/" data-id="ck3o5qlh4002ahkujxisnwzt4"
+      <a data-url="http://yoursite.com/2019/08/14/mysql-8-0以后授权/" data-id="ck3o5xx7700268wujmesojz1x"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -476,37 +575,44 @@
       
         <p>Spark centos 安装部署 </p>
 <h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
-<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
+<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。</p>
+<pre><code>cd /usr/local
+mkdir scala
+tar -zxvf scala-2.11.8.tgz
+</code></pre><p>解压安装后配置环境变量<br><code>`</code><br>vim /etc/profile</p>
 </blockquote>
-<blockquote>
-<p>解压安装后配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
-<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
-<p>进入到配置目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>然后进入sbin目录,启动集群<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>至此spark安装完成。</p>
-<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
-<p>执行脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
+<p> export JAVA_HOME=/usr/local/java/jdk1.8.0_11<br> export SCALA_HOME=/usr/local/scala/scala-2.11.8<br> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7<br> export JRE_HOME=${JAVA_HOME}/jre<br> export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:${SCALA_HOME}/lib:${SPARK_HOME}/lib<br> export PATH=${JAVA_HOME}/bin:$PATH:${SCALA_HOME}/bin:$PATH:${SPARK_HOME}/bin<br> export SPARK_SSH_OPTS=”-p 2122”</p>
+<pre><code>&gt; 主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala
+![image.png](/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png)
+
+## 二、Spark安装
+&gt; Spark安装也没什么技术含量，直接下载spark安装包，[spark下载链接](https://archive.apache.org/dist/spark/spark-2.4.3/)，选择自己安装版本。
+</code></pre><p>cd /usr/local<br>mkdir spark<br>cd spark<br>tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</p>
+<pre><code>&gt; 同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.
+![image.png](/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png)
+
+## 三、spark standalone模式部署
+&gt;进入到配置目录
+</code></pre><p>cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf<br>mv slaves.template slaves<br>mv spark-env.sh.template spark-env.sh<br>vim spark-env.sh<br>添加以下配置</p>
+<h1 id="spark-env-sh"><a href="#spark-env-sh" class="headerlink" title="spark-env.sh"></a>spark-env.sh</h1><p>export SCALA_HOME=/usr/local/scala/scala-2.11.8<br>export JAVA_HOME=/usr/local/java/jdk1.8.0_11</p>
+<h1 id="本地安装绑定"><a href="#本地安装绑定" class="headerlink" title="本地安装绑定"></a>本地安装绑定</h1><p>export SPARK_MASTER_IP=127.0.0.1</p>
+<p>#export SPARK_LOCAL_IP=127.0.0.1<br>export SPARK_MASTER_PORT=7077<br>export SPARK_WORKER_MEMORY=8G<br>export SPARK_EXECUTOR_CORES=4<br>export SPARK_LOG_DIR=/lvm/data1/spark/log</p>
+<p>#export master=spark://10.7.20.191:7077</p>
+<pre><code>&gt; 然后进入sbin目录,启动集群
+</code></pre><p>cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin<br>./start-all.sh</p>
+<pre><code>&gt;注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口
+</code></pre><p>export SPARK_SSH_OPTS=”-p 2122”</p>
+<pre><code>至此spark安装完成。
+
+## Spark命令提交程序
+</code></pre><p>nohup spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</p>
+<pre><code>执行脚本
+</code></pre><p>#!/bin/sh<br>result_time=$(date +%Y%m%d)<br>echo “小车定位程序”<br>nohup spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/${result_time}_result.log &amp;<br><code>`</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/12/Spark-Windows10-安装部署/" data-id="ck3o5qlfx0019hkujvj0sp5r8"
+      <a data-url="http://yoursite.com/2019/08/12/Spark-Windows10-安装部署/" data-id="ck3o5xx6o00198wujcwzhdzub"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
@@ -567,13 +673,22 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
-<h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
+        <pre><code>// task数量设置
+spark.sql.shuffle.partitions 50
+//并行度设置
+spark.default.parallelism 10
 
+</code></pre><h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><pre><code>#!/bin/sh
+result_time=$(date +%Y%m%d)
+echo &quot;小车定位程序&quot;
+
+spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/09/spark-常用参数设置/" data-id="ck3o5qli30034hkujcycyfxv8"
+      <a data-url="http://yoursite.com/2019/08/09/spark-常用参数设置/" data-id="ck3o5xx8000338wujzk7yqdfa"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
@@ -634,15 +749,18 @@
       
 
       
-        <pre><code>::: hljs-center
+        <pre><code>    ::: hljs-center
 </code></pre><p>java自定义函数</p>
 <p>:::</p>
-<p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题<br>      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.udf().register(&quot;transsinglepower&quot;, new UDF1&lt;Integer,Double&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Double call(Integer single_poer) throws Exception &#123;</span><br><span class="line">                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));</span><br><span class="line">                return mesure_distinct;</span><br><span class="line">            &#125;&#125;, DataTypes.DoubleType);</span><br></pre></td></tr></table></figure></p>
+<p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题</p>
+<pre><code>  ```  
+</code></pre><p>spark.udf().register(“transsinglepower”, new UDF1&lt;Integer,Double&gt;() {<br>            @Override<br>            public Double call(Integer single_poer) throws Exception {<br>                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));<br>                return mesure_distinct;<br>            }}, DataTypes.DoubleType);</p>
+<p><code>`</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/18/spark-sql-java-自定义函数/" data-id="ck3o5qlhn002qhkujdzihtovi"
+      <a data-url="http://yoursite.com/2019/07/18/spark-sql-java-自定义函数/" data-id="ck3o5xx7v002u8wujz9h4fvrs"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
@@ -711,7 +829,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/16/spring-boot-注解/" data-id="ck3o5qlib003ahkuj9gcyu50g"
+      <a data-url="http://yoursite.com/2019/07/16/spring-boot-注解/" data-id="ck3o5xx8200368wujpxpgr9fr"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
@@ -777,7 +895,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/10/Scala-安装问题/" data-id="ck3o5qlfv0017hkujboisl33u"
+      <a data-url="http://yoursite.com/2019/07/10/Scala-安装问题/" data-id="ck3o5xx6n00178wuj95ny6ta7"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
@@ -838,12 +956,46 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">log_dir=&apos;/home/lyxbdw/basedata/server/split&apos;</span><br><span class="line">monitor_file=$1</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;` &apos;初始化切割日志文件为：&apos; $monitor_file &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ ! $1 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;输入参数为空，使用默认路径：/home/lyxbdw/basedata/server/basedata.log&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    monitor_file=/home/lyxbdw/basedata/server/basedata.log #文件的绝对路径</span><br><span class="line">fi</span><br><span class="line">log_name=`basename $monitor_file`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件名称为：&apos;$log_name   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">file_size=`du $monitor_file | awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;切割文件大小为：&apos;$file_size   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">if [ $file_size -ge 1024000 ]</span><br><span class="line">then</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;文件大小大于 1024000 开始切割&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    if [ ! -d $log_dir ]</span><br><span class="line">    then</span><br><span class="line">        echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割路径不存在，新建....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">        mkdir /home/lyxbdw/basedata/server/split  #创建保存切割文件目录,这个路径可以自行修改，保存到你想要的目录</span><br><span class="line">    fi</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始切割日志....&apos;</span><br><span class="line">    cp  $monitor_file  /home/lyxbdw/basedata/server/$log_name-`date +%Y%m%d%H%M%S`.log #保存日志文件</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;日志切割完成。&apos;</span><br><span class="line">    echo `date &apos;+%Y-%m-%d-%H:%M:%S&apos;`&apos;文件切割&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log #记录切割日志</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;开始清空源文件...&apos;</span><br><span class="line">    echo &quot;&quot; &gt; $monitor_file  #清空tomcat的log/catalina.out文件内容</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log</span><br><span class="line">    echo `date &apos;+%Y-%m-%d %H:%M:%S&apos;`&apos;清空源文件完成。&apos;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+        <pre><code>#!/bin/sh
+log_dir=&#39;/home/lyxbdw/basedata/server/split&#39;
+monitor_file=$1
+echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;` &#39;初始化切割日志文件为：&#39; $monitor_file &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+if [ ! $1 ]
+then
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;输入参数为空，使用默认路径：/home/lyxbdw/basedata/server/basedata.log&#39; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    monitor_file=/home/lyxbdw/basedata/server/basedata.log #文件的绝对路径
+fi
+log_name=`basename $monitor_file`
+echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;切割文件名称为：&#39;$log_name   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+file_size=`du $monitor_file | awk &#39;{print $1}&#39;`
+echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;切割文件大小为：&#39;$file_size   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+if [ $file_size -ge 1024000 ]
+then
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;文件大小大于 1024000 开始切割&#39;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    if [ ! -d $log_dir ]
+    then
+        echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;日志切割路径不存在，新建....&#39;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+        mkdir /home/lyxbdw/basedata/server/split  #创建保存切割文件目录,这个路径可以自行修改，保存到你想要的目录
+    fi
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;开始切割日志....&#39;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;开始切割日志....&#39;
+    cp  $monitor_file  /home/lyxbdw/basedata/server/$log_name-`date +%Y%m%d%H%M%S`.log #保存日志文件
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;日志切割完成。&#39;   &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;日志切割完成。&#39;
+    echo `date &#39;+%Y-%m-%d-%H:%M:%S&#39;`&#39;文件切割&#39; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log #记录切割日志
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;开始清空源文件...&#39; &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;开始清空源文件...&#39;
+    echo &quot;&quot; &gt; $monitor_file  #清空tomcat的log/catalina.out文件内容
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;清空源文件完成。&#39;  &gt;&gt; /home/lyxbdw/basedata/server/split/split.log
+    echo `date &#39;+%Y-%m-%d %H:%M:%S&#39;`&#39;清空源文件完成。&#39;
+fi
 
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/日志切割脚本/" data-id="ck3o5qlj80045hkuj41t9p2e4"
+      <a data-url="http://yoursite.com/2019/07/02/日志切割脚本/" data-id="ck3o5xx8p00488wujn7cnmwk6"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
@@ -911,7 +1063,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/" data-id="ck3o5qles000ahkujxkmqyqlo"
+      <a data-url="http://yoursite.com/2019/06/17/Dataframe-常见问题记录/" data-id="ck3o5xx5u00098wuj3ey7bqcs"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dataframe/">Dataframe</a></li></ul>
@@ -976,35 +1128,158 @@
 <p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p>
 </blockquote>
 <h2 id="2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名"><a href="#2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名" class="headerlink" title="2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名"></a>2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名</h2><p>导包选择：<br>import tk.mybatis.spring.annotation.MapperScan;</p>
-<h2 id="3-tk-mybatis与springboot结合使用案例"><a href="#3-tk-mybatis与springboot结合使用案例" class="headerlink" title="3.tk.mybatis与springboot结合使用案例"></a>3.tk.mybatis与springboot结合使用案例</h2><p>（1）引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 数据库连接--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.0.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- 数据库连接 end --&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可以看出tk.mybatis常常结合druid德鲁伊使用</p>
-<p>（2）引入插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;configurationFile&gt;$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">                   &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                   &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">               &lt;dependencies&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;3.4.4&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">               &lt;/dependencies&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可以看见接下来需要配置${basedir}/src/main/resources/generator/<strong>generatorConfig.xml</strong>配置文件</p>
+<h2 id="3-tk-mybatis与springboot结合使用案例"><a href="#3-tk-mybatis与springboot结合使用案例" class="headerlink" title="3.tk.mybatis与springboot结合使用案例"></a>3.tk.mybatis与springboot结合使用案例</h2><p>（1）引入依赖</p>
+<pre><code> &lt;!-- 数据库连接--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.1.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 数据库连接 end --&gt;
+
+</code></pre><p>可以看出tk.mybatis常常结合druid德鲁伊使用</p>
+<p>（2）引入插件</p>
+<pre><code> &lt;plugin&gt;
+                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.3.5&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;configurationFile&gt;${basedir}/src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;
+                    &lt;overwrite&gt;true&lt;/overwrite&gt;
+                    &lt;verbose&gt;true&lt;/verbose&gt;
+                &lt;/configuration&gt;
+                &lt;dependencies&gt;
+                    &lt;dependency&gt;
+                        &lt;groupId&gt;mysql&lt;/groupId&gt;
+                        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+                        &lt;version&gt;${mysql.version}&lt;/version&gt;
+                    &lt;/dependency&gt;
+                    &lt;dependency&gt;
+                        &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;
+                        &lt;artifactId&gt;mapper&lt;/artifactId&gt;
+                        &lt;version&gt;3.4.4&lt;/version&gt;
+                    &lt;/dependency&gt;
+                &lt;/dependencies&gt;
+            &lt;/plugin&gt;
+
+</code></pre><p>可以看见接下来需要配置${basedir}/src/main/resources/generator/<strong>generatorConfig.xml</strong>配置文件</p>
 <p>（3）在下图目录下创建generatorConfig.xml配置文件，并设置相应的参数<br><img src="/images/2019/07/24/7b143a00-adc0-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!-- 引入数据库连接配置 --&gt;</span><br><span class="line">    &lt;properties resource=&quot;jdbc.properties&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 tk.mybatis 插件 --&gt;</span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.gree.cn.mybatistest.mapper.MyMapper&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置数据库连接 --&gt;</span><br><span class="line">        &lt;jdbcConnection</span><br><span class="line">                driverClass=&quot;$&#123;jdbc.driverClass&#125;&quot;</span><br><span class="line">                connectionURL=&quot;$&#123;jdbc.connectionURL&#125;&quot;</span><br><span class="line">                userId=&quot;$&#123;jdbc.username&#125;&quot;</span><br><span class="line">                password=&quot;$&#123;jdbc.password&#125;&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置实体类存放路径 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.gree.cn.mybatistest.entity&quot; targetProject=&quot;src/main/java&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 XML 存放路径 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 DAO 存放路径 --&gt;</span><br><span class="line">        &lt;javaClientGenerator</span><br><span class="line">                targetPackage=&quot;com.gree.cn.mybatistest.mapper&quot;</span><br><span class="line">                targetProject=&quot;src/main/java&quot;</span><br><span class="line">                type=&quot;XMLMAPPER&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要指定生成的数据库和表，% 代表所有表 --&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;basestation_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">           &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;buffer_area_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">            &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>可以在上面的配置文件中需要创建数据库连接jdbc.properties配置文件,如下：<br><img src="/images/2019/07/24/28a3af20-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 8.x: com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.driverClass=com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.connectionURL=jdbc:mysql://localhost:3306/bluetooth_location?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=lyxbdw</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后配置实体类存放路径</p>
-</li>
-<li>配置 XML 存放路径</li>
-<li>配置 DAO 存放路径</li>
-<li>配置需要指定生成的数据库和表</li>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+
+&lt;generatorConfiguration&gt;
+    &lt;!-- 引入数据库连接配置 --&gt;
+    &lt;properties resource=&quot;jdbc.properties&quot;/&gt;
+
+    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;
+        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;
+        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;
+
+        &lt;!-- 配置 tk.mybatis 插件 --&gt;
+        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;
+            &lt;property name=&quot;mappers&quot; value=&quot;com.gree.cn.mybatistest.mapper.MyMapper&quot;/&gt;
+        &lt;/plugin&gt;
+
+        &lt;!-- 配置数据库连接 --&gt;
+        &lt;jdbcConnection
+                driverClass=&quot;${jdbc.driverClass}&quot;
+                connectionURL=&quot;${jdbc.connectionURL}&quot;
+                userId=&quot;${jdbc.username}&quot;
+                password=&quot;${jdbc.password}&quot;&gt;
+        &lt;/jdbcConnection&gt;
+
+        &lt;!-- 配置实体类存放路径 --&gt;
+        &lt;javaModelGenerator targetPackage=&quot;com.gree.cn.mybatistest.entity&quot; targetProject=&quot;src/main/java&quot;/&gt;
+
+        &lt;!-- 配置 XML 存放路径 --&gt;
+        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;/&gt;
+
+        &lt;!-- 配置 DAO 存放路径 --&gt;
+        &lt;javaClientGenerator
+                targetPackage=&quot;com.gree.cn.mybatistest.mapper&quot;
+                targetProject=&quot;src/main/java&quot;
+                type=&quot;XMLMAPPER&quot;/&gt;
+
+        &lt;!-- 配置需要指定生成的数据库和表，% 代表所有表 --&gt;
+        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;basestation_info&quot;&gt;
+            &lt;!-- mysql 配置 --&gt;
+           &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;
+        &lt;/table&gt;
+        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;buffer_area_info&quot;&gt;
+            &lt;!-- mysql 配置 --&gt;
+            &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;
+        &lt;/table&gt;
+    &lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+
+</code></pre><ul>
+<li>可以在上面的配置文件中需要创建数据库连接jdbc.properties配置文件,如下：<br><img src="/images/2019/07/24/28a3af20-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"><br><code>`</code><h1 id="MySQL-8-x-com-mysql-cj-jdbc-Driver"><a href="#MySQL-8-x-com-mysql-cj-jdbc-Driver" class="headerlink" title="MySQL 8.x: com.mysql.cj.jdbc.Driver"></a>MySQL 8.x: com.mysql.cj.jdbc.Driver</h1>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://localhost:3306/bluetooth_location?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=lyxbdw</li>
 </ul>
-<p>（4）这些配置完成后，将创建通用的父级接口MyMapper<br>需要注意这个文件的创建目录，注释中有解释<br><img src="/images/2019/07/24/ca4edc50-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.tk.mybatis.mapper;</span><br><span class="line"></span><br><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> *  自己的 Mapper</span><br><span class="line"> *  特别注意，该接口不能被扫描到，否则会出错</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>（5）最后再在application.properties配置<br>实体类路径和xml配置文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis.mapper-locations=classpath:mapper/*.xml</span><br><span class="line">mybatis.type-aliases-package=com.gree.cn.mybatistest.entity</span><br></pre></td></tr></table></figure></p>
-<p>并在主程序入口添加注解@MapperScan(basePackages = “com.gree.cn.mybatistest.mapper”)扫描mapper包<br>需要注意的是引入的依赖为 <strong>import tk.mybatis.spring.annotation.MapperScan;</strong></p>
-<p>再点击下图中的mybatis-generator:generate</p>
-<p><img src="/images/2019/07/24/085050a0-adc3-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
-<p>前期的准备工作就完成。当然在使用前有两点需要注意下<br>1、自动生成的mapper文件可能不会集成通用的父类mapper接口，手动引入jar包<br>2、生成的实体类中表名可能会有两个点，需要手动删除一个</p>
-<h2 id="4、tk-mybatis查询数据库"><a href="#4、tk-mybatis查询数据库" class="headerlink" title="4、tk.mybatis查询数据库"></a>4、tk.mybatis查询数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.service.impl;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.mybatistest.entity.BasestationInfo;</span><br><span class="line">import com.gree.cn.mybatistest.entity.BufferAreaInfo;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BasestationInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BufferAreaInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.service.MybatisTest;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import tk.mybatis.mapper.entity.Example;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line">@Service</span><br><span class="line">public class MybatisTestimpl implements MybatisTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">   private BufferAreaInfoMapper bufferAreaInfoMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private BasestationInfoMapper basestationInfoMapper;</span><br><span class="line">    @Override</span><br><span class="line">    public void mybatistest() &#123;</span><br><span class="line">        Example example = new Example(BufferAreaInfo.class);</span><br><span class="line"></span><br><span class="line">        example.createCriteria().andEqualTo(&quot;stationxcoordinate&quot;, 811)</span><br><span class="line">                .andEqualTo(&quot;stationycoordinate&quot;, 130);</span><br><span class="line"></span><br><span class="line">        List&lt;BufferAreaInfo&gt; bufferAreaInfos = bufferAreaInfoMapper.selectByExample(example);</span><br><span class="line"></span><br><span class="line">        BasestationInfo uu = basestationInfoMapper.selectByPrimaryKey(&quot;E07DEACF031C&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(bufferAreaInfos.size());</span><br><span class="line">        System.out.println(uu.getStationid());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>大概步骤就是注入mapper,然后使用mapper调用sql算子进行查询，其他的都类似。</p>
+<pre><code>- 然后配置实体类存放路径
+- 配置 XML 存放路径
+- 配置 DAO 存放路径
+- 配置需要指定生成的数据库和表
+
+（4）这些配置完成后，将创建通用的父级接口MyMapper
+需要注意这个文件的创建目录，注释中有解释
+![image.png](/images/2019/07/24/ca4edc50-adc1-11e9-a2e4-21ce6d685454.png)
+</code></pre><p>package com.gree.cn.mybatistest.tk.mybatis.mapper;</p>
+<p>import tk.mybatis.mapper.common.Mapper;<br>import tk.mybatis.mapper.common.MySqlMapper;</p>
+<p>/**</p>
+<ul>
+<li></li>
+<li>自己的 Mapper</li>
+<li>特别注意，该接口不能被扫描到，否则会出错</li>
+<li>@param <t><br>*/<br>public interface MyMapper<t> extends Mapper<t>, MySqlMapper<t> {<br>}</t></t></t></t></li>
+</ul>
+<pre><code>（5）最后再在application.properties配置
+实体类路径和xml配置文件路径
+</code></pre><p>mybatis.mapper-locations=classpath:mapper/*.xml<br>mybatis.type-aliases-package=com.gree.cn.mybatistest.entity</p>
+<pre><code>并在主程序入口添加注解@MapperScan(basePackages = &quot;com.gree.cn.mybatistest.mapper&quot;)扫描mapper包
+需要注意的是引入的依赖为 **import tk.mybatis.spring.annotation.MapperScan;**
+
+再点击下图中的mybatis-generator:generate
+
+![image.png](/images/2019/07/24/085050a0-adc3-11e9-a2e4-21ce6d685454.png)
+
+前期的准备工作就完成。当然在使用前有两点需要注意下
+1、自动生成的mapper文件可能不会集成通用的父类mapper接口，手动引入jar包
+2、生成的实体类中表名可能会有两个点，需要手动删除一个
+
+## 4、tk.mybatis查询数据库
+</code></pre><p>package com.gree.cn.mybatistest.service.impl;</p>
+<p>import com.gree.cn.mybatistest.entity.BasestationInfo;<br>import com.gree.cn.mybatistest.entity.BufferAreaInfo;<br>import com.gree.cn.mybatistest.mapper.BasestationInfoMapper;<br>import com.gree.cn.mybatistest.mapper.BufferAreaInfoMapper;<br>import com.gree.cn.mybatistest.service.MybatisTest;<br>import org.springframework.beans.factory.annotation.Autowired;<br>import org.springframework.stereotype.Service;<br>import tk.mybatis.mapper.entity.Example;</p>
+<p>import java.util.List;<br>@Service<br>public class MybatisTestimpl implements MybatisTest {<br>    @Autowired<br>   private BufferAreaInfoMapper bufferAreaInfoMapper;<br>    @Autowired<br>    private BasestationInfoMapper basestationInfoMapper;<br>    @Override<br>    public void mybatistest() {<br>        Example example = new Example(BufferAreaInfo.class);</p>
+<pre><code>    example.createCriteria().andEqualTo(&quot;stationxcoordinate&quot;, 811)
+            .andEqualTo(&quot;stationycoordinate&quot;, 130);
+
+    List&lt;BufferAreaInfo&gt; bufferAreaInfos = bufferAreaInfoMapper.selectByExample(example);
+
+    BasestationInfo uu = basestationInfoMapper.selectByPrimaryKey(&quot;E07DEACF031C&quot;);
+
+    System.out.println(bufferAreaInfos.size());
+    System.out.println(uu.getStationid());
+
+}
+</code></pre><p>}</p>
+<p><code>`</code><br>大概步骤就是注入mapper,然后使用mapper调用sql算子进行查询，其他的都类似。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/17/mybatis/" data-id="ck3o5qlh00027hkujw648ldiq"
+      <a data-url="http://yoursite.com/2019/06/17/mybatis/" data-id="ck3o5xx7d002d8wujsj02e6sw"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库-mybatis/">数据库 mybatis</a></li></ul>

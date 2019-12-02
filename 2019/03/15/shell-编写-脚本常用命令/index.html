@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -83,12 +83,15 @@
 <h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><blockquote>
 <p>syntax error: unexpected end of file<br>原因：最后发现我的脚本是在window环境下编写的，然后传到linux服务器上的，这时候问题来了，doc下的文本内容格式和unix下的格式有所不同，比如dos文件传输到unix系统时,会在每行的结尾多一个^M结束符。（我的就是这个原因）<br>解决办法：</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim serverDeploy.sh</span><br><span class="line">:set fileformat=unix</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<pre><code>vim serverDeploy.sh
+:set fileformat=unix
+:wq
 
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/15/shell-编写-脚本常用命令/" data-id="ck3o5qlhr002thkujlrg4ixha"
+      <a data-url="http://yoursite.com/2019/03/15/shell-编写-脚本常用命令/" data-id="ck3o5xx7h002j8wujwfch11ip"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>

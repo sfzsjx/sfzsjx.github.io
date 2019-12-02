@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -75,11 +75,14 @@
 
       
         <p>1.spark 中采用部分关联字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接</span><br><span class="line">  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))</span><br></pre></td></tr></table></figure>
+<pre><code>//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接
+  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))
+
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/26/spark-常用-api/" data-id="ck3o5qlhz0030hkujj2s9wi4y"
+      <a data-url="http://yoursite.com/2019/11/26/spark-常用-api/" data-id="ck3o5xx7y002z8wuj5q8dk5zp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>

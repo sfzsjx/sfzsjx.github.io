@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -71,10 +71,17 @@
 
       
         <p>1.泛型<br>  通过泛型可以定义类型安全的数据结构（类型安全），而无须使用实际的数据类型（可扩展）。这能够显著提高性能并得到更高质量的代码（高性能），因为您可以重用数据处理算法，而无须复制类型特定的代码（可重用）。</p>
-<p>2.java.sql.SQLException: Unknown system variable ‘query_cache_size’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>3.java.sql.SQLException: The server time zone value ‘ÖÐ¹ú±ê×¼Ê±¼ä’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/springboot_jpa?charset=utf8mb4&amp;useSSL=false&amp;serverTimezone=GMT</span><br></pre></td></tr></table></figure>
-<p>4.java.lang.Exception: No runnable methods</p>
+<p>2.java.sql.SQLException: Unknown system variable ‘query_cache_size’</p>
+<pre><code> &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+</code></pre><p>3.java.sql.SQLException: The server time zone value ‘ÖÐ¹ú±ê×¼Ê±¼ä’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.</p>
+<pre><code>jdbc:mysql://localhost:3306/springboot_jpa?charset=utf8mb4&amp;useSSL=false&amp;serverTimezone=GMT
+
+</code></pre><p>4.java.lang.Exception: No runnable methods</p>
 <blockquote>
 <p>测试时 未在test方法上加上 @test 注解，同时保证注解依赖org.junit.test</p>
 </blockquote>
@@ -86,7 +93,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/29/java-基本知识/" data-id="ck3o5qlge001ohkujr8hzwj99"
+      <a data-url="http://yoursite.com/2019/11/29/java-基本知识/" data-id="ck3o5xx6x001o8wujjxtuaxng"
          class="article-share-link">Share</a>
       
     </footer>

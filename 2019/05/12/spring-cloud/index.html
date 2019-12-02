@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
   
   <script src="/js/pace.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 <body>
 <main class="content">
@@ -86,12 +86,16 @@
 <h3 id="问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext"><a href="#问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext" class="headerlink" title="问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext"></a>问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext</h3><p> 解决办法 ：未启动ConfigApplication,验证方法：打开<a href="http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod" target="_blank" rel="noopener">http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod</a></p>
 <h3 id="问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect"><a href="#问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect" class="headerlink" title="问题6 ：Caused by: java.net.ConnectException: Connection refused: connect"></a>问题6 ：Caused by: java.net.ConnectException: Connection refused: connect</h3><p>解决办法： 未加载注解 @ActiveProfiles(value = “prod”)</p>
 <h3 id="问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1"><a href="#问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1" class="headerlink" title="问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in https://oss.sonatype.org/content/repositories/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]"></a>问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank" rel="noopener">https://oss.sonatype.org/content/repositories/snapshots</a> was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]</h3><p>解决办法： 在父项目下有的子项目在首次运行clean 和install前应该先运行父项目的clean和install</p>
-<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-
+<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖</p>
+<pre><code>&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/12/spring-cloud/" data-id="ck3o5qlic003bhkujussm6907"
+      <a data-url="http://yoursite.com/2019/05/12/spring-cloud/" data-id="ck3o5xx8a003i8wujt9ziuq8j"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-cloud/">spring cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
