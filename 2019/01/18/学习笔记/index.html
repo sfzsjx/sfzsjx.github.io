@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="天道酬勤">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    学习笔记 |
+    
+    上善若水博客</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-学习笔记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习笔记
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/18/学习笔记/" class="article-date">
+  <time datetime="2019-01-18T08:56:37.000Z" itemprop="datePublished">2019-01-18</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习/">学习</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>chcp    查看windows系统编码格式</p>
+<p>chcp 65001   将Windows格式编码设为utf-8模式</p>
+<p>设置 hue 指定队列进行查询操作</p>
+<p>set mapred.job.queue.name=QueueA;</p>
+<p>设置 hue 使用 spark 引擎查询</p>
+<p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p>
+<p>host文件配置：</p>
+<p>C:\Windows\System32\drivers\etc</p>
+<p>后台运行Java程序<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
+<p>7z Linux 解压命令<br>7za x ***.7z</p>
+<p>restful api linux 测试<br>get方法  ： curl “<a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;</a><br>post方法 ： curl -d ‘info={“mlotno”:”9840021904060061”}’ <a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail</a></p>
+<p>注意空格。</p>
+<p>在windows下执行java包命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar</span><br></pre></td></tr></table></figure></p>
+<p>后台执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将jdk 重新命名项目名（如bom.exe）</span><br><span class="line"></span><br><span class="line">bom.exe -jar xx.jar</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/18/学习笔记/" data-id="ck3o5h8ke003vpkujpo1l86ki"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/01/21/jupyter-安装/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            jupyter 安装
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/01/18/kylin-jdbc-连接/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">kylin jdbc 连接</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 上善若水博客</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

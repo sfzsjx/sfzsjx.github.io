@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="天道酬勤">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    neo4j 连接 spark |
+    
+    上善若水博客</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-neo4j-连接-spark" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      neo4j 连接 spark
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/11/neo4j-连接-spark/" class="article-date">
+  <time datetime="2019-03-11T01:29:30.000Z" itemprop="datePublished">2019-03-11</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/图数据库/">图数据库</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>今天使用neo4j连接spark<br>neo4j版本3.4<br>spark版本1.6.0</p>
+<blockquote>
+<p>(1) 首先，需要添加jar包 neo4j-spark-connector_2.10-1.0.0-RC1.jar或者添加maven依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.neo4j.spark    </span><br><span class="line">neo4j-spark-connector_2.10  </span><br><span class="line">1.0.0-RC1</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>(2) 设置spark连接信息<br>val  conf : SparkConf = new SparkConf().setAppName(“InitSpark”).setMaster(“local[*]”)       conf.set(“spark.neo4j.bolt.url”,”bolt://localhost:7687”)<br>conf.set(“spark.neo4j.bolt.user”,”neo4j”)<br>conf.set(“spark.neo4j.bolt.password”,”123456”)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>简单例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jDataFrameTest &#123; </span><br><span class="line"> def main(args: Array[String]): Unit = &#123;      </span><br><span class="line">val sQLContext = InitSpark.getSqlContext   </span><br><span class="line">val query =&quot; MATCH p=(m:ITEM)&lt;-[r:rel*]-(n:ITEM) where m.item = &apos;84010420&apos; and  ALL(c in r where c.exdt&gt;&apos;2018-12-15&apos;)&quot; +  &quot; with  m.item as mark,length(r) as len, last(r).number as num,reduce(s=1.0 ,x in rels(p)| s*tofloat(x.number)) as nums, last(r).mitem as mitem , last(r) as bom  &quot; +  &quot; return  mark,bom.erpid as erpid, bom.virtual as virtual,mitem,bom.item as item,bom.pono as pono,&quot; +  &quot; bom.comment as comment, bom.warehouse as warehouse, bom.exdt as exdt, bom.indt as indt,tofloat(num) as num,nums,len &quot;   </span><br><span class="line">val df = Neo4jDataFrame.withDataType(sQLContext,query,Seq.empty,&quot;mark&quot; -&gt;    StringType,&quot;erpid&quot; -&gt;StringType,&quot;virtual&quot;-&gt;LongType,  &quot;mitem&quot;-&gt;StringType,&quot;item&quot;-&gt;StringType,&quot;pono&quot;-&gt;LongType,&quot;comment&quot;-&gt;StringType,&quot;warehouse&quot;-&gt;StringType,&quot;exdt&quot;-&gt;StringType,  &quot;indt&quot; -&gt;StringType,&quot;num&quot;-&gt;DoubleType,&quot;nums&quot;-&gt; DoubleType ,&quot;len&quot;-&gt;LongType)    </span><br><span class="line">df.show(1000)  &#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jConnectSparkGraph &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">     val sc = InitSpark.getSC</span><br><span class="line">     val sQLContext = InitSpark.getSqlContext</span><br><span class="line">     val cypher = &quot;match (n:ITEM) return n.item limit 10&quot;</span><br><span class="line">     val neo = Neo4jRowRDD(sc,cypher)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/11/neo4j-连接-spark/" data-id="ck3o5h8jb002jpkuj25m0uisz"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/neo4j/">neo4j</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/03/13/朴素贝叶斯/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            朴素贝叶斯
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/03/07/18-决策树（中）-CART算法笔记/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">18| 决策树（中） : CART算法笔记</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 上善若水博客</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

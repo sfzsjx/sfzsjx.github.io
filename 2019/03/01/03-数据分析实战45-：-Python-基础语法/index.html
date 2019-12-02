@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="天道酬勤">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    03 数据分析实战45 ： Python 基础语法 |
+    
+    上善若水博客</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-03-数据分析实战45-：-Python-基础语法" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      03 数据分析实战45 ： Python 基础语法
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/" class="article-date">
+  <time datetime="2019-03-01T02:37:48.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据分析/">数据分析</a> / <a class="article-category-link" href="/categories/数据分析/python/">python</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><img src="/images/2019/03/01/66ec2200-3bc8-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<h1 id="Python-基础语法"><a href="#Python-基础语法" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h1><h2 id="Python-语言特点"><a href="#Python-语言特点" class="headerlink" title="Python 语言特点"></a>Python 语言特点</h2><blockquote>
+<p>Python 语言最大的优点就是简洁，同时有大量的第三方库，功能强大，能够解决数据分析的大部分问题。比如科学计算工具NumPy 和 Pandas库，深度学习工具 Keras 和 TensorFlow,以及机器学习工具 Scikit-learn。</p>
+</blockquote>
+<h2 id="安装及-IDE-环境"><a href="#安装及-IDE-环境" class="headerlink" title="安装及 IDE 环境"></a>安装及 IDE 环境</h2><p>安装Python 3.x 官网下载安装。<br>Python IDE 推荐使用 PythonCharm</p>
+<h2 id="Python-基础语法-1"><a href="#Python-基础语法-1" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum = 100+100</span><br><span class="line">print (&apos;hello,%s&apos; %name) # 打印输出</span><br><span class="line">print (&apos;sum = %d&apos; %sum)</span><br></pre></td></tr></table></figure>
+<h3 id="判断语句-if-…-else-…"><a href="#判断语句-if-…-else-…" class="headerlink" title="判断语句 if … else …"></a>判断语句 if … else …</h3><figure class="highlight plain"><figcaption><span>score></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       print (&apos;Excellent&apos;)</span><br><span class="line">else:</span><br><span class="line">       if score &lt; 60:</span><br><span class="line">           print( &apos;Fail&apos;)</span><br><span class="line">       else:</span><br><span class="line">           print (&apos;Good Job&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句-：-for-…-in"><a href="#循环语句-：-for-…-in" class="headerlink" title="循环语句 ： for … in"></a>循环语句 ： for … in</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for number in range(11):</span><br><span class="line">    sum = sum + number</span><br><span class="line">print (sum)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句：while"><a href="#循环语句：while" class="headerlink" title="循环语句：while"></a>循环语句：while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 1</span><br><span class="line">while number &lt; 11:</span><br><span class="line">       sum = sum + number</span><br><span class="line">       number = number + 1</span><br><span class="line">print （sum）</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型：列表、元组、字典、集合"><a href="#数据类型：列表、元组、字典、集合" class="headerlink" title="数据类型：列表、元组、字典、集合"></a>数据类型：列表、元组、字典、集合</h2><h3 id="列表："><a href="#列表：" class="headerlink" title="列表：[]"></a>列表：[]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lists.append(&apos;d&apos;)</span><br><span class="line">print (lists)</span><br><span class="line">print (len(lists))</span><br><span class="line">lists.insert(0,&apos;mm&apos;)</span><br><span class="line">lists.pop()</span><br><span class="line">print (lists)</span><br></pre></td></tr></table></figure>
+<h3 id="元组（tuple）"><a href="#元组（tuple）" class="headerlink" title="元组（tuple）"></a>元组（tuple）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (tuples[0])</span><br></pre></td></tr></table></figure>
+<h3 id="字典（dictionary）"><a href="#字典（dictionary）" class="headerlink" title="字典（dictionary）"></a>字典（dictionary）</h3><figure class="highlight plain"><figcaption><span>-*- coding: utf-8 -*</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义一个 dictionary</span><br><span class="line">score = &#123;&apos;guanyu&apos;:95,&apos;zhangfei&apos;:96&#125;</span><br><span class="line"># 添加一个元素</span><br><span class="line">score[&apos;zhaoyun&apos;] = 98</span><br><span class="line">print (score)</span><br><span class="line"># 删除一个元素</span><br><span class="line">score.pop(&apos;zhangfei&apos;)</span><br><span class="line"># 查看 key 是否存在</span><br><span class="line">print (&apos;guanyu&apos; in score)</span><br><span class="line"># 查看一个 key 对应的值</span><br><span class="line">print (score.get(&apos;guanyu&apos;))</span><br><span class="line">print (score.get(&apos;yase&apos;,99))</span><br></pre></td></tr></table></figure>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.add(&apos;d&apos;)</span><br><span class="line">s.remove(&apos;b&apos;)</span><br><span class="line">print （s）</span><br><span class="line">print （&apos;c&apos; in s）</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/03/01/9d1f4470-3bcc-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<p><img src="/images/2019/03/01/a812ead0-3bcc-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"><br>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+<p>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/01/03-数据分析实战45-：-Python-基础语法/" data-id="ck3o5h8h30002pkuj54e96usm"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据分析/">数据分析</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/03/07/18-决策树（中）-CART算法笔记/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            18| 决策树（中） : CART算法笔记
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/02/23/17-数据分析实战笔记：-决策树/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">17-数据分析实战笔记： 决策树</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 上善若水博客</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
