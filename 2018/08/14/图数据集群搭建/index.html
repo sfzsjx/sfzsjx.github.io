@@ -1,269 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    图数据集群搭建 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-图数据集群搭建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      图数据集群搭建
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/08/14/图数据集群搭建/" class="article-date">
-  <time datetime="2018-08-14T02:15:50.000Z" itemprop="datePublished">2018-08-14</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/图数据库/">图数据库</a>
-  </div>
-
-      </div>
-    
-
-    
-      
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <pre><code>                                                  ** NEO4J高可用集群搭建 **
-</code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
-<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
-<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令</p>
-<pre class=" language-bash"><code class="language-bash">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz
-</code></pre>
-<p> 或者前往neo4j官网下载 ：<a href="https://neo4j.com/download/" target="_blank" rel="noopener">https://neo4j.com/download/</a> .</p>
-<p>二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</p>
-<pre class=" language-bash"><code class="language-bash">
-<span class="token function">tar</span> -zxvf neo4j-enterprise-3.4.0-unix.tar.gz
-<span class="token function">scp</span> -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j
-<span class="token function">scp</span> -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j
-<span class="token function">scp</span> -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j
-</code></pre>
-<p>三 、修改配置文件neo4j.conf(重要)</p>
-<p>master节点：</p>
-<pre class=" language-bash"><code class="language-bash">
-    dbms.mode<span class="token operator">=</span>HA
-    ha.server_id<span class="token operator">=</span>1
-    ha.initial_hosts<span class="token operator">=</span>172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
-    dbms.connectors.default_listen_address<span class="token operator">=</span>0.0.0.0
-
-</code></pre>
-<p>slave1节点：</p>
-<pre class=" language-bash"><code class="language-bash">
-    dbms.mode<span class="token operator">=</span>HA
-    ha.server_id<span class="token operator">=</span>2
-    ha.initial_hosts<span class="token operator">=</span>172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
-    dbms.connectors.default_listen_address<span class="token operator">=</span>0.0.0.0
-
-</code></pre>
-<p>slave2节点：</p>
-<pre class=" language-bash"><code class="language-bash">    dbms.mode<span class="token operator">=</span>HA
-    ha.server_id<span class="token operator">=</span>3
-    ha.initial_hosts<span class="token operator">=</span>172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001
-    dbms.connectors.default_listen_address<span class="token operator">=</span>0.0.0.0
-
-</code></pre>
-<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
-<pre class=" language-bash"><code class="language-bash">
-./bin/neo4j start
-./bin/neo4j start
-./bin/neo4j start
-
-</code></pre>
-<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/14/图数据集群搭建/" data-id="ck3o5xx8c003m8wujg31nnvlf"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/neo4j/">neo4j</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2018/08/15/RDD常用算子/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            RDD常用算子
-          
-        </div>
-      </a>
-    
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug

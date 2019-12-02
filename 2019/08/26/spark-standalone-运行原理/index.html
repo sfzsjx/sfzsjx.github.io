@@ -1,274 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    spark standalone  运行原理 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-spark-standalone-运行原理" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      spark standalone  运行原理
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/08/26/spark-standalone-运行原理/" class="article-date">
-  <time datetime="2019-08-26T02:31:37.000Z" itemprop="datePublished">2019-08-26</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/spark/">spark</a>
-  </div>
-
-      </div>
-    
-
-    
-      
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<blockquote>
-<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><code>`</code><br>1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint<br>2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。<br>3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。<br>4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。<br>5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)<br>6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。<br>7.应用程序运行完成后，SparkContext会进行资源回收。</p>
-</blockquote>
-<pre><code>
-### 二、spark standalone两种提交模式
-
-#### 1. standalone-client 任务提交模式
-
-提交命令：
-</code></pre><h1 id="Run-on-a-Spark-standalone-cluster-in-client-deploy-mode"><a href="#Run-on-a-Spark-standalone-cluster-in-client-deploy-mode" class="headerlink" title="Run on a Spark standalone cluster in client deploy mode"></a>Run on a Spark standalone cluster in client deploy mode</h1><p>./bin/spark-submit \<br>  –class org.apache.spark.examples.SparkPi \<br>  –master spark://207.184.161.138:7077 \<br>  –executor-memory 20G \<br>  –total-executor-cores 100 \<br>  /path/to/examples.jar \<br>  1000</p>
-<pre><code>例子：
-</code></pre><p>#!/bin/sh<br>result_time=$(date +%Y%m%d)<br>echo “小车定位程序”</p>
-<p>nohup spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 –executor-memory 4G –total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/${result_time}_result.log &amp;</p>
-<pre><code>standalone client 模式任务流程
-![image.png](/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png)
-
-执行流程
-1. client 模式提交任务后，会在客户端启动Driver进程。
-2. Driver 会向Master申请启动Application启动资源。
-3. 资源申请成功后，Driver端会将task发送到worker端执行。
-4. worker端执行成功后将执行结果返回给Driver端
-
-
-#### 1. standalone-cluster 任务提交模式
-提交命令：
-</code></pre><h1 id="Run-on-a-Spark-standalone-cluster-in-cluster-deploy-mode-with-supervise"><a href="#Run-on-a-Spark-standalone-cluster-in-cluster-deploy-mode-with-supervise" class="headerlink" title="Run on a Spark standalone cluster in cluster deploy mode with supervise"></a>Run on a Spark standalone cluster in cluster deploy mode with supervise</h1><p>./bin/spark-submit \<br>  –class org.apache.spark.examples.SparkPi \<br>  –master spark://207.184.161.138:7077 \<br>  –deploy-mode cluster \<br>  –supervise \<br>  –executor-memory 20G \<br>  –total-executor-cores 100 \<br>  /path/to/examples.jar \<br>  1000</p>
-<pre><code>例子： 
-</code></pre><p>#!/bin/sh<br>result_time=$(date +%Y%m%d)<br>echo “小车定位程序”</p>
-<p>spark-submit –class com.gree.cn.location.LocationMap –master spark://lyxbdw-02:7077 –deploy-mode cluster –supervise  –packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 –executor-memory 4G –total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</p>
-<p><code>`</code></p>
-<blockquote>
-<p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
-</blockquote>
-<p>standalone-cluster模式提交任务<br><img src="/images/2019/08/26/b76b5dc0-c7ac-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程：</p>
-<ol>
-<li>客户端使用命令spark-submit –deploy-mode cluster 后会启动spark-submit进程</li>
-<li>此进程为Driver向Master 申请资源。</li>
-<li>Master会随机在一台Worker节点来启动Driver进程。</li>
-<li>Driver启动成功后，spark-submit关闭，然后Driver向Master申请资源。</li>
-<li>Master接收到请求后，会在资源充足的Worker节点上启动Executor进程。</li>
-<li>Driver分发Task到Executor中执行。</li>
-</ol>
-<p>建议：<strong>在平时调试时使用client模式，在正式生产环境时建议使用cluster模式</strong></p>
-<p>参考文章：<a href="https://www.cnblogs.com/wangtcc/p/da-huaSpark-5san-tu-xiang-shuSpark-StandaloneClien.html" target="_blank" rel="noopener">1、大话Spark(5)-三图详述Spark Standalone/Client/Cluster运行模式</a><br><a href="https://blog.csdn.net/qq_39131779/article/details/83539608" target="_blank" rel="noopener">2、Spark中Standalone的两种提交模式（Standalone-client模式与Standalone-cluster模式）</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/26/spark-standalone-运行原理/" data-id="ck3o5xx7s002r8wujys52bvyz"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/08/26/蓝牙信标定位项目总结/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            蓝牙信标定位项目总结
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/08/22/redis-数据库/" class="article-nav-link">
-        <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">redis 数据库</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug

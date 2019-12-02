@@ -1,388 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    HBase 常用工具类 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-HBase-常用工具类" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      HBase 常用工具类
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/10/17/HBase-常用工具类/" class="article-date">
-  <time datetime="2019-10-17T02:13:36.000Z" itemprop="datePublished">2019-10-17</time>
-</a>
-        
-      </div>
-    
-
-    
-      
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <pre><code>object HBaseUtils {
-  def logger: Logger = LoggerFactory.getLogger(getClass)
-  /**
-    * 获取配置参数信息
-    * @return    
-*/ 
- def getHBaseConf : Configuration = {
-    val conf : Configuration = HBaseConfiguration.create
-    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)
-    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)
-    conf
-  }
-  /**
-    * 获取连接
-    * @param conf 配置信息
-    * @return
-    */
-  def getConnection(conf:Configuration): Connection ={
-    ConnectionFactory.createConnection(conf)
-  }
-  /**
-    * 获取管理员权限
-    * @param conn 连接信息
-    * @return HBaseAdmin
-    */
-  def getAdmin(conn:Connection) : HBaseAdmin = {
-    conn.getAdmin.asInstanceOf[HBaseAdmin]
-  }
-  /**
-    * 创建表
-    * @param admin 管理员
-    * @param tableName 表名
-    * @param columnFamily 列族
-    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常
-    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常
-    * @throws java.io.IOException 异常
-    */
-  @throws(classOf[MasterNotRunningException])
-  @throws(classOf[ZooKeeperConnectionException])
-  @throws(classOf[IOException])
-  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = {
-    val createTableName = TableName.valueOf(tableName)
-    if (admin.tableExists(createTableName)){
-      logger.info(tableName + &quot;table exists!&quot;)
-    }else{
-      val tableDesc = new HTableDescriptor(createTableName)      
-      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)
-      for (singleColumnFamily &lt;- columnFamily){
-        val columnDesc = new HColumnDescriptor(singleColumnFamily)
-        tableDesc.addFamily(columnDesc)
-      } 
-admin.createTable(tableDesc)
-      logger.info(tableName + &quot; create table success!&quot;)
-    }
-admin.close() 
- }
-
- /**
-    * 载入数据
-    * @param table HBase表
-    * @param rowKey 行键
-    * @param columnFamily 列族
-    * @param quorum 分布式信息
-    * @param value 数值
-    */
-  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit ={
-    val rowPut:Put = new Put(Bytes.toBytes(rowKey))
-    if (value == null){
-      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)
-    }else{
-      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)
-    }
-    table.put(rowPut)
-  }
-
-  /**
-    * 获取表数据
-    * @param table HBase表
-    * @param rowKey 行键
-    * @return HBase result
-    */
-  def getRow(table: Table,rowKey: String ):Result = {
-    val get:Get = new Get(Bytes.toBytes(rowKey))
-    val result:Result = table.get(get)
-    for (rowKv &lt;- result.rawCells()){
-      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)
-      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))
-      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))
-   }
-    result
-  }
-
-  /**
-    * 批量添加数据
-    * @param table HBase表
-    * @param list 数据列表
-    */
-  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = {
-    try{
-      table.put(list)
-    }catch{
-        logger.error(e.getMessage)
-      case e: IOException =&gt; 
-       logger.error(e.getMessage)
-    }
-  }
-  /**
-    * 查询所有记录
-    * @param table HBase表
-    * @return resultScanner
-    */
-  def queryAll(table: Table):ResultScanner = {
-    val scan: Scan = new Scan
-    try {
-      val result: ResultScanner = table.getScanner(scan)
-      result
-    }catch {
-      case e: IOException =&gt;
-      logger.error(e.getMessage)
-        null
-    }
-  }
-
- /**
-    * 单条记录查询
-    * @param table HBase表
-    * @param queryColumn 查询列 
-    * @param value 数值
-    * @param columns 列集合
-    * @return ResultScanner
-    */
-  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = {
-    if (columns == null || queryColumn == null || value == null ){
-      null
-    }else{
-      try {
-        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))
-        val scan: Scan = new Scan
-        for (column  logger.error(e.getMessage)
-          null
-      }
-    }
-  }
-  /**
-    * 删除表
-    * @param hBaseConnection 链接
-    * @param tableName HBase表
-    */
-  def dropTable(hBaseConnection: Connection,tableName: String): Unit = {
-    try {
-      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))
-      admin.deleteTable(TableName.valueOf(tableName))
-    }catch {
-      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)
-      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)
-      case e: IOException =&gt; logger.error(e.getMessage)
-    }
-  }
-}
-
-org.apache.hbase 
-hbase-client
-${hbase.version}
-org.apache.hadoop 
-hadoop-annotations                                            
-
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/17/HBase-常用工具类/" data-id="ck3o5xx5x000d8wujkadwpb9r"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/10/23/Docker-学习笔记/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            Docker 学习笔记
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/09/11/Apache-NiFi-简单介绍和使用/" class="article-nav-link">
-        <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">Apache NiFi 简单介绍和使用</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug

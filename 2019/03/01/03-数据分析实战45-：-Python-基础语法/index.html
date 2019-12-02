@@ -1,279 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    03 数据分析实战45 ： Python 基础语法 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-03-数据分析实战45-：-Python-基础语法" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      03 数据分析实战45 ： Python 基础语法
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/" class="article-date">
-  <time datetime="2019-03-01T02:37:48.000Z" itemprop="datePublished">2019-03-01</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/数据分析/">数据分析</a> / <a class="article-category-link" href="/categories/数据分析/python/">python</a>
-  </div>
-
-      </div>
-    
-
-    
-      
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><img src="/images/2019/03/01/66ec2200-3bc8-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
-<h1 id="Python-基础语法"><a href="#Python-基础语法" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h1><h2 id="Python-语言特点"><a href="#Python-语言特点" class="headerlink" title="Python 语言特点"></a>Python 语言特点</h2><blockquote>
-<p>Python 语言最大的优点就是简洁，同时有大量的第三方库，功能强大，能够解决数据分析的大部分问题。比如科学计算工具NumPy 和 Pandas库，深度学习工具 Keras 和 TensorFlow,以及机器学习工具 Scikit-learn。</p>
-</blockquote>
-<h2 id="安装及-IDE-环境"><a href="#安装及-IDE-环境" class="headerlink" title="安装及 IDE 环境"></a>安装及 IDE 环境</h2><p>安装Python 3.x 官网下载安装。<br>Python IDE 推荐使用 PythonCharm</p>
-<h2 id="Python-基础语法-1"><a href="#Python-基础语法-1" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><p><code>`</code>name = input(“What’s your name?”) # input 赋值输入<br>sum = 100+100<br>print (‘hello,%s’ %name) # 打印输出<br>print (‘sum = %d’ %sum)</p>
-<pre><code>### 判断语句 if ... else ...
-```if score&gt;= 90:
-       print (&#39;Excellent&#39;)
-else:
-       if score &lt; 60:
-           print( &#39;Fail&#39;)
-       else:
-           print (&#39;Good Job&#39;)
-
-
-</code></pre><h3 id="循环语句-：-for-…-in"><a href="#循环语句-：-for-…-in" class="headerlink" title="循环语句 ： for … in"></a>循环语句 ： for … in</h3><p><code>`</code>sum = 0<br>for number in range(11):<br>    sum = sum + number<br>print (sum)</p>
-<pre><code>### 循环语句：while
-```sum = 0
-number = 1
-while number &lt; 11:
-       sum = sum + number
-       number = number + 1
-print （sum）
-
-
-</code></pre><h2 id="数据类型：列表、元组、字典、集合"><a href="#数据类型：列表、元组、字典、集合" class="headerlink" title="数据类型：列表、元组、字典、集合"></a>数据类型：列表、元组、字典、集合</h2><h3 id="列表："><a href="#列表：" class="headerlink" title="列表：[]"></a>列表：[]</h3><p><code>`</code>lists = [‘a’,’b’,’c’]<br>lists.append(‘d’)<br>print (lists)<br>print (len(lists))<br>lists.insert(0,’mm’)<br>lists.pop()<br>print (lists)</p>
-<pre><code>### 元组（tuple）
-```tuples = (&#39;tupleA&#39;,&#39;tupleB&#39;)
-print (tuples[0])
-
-
-</code></pre><h3 id="字典（dictionary）"><a href="#字典（dictionary）" class="headerlink" title="字典（dictionary）"></a>字典（dictionary）</h3><p><code>`</code># -<em>- coding: utf-8 -</em></p>
-<h1 id="定义一个-dictionary"><a href="#定义一个-dictionary" class="headerlink" title="定义一个 dictionary"></a>定义一个 dictionary</h1><p>score = {‘guanyu’:95,’zhangfei’:96}</p>
-<h1 id="添加一个元素"><a href="#添加一个元素" class="headerlink" title="添加一个元素"></a>添加一个元素</h1><p>score[‘zhaoyun’] = 98<br>print (score)</p>
-<h1 id="删除一个元素"><a href="#删除一个元素" class="headerlink" title="删除一个元素"></a>删除一个元素</h1><p>score.pop(‘zhangfei’)</p>
-<h1 id="查看-key-是否存在"><a href="#查看-key-是否存在" class="headerlink" title="查看 key 是否存在"></a>查看 key 是否存在</h1><p>print (‘guanyu’ in score)</p>
-<h1 id="查看一个-key-对应的值"><a href="#查看一个-key-对应的值" class="headerlink" title="查看一个 key 对应的值"></a>查看一个 key 对应的值</h1><p>print (score.get(‘guanyu’))<br>print (score.get(‘yase’,99))</p>
-<pre><code>### 集合
-```s = set([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
-s.add(&#39;d&#39;)
-s.remove(&#39;b&#39;)
-print （s）
-print （&#39;c&#39; in s）
-
-
-</code></pre><p><img src="/images/2019/03/01/9d1f4470-3bcc-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
-<p><img src="/images/2019/03/01/a812ead0-3bcc-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"><br>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
-<p>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/01/03-数据分析实战45-：-Python-基础语法/" data-id="ck3o5xx5f00008wujf5ae4z3x"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据分析/">数据分析</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/03/07/18-决策树（中）-CART算法笔记/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            18| 决策树（中） : CART算法笔记
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/02/23/17-数据分析实战笔记：-决策树/" class="article-nav-link">
-        <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">17-数据分析实战笔记： 决策树</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug

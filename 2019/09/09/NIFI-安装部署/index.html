@@ -1,248 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    NIFI 安装部署 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-NIFI-安装部署" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      NIFI 安装部署
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/09/09/NIFI-安装部署/" class="article-date">
-  <time datetime="2019-09-09T01:43:41.000Z" itemprop="datePublished">2019-09-09</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ETL/">ETL</a> / <a class="article-category-link" href="/categories/ETL/NIFI/">NIFI</a>
-  </div>
-
-      </div>
-    
-
-    
-      
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>::: hljs-center</p>
-<p>NIFI 安装部署</p>
-<p>:::</p>
-<h2 id="一、NIFI-下载"><a href="#一、NIFI-下载" class="headerlink" title="一、NIFI 下载"></a>一、NIFI 下载</h2><ul>
-<li>NIFI 下载链接：<a href="http://nifi.apache.org/download.html" target="_blank" rel="noopener">NIFI Downloads</a></li>
-<li>选择与自己环境匹配的安装包</li>
-<li><img src="/images/2019/09/09/b6d2a810-d2a0-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-<li>若是下载速度过慢，可以选择另一个下载地址：<a href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.9.2/nifi-1.9.2-bin.zip" target="_blank" rel="noopener">NIFI 下载</a></li>
-<li><img src="/images/2019/09/09/7bb8b160-d2a1-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ul>
-<h2 id="二、NIFI-安装"><a href="#二、NIFI-安装" class="headerlink" title="二、NIFI 安装"></a>二、NIFI 安装</h2><ol>
-<li>将下载的安装包放到 E:\software\ ，然后解压安装，非常简单</li>
-<li>修改配置文件E:\software\nifi-1.9.2-bin\nifi-1.9.2\conf\nifi.properties，更改端口号</li>
-<li><img src="/images/2019/09/09/6df7ebd0-d2a2-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-<h2 id="三-、NIFI-运行"><a href="#三-、NIFI-运行" class="headerlink" title="三 、NIFI 运行"></a>三 、NIFI 运行</h2><ol>
-<li>进入E:\software\nifi-1.9.2-bin\nifi-1.9.2\bin 目录，双击run-nifi.bat，若是linux则sh nifi.sh</li>
-<li>打开浏览器，进入<a href="http://localhost:8081/nifi/，可能需要等会页面加载慢" target="_blank" rel="noopener">http://localhost:8081/nifi/，可能需要等会页面加载慢</a></li>
-<li><img src="/images/2019/09/09/2a0a96b0-d2a3-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/09/NIFI-安装部署/" data-id="ck3o5xx6j00138wujzxemav2i"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ETL/">ETL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NIFI/">NIFI</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/09/11/Apache-NiFi-简单介绍和使用/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            Apache NiFi 简单介绍和使用
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/09/05/maven-打包相关记录/" class="article-nav-link">
-        <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">maven 打包相关记录</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug

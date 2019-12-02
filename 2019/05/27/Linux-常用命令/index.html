@@ -1,322 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-    <meta name="description" content="天道酬勤">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    Linux 常用命令 |
-    
-    上善若水博客</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+extends includes/layout.pug
 
-<body>
-<main class="content">
-  <section class="outer">
-  
+block top_img
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
+  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
+  div#top-container(style=bg_img)
+    #post-info
+      #post-title
+          .posttitle= page.title || _p('no_title')
+      #post-meta
+        if (theme.post_meta.date_type)
+          if (theme.post_meta.date_type === 'both')
+            time.post-meta__date
+              i.fa.fa-calendar(aria-hidden="true")
+              =' '+_p('post.created')+' '+date(page.date, config.date_format)
+              span.post-meta__separator |
+              i.fa.fa-history(aria-hidden="true")
+              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
+          else
+            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
+            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
+                  
+        if (theme.post_meta.categories && page.categories.data.length > 0)
+          if (theme.post_meta.date_type)
+            span.post-meta__separator.mobile_hidden |
+          span.mobile_hidden
+            each item, index in page.categories.data
+              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
+              a(href=url_for(item.path)).post-meta__categories #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fa.fa-angle-right(aria-hidden="true")
+        .post-meta-wordcount
+          if (theme.wordcount && theme.wordcount.enable)
+            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.wordcount') + ': '
+            span.word-count= wordcount(page.content)
+            span.post-meta__separator |
+            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
+            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
+          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
+            span.post-meta__separator |
+          if theme.busuanzi.page_pv
+            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
+            span= _p('post.page_pv') + ': '
+            span#busuanzi_value_page_pv
 
-<article id="post-Linux-常用命令" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+block content
+  article#post(class="")
+    #post-content.article-container!= page.content
+  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
+    .post-copyright
+      .post-copyright__author
+        span.post-copyright-meta= _p('post.copyright.author') + ": "
+        span.post-copyright-info
+          a(href=`mailto:${config.email}`) #[=config.author]
+      .post-copyright__type
+        span.post-copyright-meta= _p('post.copyright.link') + ": "
+        span.post-copyright-info
+          a(href=url_for(page.permalink)) #[=page.permalink]
+      .post-copyright__notice
+        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
+        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
   
-  <div class="article-inner">
-    
-      <header class="article-header">
+  .tag_share
+    if (theme.post_meta.tags)
+      .post-meta__tag-list
+        each item, index in page.tags.data
+          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
+    include includes/share/index.pug
         
+  if theme.reward.enable
+    include includes/reward.pug
+  include includes/pagination.pug
   
-    <h1 class="article-title" itemprop="name">
-      Linux 常用命令
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/05/27/Linux-常用命令/" class="article-date">
-  <time datetime="2019-05-27T01:43:36.000Z" itemprop="datePublished">2019-05-27</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-      </div>
-    
-
-    
-      
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p>
-<blockquote>
-<p>vim file_name<br>:%d<br>:wq</p>
-</blockquote>
-<p>2.使用cat命令情况，命令如下：</p>
-<blockquote>
-<p>cat /dev/null &gt; file_name</p>
-</blockquote>
-<p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p>
-<blockquote>
-<p>echo “”&gt;file_name</p>
-</blockquote>
-<p>推荐使用cat命令</p>
-<h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p>
-<blockquote>
-<p>:$ 跳到最后一行<br>:1 跳到第一行</p>
-</blockquote>
-<p>第二种方式：</p>
-<blockquote>
-<p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
-</blockquote>
-<p>查找文件关键字内容</p>
-<blockquote>
-<p>grep -r “test”  /data/reports</p>
-</blockquote>
-<p>搜索命令</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/string</td>
-<td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td>
-</tr>
-<tr>
-<td>n</td>
-<td>搜索指定字符串的下一个出现位置</td>
-</tr>
-<tr>
-<td>:%s/old/new/g</td>
-<td>全文替换指定字符串</td>
-</tr>
-<tr>
-<td>:n1,n2s/old/new/g</td>
-<td>在一定范围内替换指定字符串</td>
-</tr>
-</tbody>
-</table>
-<p>端口占用查询：</p>
-<pre><code>netstat -anlp | grep 80
-
-lsof -i:80
-
-</code></pre><p>查看内存使用情况</p>
-<pre><code>free -h
-
-</code></pre><p>查看磁盘使用情况</p>
-<pre><code>df -h
-
-
-</code></pre><p>查看文件创建数量</p>
-<pre><code>df -i
-
-</code></pre><p>删除某个文件的小文件</p>
-<pre><code>find . -type f -delete
-find . -type d -print -delete
-
-</code></pre><p>查看占用线程最大的程序</p>
-<pre><code>ps -eLf | wc -l
-
-</code></pre><p>修改服务最大线程数</p>
-<pre><code>echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000
-echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效
-</code></pre><p>监控java线程</p>
-<pre><code>ps -eLf | grep java | wc -l
-
-</code></pre><p>监控网络客户连接数：</p>
-<pre><code>netstat -n | grep tcp | grep 侦听端口 | wc -l
-</code></pre><p>linux 将本地文件传给其他服务器</p>
-<pre><code>scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark
-
-注意第二个路径与冒号之间不能有空格
-
-</code></pre><p>查看某个目录下大文件</p>
-<pre><code>find / -size +50M | xargs du -h
-
-</code></pre><h2 id="查看CPU情况："><a href="#查看CPU情况：" class="headerlink" title="查看CPU情况："></a>查看CPU情况：</h2><pre><code>cat /proc/cpuinfo |grep &quot;model name&quot; &amp;&amp; cat /proc/cpuinfo |grep &quot;physical id&quot;
-
-</code></pre><h2 id="查看内存大小"><a href="#查看内存大小" class="headerlink" title="查看内存大小"></a>查看内存大小</h2><pre><code>cat /proc/meminfo | grep MemTotal
-
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/27/Linux-常用命令/" data-id="ck3o5xx67000l8wuj71x3h8d7"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/05/30/scala-正则匹配/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            scala 正则匹配
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/05/23/蓝牙信标定位/" class="article-nav-link">
-        <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">蓝牙信标定位</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2019 上善若水博客</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-
-</main>
-
-<aside class="sidebar sidebar-specter">
-  
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="上善若水博客"></a>
-    </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-</html>
+  if theme.related_post && theme.related_post.enable
+    != related_posts(page,site.posts)
+  if page.comments !== false
+    include includes/comments/index.pug
