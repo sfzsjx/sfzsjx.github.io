@@ -1,79 +1,611 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>netty 遇到的坑 | 上善若水博客</title><meta name="description" content="netty 遇到的坑"><meta name="keywords" content="netty"><meta name="author" content="上善若水"><meta name="copyright" content="上善若水"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="netty 遇到的坑"><meta name="twitter:description" content="netty 遇到的坑"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta property="og:type" content="article"><meta property="og:title" content="netty 遇到的坑"><meta property="og:url" content="http://yoursite.com/2019/05/22/netty-遇到的坑/"><meta property="og:site_name" content="上善若水博客"><meta property="og:description" content="netty 遇到的坑"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-block top_img
-  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
-  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
-  div#top-container(style=bg_img)
-    #post-info
-      #post-title
-          .posttitle= page.title || _p('no_title')
-      #post-meta
-        if (theme.post_meta.date_type)
-          if (theme.post_meta.date_type === 'both')
-            time.post-meta__date
-              i.fa.fa-calendar(aria-hidden="true")
-              =' '+_p('post.created')+' '+date(page.date, config.date_format)
-              span.post-meta__separator |
-              i.fa.fa-history(aria-hidden="true")
-              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
-          else
-            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
-            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-                  
-        if (theme.post_meta.categories && page.categories.data.length > 0)
-          if (theme.post_meta.date_type)
-            span.post-meta__separator.mobile_hidden |
-          span.mobile_hidden
-            each item, index in page.categories.data
-              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
-              a(href=url_for(item.path)).post-meta__categories #[=item.name]
-              if (index < page.categories.data.length - 1)
-                i.fa.fa-angle-right(aria-hidden="true")
-        .post-meta-wordcount
-          if (theme.wordcount && theme.wordcount.enable)
-            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
-            span= _p('post.wordcount') + ': '
-            span.word-count= wordcount(page.content)
-            span.post-meta__separator |
-            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
-            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
-            span.post-meta__separator |
-          if theme.busuanzi.page_pv
-            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
-            span= _p('post.page_pv') + ': '
-            span#busuanzi_value_page_pv
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
 
 
-block content
-  article#post(class="")
-    #post-content.article-container!= page.content
-  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
-    .post-copyright
-      .post-copyright__author
-        span.post-copyright-meta= _p('post.copyright.author') + ": "
-        span.post-copyright-info
-          a(href=`mailto:${config.email}`) #[=config.author]
-      .post-copyright__type
-        span.post-copyright-meta= _p('post.copyright.link') + ": "
-        span.post-copyright-info
-          a(href=url_for(page.permalink)) #[=page.permalink]
-      .post-copyright__notice
-        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
-        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://yoursite.com/2019/05/22/netty-遇到的坑/"><link rel="prev" title="蓝牙信标定位" href="http://yoursite.com/2019/05/23/蓝牙信标定位/"><link rel="next" title="MySQL 语句记录" href="http://yoursite.com/2019/05/16/MySQL-语句记录/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'false',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: undefined
   
-  .tag_share
-    if (theme.post_meta.tags)
-      .post-meta__tag-list
-        each item, index in page.tags.data
-          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
-    include includes/share/index.pug
-        
-  if theme.reward.enable
-    include includes/reward.pug
-  include includes/pagination.pug
-  
-  if theme.related_post && theme.related_post.enable
-    != related_posts(page,site.posts)
-  if page.comments !== false
-    include includes/comments/index.pug
+}</script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">上善若水博客</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">37</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">39</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">netty 遇到的坑</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-05-22<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-09-04</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/网络编程/">网络编程</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h2 id="一、-进制转换"><a href="#一、-进制转换" class="headerlink" title="一、 进制转换"></a>一、 进制转换</h2><h3 id="1-十进制转为十六进制"><a href="#1-十进制转为十六进制" class="headerlink" title="1. 十进制转为十六进制"></a>1. 十进制转为十六进制</h3><pre><code>int valueTen = 328;
+String strHex = Integer.toHexString(valueTen)
+
+</code></pre><h3 id="2-十六进制转十进制"><a href="#2-十六进制转十进制" class="headerlink" title="2. 十六进制转十进制"></a>2. 十六进制转十进制</h3><pre><code>String strHex = &quot;0214010977&quot;
+int valueTen = Integer.pareseInt(strHex,16)
+
+</code></pre><h2 id="二、数据类型转换"><a href="#二、数据类型转换" class="headerlink" title="二、数据类型转换"></a>二、数据类型转换</h2><h3 id="1-String字符串转Int整型"><a href="#1-String字符串转Int整型" class="headerlink" title="1. String字符串转Int整型"></a>1. String字符串转Int整型</h3><pre><code>String str = &quot;2019&quot;;
+int i = Integer.pareseInt(str);
+int j = Integer.valuesOf(str).intValue();
+
+</code></pre><h3 id="2-Int整型转String字符串类型"><a href="#2-Int整型转String字符串类型" class="headerlink" title="2.Int整型转String字符串类型"></a>2.Int整型转String字符串类型</h3><pre><code>int i = 2019;
+String str1 = i+&quot;&quot;;
+String str2 = String.valueOf(i);
+
+</code></pre><h3 id="3-String转-byte"><a href="#3-String转-byte" class="headerlink" title="3.String转 byte[]"></a>3.String转 byte[]</h3><pre><code>public static byte[] strToByteArray(String str) {
+    if (str == null) {
+        return null;
+    }
+    byte[] byteArray = str.getBytes();
+    return byteArray;
+}
+
+</code></pre><h3 id="4-byte-转String"><a href="#4-byte-转String" class="headerlink" title="4.byte[]转String"></a>4.byte[]转String</h3><pre><code>public static String byteArrayToStr(byte[] byteArray) {
+    if (byteArray == null) {
+        return null;
+    }
+    String str = new String(byteArray);
+    return str;
+}
+
+</code></pre><h3 id="5-byte-转十六进制String"><a href="#5-byte-转十六进制String" class="headerlink" title="5. byte[]转十六进制String"></a>5. byte[]转十六进制String</h3><pre><code>public static String byteArrayToHexStr(byte[] byteArray) {
+    if (byteArray == null){
+        return null;
+    }
+    char[] hexArray = &quot;0123456789ABCDEF&quot;.toCharArray();
+    char[] hexChars = new char[byteArray.length * 2];
+    for (int j = 0; j &lt; byteArray.length; j++) {
+        int v = byteArray[j] &amp; 0xFF;
+        hexChars[j * 2] = hexArray[v &gt;&gt;&gt; 4];
+        hexChars[j * 2 + 1] = hexArray[v &amp; 0x0F];
+    }
+    return new String(hexChars);
+}
+
+</code></pre><h3 id="6-十六进制String转byte"><a href="#6-十六进制String转byte" class="headerlink" title="6. 十六进制String转byte[]"></a>6. 十六进制String转byte[]</h3><pre><code>public static byte[] hexStrToByteArray(String str)
+{
+    if (str == null) {
+        return null;
+    }
+    if (str.length() == 0) {
+        return new byte[0];
+    }
+    byte[] byteArray = new byte[str.length() / 2];
+    for (int i = 0; i &lt; byteArray.length; i++){
+        String subStr = str.substring(2 * i, 2 * i + 2);
+        byteArray[i] = ((byte)Integer.parseInt(subStr, 16));
+    }
+    return byteArray;
+}
+
+</code></pre><h2 id="三、字节数组操作"><a href="#三、字节数组操作" class="headerlink" title="三、字节数组操作"></a>三、字节数组操作</h2><h3 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h3><pre><code>        /**
+     * 合并byte[]数组 （不改变原数组）
+     * @param byte_1
+     * @param byte_2
+     * @return 合并后的数组
+     */
+    public byte[] byteMerger(byte[] byte_1, byte[] byte_2){  
+        byte[] byte_3 = new byte[byte_1.length+byte_2.length];  
+        System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  
+        System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  
+        return byte_3;  
+    }
+
+</code></pre><h3 id="2-截取数组"><a href="#2-截取数组" class="headerlink" title="2. 截取数组"></a>2. 截取数组</h3><pre><code>    /**
+     * 截取byte数组   不改变原数组
+     * @param b 原数组
+     * @param off 偏差值（索引）
+     * @param length 长度
+     * @return 截取后的数组
+     */
+    public byte[] subByte(byte[] b,int off,int length){
+        byte[] b1 = new byte[length];
+        System.arraycopy(b, off, b1, 0, length);
+        return b1;
+    }
+
+</code></pre><h2 id="四、时间字符串转时间戳格式"><a href="#四、时间字符串转时间戳格式" class="headerlink" title="四、时间字符串转时间戳格式"></a>四、时间字符串转时间戳格式</h2><pre><code>public class TimeFormatTest {
+    public static void main(String[] args) throws ParseException {
+        String time = &quot;2019-5-23 9:24:1&quot;;
+        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+
+        java.util.Date date_util = sdf.parse(time); //转换为util.date
+        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());//转换为sql.date
+        System.out.println(date_util);
+        System.out.println(date_sql);
+        String date = sdf.format(date_sql);
+        System.out.println(date);
+        date = sdf.format(date_util);
+        System.out.println(date);
+
+    }
+    }
+
+</code></pre><h2 id="五、-netty和springboot整合"><a href="#五、-netty和springboot整合" class="headerlink" title="五、 netty和springboot整合"></a>五、 netty和springboot整合</h2><p>引入pom.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.1.5.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.gree.cn&lt;/groupId&gt;
+    &lt;artifactId&gt;basedata&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;basedata&lt;/name&gt;
+    &lt;description&gt;get base data&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- spring boot begin--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- springboot 和 netty 整合 socket--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;4.1.31.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- spring boot 和 netty整合 socket 结束--&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.16.20&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+            &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
+            &lt;version&gt;5.2.0&lt;/version&gt;
+            &lt;scope&gt;compile&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--kafka 依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+            &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;
+            &lt;version&gt;2.1.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--mysql 依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.44&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;!-- log4j--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-log4j&lt;/artifactId&gt;
+            &lt;version&gt;1.3.8.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+
+
+</code></pre><p>其中主要引入包为：</p>
+<pre><code> &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;4.1.31.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+
+</code></pre><h3 id="第一步创建NettyTcoServer服务端"><a href="#第一步创建NettyTcoServer服务端" class="headerlink" title="第一步创建NettyTcoServer服务端"></a>第一步创建NettyTcoServer服务端</h3><pre><code>package com.gree.cn.basedata.server;
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.Future;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PreDestroy;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Component
+public class NettyTcpServer {
+
+    private static final Logger log = LoggerFactory.getLogger(NettyTcpServer.class);
+    //boss事件轮询线程组
+    //处理Accept连接事件的线程，这里线程数设置为1即可，netty处理链接事件默认为单线程，过度设置反而浪费cpu资源
+    private EventLoopGroup boss = new NioEventLoopGroup(1);
+    //worker事件轮询线程组
+    //处理hadnler的工作线程，其实也就是处理IO读写 。线程数据默认为 CPU 核心数乘以2
+    private EventLoopGroup worker = new NioEventLoopGroup();
+
+    @Autowired
+    ServerChannelInitializer serverChannelInitializer;
+
+    @Value(&quot;${netty.tcp.client.port}&quot;)
+    private Integer port;
+
+    //与客户端建立连接后得到的通道对象
+    private Channel channel;
+
+    /**
+     * 存储client的channel
+     * key:ip，value:Channel
+     */
+    public static Map&lt;String, Channel&gt; map = new ConcurrentHashMap&lt;String, Channel&gt;();
+
+    /**
+     * 开启Netty tcp server服务
+     *
+     * @return
+     */
+    public ChannelFuture start() {
+        //启动类
+        ServerBootstrap serverBootstrap = new ServerBootstrap();
+        serverBootstrap.group(boss, worker)//组配置，初始化ServerBootstrap的线程组
+                .channel(NioServerSocketChannel.class)///构造channel通道工厂//bossGroup的通道，只是负责连接
+                .childHandler(serverChannelInitializer)//设置通道处理者ChannelHandler////workerGroup的处理器
+                .option(ChannelOption.SO_BACKLOG, 1024)//socket参数，当服务器请求处理程全满时，用于临时存放已完成三次握手请求的队列的最大长度。如果未设置或所设置的值小于1，Java将使用默认值50。
+                .childOption(ChannelOption.SO_KEEPALIVE, true);//启用心跳保活机制，tcp，默认2小时发一次心跳
+        //Future：异步任务的生命周期，可用来获取任务结果
+        ChannelFuture channelFuture1 = serverBootstrap.bind(port).syncUninterruptibly();//绑定端口，开启监听，同步等待
+        if (channelFuture1 != null &amp;&amp; channelFuture1.isSuccess()) {
+            channel = channelFuture1.channel();//获取通道
+            log.info(&quot;Netty tcp server start success, port = {}&quot;, port);
+        } else {
+            log.error(&quot;Netty tcp server start fail&quot;);
+        }
+        return channelFuture1;
+    }
+
+    /**
+     * 停止Netty tcp server服务
+     */
+    @PreDestroy
+    public void destroy() {
+        if (channel != null) {
+            channel.close();
+        }
+        try {
+            Future&lt;?&gt; future = worker.shutdownGracefully().await();
+            if (!future.isSuccess()) {
+                log.error(&quot;netty tcp workerGroup shutdown fail, {}&quot;, future.cause());
+            }
+            Future&lt;?&gt; future1 = boss.shutdownGracefully().await();
+            if (!future1.isSuccess()) {
+                log.error(&quot;netty tcp bossGroup shutdown fail, {}&quot;, future1.cause());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info(&quot;Netty tcp server shutdown success&quot;);
+    }
+
+}
+
+</code></pre><h3 id="第二步编写通道初始化流程"><a href="#第二步编写通道初始化流程" class="headerlink" title="第二步编写通道初始化流程"></a>第二步编写通道初始化流程</h3><pre><code>package com.gree.cn.basedata.server;
+
+import com.gree.cn.basedata.utils.decodeutil.MyDecoder;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
+
+
+@Component
+public class ServerChannelInitializer extends ChannelInitializer&lt;SocketChannel&gt; {
+
+    @Autowired
+    ServerChannelHandler serverChannelHandler;
+
+    @Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        ChannelPipeline pipeline = socketChannel.pipeline();
+        //IdleStateHandler心跳机制,如果超时触发Handle中userEventTrigger()方法
+        pipeline.addLast(&quot;idleStateHandler&quot;,
+                new IdleStateHandler(10, 0, 0, TimeUnit.MINUTES));
+        //自定义编码器
+        byte[] delimiterByte = new byte[2];
+        delimiterByte[0] = 0x02;
+        delimiterByte[1] = 0x14;
+        ByteBuf delimiterCode = Unpooled.copiedBuffer(delimiterByte);
+        pipeline.addLast(new DelimiterBasedFrameDecoder(64,delimiterCode));
+        pipeline.addLast(&quot;decoder&quot;,new MyDecoder());
+
+
+        //字符串编解码器
+      pipeline.addLast(
+               new StringDecoder(),
+               new StringEncoder());
+        //自定义Handler
+        pipeline.addLast(&quot;serverChannelHandler&quot;, serverChannelHandler);
+    }
+}
+
+</code></pre><h3 id="第三步自定义处理数据，并存入kafka"><a href="#第三步自定义处理数据，并存入kafka" class="headerlink" title="第三步自定义处理数据，并存入kafka"></a>第三步自定义处理数据，并存入kafka</h3><pre><code>package com.gree.cn.basedata.server;
+
+import com.gree.cn.basedata.kafka_netty.KafkaProducerSingleton;
+import com.gree.cn.basedata.utils.DateUtils;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.io.InputStream;
+import java.util.Properties;
+
+@Component
+@ChannelHandler.Sharable
+@Slf4j
+public class ServerChannelHandler extends SimpleChannelInboundHandler&lt;Object&gt; {
+    /**
+     * @param ctx 通道
+     * @param msg 消息
+     * @throws Exception 异常消息
+     */
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
+
+        //kafka 生产者配置
+        Properties properties = new Properties();
+        //加载配置文件
+        InputStream is = ServerChannelHandler.class.getResourceAsStream(&quot;/producer.properties&quot;);
+        properties.load(is);
+        String substring = msg.toString().substring(8, 10);
+
+        // 返回时间戳
+        if (substring.equals(&quot;77&quot;)) {
+            short yeardate = Short.parseShort(DateUtils.getTimeNow().substring(0, 4));
+            int monthdate = Integer.parseInt(DateUtils.getTimeNow().substring(4, 6));
+            int daydate = Integer.parseInt(DateUtils.getTimeNow().substring(6, 8));
+            int hoursdate = Integer.parseInt(DateUtils.getTimeNow().substring(8, 10));
+            int mindate = Integer.parseInt(DateUtils.getTimeNow().substring(10, 12));
+            int seconddate = Integer.parseInt(DateUtils.getTimeNow().substring(12, 14));
+
+            byte[] test = new byte[13];
+            test[0] = 0x02;
+            test[1] = 0x14;
+            test[2] = 0x01;
+            test[3] = 0x09;
+            test[4] = 0x77;
+            test[5] = (byte) (0x00FF &amp; yeardate);
+            test[6] = (byte) (0x00FF &amp; (yeardate &gt;&gt; 8));
+            test[7] = ((byte) monthdate);
+            test[8] = ((byte) daydate);
+            test[9] = ((byte) hoursdate);
+            test[10] = ((byte) mindate);
+            test[11] = ((byte) seconddate);
+
+            //生成异或校验码
+            byte temp = test[3];
+            for (int i = 4; i &lt; test.length; i++) {
+                temp ^= test[i];
+            }
+            test[12] = temp;
+            ByteBuf out = Unpooled.buffer();
+           // ByteOrder order;
+           // order = ByteOrder.LITTLE_ENDIAN;
+            //out.order(order);
+            out.writeBytes(test);
+            ctx.channel().writeAndFlush(out);
+        }
+        //然后将传入的数据全部写入到kafka内，并加上接收时间
+       // VoteProduceSendmsg voteProduceSendmsg = new VoteProduceSendmsg();
+        // voteProduceSendmsg.sendMsg(msg+DateUtils.getFormatTimeNow(),properties);
+ //      ExecutorService executorService = Executors.newFixedThreadPool(2);
+//        executorService.submit(new HandlerProducer(msg));
+        KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton
+                .getInstance();
+        kafkaProducerSingleton.init(&quot;topic0619&quot;);
+        kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());
+        //kafkaProducerSingleton.close();
+        ctx.channel().flush();
+
+    }
+
+    /**
+     * 活跃的、有效的通道
+     * 第一次连接成功后进入的方法
+     *
+     * @param ctx 有效的通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        log.info(&quot;tcp client &quot; + getRemoteAddress(ctx) + &quot; connect success&quot;);
+        //往channel map中添加channel信息
+        NettyTcpServer.map.put(getIPString(ctx), ctx.channel());
+
+    }
+
+    /**
+     * 不活动的通道
+     * 连接丢失后执行的方法（client端可据此实现断线重连）
+     *
+     * @param ctx 不活动的通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //删除Channel Map中的失效Client
+        log.info(&quot;不活动通道关闭!&quot;);
+        NettyTcpServer.map.remove(getIPString(ctx));
+        ctx.close();
+
+    }
+
+    /**
+     * 异常处理
+     * @param ctx 通道
+     * @throws Exception 异常
+     */
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        super.exceptionCaught(ctx, cause);
+        //发生异常，关闭连接
+        log.error(&quot;引擎 {} 的通道发生异常，即将断开连接&quot;, getRemoteAddress(ctx));
+        ctx.close();//再次建议close
+    }
+
+    /**
+     * 心跳机制，超时处理
+     * @param ctx 通道
+     * @param evt 事件
+     * @throws Exception 异常
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        String socketString = ctx.channel().remoteAddress().toString();
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            if (event.state() == IdleState.READER_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; READER_IDLE 读超时&quot;);
+                ctx.disconnect();//断开
+            } else if (event.state() == IdleState.WRITER_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; WRITER_IDLE 写超时&quot;);
+                ctx.disconnect();
+
+            } else if (event.state() == IdleState.ALL_IDLE) {
+                log.info(&quot;Client: &quot; + socketString + &quot; ALL_IDLE 总超时&quot;);
+                ctx.disconnect();
+            }
+        }
+    }
+
+    /**
+     * 获取client对象：ip+port
+     *
+     * @param ctx 通道
+     * @return 返回值
+     */
+    private String getRemoteAddress(ChannelHandlerContext ctx) {
+        String socketString = &quot;&quot;;
+        socketString = ctx.channel().remoteAddress().toString();
+        return socketString;
+    }
+
+    /**
+     * 获取client的ip
+     * @param ctx 通道
+     * @return 返回值
+     */
+    private String getIPString(ChannelHandlerContext ctx) {
+        String ipString = &quot;&quot;;
+        String socketString = ctx.channel().remoteAddress().toString();
+        int colonAt = socketString.indexOf(&quot;:&quot;);
+        ipString = socketString.substring(1, colonAt);
+        return ipString;
+    }
+
+}
+
+</code></pre><pre><code>创建necat 
+.\nc.exe -l  -p 9000
+
+</code></pre></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">上善若水</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/05/22/netty-遇到的坑/">http://yoursite.com/2019/05/22/netty-遇到的坑/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">上善若水博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/netty/">netty    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/05/23/蓝牙信标定位/"><img class="prev_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>蓝牙信标定位</span></div></a></div><div class="next-post pull_right"><a href="/2019/05/16/MySQL-语句记录/"><img class="next_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>MySQL 语句记录</span></div></a></div></nav></div></div><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2019 By 上善若水</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script></body></html>

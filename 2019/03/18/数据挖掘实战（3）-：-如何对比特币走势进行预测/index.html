@@ -1,79 +1,200 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>数据挖掘实战（3） ： 如何对比特币走势进行预测 | 上善若水博客</title><meta name="description" content="数据挖掘实战（3） ： 如何对比特币走势进行预测"><meta name="keywords" content="数据分析"><meta name="author" content="上善若水"><meta name="copyright" content="上善若水"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="数据挖掘实战（3） ： 如何对比特币走势进行预测"><meta name="twitter:description" content="数据挖掘实战（3） ： 如何对比特币走势进行预测"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta property="og:type" content="article"><meta property="og:title" content="数据挖掘实战（3） ： 如何对比特币走势进行预测"><meta property="og:url" content="http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/"><meta property="og:site_name" content="上善若水博客"><meta property="og:description" content="数据挖掘实战（3） ： 如何对比特币走势进行预测"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-block top_img
-  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.default_top_img
-  - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
-  div#top-container(style=bg_img)
-    #post-info
-      #post-title
-          .posttitle= page.title || _p('no_title')
-      #post-meta
-        if (theme.post_meta.date_type)
-          if (theme.post_meta.date_type === 'both')
-            time.post-meta__date
-              i.fa.fa-calendar(aria-hidden="true")
-              =' '+_p('post.created')+' '+date(page.date, config.date_format)
-              span.post-meta__separator |
-              i.fa.fa-history(aria-hidden="true")
-              =' '+_p('post.updated')+' '+date(page.updated, config.date_format)
-          else
-            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
-            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-                  
-        if (theme.post_meta.categories && page.categories.data.length > 0)
-          if (theme.post_meta.date_type)
-            span.post-meta__separator.mobile_hidden |
-          span.mobile_hidden
-            each item, index in page.categories.data
-              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
-              a(href=url_for(item.path)).post-meta__categories #[=item.name]
-              if (index < page.categories.data.length - 1)
-                i.fa.fa-angle-right(aria-hidden="true")
-        .post-meta-wordcount
-          if (theme.wordcount && theme.wordcount.enable)
-            i.fa.fa-file-word-o.post-meta__icon(aria-hidden="true")
-            span= _p('post.wordcount') + ': '
-            span.word-count= wordcount(page.content)
-            span.post-meta__separator |
-            i.fa.fa-clock-o.post-meta__icon(aria-hidden="true")
-            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-          if (theme.wordcount && theme.wordcount.enable && theme.busuanzi.page_pv)
-            span.post-meta__separator |
-          if theme.busuanzi.page_pv
-            i.fa.fa-eye.post-meta__icon(aria-hidden="true")        
-            span= _p('post.page_pv') + ': '
-            span#busuanzi_value_page_pv
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
 
 
-block content
-  article#post(class="")
-    #post-content.article-container!= page.content
-  if (theme.post_copyright && theme.post_copyright.enable && page.copyright != false)
-    .post-copyright
-      .post-copyright__author
-        span.post-copyright-meta= _p('post.copyright.author') + ": "
-        span.post-copyright-info
-          a(href=`mailto:${config.email}`) #[=config.author]
-      .post-copyright__type
-        span.post-copyright-meta= _p('post.copyright.link') + ": "
-        span.post-copyright-info
-          a(href=url_for(page.permalink)) #[=page.permalink]
-      .post-copyright__notice
-        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
-        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/"><link rel="prev" title="hive 笔记" href="http://yoursite.com/2019/04/04/hive-笔记/"><link rel="next" title="Mysql 优化原理 笔记" href="http://yoursite.com/2019/03/16/Mysql-优化原理-笔记/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'false',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: undefined
   
-  .tag_share
-    if (theme.post_meta.tags)
-      .post-meta__tag-list
-        each item, index in page.tags.data
-          a(href=url_for(item.path)).post-meta__tags #[=item.name]    
-    include includes/share/index.pug
-        
-  if theme.reward.enable
-    include includes/reward.pug
-  include includes/pagination.pug
-  
-  if theme.related_post && theme.related_post.enable
-    != related_posts(page,site.posts)
-  if page.comments !== false
-    include includes/comments/index.pug
+}</script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">上善若水博客</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">37</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">39</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">数据挖掘实战（3） ： 如何对比特币走势进行预测</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-03-18<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-03-18</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/数据分析/">数据分析</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><p>时间序列分析：<br>   时间序列分析模型建立了观察结果与时间变化的关系，能够帮助我们预测未来一段时间内的结果变化情况。</p>
+<p>需要掌握的目标：</p>
+<ol>
+<li>了解时间序列预测的概念，以及常用的算法，包括AR、MA、ARMA、ARIMA模型等；</li>
+<li>掌握并使用ARMA模型工具，对一个时间序列数据进行建模和预测；</li>
+<li>对比特币的历史数据进行时间序列建模，并预测未来6个月的走势。</li>
+</ol>
+<p><strong>时间序列预测</strong><br>   关于时间序列，可以简单理解为按照时间组成的数字序列。在时间序列预测模型中，经典模型有：<br>AR、MA、ARIMA、ARMA。<br>   AR(Auto Regressive) 又叫自回归模型。它认为过去若干个时刻的点通过线性组合，再加上白噪声就可以预测未来某个时刻的点。白噪声可以理解成一个期望为0，方差为常数的纯随机过程。AR模型还存在一个阶数，称为 AR（p）模型，也叫做 p 阶自回归模型。他指的是通过这个时刻的前p个点，通过线性组合再加上白噪声来预测当前时刻点的值。</p>
+<p>   MA（Moving Average）,又叫滑动平均模型。它与 AR模型大同小异，AR模型是历史时序值的线性组合，MA是通过历史白噪声点进行线性组合来 影响当前时刻点。同样MA模型也存在一个阶数，称为MA(q)阶模型，也叫做q阶移动平均模型。</p>
+<p>   ARMA（Auto Regressive Moving Average）,又叫自回归滑动平均模型，也是AR和MA两者的混合。相较于ARMA,ARIMA多了个差分的过程，作用是对不平稳数据进行差分平稳，在差分平稳后再进行建模。ARMA(p,q) 两个阶数，ARIMA（p,d,q）三个阶数，其中d 表示差分阶数。</p>
+<p><strong>  ARMA 模型工具</strong><br>  引入相关工具包</p>
+<pre><code>  from statsmodels.tsa.arima_model import ARMA
+
+</code></pre><p>然后通过ARMA(endog,order,exog=None)创建ARMA类，参数说明：<br>  endog: endogenous variable,代表内生变量，又叫非政策性变量，它由模型决定，不被政策左右，可以说是我们想要分析的变量，或者说是我们这次项目需要用到的变量。</p>
+<p>  order ：代表是p和q的值，也就是ARMA中的阶数。</p>
+<p>  exog: exogenous variables,代表外生变量。外生变量和内生变量一样是经济模型中重要变量。相较于内生变量而言，外生变量有称为政策性变量，在经济机制内受外部的影响，不是我们模型要研究的变量。</p>
+<p>代码例子：</p>
+<pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+from statsmodels.tsa.arima_model import ARMA
+from statsmodels.graphics.api import qqplot
+
+# 创建数据
+data = [5922, 5308, 5546, 5975, 2704, 1767, 4111, 5542, 4726, 5866, 6183, 3199, 1471, 1325, 6618, 6644, 5337, 7064, 2912, 1456, 4705, 4579, 4990, 4331, 4481, 1813, 1258, 4383, 5451, 5169, 5362, 6259, 3743, 2268, 5397, 5821, 6115, 6631, 6474, 4134, 2728, 5753, 7130, 7860, 6991, 7499, 5301, 2808, 6755, 6658, 7644, 6472, 8680, 6366, 5252, 8223, 8181, 10548, 11823, 14640, 9873, 6613, 14415, 13204, 14982, 9690, 10693, 8276, 4519, 7865, 8137, 10022, 7646, 8749, 5246, 4736, 9705, 7501, 9587, 10078, 9732, 6986, 4385, 8451, 9815, 10894, 10287, 9666, 6072, 5418]
+data = pd.Series(data)
+data_index = sm.tsa.datetools.dates_from_range(&#39;1901&#39;,&#39;1990&#39;)
+
+# 绘制数据图
+data.index = pd.Index(data_index)
+data.plot(figsize=(12,8))
+plt.show()
+
+# 创建 ARMA 模型
+arma = ARMA(data,(7,0)).fit()
+print(&#39;AIC: %0.4lf&#39;  %arma.aic)
+
+# 模型预测
+predict_y = arma.predict(&#39;1990&#39;,&#39;2000&#39;)
+
+# 预测结果绘制
+fig,ax = plt.subplots(figsize=(12,8))
+ax = data.ix[&#39;1901&#39;:].plot(ax=ax)
+predict_y.plot(ax= ax)
+plt.show()
+
+</code></pre><p>如何判断一个模型是否合适？<br> 需要引入AIC准则，也叫赤池准则，数值越小代表模型拟合的越好。</p>
+<p><strong>比特币预测</strong></p>
+<pre><code># -*- coding: utf-8 -*-
+# 比特币走势预测，使用时间序列 ARMA
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.arima_model import ARMA
+import warnings
+from itertools import product
+from datetime import datetime
+warnings.filterwarnings(&#39;ignore&#39;)
+# 数据加载
+df = pd.read_csv(&#39;./bitcoin_2012-01-01_to_2018-10-31.csv&#39;)
+# 将时间作为 df 的索引
+df.Timestamp = pd.to_datetime(df.Timestamp)
+df.index = df.Timestamp
+# 数据探索
+print(df.head())
+# 按照月，季度，年来统计
+df_month = df.resample(&#39;M&#39;).mean()
+df_Q = df.resample(&#39;Q-DEC&#39;).mean()
+df_year = df.resample(&#39;A-DEC&#39;).mean()
+# 按照天，月，季度，年来显示比特币的走势
+fig = plt.figure(figsize=[15, 7])
+plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;] # 用来正常显示中文标签
+plt.suptitle(&#39;比特币金额（美金）&#39;, fontsize=20)
+plt.subplot(221)
+plt.plot(df.Weighted_Price, &#39;-&#39;, label=&#39;按天&#39;)
+plt.legend()
+plt.subplot(222)
+plt.plot(df_month.Weighted_Price, &#39;-&#39;, label=&#39;按月&#39;)
+plt.legend()
+plt.subplot(223)
+plt.plot(df_Q.Weighted_Price, &#39;-&#39;, label=&#39;按季度&#39;)
+plt.legend()
+plt.subplot(224)
+plt.plot(df_year.Weighted_Price, &#39;-&#39;, label=&#39;按年&#39;)
+plt.legend()
+plt.show()
+# 设置参数范围
+ps = range(0, 3)
+qs = range(0, 3)
+parameters = product(ps, qs)
+parameters_list = list(parameters)
+# 寻找最优 ARMA 模型参数，即 best_aic 最小
+results = []
+best_aic = float(&quot;inf&quot;) # 正无穷
+for param in parameters_list:
+    try:
+        model = ARMA(df_month.Weighted_Price,order=(param[0], param[1])).fit()
+    except ValueError:
+        print(&#39;参数错误:&#39;, param)
+        continue
+    aic = model.aic
+    if aic &lt; best_aic:
+        best_model = model
+        best_aic = aic
+        best_param = param
+    results.append([param, model.aic])
+# 输出最优模型
+result_table = pd.DataFrame(results)
+result_table.columns = [&#39;parameters&#39;, &#39;aic&#39;]
+print(&#39;最优模型: &#39;, best_model.summary())
+# 比特币预测
+df_month2 = df_month[[&#39;Weighted_Price&#39;]]
+date_list = [datetime(2018, 11, 30), datetime(2018, 12, 31), datetime(2019, 1, 31), datetime(2019, 2, 28), datetime(2019, 3, 31), 
+             datetime(2019, 4, 30), datetime(2019, 5, 31), datetime(2019, 6, 30)]
+future = pd.DataFrame(index=date_list, columns= df_month.columns)
+df_month2 = pd.concat([df_month2, future])
+df_month2[&#39;forecast&#39;] = best_model.predict(start=0, end=91)
+# 比特币预测结果显示
+plt.figure(figsize=(20,7))
+df_month2.Weighted_Price.plot(label=&#39;实际金额&#39;)
+df_month2.forecast.plot(color=&#39;r&#39;, ls=&#39;--&#39;, label=&#39;预测金额&#39;)
+plt.legend()
+plt.title(&#39;比特币金额（月）&#39;)
+plt.xlabel(&#39;时间&#39;)
+plt.ylabel(&#39;美金&#39;)
+plt.show()
+
+
+</code></pre></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">上善若水</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/">http://yoursite.com/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">上善若水博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/数据分析/">数据分析    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/04/04/hive-笔记/"><img class="prev_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>hive 笔记</span></div></a></div><div class="next-post pull_right"><a href="/2019/03/16/Mysql-优化原理-笔记/"><img class="next_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Mysql 优化原理 笔记</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/" title="03 数据分析实战45 ： Python 基础语法"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">03 数据分析实战45 ： Python 基础语法</div></a></div><div class="relatedPosts_item"><a href="/2019/02/18/02-数据分析实战笔记-学习数据挖掘的最佳路径/" title="02 数据分析实战笔记--学习数据挖掘的最佳路径"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">02 数据分析实战笔记--学习数据挖掘的最佳路径</div></a></div><div class="relatedPosts_item"><a href="/2019/02/18/修炼指南/" title="修炼指南"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">修炼指南</div></a></div><div class="relatedPosts_item"><a href="/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/" title="数据挖掘实战（2）： 信用卡诈骗分析"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">数据挖掘实战（2）： 信用卡诈骗分析</div></a></div><div class="relatedPosts_item"><a href="/2019/02/18/数据分析全景图笔记/" title="数据分析全景图笔记"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">数据分析全景图笔记</div></a></div><div class="relatedPosts_item"><a href="/2019/03/14/数据挖掘实战（1）-：-信用卡违约率分析/" title="数据挖掘实战（1） ： 信用卡违约率分析"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">数据挖掘实战（1） ： 信用卡违约率分析</div></a></div></div><div class="clear_both"></div></div></div></div><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2019 By 上善若水</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script></body></html>
