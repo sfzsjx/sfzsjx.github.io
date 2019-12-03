@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-30T01:13:54.521Z</updated>
+  <updated>2019-12-03T06:24:25.335Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>lambda 表达式</title>
+    <link href="http://yoursite.com/2019/12/03/lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://yoursite.com/2019/12/03/lambda-表达式/</id>
+    <published>2019-12-03T06:23:59.000Z</published>
+    <updated>2019-12-03T06:24:25.335Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.什么是lambda表达式</p><blockquote><p>简单讲就是实现将一个代码块赋值给一个变量。如将右边代码块赋给左边变量：<br><img src="/images/2019/12/03/b18cf6d0-1594-11ea-be28-a13eed6a6a63.png" alt="image.png"></p></blockquote><p><img src="/images/2019/12/03/e62f63f0-1594-11ea-be28-a13eed6a6a63.png" alt="image.png"></p><p>2.lambda表达式的作用</p><blockquote><p>可以使代码变得简洁<br>如我们在不使用lambda表达式实现接口，并调用它时与使用lambda表达式对比<br><img src="/images/2019/12/03/4e47cc20-1595-11ea-be28-a13eed6a6a63.png" alt="image.png"></p></blockquote><p>参考：zhihu.com/question/20125256/answer/324121308</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.什么是lambda表达式&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简单讲就是实现将一个代码块赋值给一个变量。如将右边代码块赋给左边变量：&lt;br&gt;&lt;img src=&quot;/images/2019/12/03/b18cf6d0-1594-11ea-be28-a13eed6a6a
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>spring boot jpa</title>
@@ -501,34 +528,6 @@
     
     
       <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring boot 注解</title>
-    <link href="http://yoursite.com/2019/07/16/spring-boot-%E6%B3%A8%E8%A7%A3/"/>
-    <id>http://yoursite.com/2019/07/16/spring-boot-注解/</id>
-    <published>2019-07-16T09:05:47.000Z</published>
-    <updated>2019-07-16T09:09:46.592Z</updated>
-    
-    <content type="html"><![CDATA[<p>问题一、</p><p>Could not autowire. No beans of ‘RestTemplate’ type found</p><p>在mapper 类添加注解@Repository 即可解决，简单有效</p><p>方法2：在mapper文件上加@Component注解，把普通pojo实例化到spring容器中</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;问题一、&lt;/p&gt;
-&lt;p&gt;Could not autowire. No beans of ‘RestTemplate’ type found&lt;/p&gt;
-&lt;p&gt;在mapper 类添加注解@Repository 即可解决，简单有效&lt;/p&gt;
-&lt;p&gt;方法2：在mapper文件上加@Co
-      
-    
-    </summary>
-    
-      <category term="spring boot" scheme="http://yoursite.com/categories/spring-boot/"/>
-    
-    
-      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
     
   </entry>
   

@@ -136,6 +136,73 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-23T06:16:23.000Z">2019-02-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/决策树/">决策树</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1031 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/02/23/17-数据分析实战笔记：-决策树/">17-数据分析实战笔记： 决策树</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树的工作原理"><a href="#决策树的工作原理" class="headerlink" title="决策树的工作原理"></a>决策树的工作<strong>原理</strong></h2><blockquote>
+<p>  在现实生活，我们做的各种决策，都是基于以往的经验来判断的。如果将背后的逻辑整理成一个结构图，这实际上就是决策树。<br><img src="/images/2019/02/23/4dbc8110-3733-11e9-928d-e15e87e90364.png" alt="image.png"><br>上图就是一个典型的决策树。而在实现决策树时会经历两个阶段：<strong>构造和剪枝。</strong></p>
+</blockquote>
+<h2 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h2><p>优点：计算复杂度不高，输出结果易于理解，对中间值的确失不敏感，可以处理不相干特征数据<br>缺点：易发生过拟合<br>适用数据类型：数值型和标称型<br>创建分支的伪代码函数createBranch()如下所示：<br>检测数据集中的每个子项是否属于同一类：</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">If so return 类标签：</span><br><span class="line">Else</span><br><span class="line">	寻找划分数据集的最好特征</span><br><span class="line">	划分数据集</span><br><span class="line">	创建分支节点</span><br><span class="line">		for 每个划分的子集</span><br><span class="line">		    调用函数createBranch并增加返回结果到分支节点中</span><br><span class="line">        return 分支节点</span><br></pre></td></tr></table></figure>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote>
+<p>构造的过程就是选择什么样的属性作为节点的过程，一般在构造中存在三种类型的节点：<br>1.根节点：树的顶端，最开始的那个节点<br>2.内部节点：树的中间节点<br>3.叶节点：树最底部的节点，也是决策树结果</p>
+</blockquote>
+<p>构造过程中，需要解决的三个重要问题：<br>1.选择哪个属性作为根节点；<br>2.选择哪些属性作为子节点；<br>3.什么时候停止并得到目标状态，即叶子节点。</p>
+<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><blockquote>
+<p>（1）收集数据：可以使用任何方法<br>（2）准备数据：树构造算法只适应于标称型数据，因此数值型数据必须离散化<br>（3）分析数据：可以适应任何方法，构造树完成之后，我们应该检查图形是否符合预期。<br>（4）训练算法：构造树的数据结构<br>（5）测试算法：使用经验树计算错误率。<br>（6）使用算法：此步骤可以适应于任何监督学习算法，而使用决策树可以更好的理解数据的含义</p>
+</blockquote>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><pre><code>划分数据集的最大原则：将无序的数据变得更加有序。
+在划分数据集前后的信息变化称之为信息增益，而我们可以计算每个特征值划分收获的信息增益，获得信息增益最高
+</code></pre><p>的特征就是最好的选择。<br>    熵定义为信息的期望值。如果待分类的事务可能划分在多个分类之中，则xi的信息定义为：<br>            <img src="/images/2019/03/13/ed1fe490-453e-11e9-9d60-a566f1b35488.png" alt="image.png"><br>为了计算熵，需要计算所有类别可能包含的信息期望值：<br><img src="/images/2019/03/13/2fda6990-453f-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
+<p>程序清单1 计算给定数据集的香农熵<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from math import log</span><br><span class="line">def calcShannonEnt(dataSet):</span><br><span class="line">	numEntries = len(dataSet)</span><br><span class="line">	labelCounts = &#123;&#125;</span><br><span class="line">	#为所有可能的分类创建字典</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		currentLabel = featVec[-1]</span><br><span class="line">		if currentLabel not in labelCounts.keys():</span><br><span class="line">		labelCounts[currentLabel] = 0</span><br><span class="line">		labelCounts[currentLabel] += 1</span><br><span class="line">	shannonEnt = 0.0</span><br><span class="line">	# 计算信息期望</span><br><span class="line">	for key in labelCounts:</span><br><span class="line">		prob = float(labelCounts[key])/numEntries</span><br><span class="line">		shannonEnt -= prob*log(prob,2)</span><br><span class="line">	return shannonEnt</span><br></pre></td></tr></table></figure></p>
+<p>程序清单2 按照给定的特征划分数据集<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def splitDataSet(dataSet,axis,value):</span><br><span class="line">	retDataSet = []</span><br><span class="line">	for featVec in dataSet:</span><br><span class="line">		if featVec[axis] == value：</span><br><span class="line">			reduceFeatVec = featVec[:axis]</span><br><span class="line">			reduceFeatVec.extend(featVec[axis+1:])</span><br><span class="line">			retDataSet.append(reducedFeatVec)</span><br><span class="line">	return retDataSet</span><br></pre></td></tr></table></figure></p>
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><blockquote>
+<p>剪枝就是给决策树瘦身。也即不需要过多的判断也能得到不错的结果。主要是为了防止“过拟合（Overfitting）”现象的发生。<br>过拟合现象会导致得到的模型虽然训练结果好，但是泛化能力差。<br>剪枝一般分为两种：“预剪枝”（Pre-Pruning）和“后剪枝”（Post-Pruning）</p>
+</blockquote>
+<p><img src="/images/2019/02/23/98412a80-3736-11e9-928d-e15e87e90364.png" alt="image.png"></p>
+<p><img src="/images/2019/03/01/bc0ba040-3bc7-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-02-18T14:26:38.000Z">2019-02-18</time>
                 
                 <div class="level-item">
@@ -929,7 +996,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            58
+                            59
                         </p>
                     </a>
                 </div>
@@ -941,7 +1008,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            39
+                            40
                         </p>
                     </a>
                 </div>
@@ -953,7 +1020,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -1115,6 +1182,14 @@ public class KylinJdbc {
         <a class="level is-marginless" href="/categories/hive/">
             <span class="level-start">
                 <span class="level-item">hive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1370,7 +1445,7 @@ public class KylinJdbc {
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1382,6 +1457,25 @@ public class KylinJdbc {
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/03/lambda-表达式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="lambda 表达式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time></div>
+                    <a href="/2019/12/03/lambda-表达式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">lambda 表达式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1459,25 +1553,6 @@ public class KylinJdbc {
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/23/Docker-学习笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T07:13:40.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/Docker-学习笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1488,6 +1563,17 @@ public class KylinJdbc {
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1707,6 +1793,13 @@ public class KylinJdbc {
                 <div class="control">
                     <a class="tags has-addons" href="/tags/jar/">
                         <span class="tag">jar</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1917,6 +2010,25 @@ public class KylinJdbc {
         
         <article class="media">
             
+            <a href="/2019/12/03/lambda-表达式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="lambda 表达式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time></div>
+                    <a href="/2019/12/03/lambda-表达式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">lambda 表达式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/30/spring-boot-jpa/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="spring boot jpa">
@@ -1991,25 +2103,6 @@ public class KylinJdbc {
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/23/Docker-学习笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker 学习笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T07:13:40.000Z">2019-10-23</time></div>
-                    <a href="/2019/10/23/Docker-学习笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker 学习笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2020,6 +2113,17 @@ public class KylinJdbc {
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -2239,6 +2343,13 @@ public class KylinJdbc {
                 <div class="control">
                     <a class="tags has-addons" href="/tags/jar/">
                         <span class="tag">jar</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
