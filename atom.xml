@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-03T06:27:25.055Z</updated>
+  <updated>2019-12-04T03:40:21.497Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux （ubuntu） hbase 单机安装</title>
+    <link href="http://yoursite.com/2019/12/04/linux-%EF%BC%88ubuntu%EF%BC%89-hbase-%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2019/12/04/linux-（ubuntu）-hbase-单机安装/</id>
+    <published>2019-12-04T03:39:18.000Z</published>
+    <updated>2019-12-04T03:40:21.497Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.jdk 安装</p><p>下载jdk-8u212-linux-x64.tar.gz安装包，执行命令<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir java</span><br><span class="line">tar -zxvf jdk-8u212-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p><p>配置JAVA_HOME等参数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></p><blockquote><p>export JAVA_HOME=/usr/local/java/jdk1.8.0_212<br>export HBASE_HOME=/usr/local/hbase/hbase-2.1.0<br>export JRE_HOME=/usr/local/java/jdk1.8.0_212/jre<br>export PATH=${JAVA_HOME}/bin:$PATH:${HBASE_HOME}/bin:$PATH</p></blockquote><p>保存，使生效<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p><p>2.hbase 安装<br>下载 hbase-2.1.0-bin.tar.gz 安装包，执行命令<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir hbase</span><br><span class="line">tar -zxvf hbase-2.1.0-bin.tar.gz</span><br></pre></td></tr></table></figure></p><p>配置HBASE_HOME等参数。如上参数。</p><p>修改配置文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase/hbase-2.1.0/conf</span><br><span class="line">vim hbase-env.sh</span><br></pre></td></tr></table></figure></p><p>新增配置参数</p><blockquote><p>export JAVA_HOME=/usr/local/java/jdk1.8.0_212<br>export HBASE_MANAGES_ZK=true</p></blockquote><p>配置hbase数据目录<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase/hbase-2.1.0/conf</span><br><span class="line">vim hbase-site.xml</span><br></pre></td></tr></table></figure></p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:///usr/local/hbase/hbase-tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure><p>启动habse<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase/hbase-2.1.0/bin</span><br><span class="line">./start-hbase.sh</span><br><span class="line"></span><br><span class="line">hbase shell</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.jdk 安装&lt;/p&gt;
+&lt;p&gt;下载jdk-8u212-linux-x64.tar.gz安装包，执行命令&lt;br&gt;&lt;figure class=&quot;highlight plain hljs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cla
+      
+    
+    </summary>
+    
+      <category term="hbase" scheme="http://yoursite.com/categories/hbase/"/>
+    
+    
+      <category term="hbase" scheme="http://yoursite.com/tags/hbase/"/>
+    
+  </entry>
   
   <entry>
     <title>lambda 表达式</title>
@@ -492,34 +518,6 @@
       
       
         &lt;figure class=&quot;highlight plain hljs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span 
-      
-    
-    </summary>
-    
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
-    
-    
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark sql  java 自定义函数</title>
-    <link href="http://yoursite.com/2019/07/18/spark-sql-java-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/"/>
-    <id>http://yoursite.com/2019/07/18/spark-sql-java-自定义函数/</id>
-    <published>2019-07-18T08:22:27.000Z</published>
-    <updated>2019-07-18T08:22:27.928Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>::: hljs-center</code></pre><p>java自定义函数</p><p>:::</p><p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题<br>      <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.udf().register(&quot;transsinglepower&quot;, new UDF1&lt;Integer,Double&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Double call(Integer single_poer) throws Exception &#123;</span><br><span class="line">                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));</span><br><span class="line">                return mesure_distinct;</span><br><span class="line">            &#125;&#125;, DataTypes.DoubleType);</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;::: hljs-center
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;java自定义函数&lt;/p&gt;
-&lt;p&gt;:::&lt;/p&gt;
-&lt;p&gt;//自定义函数将信号强度转距离&lt;br&gt;        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型&lt;br&gt;   
       
     
     </summary>

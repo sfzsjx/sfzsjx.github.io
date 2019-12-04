@@ -136,6 +136,54 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-17T08:26:48.000Z">2019-06-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/DataFrame/">DataFrame</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 47 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/17/Dataframe-常见问题记录/">Dataframe 常见问题记录</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="问题1、不能够解析某个字段"><a href="#问题1、不能够解析某个字段" class="headerlink" title="问题1、不能够解析某个字段"></a>问题1、不能够解析某个字段</h3><blockquote>
+<p>解决办法：<br>查看表名是否正确，数据库是否正确，是否存在数据库切换的情况。</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-06-17T02:36:51.000Z">2019-06-17</time>
                 
                 <div class="level-item">
@@ -816,65 +864,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-30T07:10:31.000Z">2019-04-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/kafka/">kafka</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/kafka/消息队列/">消息队列</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 568 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/30/kafka相关的常规操作/">kafka相关的常规操作</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="1、启动服务器"><a href="#1、启动服务器" class="headerlink" title="1、启动服务器"></a>1、启动服务器</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure>
-<h3 id="2、创建主题"><a href="#2、创建主题" class="headerlink" title="2、创建主题"></a>2、创建主题</h3><p>创建一个名为“test”的主题，它只包含一个分区，只有一个副本：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server lyxbdw-01:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
-<p>查看主题：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server lyxbdw-01:9092 test</span><br></pre></td></tr></table></figure></p>
-<h3 id="3、生产者发送消息"><a href="#3、生产者发送消息" class="headerlink" title="3、生产者发送消息"></a>3、生产者发送消息</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure>
-<h3 id="4-kafka生产者创建消息"><a href="#4-kafka生产者创建消息" class="headerlink" title="4.kafka生产者创建消息"></a>4.kafka生产者创建消息</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.basedata.kafka_netty;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.util.Properties;</span><br><span class="line">import org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line">import org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public final class KafkaProducerSingleton &#123;</span><br><span class="line"></span><br><span class="line">    private static KafkaProducer&lt;Integer, Object&gt; kafkaProducer;</span><br><span class="line"></span><br><span class="line">    private String topic;</span><br><span class="line"></span><br><span class="line">    private KafkaProducerSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态内部类</span><br><span class="line">     *</span><br><span class="line">     * @author tanjie</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    private static class LazyHandler &#123;</span><br><span class="line"></span><br><span class="line">        private static final KafkaProducerSingleton instance = new KafkaProducerSingleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 单例模式,kafkaProducer是线程安全的,可以多线程共享一个实例</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static final KafkaProducerSingleton getInstance() &#123;</span><br><span class="line">        return LazyHandler.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka生产者进行初始化</span><br><span class="line">     *</span><br><span class="line">     * @return KafkaProducer</span><br><span class="line">     */</span><br><span class="line">    public void init(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">        if (null == kafkaProducer) &#123;</span><br><span class="line">            Properties props = new Properties();</span><br><span class="line">            InputStream inStream = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                inStream = this.getClass().getClassLoader()</span><br><span class="line">                        .getResourceAsStream(&quot;producer.properties&quot;);</span><br><span class="line">                props.load(inStream);</span><br><span class="line">                kafkaProducer = new KafkaProducer&lt;Integer, Object&gt;(props);</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                if (null != inStream) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        inStream.close();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过kafkaProducer发送消息</span><br><span class="line">     *  具体消息值</span><br><span class="line">     */</span><br><span class="line">    public void sendKafkaMessage( String message) &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 1、如果指定了某个分区,会只讲消息发到这个分区上 2、如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用</span><br><span class="line">         * 3、如果没有指定分区和key,那么将会随机发送到topic的分区中 4、如果指定了key,那么将会以hash&lt;key&gt;的方式发送到分区中</span><br><span class="line">         */</span><br><span class="line">        ProducerRecord&lt;Integer, Object&gt; record = new ProducerRecord&lt;Integer, Object&gt;(</span><br><span class="line">                topic, message);</span><br><span class="line">        // send方法是异步的,添加消息到缓存区等待发送,并立即返回，这使生产者通过批量发送消息来提高效率</span><br><span class="line">        // kafka生产者是线程安全的,可以单实例发送消息</span><br><span class="line">        kafkaProducer.send(record);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * kafka实例销毁</span><br><span class="line">     */</span><br><span class="line">    public void close() &#123;</span><br><span class="line">        if (null != kafkaProducer) &#123;</span><br><span class="line">            kafkaProducer.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getTopic() &#123;</span><br><span class="line">        return topic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setTopic(String topic) &#123;</span><br><span class="line">        this.topic = topic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后调用用producer实例<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KafkaProducerSingleton kafkaProducerSingleton = KafkaProducerSingleton</span><br><span class="line">               .getInstance();</span><br><span class="line">       kafkaProducerSingleton.init(&quot;topic0619&quot;);</span><br><span class="line">       kafkaProducerSingleton.sendKafkaMessage(msg+DateUtils.getFormatTimeNow());</span><br></pre></td></tr></table></figure></p>
-<p>注意配置producer.properties文件</p>
-<blockquote>
-<p>#指定节点列表<br>bootstrap.servers=10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092</p>
-</blockquote>
-<p>#指定序列化处理类<br>key.serializer=org.apache.kafka.common.serialization.IntegerSerializer<br>value.serializer=org.apache.kafka.common.serialization.StringSerializer<br>acks=0</p>
-<p>#buffer.memory=33554432</p>
-<p>#是否压缩<br>compression.type=snappy</p>
-<p>#是否重试<br>retries=0<br>batch.size=500<br>request.timeout.ms=5000</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -945,7 +934,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            59
+                            60
                         </p>
                     </a>
                 </div>
@@ -957,7 +946,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            40
+                            41
                         </p>
                     </a>
                 </div>
@@ -969,7 +958,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            38
+                            39
                         </p>
                     </a>
                 </div>
@@ -1123,6 +1112,14 @@
         <a class="level is-marginless" href="/categories/docker/">
             <span class="level-start">
                 <span class="level-item">docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hbase/">
+            <span class="level-start">
+                <span class="level-item">hbase</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1394,7 +1391,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1406,6 +1403,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
+                    <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1483,25 +1499,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/25/Docker-三剑客之-Docker-Compose/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker 三剑客之 Docker Compose">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-25T00:55:10.000Z">2019-10-25</time></div>
-                    <a href="/2019/10/25/Docker-三剑客之-Docker-Compose/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker 三剑客之 Docker Compose</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1519,7 +1516,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1728,6 +1725,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hbase/">
+                        <span class="tag">hbase</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1959,6 +1963,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
+                    <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/03/lambda-表达式/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="lambda 表达式">
@@ -2033,25 +2056,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/10/25/Docker-三剑客之-Docker-Compose/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker 三剑客之 Docker Compose">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-25T00:55:10.000Z">2019-10-25</time></div>
-                    <a href="/2019/10/25/Docker-三剑客之-Docker-Compose/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker 三剑客之 Docker Compose</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2069,7 +2073,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2278,6 +2282,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hbase/">
+                        <span class="tag">hbase</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
