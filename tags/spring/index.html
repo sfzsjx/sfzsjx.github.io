@@ -146,68 +146,10 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-12T01:57:13.000Z">2019-05-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spring/">spring</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/spring/spring-cloud/">spring cloud </a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/spring/spring-cloud/微服务/">微服务</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 481 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/12/spring-cloud/">spring cloud</a>
-            
-        </h1>
-        <div class="content">
-            <p>::: hljs-center</p>
-<p>spring cloud 常见错误以及解决办法<br>:::</p>
-<h3 id="问题-1：找不到主类或加载不到主类"><a href="#问题-1：找不到主类或加载不到主类" class="headerlink" title="问题 1：找不到主类或加载不到主类"></a>问题 1：找不到主类或加载不到主类</h3><p>解决办法：尝试 mvn clean ，mvn install</p>
-<h3 id="问题2：Module-“spring-cloud-itoken”"><a href="#问题2：Module-“spring-cloud-itoken”" class="headerlink" title="问题2：Module “spring-cloud-itoken”"></a>问题2：Module “spring-cloud-itoken”</h3><p>must not contain source root “C:\Users\hadoop\IdeaProjects\spring-cloud-itoken\spring-cloud-itoken-admin\src\main\java”.<br>The root already belongs to module “spring-cloud-itoken-admin”<br>解决办法：这类问题通常是由于多模块项目，删除了root 模块的src 目录造成的</p>
-<p><img src="/images/2019/05/27/a4fe2200-802e-11e9-b471-85e9a7e0c091.png" alt="image.png"></p>
-<p>所有找到root模块，然后将其右侧的sources 下的多余文件找到并删除即可。</p>
-<h3 id="问题3-：java程序找不到包"><a href="#问题3-：java程序找不到包" class="headerlink" title="问题3 ：java程序找不到包"></a>问题3 ：java程序找不到包</h3><p>解决办法：<img src="/images/2019/05/27/0e0fb740-802f-11e9-b471-85e9a7e0c091.png" alt="image.png"></p>
-<p>重新设置module sdk 的路径一般能够解决。</p>
-<h3 id="问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true"><a href="#问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true" class="headerlink" title="问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}"></a>问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: <a href="mailto:{@org.springframework.beans.factory.annotation.Autowired" target="_blank" rel="noopener">{@org.springframework.beans.factory.annotation.Autowired</a>(required=true)}</h3><p> 解决办法啊： 在 serviceImpl 加上注解 @Service</p>
-<h3 id="问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext"><a href="#问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext" class="headerlink" title="问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext"></a>问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext</h3><p> 解决办法 ：未启动ConfigApplication,验证方法：打开<a href="http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod" target="_blank" rel="noopener">http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod</a></p>
-<h3 id="问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect"><a href="#问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect" class="headerlink" title="问题6 ：Caused by: java.net.ConnectException: Connection refused: connect"></a>问题6 ：Caused by: java.net.ConnectException: Connection refused: connect</h3><p>解决办法： 未加载注解 @ActiveProfiles(value = “prod”)</p>
-<h3 id="问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1"><a href="#问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1" class="headerlink" title="问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in https://oss.sonatype.org/content/repositories/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]"></a>问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank" rel="noopener">https://oss.sonatype.org/content/repositories/snapshots</a> was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]</h3><p>解决办法： 在父项目下有的子项目在首次运行clean 和install前应该先运行父项目的clean和install</p>
-<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-04-04T06:32:58.000Z">2019-04-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spring/">spring</a>
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                 </div>
                 
                 
@@ -307,7 +249,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            33
+                            15
                         </p>
                     </a>
                 </div>
@@ -319,7 +261,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            38
+                            33
                         </p>
                     </a>
                 </div>
@@ -422,33 +364,9 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/DataFrame/">
-            <span class="level-start">
-                <span class="level-item">DataFrame</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/IDEA/">
             <span class="level-start">
                 <span class="level-item">IDEA</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java，jar/">
-            <span class="level-start">
-                <span class="level-item">Java，jar</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Scala/">
-            <span class="level-start">
-                <span class="level-item">Scala</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -460,30 +378,6 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/kafka/">
-            <span class="level-start">
-                <span class="level-item">kafka</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/kafka/消息队列/">
-            <span class="level-start">
-                <span class="level-item">消息队列</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/linux/">
-            <span class="level-start">
-                <span class="level-item">linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/mysql，数据库/">
@@ -502,65 +396,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/scala/">
-            <span class="level-start">
-                <span class="level-item">scala</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/scala/正则匹配/">
-            <span class="level-start">
-                <span class="level-item">正则匹配</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/shell/">
-            <span class="level-start">
-                <span class="level-item">shell</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/spark/">
             <span class="level-start">
                 <span class="level-item">spark</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/spring/spring-cloud/">
-            <span class="level-start">
-                <span class="level-item">spring cloud </span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/spring-boot/">
-            <span class="level-start">
-                <span class="level-item">spring boot</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/sql/">
-            <span class="level-start">
-                <span class="level-item">sql</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -571,7 +409,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -579,20 +417,12 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">21</span>
+                <span class="level-item tag">28</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
             <span class="level-start">
                 <span class="level-item">学习</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/工具类，Java/">
-            <span class="level-start">
-                <span class="level-item">工具类，Java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -627,23 +457,7 @@
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/数据库/mybatis/">
-            <span class="level-start">
-                <span class="level-item">mybatis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/校验/">
-            <span class="level-start">
-                <span class="level-item">校验</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/程序语言/">
@@ -651,15 +465,7 @@
                 <span class="level-item">程序语言</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/网络编程/">
-            <span class="level-start">
-                <span class="level-item">网络编程</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/脚本/">
@@ -795,7 +601,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
         
@@ -980,7 +786,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1041,13 +847,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/jar/">
-                        <span class="tag">jar</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
@@ -1076,9 +875,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mysql/">
                         <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1127,7 +933,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1160,37 +966,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/工具类，时间工具类/">
-                        <span class="tag">工具类，时间工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/微服务/">
-                        <span class="tag">微服务</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据分析/">
                         <span class="tag">数据分析</span>
                         <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据库/">
-                        <span class="tag">数据库</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据库-mybatis/">
-                        <span class="tag">数据库 mybatis</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1211,13 +989,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1250,7 +1021,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1435,7 +1206,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1496,13 +1267,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/jar/">
-                        <span class="tag">jar</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
@@ -1531,9 +1295,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mysql/">
                         <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1582,7 +1353,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1615,37 +1386,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/工具类，时间工具类/">
-                        <span class="tag">工具类，时间工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/微服务/">
-                        <span class="tag">微服务</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据分析/">
                         <span class="tag">数据分析</span>
                         <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据库/">
-                        <span class="tag">数据库</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据库-mybatis/">
-                        <span class="tag">数据库 mybatis</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1666,13 +1409,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
