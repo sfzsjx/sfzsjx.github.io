@@ -147,6 +147,52 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-09T08:50:32.000Z">2019-08-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 79 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/09/spark-常用参数设置/">spark 常用参数设置</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
+<h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-18T08:22:27.000Z">2019-07-18</time>
                 
                 <div class="level-item">
@@ -635,7 +681,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-13T06:45:42.000Z">2019-03-13</time>
+                <time class="level-item has-text-grey" datetime="2019-04-04T01:47:50.000Z">2019-04-04</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
@@ -645,7 +691,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 988 个字)
+                    几秒 读完 (大约 26 个字)
                 </span>
                 
                 
@@ -654,98 +700,15 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/13/朴素贝叶斯/">朴素贝叶斯</a>
+                <a class="has-link-black-ter" href="/2019/04/04/hive-笔记/">hive 笔记</a>
             
         </h1>
         <div class="content">
-            <ol>
-<li>使用概率分布进行分类</li>
-<li>学习朴素贝叶斯分类器</li>
-<li>解析RSS源数据</li>
-<li>使用朴素贝叶斯来分析不同地区的态度<br><strong>通用贝叶斯公式</strong></li>
-</ol>
-<p><img src="/images/2019/03/30/df943f70-528a-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
-<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>优点：在数据较少的情况下仍然有效，可以处理多类别问题。<br>缺点：对于输入数据的准备方式较为敏感<br>适应数据类型：标称型数据<br>贝叶斯决策理论的核心思想：选择高概率所对应的类别<br>朴素贝叶斯它是一个简单但是及其强大的预测算法，之所以称为朴素贝叶斯是因为他有个非常强硬的假设，即它假设输入的每个变量都是独立的 。<br>条件概率：</p>
-<p><img src="/images/2019/03/13/7b97ece0-455d-11e9-9d60-a566f1b35488.png" alt="image.png"></p>
-<h3 id="朴素贝叶斯文档分类应用"><a href="#朴素贝叶斯文档分类应用" class="headerlink" title="朴素贝叶斯文档分类应用"></a>朴素贝叶斯文档分类应用</h3><p>一般过程</p>
-<ol>
-<li>收集数据</li>
-<li>准备数据：需要数值型或者布尔型数据</li>
-<li>分析数据：在有大量特征时，绘制特征作用不大，此时使用直方图效果更好</li>
-<li>训练算法：计算不同的独立特征的条件概率</li>
-<li>测试算法：计算错误率</li>
-<li>使用算法：一个常见的朴素贝叶斯应用是文档分类。</li>
-</ol>
-<p>程序清单 1 ： 词表到向量的转换函数</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def loadDataSet():</span><br><span class="line">	postingList = [[&apos;my&apos;,&apos;dog&apos;,&apos;has&apos;,&apos;flea&apos;,\</span><br><span class="line">	&apos;problems&apos;,&apos;help&apos;,&apos;please&apos;],</span><br><span class="line">	[&apos;maybe&apos;,&apos;not&apos;,&apos;take&apos;,&apos;him&apos;,\</span><br><span class="line">	&apos;I&apos;,&apos;love&apos;,&apos;him&apos;]]</span><br><span class="line">classVec = [0,1] # 1代表有侮辱性文字，0代表正常言论</span><br><span class="line">return postingList,classVec</span><br><span class="line"></span><br><span class="line">def createVocabList(dataSet):</span><br><span class="line">	vocabSet = set([])</span><br><span class="line">	for document in dataSet:</span><br><span class="line">		vocabSet = vocabSet | set(document)</span><br><span class="line">	return list(vocabSet)</span><br><span class="line"></span><br><span class="line">def setOfWords2Vec(vocabList,inputSet):</span><br><span class="line">returnVec = [0]*len(vocabList)</span><br><span class="line">for word in inputSet:</span><br><span class="line">	if word in vocabList:</span><br><span class="line">		returnVec[vocabList.index(word)] = 1</span><br><span class="line">	else:print &quot;the Word : %s is not in my Vocabulary!&quot; % word</span><br><span class="line">return returnVec</span><br></pre></td></tr></table></figure>
-<h4 id="训练算法"><a href="#训练算法" class="headerlink" title="训练算法"></a>训练算法</h4><p>函数伪代码：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">计算每个类别中的文档数目</span><br><span class="line">对每篇训练文档：</span><br><span class="line">	对每个类别：</span><br><span class="line">		如果词条出现文档中 --&gt; 增加该词条的计数值</span><br><span class="line">		增加所有词条的计数值</span><br><span class="line">	对每个类别：</span><br><span class="line">		对每个词条：</span><br><span class="line">			将该词条的数目除以总词条数目得到条件概率</span><br><span class="line">	返回每个类别的条件概率</span><br></pre></td></tr></table></figure></p>
-<p>程序清单2 朴素贝叶斯分类器训练函数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def trainNB0(trainMatrix,trainCategory):</span><br><span class="line">	# 初始化概率</span><br><span class="line">	numTrainDocs = len(trainMatrix)</span><br><span class="line">	numWords = len(trainMatrix[0])</span><br><span class="line">	pAbusive = sum(trainCategory)/float(numTrainDocs)</span><br><span class="line">	p0Num = zeros(numWords);plNum = zeros(numWords)</span><br><span class="line">	p0Denom = 0.0;plDenom = 0.0</span><br><span class="line">	# 向量相加</span><br><span class="line">	for i in range(numTrainDocs):</span><br><span class="line">		if trainCategory[i] ==1;</span><br><span class="line">			p1Num += trainMatrix[i]</span><br><span class="line">			p1Denom += sum(trainMatrix[i])</span><br><span class="line">		else:</span><br><span class="line">			p0Num += trainMatrix[i]</span><br><span class="line">			p0Denom += sum(trainMatrix[i])	</span><br><span class="line">	p1Vect = p1Num/p1Denom</span><br><span class="line">	p0Vect = p0Num/p0Denom</span><br><span class="line">	return p0Vect,p1Vect,pAbusive</span><br></pre></td></tr></table></figure></p>
-<h3 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h3><h4 id="离散数据案例（判断性别【高，中，中】）"><a href="#离散数据案例（判断性别【高，中，中】）" class="headerlink" title="离散数据案例（判断性别【高，中，中】）"></a>离散数据案例（判断性别【高，中，中】）</h4><p><img src="/images/2019/03/30/636a22f0-528c-11e9-a83e-453cdda717bc.png" alt="image.png"><br> 可知 共有三个属性，用A代表属性，A1,A2,A3分别表示 身高 = 高、体重 = 中、鞋码 = 中。<br>      共有两个类别，用C代表类别，C1,C2 分别表示为 男、女，未知情况用C~j~ 表示。<br>补充：</p>
+            <p>hive设置队列三种方式：</p>
 <blockquote>
-<p>（1）条件概率：<br>                 P(A|B)=P(AB)/P(B)  （P(B)&gt;0）<br>   (2) 乘法公式：</p>
-<pre><code>-  P(AB)=P(A|B)P(B)=P(B|A)P(A)
--  P(A1A2...An-1An)=P(A1)P(A2|A1)P(A3|A1A2)...P(An|A1A2...An-1)   （n≥2，P(A1A2...An-1) &gt; 0）
-</code></pre><p>  （3）全概率公式:<br>             如果事件组B1，B2，…. 满足<br>               1.B1，B2….两两互斥，即 Bi ∩ Bj = ∅ ，i≠j ， i,j=1，2，….，且P(Bi)&gt;0,i=1,2,….;<br>               2.B1∪B2∪….=Ω ，则称事件组 B1,B2,…是样本空间Ω的一个划分<br>             设 B1,B2,…是样本空间Ω的一个划分，A为任一事件，则：<br>                 <img src="/images/2019/03/30/0e323350-5290-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
+<p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p>
 </blockquote>
-<p>现在需要求得在 A1,A2,A3 下 C~j~ 的概率：<br>           <img src="/images/2019/03/30/5e230640-5291-11e9-a83e-453cdda717bc.png" alt="image.png"></p>
-<p>由于P(A1A2A3) 固定，故求P(C~j~|A1A2A3)最大等价于P(A1A2A3|C~j~)P(C~j~)最大值。</p>
 
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-11T01:29:30.000Z">2019-03-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 271 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/11/neo4j-连接-spark/">neo4j 连接 spark</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天使用neo4j连接spark<br>neo4j版本3.4<br>spark版本1.6.0</p>
-<blockquote>
-<p>(1) 首先，需要添加jar包 neo4j-spark-connector_2.10-1.0.0-RC1.jar或者添加maven依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.neo4j.spark    </span><br><span class="line">neo4j-spark-connector_2.10  </span><br><span class="line">1.0.0-RC1</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>(2) 设置spark连接信息<br>val  conf : SparkConf = new SparkConf().setAppName(“InitSpark”).setMaster(“local[*]”)       conf.set(“spark.neo4j.bolt.url”,”bolt://localhost:7687”)<br>conf.set(“spark.neo4j.bolt.user”,”neo4j”)<br>conf.set(“spark.neo4j.bolt.password”,”123456”)</p>
-</blockquote>
-<blockquote>
-</blockquote>
-<p>简单例子</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jDataFrameTest &#123; </span><br><span class="line"> def main(args: Array[String]): Unit = &#123;      </span><br><span class="line">val sQLContext = InitSpark.getSqlContext   </span><br><span class="line">val query =&quot; MATCH p=(m:ITEM)&lt;-[r:rel*]-(n:ITEM) where m.item = &apos;84010420&apos; and  ALL(c in r where c.exdt&gt;&apos;2018-12-15&apos;)&quot; +  &quot; with  m.item as mark,length(r) as len, last(r).number as num,reduce(s=1.0 ,x in rels(p)| s*tofloat(x.number)) as nums, last(r).mitem as mitem , last(r) as bom  &quot; +  &quot; return  mark,bom.erpid as erpid, bom.virtual as virtual,mitem,bom.item as item,bom.pono as pono,&quot; +  &quot; bom.comment as comment, bom.warehouse as warehouse, bom.exdt as exdt, bom.indt as indt,tofloat(num) as num,nums,len &quot;   </span><br><span class="line">val df = Neo4jDataFrame.withDataType(sQLContext,query,Seq.empty,&quot;mark&quot; -&gt;    StringType,&quot;erpid&quot; -&gt;StringType,&quot;virtual&quot;-&gt;LongType,  &quot;mitem&quot;-&gt;StringType,&quot;item&quot;-&gt;StringType,&quot;pono&quot;-&gt;LongType,&quot;comment&quot;-&gt;StringType,&quot;warehouse&quot;-&gt;StringType,&quot;exdt&quot;-&gt;StringType,  &quot;indt&quot; -&gt;StringType,&quot;num&quot;-&gt;DoubleType,&quot;nums&quot;-&gt; DoubleType ,&quot;len&quot;-&gt;LongType)    </span><br><span class="line">df.show(1000)  &#125;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">object Neo4jConnectSparkGraph &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">     val sc = InitSpark.getSC</span><br><span class="line">     val sQLContext = InitSpark.getSqlContext</span><br><span class="line">     val cypher = &quot;match (n:ITEM) return n.item limit 10&quot;</span><br><span class="line">     val neo = Neo4jRowRDD(sc,cypher)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -777,6 +740,8 @@
             <li><a class="pagination-link is-current" href="/categories/大数据/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/4/">4</a></li>
             
         </ul>
     </nav>
@@ -838,7 +803,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            9
                         </p>
                     </a>
                 </div>
@@ -961,38 +926,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/hive/">
-            <span class="level-start">
-                <span class="level-item">hive</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/mysql，数据库/">
-            <span class="level-start">
-                <span class="level-item">mysql，数据库</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/python/">
-            <span class="level-start">
-                <span class="level-item">python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spark/">
-            <span class="level-start">
-                <span class="level-item">spark</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/后台/">
             <span class="level-start">
                 <span class="level-item">后台</span>
@@ -1006,7 +939,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">28</span>
+                <span class="level-item tag">34</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1017,22 +950,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/数据分析/">
-            <span class="level-start">
-                <span class="level-item">数据分析</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/数据分析/数据挖掘/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
             <span class="level-start">
                 <span class="level-item">数据库</span>
@@ -1046,7 +963,7 @@
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/程序语言/">
@@ -1054,7 +971,7 @@
                 <span class="level-item">程序语言</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/脚本/">
