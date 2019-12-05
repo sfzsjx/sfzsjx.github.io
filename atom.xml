@@ -483,7 +483,7 @@
     <link href="http://yoursite.com/2019/08/14/mysql-8-0%E4%BB%A5%E5%90%8E%E6%8E%88%E6%9D%83/"/>
     <id>http://yoursite.com/2019/08/14/mysql-8-0以后授权/</id>
     <published>2019-08-14T08:25:52.000Z</published>
-    <updated>2019-12-05T02:05:31.334Z</updated>
+    <updated>2019-12-05T02:32:41.626Z</updated>
     
     <content type="html"><![CDATA[<p>mysql 授权操作</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">首先创建一个用户</span><br><span class="line">create user &apos;root&apos;@&apos;172.16.247.129&apos; identified by &apos;lyxbdw&apos;;</span><br><span class="line"></span><br><span class="line">然后进行授权</span><br><span class="line"> grant all privileges on *.* to &apos;root&apos;@&apos;172.16.247.129&apos;</span><br><span class="line">    -&gt; ;</span><br><span class="line"></span><br><span class="line">刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">开启管理员权限，重启mysql</span><br><span class="line">![image.png](/images/2019/08/14/6a9ca990-be6f-11e9-8d50-b3f800759cdf.png)</span><br></pre></td></tr></table></figure><p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p><p>查看某个用户权限</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for  &apos;root&apos;@&apos;172.16.247.129&apos;;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -497,7 +497,7 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库 " scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>

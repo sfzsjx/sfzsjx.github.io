@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: 数据库 - 上善若水博客</title>
+<title>分类: 数据库  - 上善若水博客</title>
 
 
     <meta name="description" content="天道酬勤">
@@ -134,7 +134,7 @@
         <ul>
             <li><a href="/categories">分类</a></li>
             
-            <li class="is-active"><a href="#" aria-current="page">数据库</a></li>
+            <li class="is-active"><a href="#" aria-current="page">数据库 </a></li>
         </ul>
         </nav>
     </div>
@@ -147,10 +147,129 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-22T11:00:10.000Z">2019-08-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1222 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/22/redis-数据库/">redis 数据库</a>
+            
+        </h1>
+        <div class="content">
+            <p><strong>Redis 数据库</strong></p>
+<blockquote>
+<p>Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。<br>它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。</p>
+</blockquote>
+<p>Redis 安装参考<a href="https://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">redis基础教程</a></p>
+<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis/redis-5.0.5/src</span><br><span class="line">./redis-cli --raw</span><br><span class="line">hvals materialinfo</span><br></pre></td></tr></table></figure>
+<h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.配置依赖文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># redisspring.redis.host = 172.80.122.33</span><br><span class="line">spring.redis.port = 6379</span><br><span class="line">spring.redis.database = 0</span><br><span class="line">spring.redis.timeout = 100ms</span><br><span class="line">spring.redis.lettuce.pool.max-active = 8</span><br><span class="line">spring.redis.lettuce.pool.max-idle = 8</span><br><span class="line">spring.redis.lettuce.pool.min-idle = 0</span><br><span class="line">spring.redis.lettuce.pool.max-wait = 100ms</span><br></pre></td></tr></table></figure></p>
+<p>3.使用redisTemplate<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired </span><br><span class="line">private RedisTemplate&lt;String,String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Redis客户端 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.配置数据库连接池<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static JedisPool jedisPool;</span><br><span class="line">    private Jedis jedis;</span><br><span class="line">    static &#123;</span><br><span class="line">        JedisPoolConfig config = new JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(20);</span><br><span class="line">        config.setMaxIdle(5);</span><br><span class="line">        config.setMaxWaitMillis(1000);</span><br><span class="line">        config.setMinIdle(2);</span><br><span class="line">        config.setTestOnBorrow(false);</span><br><span class="line">        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);</span><br><span class="line">    &#125;</span><br><span class="line">    private static synchronized Jedis getJedis()&#123;</span><br><span class="line">        return jedisPool.getResource();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.操作数据库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jedis = getJedis();</span><br><span class="line">jedis.hvals(&quot;materialinfo&quot;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
+</code></pre><ul>
+<li>set(Key,value) :给数据库中名称为Key的String赋值value</li>
+<li>get(Key):返回数据库中名称为Key的String的value</li>
+<li>getset(key, value)：给名称为 key 的 string 赋予上一次的 value</li>
+<li>mget(key1, key2,…, key N)：返回库中多个 string 的 value</li>
+<li>setnx(key, value)：添加 string，名称为 key，值为 value</li>
+<li>setex(key, time, value)：向库中添加 string，设定过期时间 time</li>
+<li>mset(key N, value N)：批量设置多个 string 的值</li>
+<li>msetnx(key N, value N)：如果所有名称为 key i 的 string 都不存在</li>
+<li>incr(key)：名称为 key 的 string 增 1 操作</li>
+<li>incrby(key, integer)：名称为 key 的 string 增加 integer</li>
+<li>decr(key)：名称为 key 的 string 减 1 操作</li>
+<li>decrby(key, integer)：名称为 key 的 string 减少 integer</li>
+<li>append(key, value)：名称为 key 的 string 的值附加 value</li>
+<li>substr(key, start, end)：返回名称为 key 的 string 的 value 的子串</li>
+</ul>
+<pre><code>对List操作命令
+</code></pre><ul>
+<li>rpush(key, value)：在名称为 key 的 list 尾添加一个值为 value 的元素</li>
+<li>lpush(key, value)：在名称为 key 的 list 头添加一个值为 value 的元素</li>
+<li>llen(key)：返回名称为 key 的 list 的长度</li>
+<li>lrange(key, start, end)：返回名称为 key 的 list 中 start 至 end 之间的元素</li>
+<li>ltrim(key, start, end)：截取名称为 key 的 list</li>
+<li>lindex(key, index)：返回名称为 key 的 list 中 index 位置的元素</li>
+<li>lset(key, index, value)：给名称为 key 的 list 中 index 位置的元素赋值</li>
+<li>lrem(key, count, value)：删除 count 个 key 的 list 中值为 value 的元素</li>
+<li>lpop(key)：返回并删除名称为 key 的 list 中的首元素</li>
+<li>rpop(key)：返回并删除名称为 key 的 list 中的尾元素</li>
+<li>blpop(key1, key2,… key N, timeout)：lpop 命令的 block 版本。</li>
+<li>brpop(key1, key2,… key N, timeout)：rpop 的 block 版本。</li>
+<li><p>rpoplpush(srckey, dstkey)：返回并删除名称为 srckey 的 list 的尾元素，并将该元素添加到名称为 dstkey 的 list 的头部</p>
+<p>  对Set操作命令    </p>
+</li>
+<li>sadd(key, member)：向名称为 key 的 set 中添加元素 member</li>
+<li>srem(key, member) ：删除名称为 key 的 set 中的元素 member</li>
+<li>spop(key) ：随机返回并删除名称为 key 的 set 中一个元素</li>
+<li>smove(srckey, dstkey, member) ：移到集合元素</li>
+<li>scard(key) ：返回名称为 key 的 set 的基数</li>
+<li>sismember(key, member) ：member 是否是名称为 key 的 set 的元素</li>
+<li>sinter(key1, key2,…key N) ：求交集</li>
+<li>sinterstore(dstkey, (keys)) ：求交集并将交集保存到 dstkey 的集合</li>
+<li>sunion(key1, (keys)) ：求并集</li>
+<li>sunionstore(dstkey, (keys)) ：求并集并将并集保存到 dstkey 的集合</li>
+<li>sdiff(key1, (keys)) ：求差集</li>
+<li>sdiffstore(dstkey, (keys)) ：求差集并将差集保存到 dstkey 的集合</li>
+<li>smembers(key) ：返回名称为 key 的 set 的所有元素</li>
+<li><p>srandmember(key) ：随机返回名称为 key 的 set 的一个元素</p>
+<p>  对 Hash 操作的命令</p>
+</li>
+<li>hset(key, field, value)：向名称为 key 的 hash 中添加元素 field</li>
+<li>hget(key, field)：返回名称为 key 的 hash 中 field 对应的 value</li>
+<li>hmget(key, (fields))：返回名称为 key 的 hash 中 field i 对应的 value</li>
+<li>hmset(key, (fields))：向名称为 key 的 hash 中添加元素 field</li>
+<li>hincrby(key, field, integer)：将名称为 key 的 hash 中 field 的 value 增加 integer</li>
+<li>hexists(key, field)：名称为 key 的 hash 中是否存在键为 field 的域</li>
+<li>hdel(key, field)：删除名称为 key 的 hash 中键为 field 的域</li>
+<li>hlen(key)：返回名称为 key 的 hash 中元素个数</li>
+<li>hkeys(key)：返回名称为 key 的 hash 中所有键</li>
+<li>hvals(key)：返回名称为 key 的 hash 中所有键对应的 value</li>
+<li>hgetall(key)：返回名称为 key 的 hash 中所有的键（field）及其对应的 value</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-14T08:25:52.000Z">2019-08-14</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
                 </div>
                 
                 
@@ -175,6 +294,340 @@
 <p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p>
 <p>查看某个用户权限</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for  &apos;root&apos;@&apos;172.16.247.129&apos;;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-17T02:36:51.000Z">2019-06-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 951 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/17/mybatis/">mybatis</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1、什么是mybatis"><a href="#1、什么是mybatis" class="headerlink" title="1、什么是mybatis"></a>1、什么是mybatis</h2><blockquote>
+<p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p>
+</blockquote>
+<h2 id="2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名"><a href="#2、Exception-in-thread-“main”-tk-mybatis-mapper-MapperException-无法获取实体类com-gree-cn-sparkstreamingkafka-entity-BasestationInfo对应的表名" class="headerlink" title="2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名"></a>2、Exception in thread “main” tk.mybatis.mapper.MapperException: 无法获取实体类com.gree.cn.sparkstreamingkafka.entity.BasestationInfo对应的表名</h2><p>导包选择：<br>import tk.mybatis.spring.annotation.MapperScan;</p>
+<h2 id="3-tk-mybatis与springboot结合使用案例"><a href="#3-tk-mybatis与springboot结合使用案例" class="headerlink" title="3.tk.mybatis与springboot结合使用案例"></a>3.tk.mybatis与springboot结合使用案例</h2><p>（1）引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 数据库连接--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.0.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- 数据库连接 end --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出tk.mybatis常常结合druid德鲁伊使用</p>
+<p>（2）引入插件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;configurationFile&gt;$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">                   &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                   &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">               &lt;dependencies&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">                   &lt;dependency&gt;</span><br><span class="line">                       &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                       &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                       &lt;version&gt;3.4.4&lt;/version&gt;</span><br><span class="line">                   &lt;/dependency&gt;</span><br><span class="line">               &lt;/dependencies&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看见接下来需要配置${basedir}/src/main/resources/generator/<strong>generatorConfig.xml</strong>配置文件</p>
+<p>（3）在下图目录下创建generatorConfig.xml配置文件，并设置相应的参数<br><img src="/images/2019/07/24/7b143a00-adc0-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!-- 引入数据库连接配置 --&gt;</span><br><span class="line">    &lt;properties resource=&quot;jdbc.properties&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 tk.mybatis 插件 --&gt;</span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.gree.cn.mybatistest.mapper.MyMapper&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置数据库连接 --&gt;</span><br><span class="line">        &lt;jdbcConnection</span><br><span class="line">                driverClass=&quot;$&#123;jdbc.driverClass&#125;&quot;</span><br><span class="line">                connectionURL=&quot;$&#123;jdbc.connectionURL&#125;&quot;</span><br><span class="line">                userId=&quot;$&#123;jdbc.username&#125;&quot;</span><br><span class="line">                password=&quot;$&#123;jdbc.password&#125;&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置实体类存放路径 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.gree.cn.mybatistest.entity&quot; targetProject=&quot;src/main/java&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 XML 存放路径 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置 DAO 存放路径 --&gt;</span><br><span class="line">        &lt;javaClientGenerator</span><br><span class="line">                targetPackage=&quot;com.gree.cn.mybatistest.mapper&quot;</span><br><span class="line">                targetProject=&quot;src/main/java&quot;</span><br><span class="line">                type=&quot;XMLMAPPER&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要指定生成的数据库和表，% 代表所有表 --&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;basestation_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">           &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        &lt;table catalog=&quot;bluetooth_location&quot; tableName=&quot;buffer_area_info&quot;&gt;</span><br><span class="line">            &lt;!-- mysql 配置 --&gt;</span><br><span class="line">            &lt;!-- &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;Mysql&quot; identity=&quot;true&quot;/&gt;--&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以在上面的配置文件中需要创建数据库连接jdbc.properties配置文件,如下：<br><img src="/images/2019/07/24/28a3af20-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 8.x: com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.driverClass=com.mysql.cj.jdbc.Driver</span><br><span class="line">jdbc.connectionURL=jdbc:mysql://localhost:3306/bluetooth_location?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=lyxbdw</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后配置实体类存放路径</p>
+</li>
+<li>配置 XML 存放路径</li>
+<li>配置 DAO 存放路径</li>
+<li>配置需要指定生成的数据库和表</li>
+</ul>
+<p>（4）这些配置完成后，将创建通用的父级接口MyMapper<br>需要注意这个文件的创建目录，注释中有解释<br><img src="/images/2019/07/24/ca4edc50-adc1-11e9-a2e4-21ce6d685454.png" alt="image.png"><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.tk.mybatis.mapper;</span><br><span class="line"></span><br><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> *  自己的 Mapper</span><br><span class="line"> *  特别注意，该接口不能被扫描到，否则会出错</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>（5）最后再在application.properties配置<br>实体类路径和xml配置文件路径<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis.mapper-locations=classpath:mapper/*.xml</span><br><span class="line">mybatis.type-aliases-package=com.gree.cn.mybatistest.entity</span><br></pre></td></tr></table></figure></p>
+<p>并在主程序入口添加注解@MapperScan(basePackages = “com.gree.cn.mybatistest.mapper”)扫描mapper包<br>需要注意的是引入的依赖为 <strong>import tk.mybatis.spring.annotation.MapperScan;</strong></p>
+<p>再点击下图中的mybatis-generator:generate</p>
+<p><img src="/images/2019/07/24/085050a0-adc3-11e9-a2e4-21ce6d685454.png" alt="image.png"></p>
+<p>前期的准备工作就完成。当然在使用前有两点需要注意下<br>1、自动生成的mapper文件可能不会集成通用的父类mapper接口，手动引入jar包<br>2、生成的实体类中表名可能会有两个点，需要手动删除一个</p>
+<h2 id="4、tk-mybatis查询数据库"><a href="#4、tk-mybatis查询数据库" class="headerlink" title="4、tk.mybatis查询数据库"></a>4、tk.mybatis查询数据库</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.mybatistest.service.impl;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.mybatistest.entity.BasestationInfo;</span><br><span class="line">import com.gree.cn.mybatistest.entity.BufferAreaInfo;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BasestationInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.mapper.BufferAreaInfoMapper;</span><br><span class="line">import com.gree.cn.mybatistest.service.MybatisTest;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import tk.mybatis.mapper.entity.Example;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line">@Service</span><br><span class="line">public class MybatisTestimpl implements MybatisTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">   private BufferAreaInfoMapper bufferAreaInfoMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private BasestationInfoMapper basestationInfoMapper;</span><br><span class="line">    @Override</span><br><span class="line">    public void mybatistest() &#123;</span><br><span class="line">        Example example = new Example(BufferAreaInfo.class);</span><br><span class="line"></span><br><span class="line">        example.createCriteria().andEqualTo(&quot;stationxcoordinate&quot;, 811)</span><br><span class="line">                .andEqualTo(&quot;stationycoordinate&quot;, 130);</span><br><span class="line"></span><br><span class="line">        List&lt;BufferAreaInfo&gt; bufferAreaInfos = bufferAreaInfoMapper.selectByExample(example);</span><br><span class="line"></span><br><span class="line">        BasestationInfo uu = basestationInfoMapper.selectByPrimaryKey(&quot;E07DEACF031C&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(bufferAreaInfos.size());</span><br><span class="line">        System.out.println(uu.getStationid());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大概步骤就是注入mapper,然后使用mapper调用sql算子进行查询，其他的都类似。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-16T06:36:17.000Z">2019-05-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 157 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/16/MySQL-语句记录/">MySQL 语句记录</a>
+            
+        </h1>
+        <div class="content">
+            <p>sqlserver 统计具有重复字段的记录：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;</span><br></pre></td></tr></table></figure></p>
+<p>统计出a表有的b表没有的数据：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a.* FROM A a left outer join B b on a.qq = b.qq</span><br><span class="line">WHERE b.qq is null;</span><br></pre></td></tr></table></figure></p>
+<p>mysql 统计具有重复字段的记录(hive也可以)：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,count(*) as count from hk_test group by username having count&gt;1;</span><br></pre></td></tr></table></figure></p>
+<h3 id="MySQL8-x-连接"><a href="#MySQL8-x-连接" class="headerlink" title="MySQL8.x 连接"></a>MySQL8.x 连接</h3><blockquote>
+<p>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://127.0.0.1:3306/spring-cloud-itoken-service-admin?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=123456</p>
+</blockquote>
+<p>主要关注的驱动不同，新加了cj这个东东，然后可能时区问题新加serverTimezone=GMT</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-16T08:07:15.000Z">2019-03-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 257 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/16/Mysql-优化原理-笔记/">Mysql 优化原理 笔记</a>
+            
+        </h1>
+        <div class="content">
+            <p>Mysql 逻辑框架<br><img src="/images/2019/03/16/7156c0e0-47be-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
+<p>MYSQL 逻辑框架整体分为三层，最上层为客户端层，并非Mysql独有，诸如：连接处理，授权认证，安全等。</p>
+<p>MYSQL 大多数核心服务均在这中间这一层，包括查询解析、分析、优化、缓存、内置函数。所有的跨存储引擎也在这层实现，如：存储过程，触发器和视图等</p>
+<p>最下层为存储引擎。负责Mysql中数据存储和提取。</p>
+<h2 id="Mysql查询过程"><a href="#Mysql查询过程" class="headerlink" title="Mysql查询过程"></a>Mysql查询过程</h2><p>  Mysql查询优化，首先得了解Mysql是如何优化和执行查询的，然后在实际的工作中就是遵循一些原则让Mysql的优化器能够按照预想的合理的方式运行而已。</p>
+<p><img src="/images/2019/03/16/bce25300-47c1-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
+<p><img src="/images/2019/03/16/cfcff250-47c2-11e9-898c-d1fd811fe7b6.png" alt="image.png"></p>
+<p>参考：<a href="https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/OeKXHpnk72kp37E6z97xMA</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-14T06:33:35.000Z">2019-01-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1217 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/14/NEO4J-图数据库使用APOC数据导入/">NEO4J 图数据库使用APOC数据导入</a>
+            
+        </h1>
+        <div class="content">
+            <p>Neo4j 数据导入</p>
+<p>一、安装与部署</p>
+<pre><code>直接在官网下载安装包安装，解压即可。
+</code></pre><p>二、下载相应的jar包</p>
+<p>1.sqlserver 数据导入neo4j的jar包</p>
+<blockquote>
+<p>apoc-3.4.0.1-all.jar     mssql-jdbc-6.2.2.jre8.jar     sqljdbc4-4.0.jar</p>
+</blockquote>
+<p>2.mysql 数据导入neo4j的jar包</p>
+<blockquote>
+<p>apoc-3.3.0.1-all.jar    mysql-connector-java-8.0.8-dmr.jar</p>
+</blockquote>
+<p>3.将对应jar包放在安装目录plugins文件目录里，然后conf目录里的neo4j.conf的后面加上</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.security.procedures.unrestricted=apoc.*</span><br><span class="line"></span><br><span class="line">apoc.import.file.enabled=true</span><br><span class="line">apoc.export.file.enabled=true</span><br></pre></td></tr></table></figure>
+<p>4.restart neo4j,运行return apoc.version(),若有版本号，则成功。</p>
+<p>三、导数据</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org.neo4j.driver.v1.*;</span><br><span class="line">public class Connect&#123;</span><br><span class="line">public static void main(String[] args)&#123;</span><br><span class="line"> Driver driver = GraphDatabase.driver(&quot;bolt://localhost:7687&quot;,AuthTokens.basic(&quot;neo4j&quot;,&quot;neo4j&quot;));</span><br><span class="line"> Session session = driver.session();</span><br><span class="line"> String cypher=&quot;create constraint on (n:ITEM) ASSERT n.itemid is unique&quot;; //创建唯一索引，这样可以更快的导入数据</span><br><span class="line"> Session.run(cypher);</span><br><span class="line"> cypher=&quot;CALL apoc.periodic.iterate(\&quot;CALL apoc.load.jdbc(&apos;jdbc:sqlserver://localhost;username=name;password=word;database=db;characterEncoding=utf-8&apos;,\\\&quot;SELECT * FROM TABLE1\\\&quot;)\&quot;,\&quot;MERGE(n:ITEM&#123;itemid:row.mitemid&#125;) with * MERGE(m:ITEM&#123;itemid:row.itemid&#125;) with * create p=(n)-[r:rel&#123;rels:row.rels&#125;]-&gt;(m)\&quot;,&#123;batchSize:10000,iterateList:true&#125;)&quot;;  //连接sqlserve数据库和设计创建neo4j图数据库数据模型</span><br><span class="line"> Session.run(cypher);</span><br><span class="line"> session.close();</span><br><span class="line"> driver.close();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mysql数据库类似,不再赘述。</p>
+<p>补充：1.使用neo4j-import导入数据的命令</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neo4j-admin import --nodes:item  &quot;nodes.csv&quot;  --relationships:rel &quot;rel_header.csv,rel.csv&quot; --ignore-missing-nodes</span><br></pre></td></tr></table></figure>
+<p>2.apoc 导出命令</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call apoc.export.cypher.query(</span><br><span class="line">&quot;MATCH (p1:Person)-[r:KNOWS]-&gt;(p2:Person) RETURN p1,r,p2&quot;,</span><br><span class="line">&quot;/tmp/friendships.cypher&quot;,</span><br><span class="line">&#123;format:&apos;plain&apos;,cypherFormat:&apos;updateStructure&apos;&#125;)`</span><br></pre></td></tr></table></figure>
+<p>参考： <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import" target="_blank" rel="noopener">http://neo4j-contrib.github.io/neo4j-apoc-procedures/#_export_import</a><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">call apoc.export.cypher.query(&quot;match (n:lable) where not (n)--() and n.properties = &apos;400&apos; return distinct(n)&quot;,&quot;C://User/Desktop/test&quot;,&#123;format:&apos;plain&apos;,cypherFormat:&apos;create&apos;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p> 3.不用解压也能导数据load csv</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load csv from &quot;file:/twitter-2010.txt.gz&quot; as line fieldterminator &apos; &apos; with toInt(line[0]) as id,toInt(line[1]) as id1 return id,id1 limit 10</span><br><span class="line">using periodic commit 1000</span><br><span class="line">load csv from &quot;file:/twitter-2010.txt.gz&quot; as line fieldterminator &apos; &apos; create (item:ITEM&#123;id:line[0],item:line[1]&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="常见问题总结："><a href="#常见问题总结：" class="headerlink" title="常见问题总结："></a>常见问题总结：</h4><blockquote>
+<p>问题一、<br>apoc 导数据 时会漏掉一些数据，总是导不全？有一些批次失败。报错信息：{ “Cannot merge node using null property value for dsca”: 8}</p>
+</blockquote>
+<p>{ “total”: 52562339, “committed”: 52554339, “failed”: 8000, “errors”: { “Cannot merge node using null property value for dsca”: 8</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">具体原因：是dsca字段有null值造成的，可以看出导数据时需要先对数据清洗，清除脏数据。</span><br><span class="line">操作：将为null的数据转为&apos;null&apos;字符串。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>问题二：<br>Caused by: org.neo4j.driver.v1.exceptions.ClientException: Failed to invoke procedure <code>apoc.periodic.iterate</code>: Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Connection reset<br>数据库连接被重置<br>可能原因有很多：可能数据库关闭了连接，也可能是防火墙和网络的原因，还有一些其他的异常可以通过try{}cathch来捕捉异常来解决。</p>
+</blockquote>
+<blockquote>
+<p>问题三：<br>neo4j由于查询数据量过多导致数据库挂掉。<br>neo4j可能会因一次性查询数据太多，而挂掉。进入neo4j目录bin下。<br>cd到bin目录下，执行启动命令：./neo4j stop<br>另外neo4j还有其他命令，执行方式相同：neo4j { console | start | stop | restart | status }<br>如果，./neo4j stop不能停止neo4j，<br><strong>用kill -s 9 强制杀掉进程。 </strong><br>然后，调用./neo4j start 启动neo4j</p>
+</blockquote>
+<blockquote>
+<p>问题四：<br>neo4j 导数据时程序未出现报错信息，但是一直卡着，数据导入失败。<br>可以查看进程：jps、ps -p pid,直接将所有的关于neo4j的进程kill ,再重新执行数据导入程序<br>在查看进行可以看到有两个进程CommunityEntryPoint和jar.<br>可能造成的原因是由于上次导完数据后的链接数据库为关闭。</p>
+</blockquote>
+<h3 id="hive数据迁移到neo4j操作"><a href="#hive数据迁移到neo4j操作" class="headerlink" title="hive数据迁移到neo4j操作"></a>hive数据迁移到neo4j操作</h3><ol>
+<li>下载与hive版本一致的jar包，如（hadoop-common-2.7.3.jar，hive-exec-1.2.1.jar，hive-jdbc-1.2.1.jar，hive-metastore-1.2.1.jar，hive-service-1.2.1.jar，httpclient-4.4.jar，httpcore-4.4.jar，libfb303-0.9.2.jar，libthrift-0.9.3.jar）</li>
+<li>将jar包放入到plugin 目录中</li>
+<li>重启neo4j,./neo4j restart</li>
+<li>加载驱动，call apoc.load.driver(‘org.apache.hive.jdbc.HiveDriver’)</li>
+<li>执行查询，call apoc.load.jdbc(‘jdbc:hive2://ip:1000/database;user=hdfs;password=hdfs’,’select name,age from user’)  YIELD row<br>RETURN row.name, row.age;</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>1.hive 查询的时候需要将字段查出来，例如：select name，age from user ,如果使用 select * from user 则返回的数据为null<br>2.hive 表中数据若是太大可能需要查询很久才能，会将数据全部查询出来才才开始进行图的构建。</p>
+</blockquote>
+<blockquote>
+<p>问题五：<br>报错：Node(934582) already exists with label <code>ITEM</code> and property <code>itemid</code> = ‘980_A700100171’<br>原因：由于节点重复导致，由于itemid相同，但是节点其他属性不同，无法完成节点合并<br>解决办法：去掉重复的节点，或者不创建唯一的itemID，但是这样数据导入速度会变慢，故建议采用去掉重复的节点id。</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-14T02:15:50.000Z">2018-08-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 469 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/14/图数据集群搭建/">图数据集群搭建</a>
+            
+        </h1>
+        <div class="content">
+            <p><strong> NEO4J高可用集群搭建 </strong></p>
+<p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
+<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
+<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">```							  </span><br><span class="line"> 或者前往neo4j官网下载 ：https://neo4j.com/download/ .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</span><br><span class="line">``` bash</span><br><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
+<p>三 、修改配置文件neo4j.conf(重要)</p>
+<p>master节点：<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
+<p>slave1节点：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>slave2节点：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
+<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
+
         </div>
         
         
@@ -246,7 +699,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            9
+                            8
                         </p>
                     </a>
                 </div>
@@ -395,18 +848,10 @@
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
             <span class="level-start">
-                <span class="level-item">数据库</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/数据库/">
-            <span class="level-start">
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/程序语言/">

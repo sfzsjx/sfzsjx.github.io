@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/08/14/mysql-8-0%E4%BB%A5%E5%90%8E%E6%8E%88%E6%9D%83/</loc>
+    
+    <lastmod>2019-12-05T02:32:41.626Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/18/%E4%BF%AE%E7%82%BC%E6%8C%87%E5%8D%97/</loc>
     
     <lastmod>2019-12-05T02:28:35.584Z</lastmod>
@@ -271,13 +278,6 @@
     <loc>http://yoursite.com/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2019-12-05T02:05:59.064Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/08/14/mysql-8-0%E4%BB%A5%E5%90%8E%E6%8E%88%E6%9D%83/</loc>
-    
-    <lastmod>2019-12-05T02:05:31.334Z</lastmod>
     
   </url>
   
