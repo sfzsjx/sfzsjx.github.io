@@ -136,10 +136,67 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 717 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/05/flink-sink-mysql-和-hbase/">flink sink mysql 和 hbase</a>
+            
+        </h1>
+        <div class="content">
+            <p>直接上例子，本人亲测有效<br>1.搭建kafka(单机)，hbase（单机）<br>2.引入依赖<br>主要包括 flink-connector-kafka-0.11_2.11、hbase-client、mysql-connector-java、gson<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.gree.bdc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-source&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;flink-source&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Demo project for flink-source&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">        &lt;flink.version&gt;1.8.0&lt;/flink.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- flink 快速开始--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-connector-kafka-0.11_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- flink 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- log4j 开始 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7.25&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- log4j 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.47&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hbase-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--插件 --&gt;</span><br><span class="line">        &lt;!--  Gson: Java to Json conversion --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.8.5&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.3.1&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                    &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.项目结构<br><img src="/images/2019/12/05/7b5b2b40-1701-11ea-8aaf-4df9698be8a5.png" alt="image.png"><br>4.创建MysqlSink<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line">import java.sql.&#123;Connection, Driver, DriverManager&#125;</span><br><span class="line"></span><br><span class="line">import com.google.gson.Gson</span><br><span class="line">import com.gree.bdc.KafkaToSinkStreaming.Student</span><br><span class="line">import org.apache.flink.configuration.Configuration</span><br><span class="line">import org.apache.flink.streaming.api.functions.sink.&#123;RichSinkFunction, SinkFunction&#125;</span><br><span class="line"></span><br><span class="line">class MysqlSink (url:String, user:String, pwd:String ) extends RichSinkFunction[String]&#123;</span><br><span class="line"></span><br><span class="line">  var conn:Connection = _</span><br><span class="line"></span><br><span class="line">  override def open(parameters: Configuration): Unit =&#123;</span><br><span class="line">    super.open(parameters)</span><br><span class="line">    Class.forName(&quot;com.mysql.jdbc.Driver&quot;)</span><br><span class="line">    conn = DriverManager.getConnection(url,user,pwd)</span><br><span class="line">    conn.setAutoCommit(false)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def invoke(value: String,context:SinkFunction.Context[_]): Unit =&#123;</span><br><span class="line">//    super.invoke(value)</span><br><span class="line">    val gson = new Gson()</span><br><span class="line">    val student = gson.fromJson(value,classOf[Student])</span><br><span class="line">    println(value)</span><br><span class="line"></span><br><span class="line">    val person = conn.prepareStatement(&quot;replace into student(name,age,sex,sid) values(?,?,?,?)&quot;)</span><br><span class="line">    person.setString(1,student.name)</span><br><span class="line">    person.setString(2,student.age.toString)</span><br><span class="line">    person.setString(3,student.sex)</span><br><span class="line">    person.setString(4,student.sid)</span><br><span class="line">    person.execute()</span><br><span class="line">    conn.commit()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def close(): Unit = &#123;</span><br><span class="line">    super.close()</span><br><span class="line">    conn.close()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.创建HbaseSink<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.google.gson.Gson</span><br><span class="line">import com.gree.bdc.KafkaToSinkStreaming.Student</span><br><span class="line">import org.apache.flink.configuration.Configuration</span><br><span class="line">import org.apache.flink.streaming.api.functions.sink.&#123;RichSinkFunction, SinkFunction&#125;</span><br><span class="line">import org.apache.hadoop.hbase.&#123;HBaseConfiguration, TableName&#125;</span><br><span class="line">import org.apache.hadoop.hbase.client.&#123;Connection, ConnectionFactory, Put&#125;</span><br><span class="line">import org.apache.hadoop.hbase.util.Bytes</span><br><span class="line"></span><br><span class="line">class HBaseSink(tableName:String, family:String) extends RichSinkFunction[String] &#123;</span><br><span class="line">  var conn:Connection = _</span><br><span class="line"></span><br><span class="line">  override def open(parameters: Configuration): Unit = &#123;</span><br><span class="line">    super.open(parameters)</span><br><span class="line">    val conf = HBaseConfiguration.create()</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;,&quot;172.16.247.131&quot;)</span><br><span class="line">    conn = ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def invoke(value: String, context: SinkFunction.Context[_]): Unit =&#123;</span><br><span class="line">    val gson = new Gson()</span><br><span class="line">    val student = gson.fromJson(value,classOf[Student])</span><br><span class="line">    println(value)</span><br><span class="line">    println(student)</span><br><span class="line"></span><br><span class="line">    val table = conn.getTable(TableName.valueOf(tableName))</span><br><span class="line">    val put = new Put(Bytes.toBytes(student.sid))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;name&quot;),Bytes.toBytes(student.name))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;age&quot;),Bytes.toBytes(student.age))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;sex&quot;),Bytes.toBytes(student.sex))</span><br><span class="line">    table.put(put)</span><br><span class="line">    table.close()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def close(): Unit =&#123;</span><br><span class="line">    super.close()</span><br><span class="line">    conn.close()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>6.创建KafkaToSinkStreaming<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line">import java.util.Properties</span><br><span class="line"></span><br><span class="line">import org.apache.flink.api.common.serialization.SimpleStringSchema</span><br><span class="line">import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment</span><br><span class="line">import org.apache.flink.streaming.connectors.kafka.&#123;FlinkKafkaConsumer010, FlinkKafkaConsumer011&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">flink 读取 kafka数据</span><br><span class="line">sink mysql 和 hbase</span><br><span class="line"> */</span><br><span class="line">object KafkaToSinkStreaming &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val env = StreamExecutionEnvironment.getExecutionEnvironment</span><br><span class="line"></span><br><span class="line">    val prop = new Properties()</span><br><span class="line">    prop.setProperty(&quot;bootstrap.servers&quot;,&quot;localhost:9092&quot;)</span><br><span class="line">    prop.setProperty(&quot;group.id&quot;,&quot;test&quot;)</span><br><span class="line"></span><br><span class="line">    val input = env.addSource(new FlinkKafkaConsumer010[String](&quot;test&quot;, new SimpleStringSchema(),prop))</span><br><span class="line"></span><br><span class="line">    //自定义MysqlSink类。将数据写入到mysql</span><br><span class="line">    val mysqlSink = new MysqlSink(&quot;jdbc:mysql://localhost:3306/test?serverTimezone=GMT&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&quot;, &quot;root&quot;, &quot;123456&quot;)</span><br><span class="line">    input.addSink(mysqlSink)</span><br><span class="line"></span><br><span class="line">    //自定义HBaseSink类，将数据Sink到HBase</span><br><span class="line"></span><br><span class="line">    val hBaseSink = new HBaseSink(&quot;student&quot;,&quot;sfz&quot;)</span><br><span class="line">    input.addSink(hBaseSink)</span><br><span class="line"></span><br><span class="line">    env.execute(&quot;KafkaToSinkStreaming&quot;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  case class Student(name: String,age: Int,sex:String,sid:String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7.遇到问题总结</p>
+<blockquote>
+<p>1.NoSuchColumnFamilyException<br>主要是创建hbase table 是 familycloumn 和表对应的列族相同</p>
+</blockquote>
+<blockquote>
+<p>2.java.net.UnknownHostException<br>hosts文件中未配置主机名和ip对应表<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line"></span><br><span class="line">172.16.247.131 kubernetes-master</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>参考文章：<a href="https://blog.csdn.net/qq_33689414/article/details/86629720" target="_blank" rel="noopener">Flink读取Kafka数据Sink到MySQL和HBase数据库</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                 </div>
                 
                 
@@ -201,7 +258,7 @@
                 <time class="level-item has-text-grey" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java/">java</a>
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                 </div>
                 
                 
@@ -256,7 +313,7 @@
                 <time class="level-item has-text-grey" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spring-boot/">spring boot</a>
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                 </div>
                 
                 
@@ -309,6 +366,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -364,7 +425,7 @@
                 <time class="level-item has-text-grey" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                 </div>
                 
                 
@@ -409,6 +470,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-10-25T00:55:10.000Z">2019-10-25</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -428,7 +493,6 @@
         <div class="content">
             <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Docker Compose 定位是 定义和运行多个docker容器应用（Defining and running multi-container Docker applications）</span><br><span class="line"></span><br><span class="line">它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）</span><br><span class="line"></span><br><span class="line">Compose 中有两个重要的概念：</span><br><span class="line"></span><br><span class="line">服务 (service)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。</span><br><span class="line">项目 (project)：由一组关联的应用容器组成的一个完整业务单元，在 docker-compose.yml 文件中定义。</span><br></pre></td></tr></table></figure>
 <h1 id="安装与卸载"><a href="#安装与卸载" class="headerlink" title="安装与卸载"></a>安装与卸载</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.安装</span><br><span class="line">$ sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">2.卸载</span><br><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-
         </div>
         
         
@@ -453,7 +517,7 @@
                 <time class="level-item has-text-grey" datetime="2019-10-23T07:13:40.000Z">2019-10-23</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                 </div>
                 
                 
@@ -484,7 +548,6 @@
 <h1 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">1.创建数据卷</span><br><span class="line">docker volume create my-vol</span><br><span class="line">2.查看所有数据卷</span><br><span class="line">docker volume ls</span><br><span class="line">3.查看某个数据卷的具体信息</span><br><span class="line">docker volume inspect my-vol</span><br><span class="line">4.启动一个挂载数据卷的容器</span><br><span class="line"></span><br><span class="line">docker run -d -P \</span><br><span class="line">&gt; --name web \</span><br><span class="line">&gt; --mount source=my-vol,target=/webapp \</span><br><span class="line">&gt; training/webapp \</span><br><span class="line">&gt; python app.py</span><br><span class="line"></span><br><span class="line">5.删除数据卷</span><br><span class="line">docker volume rm my-vol</span><br><span class="line">如果报错：</span><br><span class="line">Error response from daemon: remove my-vol: volume is in use - [e6520e12082e077ff427d2ec87dc32c61bf30414570009a82363c706d5e2072e]</span><br><span class="line"></span><br><span class="line">则需要先停止正在使用数据卷的容器，并删除它。</span><br><span class="line">docker stop e6520e12082e</span><br><span class="line">docker rm e6520e12082e</span><br><span class="line"></span><br><span class="line">6.清除无主的数据卷</span><br><span class="line">docker volume prune</span><br></pre></td></tr></table></figure>
 <h1 id="docker-构建-Tomcat"><a href="#docker-构建-Tomcat" class="headerlink" title="docker 构建 Tomcat"></a>docker 构建 Tomcat</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.搜索Tomcat镜像</span><br><span class="line">docker search tomcat</span><br><span class="line">2.拉取Tomcat镜像</span><br><span class="line">docker pull tomcat</span><br><span class="line">3.运行容器</span><br><span class="line">docker run --name tomcat -p 8080:8080 -v $PWD/test:/usr/local/tomcat/webapps/test -d tomcat</span><br><span class="line">命令说明：</span><br><span class="line"></span><br><span class="line">-p 8080:8080：将容器的8080端口映射到主机的8080端口</span><br><span class="line">-v $PWD/test:/usr/local/tomcat/webapps/test：将主机中当前目录下的test挂载到容器的/test</span><br></pre></td></tr></table></figure>
 <h1 id="docker-构建-mysql"><a href="#docker-构建-mysql" class="headerlink" title="docker 构建 mysql"></a>docker 构建 mysql</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1.搜索mysql镜像</span><br><span class="line">docker search mysql</span><br><span class="line">2.拉取mysql镜像</span><br><span class="line">docker pull mysql</span><br><span class="line">3.运行mysql镜像，构建mysql容器</span><br><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /usr/local/docker/mysql/conf:/etc/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/logs:/var/log/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-d mysql</span><br><span class="line"></span><br><span class="line">命令参数：</span><br><span class="line"></span><br><span class="line">-p 3306:3306：将容器的3306端口映射到主机的3306端口</span><br><span class="line">-v /usr/local/docker/mysql/conf:/etc/mysql：将主机当前目录下的 conf 挂载到容器的 /etc/mysql</span><br><span class="line">-v /usr/local/docker/mysql/logs:/var/log/mysql：将主机当前目录下的 logs 目录挂载到容器的 /var/log/mysql</span><br><span class="line">-v /usr/local/docker/mysql/data:/var/lib/mysql：将主机当前目录下的 data 目录挂载到容器的 /var/lib/mysql</span><br><span class="line">-e MYSQL\_ROOT\_PASSWORD=123456：初始化root用户的密码</span><br></pre></td></tr></table></figure>
-
         </div>
         
         
@@ -508,6 +571,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-10-17T02:13:36.000Z">2019-10-17</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -526,7 +593,6 @@
         </h1>
         <div class="content">
             <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">object HBaseUtils &#123;</span><br><span class="line">  def logger: Logger = LoggerFactory.getLogger(getClass)</span><br><span class="line">  /**</span><br><span class="line">    * 获取配置参数信息</span><br><span class="line">    * @return    </span><br><span class="line">*/ </span><br><span class="line"> def getHBaseConf : Configuration = &#123;</span><br><span class="line">    val conf : Configuration = HBaseConfiguration.create</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)</span><br><span class="line">    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)</span><br><span class="line">    conf</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取连接</span><br><span class="line">    * @param conf 配置信息</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">  def getConnection(conf:Configuration): Connection =&#123;</span><br><span class="line">    ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取管理员权限</span><br><span class="line">    * @param conn 连接信息</span><br><span class="line">    * @return HBaseAdmin</span><br><span class="line">    */</span><br><span class="line">  def getAdmin(conn:Connection) : HBaseAdmin = &#123;</span><br><span class="line">    conn.getAdmin.asInstanceOf[HBaseAdmin]</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 创建表</span><br><span class="line">    * @param admin 管理员</span><br><span class="line">    * @param tableName 表名</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常</span><br><span class="line">    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常</span><br><span class="line">    * @throws java.io.IOException 异常</span><br><span class="line">    */</span><br><span class="line">  @throws(classOf[MasterNotRunningException])</span><br><span class="line">  @throws(classOf[ZooKeeperConnectionException])</span><br><span class="line">  @throws(classOf[IOException])</span><br><span class="line">  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = &#123;</span><br><span class="line">    val createTableName = TableName.valueOf(tableName)</span><br><span class="line">    if (admin.tableExists(createTableName))&#123;</span><br><span class="line">      logger.info(tableName + &quot;table exists!&quot;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      val tableDesc = new HTableDescriptor(createTableName)      </span><br><span class="line">      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)</span><br><span class="line">      for (singleColumnFamily &lt;- columnFamily)&#123;</span><br><span class="line">        val columnDesc = new HColumnDescriptor(singleColumnFamily)</span><br><span class="line">        tableDesc.addFamily(columnDesc)</span><br><span class="line">      &#125; </span><br><span class="line">admin.createTable(tableDesc)</span><br><span class="line">      logger.info(tableName + &quot; create table success!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">admin.close() </span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 载入数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @param quorum 分布式信息</span><br><span class="line">    * @param value 数值</span><br><span class="line">    */</span><br><span class="line">  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit =&#123;</span><br><span class="line">    val rowPut:Put = new Put(Bytes.toBytes(rowKey))</span><br><span class="line">    if (value == null)&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)</span><br><span class="line">    &#125;</span><br><span class="line">    table.put(rowPut)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 获取表数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @return HBase result</span><br><span class="line">    */</span><br><span class="line">  def getRow(table: Table,rowKey: String ):Result = &#123;</span><br><span class="line">    val get:Get = new Get(Bytes.toBytes(rowKey))</span><br><span class="line">    val result:Result = table.get(get)</span><br><span class="line">    for (rowKv &lt;- result.rawCells())&#123;</span><br><span class="line">      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)</span><br><span class="line">      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))</span><br><span class="line">      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))</span><br><span class="line">   &#125;</span><br><span class="line">    result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 批量添加数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param list 数据列表</span><br><span class="line">    */</span><br><span class="line">  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = &#123;</span><br><span class="line">    try&#123;</span><br><span class="line">      table.put(list)</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; </span><br><span class="line">       logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 查询所有记录</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @return resultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryAll(table: Table):ResultScanner = &#123;</span><br><span class="line">    val scan: Scan = new Scan</span><br><span class="line">    try &#123;</span><br><span class="line">      val result: ResultScanner = table.getScanner(scan)</span><br><span class="line">      result</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: IOException =&gt;</span><br><span class="line">      logger.error(e.getMessage)</span><br><span class="line">        null</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 单条记录查询</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param queryColumn 查询列 </span><br><span class="line">    * @param value 数值</span><br><span class="line">    * @param columns 列集合</span><br><span class="line">    * @return ResultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = &#123;</span><br><span class="line">    if (columns == null || queryColumn == null || value == null )&#123;</span><br><span class="line">      null</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))</span><br><span class="line">        val scan: Scan = new Scan</span><br><span class="line">        for (column  logger.error(e.getMessage)</span><br><span class="line">          null</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 删除表</span><br><span class="line">    * @param hBaseConnection 链接</span><br><span class="line">    * @param tableName HBase表</span><br><span class="line">    */</span><br><span class="line">  def dropTable(hBaseConnection: Connection,tableName: String): Unit = &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))</span><br><span class="line">      admin.deleteTable(TableName.valueOf(tableName))</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.hbase </span><br><span class="line">hbase-client</span><br><span class="line">$&#123;hbase.version&#125;</span><br><span class="line">org.apache.hadoop </span><br><span class="line">hadoop-annotations</span><br></pre></td></tr></table></figure>
-
         </div>
         
         
@@ -551,7 +617,7 @@
                 <time class="level-item has-text-grey" datetime="2019-09-11T06:59:39.000Z">2019-09-11</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ETL/">ETL</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ETL/NIFI/">NIFI</a>
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                 </div>
                 
                 
@@ -617,7 +683,7 @@
                 <time class="level-item has-text-grey" datetime="2019-09-09T01:43:41.000Z">2019-09-09</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ETL/">ETL</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ETL/NIFI/">NIFI</a>
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                 </div>
                 
                 
@@ -717,68 +783,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-30T08:54:39.000Z">2019-08-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 346 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/30/flink-基础/">flink 基础</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、Apache-Flink"><a href="#一、Apache-Flink" class="headerlink" title="一、Apache Flink"></a>一、Apache Flink</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><pre><code>Apache Flink 是一个分布式大数据处理引擎，可以对有限流和无线流进行有状态和无状态进行计算，能够在各种集群环境上部署，对各种大小的数据集进行快速计算。
-</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux</span><br><span class="line">./bin/start-cluster.sh</span><br><span class="line">windows</span><br><span class="line">.\start-cluster.bat</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" alt="image.png"></p>
-<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Scala版本：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>flink 关联 kafka 依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>flink 推荐使用shade插件打包maven项目<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">			&lt;executions&gt;</span><br><span class="line">				&lt;execution&gt;</span><br><span class="line">					&lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">					&lt;goals&gt;</span><br><span class="line">						&lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">					&lt;/goals&gt;</span><br><span class="line">					&lt;configuration&gt;</span><br><span class="line">						&lt;artifactSet&gt;</span><br><span class="line">							&lt;excludes&gt;</span><br><span class="line">								&lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;log4j:*&lt;/exclude&gt;</span><br><span class="line">							&lt;/excludes&gt;</span><br><span class="line">						&lt;/artifactSet&gt;</span><br><span class="line">						&lt;filters&gt;</span><br><span class="line">							&lt;filter&gt;</span><br><span class="line">								&lt;!-- Do not copy the signatures in the META-INF folder.</span><br><span class="line">								Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span><br><span class="line">								&lt;artifact&gt;*:*&lt;/artifact&gt;</span><br><span class="line">								&lt;excludes&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</span><br><span class="line">								&lt;/excludes&gt;</span><br><span class="line">							&lt;/filter&gt;</span><br><span class="line">						&lt;/filters&gt;</span><br><span class="line">						&lt;transformers&gt;</span><br><span class="line">							&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">								&lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;</span><br><span class="line">							&lt;/transformer&gt;</span><br><span class="line">						&lt;/transformers&gt;</span><br><span class="line">					&lt;/configuration&gt;</span><br><span class="line">				&lt;/execution&gt;</span><br><span class="line">			&lt;/executions&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
-<p>DataSet and DataStream:<br>    Flink具有特殊类DataSet并DataStream在程序中表示数据。您可以将它们视为可以包含重复项的不可变数据集合。在DataSet数据有限的情况下，对于一个DataStream元素的数量可以是无界的。</p>
-</blockquote>
-<h3 id="flink-一般处理步骤"><a href="#flink-一般处理步骤" class="headerlink" title="flink 一般处理步骤"></a>flink 一般处理步骤</h3><ol>
-<li>获得一个execution environment，</li>
-<li>加载/创建初始数据，</li>
-<li>指定此数据的转换，</li>
-<li>指定放置计算结果的位置，</li>
-<li>触发程序执行</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -797,7 +801,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
             
         </ul>
     </nav>
@@ -847,7 +851,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            60
+                            61
                         </p>
                     </a>
                 </div>
@@ -859,7 +863,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            41
+                            33
                         </p>
                     </a>
                 </div>
@@ -871,7 +875,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            38
                         </p>
                     </a>
                 </div>
@@ -982,22 +986,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/ETL/">
-            <span class="level-start">
-                <span class="level-item">ETL</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/ETL/NIFI/">
-            <span class="level-start">
-                <span class="level-item">NIFI</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/IDEA/">
             <span class="level-start">
                 <span class="level-item">IDEA</span>
@@ -1022,33 +1010,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/docker/">
-            <span class="level-start">
-                <span class="level-item">docker</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/hbase/">
-            <span class="level-start">
-                <span class="level-item">hbase</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/hive/">
             <span class="level-start">
                 <span class="level-item">hive</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/java/">
-            <span class="level-start">
-                <span class="level-item">java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1070,14 +1034,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/kylin/">
-            <span class="level-start">
-                <span class="level-item">kylin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/linux/">
             <span class="level-start">
                 <span class="level-item">linux</span>
@@ -1091,7 +1047,7 @@
                 <span class="level-item">mysql，数据库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/python/">
@@ -1131,7 +1087,7 @@
                 <span class="level-item">spark</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/spring/">
@@ -1155,7 +1111,7 @@
                 <span class="level-item">spring boot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/sql/">
@@ -1166,25 +1122,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/决策树/">
+        <a class="level is-marginless" href="/categories/后台/">
             <span class="level-start">
-                <span class="level-item">决策树</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/决策树/数据挖掘/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/图数据库/">
-            <span class="level-start">
-                <span class="level-item">图数据库</span>
+                <span class="level-item">后台</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">3</span>
@@ -1195,7 +1135,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">21</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1219,31 +1159,31 @@
                 <span class="level-item">数据分析</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
-        <a class="level is-marginless" href="/categories/数据分析/python/">
-            <span class="level-start">
-                <span class="level-item">python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/数据分析/数据挖掘/">
             <span class="level-start">
                 <span class="level-item">数据挖掘</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/数据库/">
+            <span class="level-start">
+                <span class="level-item">数据库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
             <span class="level-start">
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/数据库/mybatis/">
@@ -1254,20 +1194,20 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/数据挖掘算法/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘算法</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/校验/">
             <span class="level-start">
                 <span class="level-item">校验</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序语言/">
+            <span class="level-start">
+                <span class="level-item">程序语言</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/网络编程/">
@@ -1307,6 +1247,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
@@ -1318,7 +1277,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
                     <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
                 </div>
             </div>
@@ -1337,7 +1296,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time></div>
                     <a href="/2019/12/03/lambda-表达式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">lambda 表达式</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -1356,7 +1315,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time></div>
                     <a href="/2019/11/30/spring-boot-jpa/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spring boot jpa</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring-boot/">spring boot</a>
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                     </p>
                 </div>
             </div>
@@ -1375,26 +1334,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time></div>
                     <a href="/2019/11/29/java-基本知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java 基本知识</a>
                     <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/26/spark-常用-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用 api">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/spark-常用-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用 api</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spark/">spark</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -1411,7 +1351,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
         
@@ -1429,7 +1369,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1587,13 +1527,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -1603,7 +1536,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1629,8 +1562,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1638,14 +1578,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1715,7 +1655,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1729,7 +1676,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1769,13 +1716,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1799,7 +1739,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1827,13 +1767,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1873,7 +1806,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1891,7 +1824,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2049,13 +1982,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -2065,7 +1991,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2091,8 +2017,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -2100,14 +2033,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2177,7 +2110,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2191,7 +2131,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -2231,13 +2171,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -2261,7 +2194,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2289,13 +2222,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

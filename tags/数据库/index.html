@@ -146,125 +146,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-22T11:00:10.000Z">2019-08-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1222 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/22/redis-数据库/">redis 数据库</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>Redis 数据库</strong></p>
-<blockquote>
-<p>Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。<br>它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。</p>
-</blockquote>
-<p>Redis 安装参考<a href="https://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">redis基础教程</a></p>
-<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis/redis-5.0.5/src</span><br><span class="line">./redis-cli --raw</span><br><span class="line">hvals materialinfo</span><br></pre></td></tr></table></figure>
-<h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置依赖文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># redisspring.redis.host = 172.80.122.33</span><br><span class="line">spring.redis.port = 6379</span><br><span class="line">spring.redis.database = 0</span><br><span class="line">spring.redis.timeout = 100ms</span><br><span class="line">spring.redis.lettuce.pool.max-active = 8</span><br><span class="line">spring.redis.lettuce.pool.max-idle = 8</span><br><span class="line">spring.redis.lettuce.pool.min-idle = 0</span><br><span class="line">spring.redis.lettuce.pool.max-wait = 100ms</span><br></pre></td></tr></table></figure></p>
-<p>3.使用redisTemplate<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired </span><br><span class="line">private RedisTemplate&lt;String,String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Redis客户端 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置数据库连接池<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static JedisPool jedisPool;</span><br><span class="line">    private Jedis jedis;</span><br><span class="line">    static &#123;</span><br><span class="line">        JedisPoolConfig config = new JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(20);</span><br><span class="line">        config.setMaxIdle(5);</span><br><span class="line">        config.setMaxWaitMillis(1000);</span><br><span class="line">        config.setMinIdle(2);</span><br><span class="line">        config.setTestOnBorrow(false);</span><br><span class="line">        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);</span><br><span class="line">    &#125;</span><br><span class="line">    private static synchronized Jedis getJedis()&#123;</span><br><span class="line">        return jedisPool.getResource();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.操作数据库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jedis = getJedis();</span><br><span class="line">jedis.hvals(&quot;materialinfo&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
-</code></pre><ul>
-<li>set(Key,value) :给数据库中名称为Key的String赋值value</li>
-<li>get(Key):返回数据库中名称为Key的String的value</li>
-<li>getset(key, value)：给名称为 key 的 string 赋予上一次的 value</li>
-<li>mget(key1, key2,…, key N)：返回库中多个 string 的 value</li>
-<li>setnx(key, value)：添加 string，名称为 key，值为 value</li>
-<li>setex(key, time, value)：向库中添加 string，设定过期时间 time</li>
-<li>mset(key N, value N)：批量设置多个 string 的值</li>
-<li>msetnx(key N, value N)：如果所有名称为 key i 的 string 都不存在</li>
-<li>incr(key)：名称为 key 的 string 增 1 操作</li>
-<li>incrby(key, integer)：名称为 key 的 string 增加 integer</li>
-<li>decr(key)：名称为 key 的 string 减 1 操作</li>
-<li>decrby(key, integer)：名称为 key 的 string 减少 integer</li>
-<li>append(key, value)：名称为 key 的 string 的值附加 value</li>
-<li>substr(key, start, end)：返回名称为 key 的 string 的 value 的子串</li>
-</ul>
-<pre><code>对List操作命令
-</code></pre><ul>
-<li>rpush(key, value)：在名称为 key 的 list 尾添加一个值为 value 的元素</li>
-<li>lpush(key, value)：在名称为 key 的 list 头添加一个值为 value 的元素</li>
-<li>llen(key)：返回名称为 key 的 list 的长度</li>
-<li>lrange(key, start, end)：返回名称为 key 的 list 中 start 至 end 之间的元素</li>
-<li>ltrim(key, start, end)：截取名称为 key 的 list</li>
-<li>lindex(key, index)：返回名称为 key 的 list 中 index 位置的元素</li>
-<li>lset(key, index, value)：给名称为 key 的 list 中 index 位置的元素赋值</li>
-<li>lrem(key, count, value)：删除 count 个 key 的 list 中值为 value 的元素</li>
-<li>lpop(key)：返回并删除名称为 key 的 list 中的首元素</li>
-<li>rpop(key)：返回并删除名称为 key 的 list 中的尾元素</li>
-<li>blpop(key1, key2,… key N, timeout)：lpop 命令的 block 版本。</li>
-<li>brpop(key1, key2,… key N, timeout)：rpop 的 block 版本。</li>
-<li><p>rpoplpush(srckey, dstkey)：返回并删除名称为 srckey 的 list 的尾元素，并将该元素添加到名称为 dstkey 的 list 的头部</p>
-<p>  对Set操作命令    </p>
-</li>
-<li>sadd(key, member)：向名称为 key 的 set 中添加元素 member</li>
-<li>srem(key, member) ：删除名称为 key 的 set 中的元素 member</li>
-<li>spop(key) ：随机返回并删除名称为 key 的 set 中一个元素</li>
-<li>smove(srckey, dstkey, member) ：移到集合元素</li>
-<li>scard(key) ：返回名称为 key 的 set 的基数</li>
-<li>sismember(key, member) ：member 是否是名称为 key 的 set 的元素</li>
-<li>sinter(key1, key2,…key N) ：求交集</li>
-<li>sinterstore(dstkey, (keys)) ：求交集并将交集保存到 dstkey 的集合</li>
-<li>sunion(key1, (keys)) ：求并集</li>
-<li>sunionstore(dstkey, (keys)) ：求并集并将并集保存到 dstkey 的集合</li>
-<li>sdiff(key1, (keys)) ：求差集</li>
-<li>sdiffstore(dstkey, (keys)) ：求差集并将差集保存到 dstkey 的集合</li>
-<li>smembers(key) ：返回名称为 key 的 set 的所有元素</li>
-<li><p>srandmember(key) ：随机返回名称为 key 的 set 的一个元素</p>
-<p>  对 Hash 操作的命令</p>
-</li>
-<li>hset(key, field, value)：向名称为 key 的 hash 中添加元素 field</li>
-<li>hget(key, field)：返回名称为 key 的 hash 中 field 对应的 value</li>
-<li>hmget(key, (fields))：返回名称为 key 的 hash 中 field i 对应的 value</li>
-<li>hmset(key, (fields))：向名称为 key 的 hash 中添加元素 field</li>
-<li>hincrby(key, field, integer)：将名称为 key 的 hash 中 field 的 value 增加 integer</li>
-<li>hexists(key, field)：名称为 key 的 hash 中是否存在键为 field 的域</li>
-<li>hdel(key, field)：删除名称为 key 的 hash 中键为 field 的域</li>
-<li>hlen(key)：返回名称为 key 的 hash 中元素个数</li>
-<li>hkeys(key)：返回名称为 key 的 hash 中所有键</li>
-<li>hvals(key)：返回名称为 key 的 hash 中所有键对应的 value</li>
-<li>hgetall(key)：返回名称为 key 的 hash 中所有的键（field）及其对应的 value</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-05-16T06:36:17.000Z">2019-05-16</time>
                 
                 <div class="level-item">
@@ -295,64 +176,6 @@
 <p>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://127.0.0.1:3306/spring-cloud-itoken-service-admin?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=123456</p>
 </blockquote>
 <p>主要关注的驱动不同，新加了cj这个东东，然后可能时区问题新加serverTimezone=GMT</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-14T02:15:50.000Z">2018-08-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/图数据库/">图数据库</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 469 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/14/图数据集群搭建/">图数据集群搭建</a>
-            
-        </h1>
-        <div class="content">
-            <pre><code>** NEO4J高可用集群搭建 **
-</code></pre><p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
-<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
-<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">```							  </span><br><span class="line"> 或者前往neo4j官网下载 ：https://neo4j.com/download/ .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</span><br><span class="line">``` bash</span><br><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
-<p>三 、修改配置文件neo4j.conf(重要)</p>
-<p>master节点：<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>slave1节点：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>slave2节点：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
-<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
 
         </div>
         
@@ -413,7 +236,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            60
+                            61
                         </p>
                     </a>
                 </div>
@@ -425,7 +248,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            41
+                            33
                         </p>
                     </a>
                 </div>
@@ -437,7 +260,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            38
                         </p>
                     </a>
                 </div>
@@ -548,22 +371,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/ETL/">
-            <span class="level-start">
-                <span class="level-item">ETL</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/ETL/NIFI/">
-            <span class="level-start">
-                <span class="level-item">NIFI</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/IDEA/">
             <span class="level-start">
                 <span class="level-item">IDEA</span>
@@ -588,33 +395,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/docker/">
-            <span class="level-start">
-                <span class="level-item">docker</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/hbase/">
-            <span class="level-start">
-                <span class="level-item">hbase</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/hive/">
             <span class="level-start">
                 <span class="level-item">hive</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/java/">
-            <span class="level-start">
-                <span class="level-item">java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -636,14 +419,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/kylin/">
-            <span class="level-start">
-                <span class="level-item">kylin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/linux/">
             <span class="level-start">
                 <span class="level-item">linux</span>
@@ -657,7 +432,7 @@
                 <span class="level-item">mysql，数据库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/python/">
@@ -697,7 +472,7 @@
                 <span class="level-item">spark</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/spring/">
@@ -721,7 +496,7 @@
                 <span class="level-item">spring boot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/sql/">
@@ -732,25 +507,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/决策树/">
+        <a class="level is-marginless" href="/categories/后台/">
             <span class="level-start">
-                <span class="level-item">决策树</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/决策树/数据挖掘/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/图数据库/">
-            <span class="level-start">
-                <span class="level-item">图数据库</span>
+                <span class="level-item">后台</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">3</span>
@@ -761,7 +520,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">21</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -785,31 +544,31 @@
                 <span class="level-item">数据分析</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
-        <a class="level is-marginless" href="/categories/数据分析/python/">
-            <span class="level-start">
-                <span class="level-item">python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/数据分析/数据挖掘/">
             <span class="level-start">
                 <span class="level-item">数据挖掘</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/数据库/">
+            <span class="level-start">
+                <span class="level-item">数据库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
             <span class="level-start">
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/数据库/mybatis/">
@@ -820,20 +579,20 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/数据挖掘算法/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘算法</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/校验/">
             <span class="level-start">
                 <span class="level-item">校验</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序语言/">
+            <span class="level-start">
+                <span class="level-item">程序语言</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/网络编程/">
@@ -873,6 +632,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
@@ -884,7 +662,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
                     <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
                 </div>
             </div>
@@ -903,7 +681,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time></div>
                     <a href="/2019/12/03/lambda-表达式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">lambda 表达式</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -922,7 +700,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time></div>
                     <a href="/2019/11/30/spring-boot-jpa/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spring boot jpa</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring-boot/">spring boot</a>
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                     </p>
                 </div>
             </div>
@@ -941,26 +719,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time></div>
                     <a href="/2019/11/29/java-基本知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java 基本知识</a>
                     <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/26/spark-常用-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用 api">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/spark-常用-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用 api</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spark/">spark</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -977,7 +736,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
         
@@ -995,7 +754,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1153,13 +912,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -1169,7 +921,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1195,8 +947,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1204,14 +963,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1281,7 +1040,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1295,7 +1061,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1335,13 +1101,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1365,7 +1124,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1393,13 +1152,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1439,7 +1191,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1457,7 +1209,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1615,13 +1367,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -1631,7 +1376,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1657,8 +1402,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1666,14 +1418,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1743,7 +1495,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1757,7 +1516,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1797,13 +1556,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1827,7 +1579,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1855,13 +1607,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

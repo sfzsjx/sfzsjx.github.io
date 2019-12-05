@@ -147,267 +147,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 62 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/26/spark-常用-api/">spark 常用 api</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.spark 中采用部分关联字段</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接</span><br><span class="line">  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-27T02:34:36.000Z">2019-08-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 分钟 读完 (大约 1589 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/27/spark-structed-streaming-读取kafka数据/">spark structed streaming 读取kafka数据</a>
-            
-        </h1>
-        <div class="content">
-            <p>structed streaming :</p>
-<blockquote>
-<p>Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine.</p>
-</blockquote>
-<p>Structed streaming 官方文档 <a href="http://spark.apache.org/docs/latest/structured-streaming-programming-guide.html" target="_blank" rel="noopener">2.4.3官方文档</a></p>
-<h3 id="一、部分关于如何连接kafka数据，并做计算。"><a href="#一、部分关于如何连接kafka数据，并做计算。" class="headerlink" title="一、部分关于如何连接kafka数据，并做计算。"></a>一、部分关于如何连接kafka数据，并做计算。</h3><p>首先引入pom.xml<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.gree.cn&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;structstreaminglocation&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;StructStreamingLocation&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Demo project for StructStreamingLocation&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- spark 相关依赖 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-core_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-sql_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- sparkStreaming kafka 整合--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-streaming-kafka-0-10_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-streaming_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- sparkStreaming kafka end --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- struct streaming kafka --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-sql-kafka-0-10_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- struct streaming kafka 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- spark 相关依赖 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库连接--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.12&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.1.12&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库连接 end --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- Redis客户端 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!-- 常用工具 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.18.2&lt;/version&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- 常用工具  end --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">    &lt;build&gt;</span><br><span class="line">       &lt;plugins&gt;</span><br><span class="line">           &lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;2.5.5&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;archive&gt;</span><br><span class="line">                       &lt;manifest&gt;</span><br><span class="line">                           &lt;mainClass&gt;com.gree.cn.location.LocationMap&lt;/mainClass&gt;</span><br><span class="line">                       &lt;/manifest&gt;</span><br><span class="line">                   &lt;/archive&gt;</span><br><span class="line">                   &lt;descriptorRefs&gt;</span><br><span class="line">                       &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;</span><br><span class="line">                   &lt;/descriptorRefs&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">               &lt;executions&gt;</span><br><span class="line">                   &lt;execution&gt;</span><br><span class="line">                       &lt;id&gt;make-assembly&lt;/id&gt;</span><br><span class="line">                       &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                       &lt;goals&gt;</span><br><span class="line">                           &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">                       &lt;/goals&gt;</span><br><span class="line">                   &lt;/execution&gt;</span><br><span class="line">               &lt;/executions&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br><span class="line">           &lt;plugin&gt;</span><br><span class="line">               &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">               &lt;version&gt;2.3.1&lt;/version&gt;</span><br><span class="line">               &lt;configuration&gt;</span><br><span class="line">                   &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                   &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">               &lt;/configuration&gt;</span><br><span class="line">           &lt;/plugin&gt;</span><br><span class="line">       &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
-<p>然后编写相应的代码逻辑：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.location;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.entity.*;</span><br><span class="line">import com.gree.cn.sink.BaseHeartSink;</span><br><span class="line">import com.gree.cn.sink.LabelSink;</span><br><span class="line">import com.gree.cn.sink.MaterialInfoSink;</span><br><span class="line">import com.gree.cn.sink.MaterialRedisSink;</span><br><span class="line">import com.gree.cn.utils.DruidPoolUtils;</span><br><span class="line">import org.apache.spark.api.java.function.MapFunction;</span><br><span class="line">import org.apache.spark.sql.*;</span><br><span class="line">import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder;</span><br><span class="line">import org.apache.spark.sql.streaming.StreamingQuery;</span><br><span class="line">import org.apache.spark.sql.streaming.StreamingQueryException;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.PreparedStatement;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">import static org.apache.spark.sql.functions.*;</span><br><span class="line"></span><br><span class="line">public class LocationMap &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建SparkSession</span><br><span class="line">        SparkSession spark = SparkSession</span><br><span class="line">                .builder()</span><br><span class="line">                .appName(&quot;小车定位程序&quot;)</span><br><span class="line">                //.master(&quot;local[2]&quot;)</span><br><span class="line">                .config(&quot;spark.serializer&quot;,&quot;org.apache.spark.serializer.KryoSerializer&quot;)</span><br><span class="line">                .config(&quot;spark.local.dir&quot;, &quot;/lvm/data1/bluetooth_location/spark/location&quot;)</span><br><span class="line">                .config(&quot;spark.ui.port&quot;, &quot;8083&quot;)</span><br><span class="line">                .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;50&quot;)</span><br><span class="line">                .config(&quot;spark.default.parallelism&quot;, &quot;12&quot;)</span><br><span class="line">                .getOrCreate();</span><br><span class="line"></span><br><span class="line">        //读取kafka数据</span><br><span class="line">        Dataset&lt;Row&gt; kafkaValue = spark.readStream()</span><br><span class="line">                .format(&quot;kafka&quot;)</span><br><span class="line">                .option(&quot;kafka.bootstrap.servers&quot;, &quot;10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092&quot;)</span><br><span class="line">                .option(&quot;subscribe&quot;, &quot;topic0619&quot;)</span><br><span class="line">                //.option(&quot;kafka.bootstrap.servers&quot;,&quot;172.16.247.129:9092&quot;)</span><br><span class="line">                //.option(&quot;subscribe&quot;,&quot;test06&quot;)</span><br><span class="line">                .option(&quot;startingOffsets&quot;, &quot;latest&quot;)</span><br><span class="line">                .load()</span><br><span class="line">                .selectExpr(&quot;CAST(value AS STRING)&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //基站数据包括 接收时间，基站ID，信标ID，信号强度</span><br><span class="line">        Dataset&lt;BaseTable&gt; baseTableDs = kafkaValue.as(Encoders.STRING()).map(</span><br><span class="line">                (MapFunction&lt;String, BaseTable&gt;) values -&gt; &#123;</span><br><span class="line">                    BaseTable baseTable = new BaseTable();</span><br><span class="line">			//具体逻辑</span><br><span class="line">                  	...</span><br><span class="line">			...</span><br><span class="line">			...</span><br><span class="line">                    return baseTable;</span><br><span class="line">                &#125; , ExpressionEncoder.javaBean(BaseTable.class));</span><br><span class="line"></span><br><span class="line">        //获取信标电量表数据</span><br><span class="line">        Dataset&lt;LabelData&gt; labelData = baseTableDs</span><br><span class="line">                .filter(col(&quot;orderName&quot;).equalTo(&quot;66&quot;))</span><br><span class="line">                .select(col(&quot;labelID&quot;), col(&quot;electricity&quot;),</span><br><span class="line">                        col(&quot;baseID&quot;),col(&quot;recDatetime&quot;))</span><br><span class="line">                .as(ExpressionEncoder.javaBean(LabelData.class));</span><br><span class="line"></span><br><span class="line">        /*StreamingQuery labelDataStart =*/ labelData.repartition(2, col(&quot;labelID&quot;))</span><br><span class="line">                .writeStream()</span><br><span class="line">                .outputMode(&quot;append&quot;)</span><br><span class="line">                .foreach(new LabelSink())</span><br><span class="line">                .start();</span><br><span class="line"></span><br><span class="line">        //labelData.writeStream().format(&quot;console&quot;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、如何将数据sink到mysql"><a href="#二、如何将数据sink到mysql" class="headerlink" title="二、如何将数据sink到mysql"></a>二、如何将数据sink到mysql</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.sink;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.gree.cn.entity.LabelData;</span><br><span class="line">import com.gree.cn.utils.DruidPoolUtils;</span><br><span class="line">import org.apache.spark.sql.ForeachWriter;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.PreparedStatement;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class LabelSink extends ForeachWriter&lt;LabelData&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     * sink 信标数据到MySQL中</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    private PreparedStatement statement;</span><br><span class="line">    private Connection connection;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public boolean open(long arg0, long arg1) &#123;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void process(LabelData labelData) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = DruidPoolUtils.getConnection();</span><br><span class="line"></span><br><span class="line">            String insertSql = &quot; REPLACE INTO bluetooth_location.beacon_info (beaconId,electricity,stationId,updateTime) VALUES(?,?,?,?) &quot;;</span><br><span class="line"></span><br><span class="line">            statement = connection.prepareStatement(insertSql);</span><br><span class="line">            statement.setString(1,labelData.getLabelID());</span><br><span class="line">            statement.setInt(2,labelData.getElectricity());</span><br><span class="line">            statement.setString(3,labelData.getBaseID());</span><br><span class="line">            statement.setString(4,labelData.getRecDatetime());</span><br><span class="line">            statement.executeUpdate();</span><br><span class="line"></span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            DruidPoolUtils.close(connection,statement);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void close(Throwable arg0) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="三、数据库连接池配置"><a href="#三、数据库连接池配置" class="headerlink" title="三、数据库连接池配置"></a>三、数据库连接池配置</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.utils;</span><br><span class="line"></span><br><span class="line">import com.alibaba.druid.pool.DruidDataSourceFactory;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 数据库连接池工具类</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class DruidPoolUtils &#123;</span><br><span class="line"></span><br><span class="line">    //创建成员变量</span><br><span class="line">    private static DataSource dataSource;</span><br><span class="line">    //加载配置文件</span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Properties properties = new Properties();</span><br><span class="line">            //加载类路径</span><br><span class="line">            properties.load(DruidPoolUtils.class.getResourceAsStream(&quot;/druid.properties&quot;));</span><br><span class="line"></span><br><span class="line">            //读取属性文件，创建连接池</span><br><span class="line">            dataSource = DruidDataSourceFactory.createDataSource(properties);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取数据源</span><br><span class="line">    public static DataSource getDataSource()&#123;</span><br><span class="line">        return dataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取连接对象</span><br><span class="line">    public static Connection getConnection()&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return dataSource.getConnection();</span><br><span class="line">        &#125;catch (SQLException e)&#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //释放资源</span><br><span class="line"></span><br><span class="line">    public static void close(Connection connection, Statement statement, ResultSet resultSet)&#123;</span><br><span class="line">        if (resultSet != null )&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                resultSet.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (statement != null)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (connection != null)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;catch (SQLException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void close(Connection connection,Statement statement)&#123;</span><br><span class="line">        close(connection,statement,null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>druid.properties</p>
-<blockquote>
-<p>driverClassName=com.mysql.cj.jdbc.Driver<br>url=jdbc:mysql://localhost:3306?serverTimezone=GMT&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>username=root<br>password=lyxbdw<br>initialSize=5<br>maxActive=20<br>maxWait=3000<br>minIdle=3</p>
-</blockquote>
-<h2 id="Scala编写structed-stremaing"><a href="#Scala编写structed-stremaing" class="headerlink" title="Scala编写structed stremaing"></a>Scala编写structed stremaing</h2><h3 id="引入pom-xml"><a href="#引入pom-xml" class="headerlink" title="引入pom.xml"></a>引入pom.xml</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.gree.cn&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;write2mysql&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;write2mysql&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- 常用插件 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.18.6&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- 常用插件 结束 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- spark 相关依赖 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-core_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.3&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-sql_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.3&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- spark streaming kafka --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-streaming-kafka-0-10_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.3&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-streaming_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.3&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- spark streaming kafka 结束--&gt;</span><br><span class="line">        &lt;!-- struct streaming kafka --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spark-sql-kafka-0-10_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.4.3&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- struct streaming kafka 结束--&gt;</span><br><span class="line">        &lt;!-- spark 相关依赖 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库连接--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.15&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.1.12&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- 数据库连接 end --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- log 日志--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- log 日志结束--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.scala-tools&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-scala-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.15.2&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;scala-compile-first&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;includes&gt;</span><br><span class="line">                                &lt;include&gt;**/*.scala&lt;/include&gt;</span><br><span class="line">                            &lt;/includes&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;scala-test-compile&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;testCompile&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;appendAssemblyId&gt;false&lt;/appendAssemblyId&gt;</span><br><span class="line">                    &lt;descriptorRefs&gt;</span><br><span class="line">                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;</span><br><span class="line">                    &lt;/descriptorRefs&gt;</span><br><span class="line">                    &lt;archive&gt;</span><br><span class="line">                        &lt;manifest&gt;</span><br><span class="line">                            &lt;mainClass&gt;com.gree.cn.write2mysql.Write2mysql&lt;/mainClass&gt;</span><br><span class="line">                        &lt;/manifest&gt;</span><br><span class="line">                    &lt;/archive&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;make-assembly&lt;/id&gt;</span><br><span class="line">                        &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<p>与java的差别主要是打包插件不同，编写相应逻辑<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.write2mysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.gree.cn.sink.MysqlSink</span><br><span class="line">import org.apache.spark.sql.SparkSession</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  * 原始数据保存</span><br><span class="line">  * @author sfz</span><br><span class="line">  * Time 2019-08-08</span><br><span class="line">  */</span><br><span class="line">object Write2mysql &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line"></span><br><span class="line">    //创建SparkSession</span><br><span class="line">    val spark = SparkSession</span><br><span class="line">      .builder()</span><br><span class="line">      .appName(&quot;write2mysql&quot;)</span><br><span class="line">      .master(&quot;local[*]&quot;)</span><br><span class="line">      .config(&quot;spark.serializer&quot;,&quot;org.apache.spark.serializer.KryoSerializer&quot;)</span><br><span class="line">      .config(&quot;spark.local.dir&quot;, &quot;/lvm/data1/bluetooth_location/spark/write2mysql&quot;)</span><br><span class="line">      .config(&quot;spark.ui.port&quot;, &quot;8084&quot;)</span><br><span class="line">      .getOrCreate()</span><br><span class="line"></span><br><span class="line">    //引入隐式转换，保证String可以序列化</span><br><span class="line">    import spark.implicits._</span><br><span class="line"></span><br><span class="line">    //读取kafka数据</span><br><span class="line">    val kafkaValue = spark.readStream</span><br><span class="line">      .format(&quot;kafka&quot;)</span><br><span class="line">      //.option(&quot;kafka.bootstrap.servers&quot;, &quot;10.7.20.190:9092,10.7.20.191:9092,10.7.17.9:9092&quot;)</span><br><span class="line">     // .option(&quot;subscribe&quot;, &quot;topic0619&quot;)</span><br><span class="line">      .option(&quot;kafka.bootstrap.servers&quot;,&quot;localhost:9092&quot;)</span><br><span class="line">      .option(&quot;subscribe&quot;,&quot;test06&quot;)</span><br><span class="line">      .option(&quot;startingOffsets&quot;, &quot;latest&quot;)</span><br><span class="line">      .load()</span><br><span class="line">      .selectExpr(&quot;CAST(value AS STRING)&quot;)</span><br><span class="line"></span><br><span class="line">    //将kafka数据转化为BaseTable结构</span><br><span class="line">    val baseData = kafkaValue.as[String].map(values =&gt; &#123;</span><br><span class="line">//具体的解析数据逻辑</span><br><span class="line">。。。</span><br><span class="line">。。。</span><br><span class="line">。。。</span><br><span class="line">        BaseTable.apply(frameHeader, equipment, frameLength, orderName, baseID, labelID, signalPower, electricity, datetime, checkName, recDatetime)</span><br><span class="line">      &#125;</span><br><span class="line">      else &#123;</span><br><span class="line">        BaseTable.apply(frameHeader, equipment, frameLength, orderName, baseID77, labelID, signalPower, electricity, datetime, checkName, recDatetime)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).as[BaseTable]</span><br><span class="line"></span><br><span class="line">    //将数据sink到mysql数据库中</span><br><span class="line">    val query =  baseData.writeStream</span><br><span class="line">      .foreach(new MysqlSink)</span><br><span class="line">      .outputMode(&quot;append&quot;)</span><br><span class="line">      .start()</span><br><span class="line"></span><br><span class="line">    query.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  //创建BaseTable结构</span><br><span class="line">  case class BaseTable(frameHeader: String, equipment: String, frameLength: String, orderName: String, baseId: String,</span><br><span class="line">                       labelId: String, signalPower: Integer, electricity: Integer, datetime: String, checkName: String, recDatetime: String)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接着sink到mysql 数据库中<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.sink</span><br><span class="line"></span><br><span class="line">import java.sql.&#123;Connection, PreparedStatement, SQLException&#125;</span><br><span class="line"></span><br><span class="line">import com.gree.cn.utils.&#123;DateUtils, MysqlPoolUtils&#125;</span><br><span class="line">import com.gree.cn.write2mysql.Write2mysql.BaseTable</span><br><span class="line">import org.apache.spark.sql.ForeachWriter</span><br><span class="line"></span><br><span class="line">class MysqlSink() extends ForeachWriter[BaseTable]()&#123;</span><br><span class="line"></span><br><span class="line">  var conn:Connection = _</span><br><span class="line">  var statement : PreparedStatement = _</span><br><span class="line">  override def open(partitionId: Long, epochId: Long): Boolean = &#123;</span><br><span class="line">     conn = MysqlPoolUtils.getConnection.get</span><br><span class="line">     conn.setAutoCommit(false)</span><br><span class="line">     true</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def process(baseTable: BaseTable): Unit = &#123;</span><br><span class="line">    val insertSql = &quot; &quot;</span><br><span class="line"></span><br><span class="line">    statement = conn.prepareStatement(insertSql)</span><br><span class="line">    statement.setString(1, baseTable.frameHeader)</span><br><span class="line"> 。。。</span><br><span class="line">。。。</span><br><span class="line">    statement.setString(11, baseTable.recDatetime)</span><br><span class="line">    statement.executeUpdate()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def close(errorOrNull: Throwable): Unit = &#123;</span><br><span class="line">    try&#123;</span><br><span class="line">      if ( statement != null &amp;&amp; conn != null) &#123;</span><br><span class="line">        statement.close()</span><br><span class="line">        conn.close()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; catch &#123;</span><br><span class="line">      case e: SQLException =&gt;</span><br><span class="line">        e.printStackTrace()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后配上数据库连接池<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.cn.utils</span><br><span class="line"></span><br><span class="line">import java.sql.Connection</span><br><span class="line">import java.util.Properties</span><br><span class="line"></span><br><span class="line">import com.alibaba.druid.pool.DruidDataSourceFactory</span><br><span class="line">import javax.sql.DataSource</span><br><span class="line">import org.apache.log4j.Logger</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  * @author sfz</span><br><span class="line">  * MySql 数据库连接池</span><br><span class="line">  */</span><br><span class="line">object MysqlPoolUtils &#123;</span><br><span class="line"></span><br><span class="line">private val log = Logger.getLogger(MysqlPoolUtils.getClass.getName)</span><br><span class="line"></span><br><span class="line">val dataSource:Option[DataSource] = &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    val druidProps = new Properties()</span><br><span class="line">    //获取Druid连接池配置文件</span><br><span class="line">    val druidConfig = getClass.getResourceAsStream(&quot;/application.properties&quot;)</span><br><span class="line">    //加载配置文件</span><br><span class="line">    druidProps.load(druidConfig)</span><br><span class="line">    Some(DruidDataSourceFactory.createDataSource(druidProps))</span><br><span class="line">  &#125;catch &#123;</span><br><span class="line">    case error :Exception =&gt;</span><br><span class="line">      log.error(&quot;Error Create Mysql Connection &quot;,error)</span><br><span class="line">      None</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  //获取连接</span><br><span class="line">  def getConnection:Option[Connection] = &#123;</span><br><span class="line">    dataSource match &#123;</span><br><span class="line">      case Some(ds) =&gt; Some(ds.getConnection)</span><br><span class="line">      case None =&gt; None</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>application.properties</p>
-<blockquote>
-<p>driver-class-name = com.mysql.cj.jdbc.Driver<br>url=jdbc:mysql://localhost:3306/base_data?serverTimezone=GMT&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>username=root<br>password=lyxbdw<br>filters=stat,config<br>initialSize=2<br>maxActive=20<br>minIdle=2<br>maxWait=60000<br>timeBetweenEvictionRunsMillis=60000<br>minEvictableIdleTimeMillis=300000<br>validationQuery=SELECT 1<br>testWhileIdle=true<br>testOnBorrow=false<br>testOnReturn=false<br>removeAbandoned=true<br>logAbandoned=true<br>poolPreparedStatements=false<br>removeAbandonedTimeout=1800<br>maxOpenPreparedStatements=100</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-26T02:31:37.000Z">2019-08-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 996 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/26/spark-standalone-运行原理/">spark standalone  运行原理</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<blockquote>
-<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint</span><br><span class="line">2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。</span><br><span class="line">3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。</span><br><span class="line">4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。</span><br><span class="line">5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)</span><br><span class="line">6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。</span><br><span class="line">7.应用程序运行完成后，SparkContext会进行资源回收。</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="二、spark-standalone两种提交模式"><a href="#二、spark-standalone两种提交模式" class="headerlink" title="二、spark standalone两种提交模式"></a>二、spark standalone两种提交模式</h3><h4 id="1-standalone-client-任务提交模式"><a href="#1-standalone-client-任务提交模式" class="headerlink" title="1. standalone-client 任务提交模式"></a>1. standalone-client 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in client deploy mode</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-<p>standalone client 模式任务流程<br><img src="/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程</p>
-<ol>
-<li>client 模式提交任务后，会在客户端启动Driver进程。</li>
-<li>Driver 会向Master申请启动Application启动资源。</li>
-<li>资源申请成功后，Driver端会将task发送到worker端执行。</li>
-<li>worker端执行成功后将执行结果返回给Driver端</li>
-</ol>
-<h4 id="1-standalone-cluster-任务提交模式"><a href="#1-standalone-cluster-任务提交模式" class="headerlink" title="1. standalone-cluster 任务提交模式"></a>1. standalone-cluster 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in cluster deploy mode with supervise</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --deploy-mode cluster \</span><br><span class="line">  --supervise \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
-</blockquote>
-<p>standalone-cluster模式提交任务<br><img src="/images/2019/08/26/b76b5dc0-c7ac-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程：</p>
-<ol>
-<li>客户端使用命令spark-submit –deploy-mode cluster 后会启动spark-submit进程</li>
-<li>此进程为Driver向Master 申请资源。</li>
-<li>Master会随机在一台Worker节点来启动Driver进程。</li>
-<li>Driver启动成功后，spark-submit关闭，然后Driver向Master申请资源。</li>
-<li>Master接收到请求后，会在资源充足的Worker节点上启动Executor进程。</li>
-<li>Driver分发Task到Executor中执行。</li>
-</ol>
-<p>建议：<strong>在平时调试时使用client模式，在正式生产环境时建议使用cluster模式</strong></p>
-<p>参考文章：<a href="https://www.cnblogs.com/wangtcc/p/da-huaSpark-5san-tu-xiang-shuSpark-StandaloneClien.html" target="_blank" rel="noopener">1、大话Spark(5)-三图详述Spark Standalone/Client/Cluster运行模式</a><br><a href="https://blog.csdn.net/qq_39131779/article/details/83539608" target="_blank" rel="noopener">2、Spark中Standalone的两种提交模式（Standalone-client模式与Standalone-cluster模式）</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-12T01:18:10.000Z">2019-08-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 562 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/12/Spark-Windows10-安装部署/">Spark Windows10 安装部署</a>
-            
-        </h1>
-        <div class="content">
-            <p>Spark centos 安装部署 </p>
-<h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
-<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>解压安装后配置环境变量<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
-<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
-<p>进入到配置目录<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>然后进入sbin目录,启动集群<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>至此spark安装完成。</p>
-<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
-<p>执行脚本<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-09T08:50:32.000Z">2019-08-09</time>
                 
                 <div class="level-item">
@@ -433,55 +172,6 @@
         <div class="content">
             <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
 <h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-18T08:22:27.000Z">2019-07-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/spark/">spark</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 87 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/18/spark-sql-java-自定义函数/">spark sql  java 自定义函数</a>
-            
-        </h1>
-        <div class="content">
-            <pre><code>::: hljs-center
-</code></pre><p>java自定义函数</p>
-<p>:::</p>
-<p>//自定义函数将信号强度转距离<br>        //其中udf+数字中数字代表入参个数，最后一个参数代表出参的数据类型<br>        //出现序列化问题<br>      <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.udf().register(&quot;transsinglepower&quot;, new UDF1&lt;Integer,Double&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Double call(Integer single_poer) throws Exception &#123;</span><br><span class="line">                Double mesure_distinct = Math.pow(10, (Math.abs(single_poer) - 59) / (10 * 2.0));</span><br><span class="line">                return mesure_distinct;</span><br><span class="line">            &#125;&#125;, DataTypes.DoubleType);</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -542,7 +232,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            60
+                            61
                         </p>
                     </a>
                 </div>
@@ -554,7 +244,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            41
+                            33
                         </p>
                     </a>
                 </div>
@@ -566,7 +256,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            38
                         </p>
                     </a>
                 </div>
@@ -677,22 +367,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/ETL/">
-            <span class="level-start">
-                <span class="level-item">ETL</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/ETL/NIFI/">
-            <span class="level-start">
-                <span class="level-item">NIFI</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/IDEA/">
             <span class="level-start">
                 <span class="level-item">IDEA</span>
@@ -717,33 +391,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/docker/">
-            <span class="level-start">
-                <span class="level-item">docker</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/hbase/">
-            <span class="level-start">
-                <span class="level-item">hbase</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/hive/">
             <span class="level-start">
                 <span class="level-item">hive</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/java/">
-            <span class="level-start">
-                <span class="level-item">java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -765,14 +415,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/kylin/">
-            <span class="level-start">
-                <span class="level-item">kylin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/linux/">
             <span class="level-start">
                 <span class="level-item">linux</span>
@@ -786,7 +428,7 @@
                 <span class="level-item">mysql，数据库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/python/">
@@ -826,7 +468,7 @@
                 <span class="level-item">spark</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/spring/">
@@ -850,7 +492,7 @@
                 <span class="level-item">spring boot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/sql/">
@@ -861,25 +503,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/决策树/">
+        <a class="level is-marginless" href="/categories/后台/">
             <span class="level-start">
-                <span class="level-item">决策树</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/决策树/数据挖掘/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/图数据库/">
-            <span class="level-start">
-                <span class="level-item">图数据库</span>
+                <span class="level-item">后台</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">3</span>
@@ -890,7 +516,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">21</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -914,31 +540,31 @@
                 <span class="level-item">数据分析</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
-        <a class="level is-marginless" href="/categories/数据分析/python/">
-            <span class="level-start">
-                <span class="level-item">python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/数据分析/数据挖掘/">
             <span class="level-start">
                 <span class="level-item">数据挖掘</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/数据库/">
+            <span class="level-start">
+                <span class="level-item">数据库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
             <span class="level-start">
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/数据库/mybatis/">
@@ -949,20 +575,20 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/数据挖掘算法/">
-            <span class="level-start">
-                <span class="level-item">数据挖掘算法</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/校验/">
             <span class="level-start">
                 <span class="level-item">校验</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序语言/">
+            <span class="level-start">
+                <span class="level-item">程序语言</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/网络编程/">
@@ -1002,6 +628,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
@@ -1013,7 +658,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
                     <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hbase/">hbase</a>
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
                 </div>
             </div>
@@ -1032,7 +677,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time></div>
                     <a href="/2019/12/03/lambda-表达式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">lambda 表达式</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -1051,7 +696,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time></div>
                     <a href="/2019/11/30/spring-boot-jpa/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spring boot jpa</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring-boot/">spring boot</a>
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
                     </p>
                 </div>
             </div>
@@ -1070,26 +715,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time></div>
                     <a href="/2019/11/29/java-基本知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java 基本知识</a>
                     <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/26/spark-常用-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用 api">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time></div>
-                    <a href="/2019/11/26/spark-常用-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用 api</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spark/">spark</a>
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
                     </p>
                 </div>
             </div>
@@ -1106,7 +732,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
         
@@ -1124,7 +750,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1282,13 +908,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -1298,7 +917,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1324,8 +943,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1333,14 +959,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1410,7 +1036,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1424,7 +1057,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1464,13 +1097,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1494,7 +1120,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1522,13 +1148,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1568,7 +1187,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/ETL/" style="font-size: 12.5px;">ETL</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/Spark/" style="font-size: 12.5px;">Spark</a> <a href="/tags/flink/" style="font-size: 10px;">flink</a> <a href="/tags/hbase/" style="font-size: 10px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 17.5px;">spark</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/流处理/" style="font-size: 10px;">流处理</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具类，时间工具类/" style="font-size: 10px;">工具类，时间工具类</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据库-mybatis/" style="font-size: 10px;">数据库 mybatis</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1586,7 +1205,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1744,13 +1363,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/ETL/">
-                        <span class="tag">ETL</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA/">
                         <span class="tag">IDEA</span>
                         <span class="tag is-grey">1</span>
@@ -1760,7 +1372,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1786,8 +1398,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Spark/">
-                        <span class="tag">Spark</span>
+                    <a class="tags has-addons" href="/tags/cdh/">
+                        <span class="tag">cdh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
@@ -1795,14 +1414,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1872,7 +1491,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1886,7 +1512,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1926,13 +1552,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/容器/">
-                        <span class="tag">容器</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类，时间工具类/">
                         <span class="tag">工具类，时间工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1956,7 +1575,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1984,13 +1603,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/流处理/">
-                        <span class="tag">流处理</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
