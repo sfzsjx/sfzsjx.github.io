@@ -136,6 +136,101 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-16T09:05:47.000Z">2019-07-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 55 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/16/spring-boot-注解/">spring boot 注解</a>
+            
+        </h1>
+        <div class="content">
+            <p>问题一、</p>
+<p>Could not autowire. No beans of ‘RestTemplate’ type found</p>
+<p>在mapper 类添加注解@Repository 即可解决，简单有效</p>
+<p>方法2：在mapper文件上加@Component注解，把普通pojo实例化到spring容器中</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-10T05:09:01.000Z">2019-07-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 29 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/10/Scala-安装问题/">Scala 安装问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>1、此时不应有 \scala\bin。<br>由于Scala 安装路径中包含空格，需要重新安装。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-02T01:18:44.000Z">2019-07-02</time>
                 
                 <div class="level-item">
@@ -743,116 +838,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-16T06:36:17.000Z">2019-05-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 157 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/16/MySQL-语句记录/">MySQL 语句记录</a>
-            
-        </h1>
-        <div class="content">
-            <p>sqlserver 统计具有重复字段的记录：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id, COUNT(*) AS sumCount FROM dat_bill_201811 GROUP BY product_id HAVING sumCount &gt; 1;</span><br></pre></td></tr></table></figure></p>
-<p>统计出a表有的b表没有的数据：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a.* FROM A a left outer join B b on a.qq = b.qq</span><br><span class="line">WHERE b.qq is null;</span><br></pre></td></tr></table></figure></p>
-<p>mysql 统计具有重复字段的记录(hive也可以)：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,count(*) as count from hk_test group by username having count&gt;1;</span><br></pre></td></tr></table></figure></p>
-<h3 id="MySQL8-x-连接"><a href="#MySQL8-x-连接" class="headerlink" title="MySQL8.x 连接"></a>MySQL8.x 连接</h3><blockquote>
-<p>jdbc.driverClass=com.mysql.cj.jdbc.Driver<br>jdbc.connectionURL=jdbc:mysql://127.0.0.1:3306/spring-cloud-itoken-service-admin?serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false<br>jdbc.username=root<br>jdbc.password=123456</p>
-</blockquote>
-<p>主要关注的驱动不同，新加了cj这个东东，然后可能时区问题新加serverTimezone=GMT</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-12T01:57:13.000Z">2019-05-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 481 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/12/spring-cloud/">spring cloud</a>
-            
-        </h1>
-        <div class="content">
-            <p>::: hljs-center</p>
-<p>spring cloud 常见错误以及解决办法<br>:::</p>
-<h3 id="问题-1：找不到主类或加载不到主类"><a href="#问题-1：找不到主类或加载不到主类" class="headerlink" title="问题 1：找不到主类或加载不到主类"></a>问题 1：找不到主类或加载不到主类</h3><p>解决办法：尝试 mvn clean ，mvn install</p>
-<h3 id="问题2：Module-“spring-cloud-itoken”"><a href="#问题2：Module-“spring-cloud-itoken”" class="headerlink" title="问题2：Module “spring-cloud-itoken”"></a>问题2：Module “spring-cloud-itoken”</h3><p>must not contain source root “C:\Users\hadoop\IdeaProjects\spring-cloud-itoken\spring-cloud-itoken-admin\src\main\java”.<br>The root already belongs to module “spring-cloud-itoken-admin”<br>解决办法：这类问题通常是由于多模块项目，删除了root 模块的src 目录造成的</p>
-<p><img src="/images/2019/05/27/a4fe2200-802e-11e9-b471-85e9a7e0c091.png" alt="image.png"></p>
-<p>所有找到root模块，然后将其右侧的sources 下的多余文件找到并删除即可。</p>
-<h3 id="问题3-：java程序找不到包"><a href="#问题3-：java程序找不到包" class="headerlink" title="问题3 ：java程序找不到包"></a>问题3 ：java程序找不到包</h3><p>解决办法：<img src="/images/2019/05/27/0e0fb740-802f-11e9-b471-85e9a7e0c091.png" alt="image.png"></p>
-<p>重新设置module sdk 的路径一般能够解决。</p>
-<h3 id="问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true"><a href="#问题4-：org-springframework-beans-factory-UnsatisfiedDependencyException-Error-creating-bean-with-name-‘com-sfz-spring-cloud-itoken-service-admin-test-admin-AdminServiceTest’-Unsatisfied-dependency-expressed-through-field-‘adminService’-nested-exception-is-org-springframework-beans-factory-NoSuchBeanDefinitionException-No-qualifying-bean-of-type-‘com-sfz-spring-cloud-itoken-service-admin-service-AdminService’-available-expected-at-least-1-bean-which-qualifies-as-autowire-candidate-Dependency-annotations-org-springframework-beans-factory-annotation-Autowired-required-true" class="headerlink" title="问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}"></a>问题4 ：org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name ‘com.sfz.spring.cloud.itoken.service.admin.test.admin.AdminServiceTest’: Unsatisfied dependency expressed through field ‘adminService’; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type ‘com.sfz.spring.cloud.itoken.service.admin.service.AdminService’ available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: <a href="mailto:{@org.springframework.beans.factory.annotation.Autowired" target="_blank" rel="noopener">{@org.springframework.beans.factory.annotation.Autowired</a>(required=true)}</h3><p> 解决办法啊： 在 serviceImpl 加上注解 @Service</p>
-<h3 id="问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext"><a href="#问题5-：-java-lang-IllegalStateException-Failed-to-load-ApplicationContext" class="headerlink" title="问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext"></a>问题5 ： java.lang.IllegalStateException: Failed to load ApplicationContext</h3><p> 解决办法 ：未启动ConfigApplication,验证方法：打开<a href="http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod" target="_blank" rel="noopener">http://127.0.0.1:8888/spring-cloud-itoken-service-admin/prod</a></p>
-<h3 id="问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect"><a href="#问题6-：Caused-by-java-net-ConnectException-Connection-refused-connect" class="headerlink" title="问题6 ：Caused by: java.net.ConnectException: Connection refused: connect"></a>问题6 ：Caused by: java.net.ConnectException: Connection refused: connect</h3><p>解决办法： 未加载注解 @ActiveProfiles(value = “prod”)</p>
-<h3 id="问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1"><a href="#问题7-：Failed-to-execute-goal-on-project-spring-cloud-itoken-web-admin-Could-not-resolve-dependencies-for-project-com-sfz-spring-cloud-itoken-web-admin-jar-1-0-0-SNAPSHOT-Failure-to-find-com-sfz-spring-cloud-itoken-common-web-jar-1-0-0-SNAPSHOT-in-https-oss-sonatype-org-content-repositories-snapshots-was-cached-in-the-local-repository-resolution-will-not-be-reattempted-until-the-update-interval-of-sonatype-repos-s-has-elapsed-or-updates-are-forced-gt-Help-1" class="headerlink" title="问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in https://oss.sonatype.org/content/repositories/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]"></a>问题7 ：Failed to execute goal on project spring-cloud-itoken-web-admin: Could not resolve dependencies for project com.sfz:spring-cloud-itoken-web-admin:jar:1.0.0-SNAPSHOT: Failure to find com.sfz:spring-cloud-itoken-common-web:jar:1.0.0-SNAPSHOT in <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank" rel="noopener">https://oss.sonatype.org/content/repositories/snapshots</a> was cached in the local repository, resolution will not be reattempted until the update interval of sonatype-repos-s has elapsed or updates are forced -&gt; [Help 1]</h3><p>解决办法： 在父项目下有的子项目在首次运行clean 和install前应该先运行父项目的clean和install</p>
-<h3 id="问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect"><a href="#问题8：Caused-by-java-lang-ClassNotFoundException-com-netflix-hystrix-contrib-javanica-aop-aspectj-HystrixCommandAspect" class="headerlink" title="问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></a>问题8：Caused by: java.lang.ClassNotFoundException: com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect</h3><p>解决办法：新增依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -925,7 +910,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            61
+                            63
                         </p>
                     </a>
                 </div>
@@ -1073,7 +1058,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">34</span>
+                <span class="level-item tag">35</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1097,7 +1082,7 @@
                 <span class="level-item">程序语言</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/脚本/">
@@ -1126,7 +1111,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 13.33px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 16.67px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 13.33px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 13.33px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 15px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1135,6 +1120,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/18/JSON数据处理（gson-和-fastjson）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JSON数据处理（gson 和 fastjson）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-18T06:24:05.000Z">2019-12-18</time></div>
+                    <a href="/2019/12/18/JSON数据处理（gson-和-fastjson）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">JSON数据处理（gson 和 fastjson）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/flink-基础知识/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基础知识">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T03:26:35.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/flink-基础知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基础知识</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1193,44 +1216,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/30/spring-boot-jpa/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spring boot jpa">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time></div>
-                    <a href="/2019/11/30/spring-boot-jpa/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spring boot jpa</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/29/java-基本知识/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="java 基本知识">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time></div>
-                    <a href="/2019/11/29/java-基本知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java 基本知识</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1248,7 +1233,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1415,7 +1400,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1457,7 +1442,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
