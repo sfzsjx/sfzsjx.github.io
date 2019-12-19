@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Linux 常用命令 - 上善若水博客</title>
+<title>flink 提交任务 - 上善若水博客</title>
 
 
-    <meta name="description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：  vim file_name:%d:wq  2.使用cat命令情况，命令如下：  cat /dev/null &amp;gt; file_name  3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：  echo “”&amp;gt;file_na">
-<meta name="keywords" content="Linux">
+    <meta name="description" content="flink 提交任务flink本地提交任务 一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种： 1.通过命令行的方式提交flink任务：1./bin/flink run ./examples/batch/WordCount.jar   2.通过网页ip:8081提交任务点击 add new 上传jar包   选择想要执行的jar包，点击主类，设置并行度，点击submit提交按">
+<meta name="keywords" content="flink">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 常用命令">
-<meta property="og:url" content="http://yoursite.com/2019/05/27/Linux-常用命令/index.html">
+<meta property="og:title" content="flink 提交任务">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/flink-提交任务/index.html">
 <meta property="og:site_name" content="上善若水博客">
-<meta property="og:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：  vim file_name:%d:wq  2.使用cat命令情况，命令如下：  cat /dev/null &amp;gt; file_name  3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：  echo “”&amp;gt;file_na">
+<meta property="og:description" content="flink 提交任务flink本地提交任务 一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种： 1.通过命令行的方式提交flink任务：1./bin/flink run ./examples/batch/WordCount.jar   2.通过网页ip:8081提交任务点击 add new 上传jar包   选择想要执行的jar包，点击主类，设置并行度，点击submit提交按">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-05T02:17:01.303Z">
+<meta property="og:updated_time" content="2019-12-19T02:09:11.636Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 常用命令">
-<meta name="twitter:description" content="linux系统中清空文件内容的三种方法1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：  vim file_name:%d:wq  2.使用cat命令情况，命令如下：  cat /dev/null &amp;gt; file_name  3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：  echo “”&amp;gt;file_na">
+<meta name="twitter:title" content="flink 提交任务">
+<meta name="twitter:description" content="flink 提交任务flink本地提交任务 一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种： 1.通过命令行的方式提交flink任务：1./bin/flink run ./examples/batch/WordCount.jar   2.通过网页ip:8081提交任务点击 add new 上传jar包   选择想要执行的jar包，点击主类，设置并行度，点击submit提交按">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Linux 常用命令" height="28">
+                <img src="/images/logo.svg" alt="flink 提交任务" height="28">
             
             </a>
         </div>
@@ -137,7 +137,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-27T01:43:36.000Z">2019-05-27</time>
+                <time class="level-item has-text-grey" datetime="2019-12-19T01:35:40.000Z">2019-12-19</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
@@ -147,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 497 个字)
+                    3 分钟 读完 (大约 425 个字)
                 </span>
                 
                 
@@ -156,84 +156,31 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Linux 常用命令
+                flink 提交任务
             
         </h1>
         <div class="content">
-            <h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p>
-<blockquote>
-<p>vim file_name<br>:%d<br>:wq</p>
+            <h1 id="flink-提交任务"><a href="#flink-提交任务" class="headerlink" title="flink 提交任务"></a>flink 提交任务</h1><h2 id="flink本地提交任务"><a href="#flink本地提交任务" class="headerlink" title="flink本地提交任务"></a>flink本地提交任务</h2><blockquote>
+<p>一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种：<br> 1.通过命令行的方式提交flink任务：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run ./examples/batch/WordCount.jar</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>2.使用cat命令情况，命令如下：</p>
 <blockquote>
-<p>cat /dev/null &gt; file_name</p>
+<p>2.通过网页ip:8081提交任务<br>点击 add new 上传jar包<br><img src="/images/2019/12/19/3d365750-21ff-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
 </blockquote>
-<p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p>
 <blockquote>
-<p>echo “”&gt;file_name</p>
+<p>选择想要执行的jar包，点击主类，设置并行度，点击submit提交按钮<br><img src="/images/2019/12/19/1476e7b0-2201-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
 </blockquote>
-<p>推荐使用cat命令</p>
-<h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p>
-<blockquote>
-<p>:$ 跳到最后一行<br>:1 跳到第一行</p>
+<h2 id="flink集群提交任务"><a href="#flink集群提交任务" class="headerlink" title="flink集群提交任务"></a>flink集群提交任务</h2><blockquote>
+<p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
 </blockquote>
-<p>第二种方式：</p>
-<blockquote>
-<p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
-</blockquote>
-<p>查找文件关键字内容</p>
-<blockquote>
-<p>grep -r “test”  /data/reports</p>
-</blockquote>
-<p>搜索命令</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/string</td>
-<td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td>
-</tr>
-<tr>
-<td>n</td>
-<td>搜索指定字符串的下一个出现位置</td>
-</tr>
-<tr>
-<td>:%s/old/new/g</td>
-<td>全文替换指定字符串</td>
-</tr>
-<tr>
-<td>:n1,n2s/old/new/g</td>
-<td>在一定范围内替换指定字符串</td>
-</tr>
-</tbody>
-</table>
-<p>端口占用查询：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p>
-<p>查看内存使用情况<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p>
-<p>查看磁盘使用情况</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
-<p>查看文件创建数量</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
-<p>删除某个文件的小文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
-<p>查看占用线程最大的程序<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>修改服务最大线程数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p>
-<p>监控java线程<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>监控网络客户连接数：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>linux 将本地文件传给其他服务器<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>
-<p>查看某个目录下大文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -size +50M | xargs du -h</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看CPU情况："><a href="#查看CPU情况：" class="headerlink" title="查看CPU情况："></a>查看CPU情况：</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo |grep &quot;model name&quot; &amp;&amp; cat /proc/cpuinfo |grep &quot;physical id&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="查看内存大小"><a href="#查看内存大小" class="headerlink" title="查看内存大小"></a>查看内存大小</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo | grep MemTotal</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Linux/">Linux</a>
+                    <a class="has-link-grey -link" href="/tags/flink/">flink</a>
                 </div>
             </div>
         </div>
@@ -288,17 +235,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/30/scala-正则匹配/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">scala 正则匹配</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/23/蓝牙信标定位/">
-                <span class="level-item">蓝牙信标定位</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/18/JSON数据处理（gson-和-fastjson）/">
+                <span class="level-item">JSON数据处理（gson 和 fastjson）</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -314,8 +254,8 @@
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/05/27/Linux-常用命令/';
-        this.page.identifier = '2019/05/27/Linux-常用命令/';
+        this.page.url = 'http://yoursite.com/2019/12/19/flink-提交任务/';
+        this.page.identifier = '2019/12/19/flink-提交任务/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -1102,7 +1042,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Linux 常用命令" height="28">
+                    <img src="/images/logo.svg" alt="flink 提交任务" height="28">
                 
                 </a>
                 <p class="is-size-7">

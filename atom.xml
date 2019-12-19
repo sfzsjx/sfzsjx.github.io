@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-18T06:24:40.795Z</updated>
+  <updated>2019-12-19T02:09:11.636Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flink 提交任务</title>
+    <link href="http://yoursite.com/2019/12/19/flink-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://yoursite.com/2019/12/19/flink-提交任务/</id>
+    <published>2019-12-19T01:35:40.000Z</published>
+    <updated>2019-12-19T02:09:11.636Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="flink-提交任务"><a href="#flink-提交任务" class="headerlink" title="flink 提交任务"></a>flink 提交任务</h1><h2 id="flink本地提交任务"><a href="#flink本地提交任务" class="headerlink" title="flink本地提交任务"></a>flink本地提交任务</h2><blockquote><p>一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种：<br> 1.通过命令行的方式提交flink任务：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run ./examples/batch/WordCount.jar</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>2.通过网页ip:8081提交任务<br>点击 add new 上传jar包<br><img src="/images/2019/12/19/3d365750-21ff-11ea-80df-39774ea2e31e.png" alt="image.png"></p></blockquote><blockquote><p>选择想要执行的jar包，点击主类，设置并行度，点击submit提交按钮<br><img src="/images/2019/12/19/1476e7b0-2201-11ea-80df-39774ea2e31e.png" alt="image.png"></p></blockquote><h2 id="flink集群提交任务"><a href="#flink集群提交任务" class="headerlink" title="flink集群提交任务"></a>flink集群提交任务</h2><blockquote><p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p></blockquote><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;flink-提交任务&quot;&gt;&lt;a href=&quot;#flink-提交任务&quot; class=&quot;headerlink&quot; title=&quot;flink 提交任务&quot;&gt;&lt;/a&gt;flink 提交任务&lt;/h1&gt;&lt;h2 id=&quot;flink本地提交任务&quot;&gt;&lt;a href=&quot;#flink本地提交任
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/tags/flink/"/>
+    
+  </entry>
   
   <entry>
     <title>JSON数据处理（gson 和 fastjson）</title>
@@ -500,32 +525,6 @@
     
     
       <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Intellij IDEA 问题记录</title>
-    <link href="http://yoursite.com/2019/08/15/Intellij-IDEA-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2019/08/15/Intellij-IDEA-问题记录/</id>
-    <published>2019-08-15T08:03:58.000Z</published>
-    <updated>2019-08-15T08:03:58.470Z</updated>
-    
-    <content type="html"><![CDATA[<p>Intellij IDEA 问题记录 </p><p>问题一、<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Intellij idea Language level和Java Compiler版本自动变化问题</span><br><span class="line">该问题主要是由于刷新pom.xml文件时，IDEA的这两个参数就会恢复成默认值</span><br><span class="line">解决办法：</span><br><span class="line">在pom.xml中加入以下配置</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Intellij IDEA 问题记录 &lt;/p&gt;
-&lt;p&gt;问题一、&lt;br&gt;&lt;figure class=&quot;highlight plain hljs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br
-      
-    
-    </summary>
-    
-      <category term="IDEA" scheme="http://yoursite.com/categories/IDEA/"/>
-    
-    
-      <category term="IDEA" scheme="http://yoursite.com/tags/IDEA/"/>
     
   </entry>
   
