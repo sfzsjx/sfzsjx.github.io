@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 985 个字)
+                    19 分钟 读完 (大约 2798 个字)
                 </span>
                 
                 
@@ -193,10 +193,68 @@
 </li>
 </ol>
 <h2 id="二、有状态流式处理的挑战"><a href="#二、有状态流式处理的挑战" class="headerlink" title="二、有状态流式处理的挑战"></a>二、有状态流式处理的挑战</h2><ol>
-<li><p>状态容错</p>
-</li>
-<li></li>
+<li>状态容错<br>需要解决下面三个问题：</li>
 </ol>
+<ul>
+<li>如何确保状态拥有精确一次（exactly-once guarantee）容错保证</li>
+<li>如何在分布式场景下替多个拥有本地状态的运算子产生一个全域一致的快照（global consistent snapshot）</li>
+<li>如何在不中断运算的前提下产生快照<br>1.1 简单场景的精确一次容错方法<blockquote>
+<p>先考虑最简单的使用场景，如无限流的数据进入，后面单一的Process 进行运算，每处理完一笔计算即会累积一次状态，这种情况下如果要确保Process 产生精确一次的状态容错，每处理完一笔数据，更改完状态后进行一次快照，快照包含在队列中并与相应的状态进行对比，完成一致的快照，就能确保精确一次。</p>
+</blockquote>
+</li>
+</ul>
+<p>1.2 分布式状态容错</p>
+<blockquote>
+<p>Flink作为分布式的处理引擎，在分布式的场景下，进行多个本地状态的运算，只产生一个全域一致的快照，如需要在不中断运算值的前提下产生全域一致的快照，就涉及到分散式状态容错。</p>
+</blockquote>
+<p><img src="/images/2019/12/27/9078f390-2872-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p> 关于Global consistent snapshot，当Operator 在分布式的环境中，在各个节点做运算，首先产生Global consistent snapshot 的方式就是处理每一笔数据的快照点是连续的，这笔运算流过所有的运算值，更改完所有的运算值后，能够看到每一个运算值的状态与该笔运算的位置，即可称为Consistent snapshot，当然，Global consistent snapshot 也是简易场景的延伸。</p>
+</blockquote>
+<p>容错恢复</p>
+<p><img src="/images/2019/12/27/09adb2f0-2873-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>首先了解一下Checkpoint，上面提到连续性快照每个Operator 运算值本地的状态后端都要维护状态，也就是每次将产生检查点时会将它们传入共享的DFS 中。当任何一个Process 挂掉后，可以直接从三个完整的Checkpoint 将所有的运算值的状态恢复，重新设定到相应位置。Checkpoint的存在使整个Process 能够实现分散式环境中的Exactly-once。</p>
+</blockquote>
+<p>1.3 分布式快照的方法（distribution snapshot）<br><img src="/images/2019/12/27/b51633f0-2874-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>关于Flink 如何在不中断运算的状况下持续产生Global consistent snapshot，其方式是基于用 Simple lamport 演算法机制下延伸的。已知的一个点Checkpoint barrier，Flink 在某个Datastream 中会一直安插Checkpoint barrier，Checkpoint barrier 也会N – 1等等，Checkpoint barrier N 代表着所有在这个范围里面的数据都是Checkpoint barrier N。</p>
+</blockquote>
+<p><img src="/images/2019/12/27/a0fa8a00-2875-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>举例：假设现在需要产生Checkpoint barrier N，但实际上在Flink 中是由Job manager 触发Checkpoint，Checkpoint 被触发后开始从数据源产生Checkpoint barrier。当Job 开始做Checkpoint barrier N 的时候，可以理解为Checkpoint barrier N 需要逐步填充左下角的表格。</p>
+</blockquote>
+<p><img src="/images/2019/12/27/3cecb820-2876-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>如图，当部分事件标为红色，Checkpoint barrier N 也是红色时，代表着这些数据或事件都由Checkpoint barrier N 负责。Checkpoint barrier N 后面白色部分的数据或事件则不属于Checkpoint barrier N。</p>
+</blockquote>
+<p>在以上的基础上，当数据源收到Checkpoint barrier N 之后会先将自己的状态保存，以读取Kafka资料为例，数据源的状态就是目前它在Kafka 分区的位置，这个状态也会写入到上面提到的表格中。下游的Operator 1 会开始运算属于Checkpoint barrier N 的数据，当Checkpoint barrier N 跟着这些数据流动到Operator 1 之后,Operator 1 也将属于Checkpoint barrier N 的所有数据都反映在状态中，当收到Checkpoint barrier N 时也会直接对Checkpoint去做快照。</p>
+<p><img src="/images/2019/12/27/6ba1cfc0-2876-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>当快照完成后继续往下游走，Operator 2 也会接收到所有数据，然后搜索Checkpoint barrier N 的数据并直接反映到状态，当状态收到Checkpoint barrier N 之后也会直接写入到Checkpoint N 中。以上过程到此可以看到Checkpoint barrier N 已经完成了一个完整的表格，这个表格叫做Distributed Snapshots，即分布式快照。分布式快照可以用来做状态容错，任何一个节点挂掉的时候可以在之前的Checkpoint 中将其恢复。继续以上Process，当多个Checkpoint 同时进行，Checkpoint barrier N 已经流到Job manager 2，Flink job manager 可以触发其他的Checkpoint，比如Checkpoint N + 1，Checkpoint N + 2 等等也同步进行，利用这种机制，可以在不阻挡运算的状况下持续地产生Checkpoint。</p>
+</blockquote>
+<p><img src="/images/2019/12/27/adee50b0-2876-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<ol start="2">
+<li>状态维护<blockquote>
+<p>状态维护即用一段代码在本地维护状态值，当状态值非常大时需要本地的状态后端来支持。</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/images/2019/12/27/a35ab9c0-2878-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>图中分别为： 状态识别id,状态数据形态资讯，注册状态<br>如图，在Flink 程序中，可以采用getRuntimeContext().getState(desc); 这组API 去注册状态。Flink 有多种状态后端，采用API 注册状态后，读取状态时都是通过状态后端来读取的。Flink 有两种不同的状态值，也有两种不同的状态后端：<br><img src="/images/2019/12/27/102f4a70-2879-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+</blockquote>
+<p>-JVM Heap状态后端，适合数量较小的状态，当状态量不大时就可以采用JVM Heap 的状态后端。JVM Heap 状态后端会在每一次运算值需要读取状态时，用Java object read / writes 进行读或写，不会产生较大代价，但当Checkpoint 需要将每一个运算值的本地状态放入Distributed Snapshots 的时候，就需要进行序列化了。</p>
+<p><img src="/images/2019/12/27/30faad30-2879-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<p>-RocksDB状态后端，它是一种out of core 的状态后端。在Runtime 的本地状态后端让使用者去读取状态的时候会经过磁盘，相当于将状态维护在磁盘里，与之对应的代价可能就是每次读取状态时，都需要经过序列化和反序列化的过程。当需要进行快照时只将应用序列化即可，序列化后的数据直接传输到中央的共享DFS 中。</p>
+<blockquote>
+<p>Flink目前支持以上两种状态后端，一种是纯 Memory 的状态后端，另一种是有资源磁盘的状态后端，在维护状态时可以根据状态的数量选择相应的状态后端。</p>
+</blockquote>
+<ol start="3">
+<li>event-time process</li>
+<li>状态保存与迁移</li>
+</ol>
+<p>参考文章：<a href="https://ververica.cn/developers/flink-basic-tutorial-1-basic-concept/" target="_blank" rel="noopener">Apache Flink 零基础入门（一&amp;二）：基础概念解析</a></p>
 
         </div>
         
