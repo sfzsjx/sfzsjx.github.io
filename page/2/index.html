@@ -136,6 +136,106 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T07:13:40.000Z">2019-10-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 986 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/23/Docker-学习笔记/">Docker 学习笔记</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h1><p><a href="https://www.runoob.com/docker/centos-docker-install.html" target="_blank" rel="noopener">docker 安装地址</a></p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.</span><br><span class="line">See &apos;docker run --help&apos;.</span><br><span class="line"></span><br><span class="line">可能docker上次为正常关闭导致： systemctl start docker</span><br></pre></td></tr></table></figure>
+<h1 id="验证docker-安装成功"><a href="#验证docker-安装成功" class="headerlink" title="验证docker 安装成功"></a>验证docker 安装成功</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/10/23/dc94e130-f564-11e9-84ab-7fe2af665eb5.png" alt="image.png"></p>
+<h1 id="常见镜像操作"><a href="#常见镜像操作" class="headerlink" title="常见镜像操作"></a>常见镜像操作</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">1.获取镜像</span><br><span class="line">docker pull ubuntu:16.04</span><br><span class="line"></span><br><span class="line">2.运行镜像,进入容器</span><br><span class="line">docker run -it --rm \</span><br><span class="line">ubuntu:16.04 \</span><br><span class="line">bash</span><br><span class="line"></span><br><span class="line">3. 退出容器</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line">4.列出镜像</span><br><span class="line">docker image ls</span><br><span class="line"></span><br><span class="line">5.查看镜像、容器、数据卷所占用的空间</span><br><span class="line">docker system df</span><br><span class="line"></span><br><span class="line">6.虚悬镜像</span><br><span class="line">docker image ls -f dangling=true</span><br><span class="line"></span><br><span class="line">7.删除虚悬镜像</span><br><span class="line">docker image prune</span><br><span class="line"></span><br><span class="line">8.中间层镜像</span><br><span class="line">docker image ls -a</span><br><span class="line"></span><br><span class="line">9.部分镜像列出</span><br><span class="line">docker image ls ubuntu</span><br><span class="line">docker image ls ubuntu:16.04</span><br><span class="line">docker image ls -f since=mongo:3.2</span><br><span class="line">docker image ls -f label=com.example.version=0.1</span><br><span class="line"></span><br><span class="line">10. 特定格式显示</span><br><span class="line">docker image ls -q</span><br><span class="line">docker image ls --format &quot;&#123;&#123;.ID&#125;&#125;: &#123;&#123;.Repository&#125;&#125;&quot;</span><br><span class="line">docker image ls --format &quot;table &#123;&#123;.ID&#125;&#125;\t&#123;&#123;.Repository&#125;&#125;\t&#123;&#123;.Tag&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="镜像构建"><a href="#镜像构建" class="headerlink" title="镜像构建"></a>镜像构建</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir mynginx</span><br><span class="line">$ cd mynginx</span><br><span class="line">$ touch Dockerfile</span><br><span class="line"></span><br><span class="line">Dockerfile内容:</span><br><span class="line"></span><br><span class="line">FROM nginx</span><br><span class="line">RUN echo &apos;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&apos; &gt; /usr/share/nginx/html/index.html</span><br><span class="line"></span><br><span class="line">在Dockerfile所在的目录执行</span><br><span class="line">docker build -t nginx:v3 .</span><br></pre></td></tr></table></figure>
+<h1 id="常见容器操作"><a href="#常见容器操作" class="headerlink" title="常见容器操作"></a>常见容器操作</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">1.新建并启动容器</span><br><span class="line">docker run ubuntu:16.04 /bin/echo &apos;Hello World!&apos;</span><br><span class="line"></span><br><span class="line">2.在终端打开容器</span><br><span class="line">docker run -t -i  ubuntu:16.04 /bin/bash  （其中，-t 选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， -i 则让容器的标准输入保持打开）</span><br><span class="line"></span><br><span class="line">3. 启动已经终止的容器</span><br><span class="line">docker container start --help</span><br><span class="line"></span><br><span class="line">4.后台运行容器</span><br><span class="line">docker run -d  ubuntu:16.04 /bin/sh -c &quot;while true ;do echo hello world;sleep 1;done&quot;</span><br><span class="line">5.查看运行容器</span><br><span class="line">docker container ls</span><br><span class="line"></span><br><span class="line">6.查看容器的运行日志</span><br><span class="line">docker logs container id</span><br><span class="line">docker logs 583d0660cf1364e7e52a996e0ccab94c2c9e1b88a831233e5777adf6d4684601</span><br><span class="line"></span><br><span class="line">7.终止一个容器</span><br><span class="line">docker container stop container id</span><br><span class="line">docker container stop 583d0660cf13</span><br><span class="line"></span><br><span class="line">8.查看所有的容器</span><br><span class="line">docker container ls -a</span><br><span class="line"></span><br><span class="line">9.启动已经停止的容器</span><br><span class="line">docker container start container id</span><br><span class="line">docker container start 583d0660cf13</span><br><span class="line"></span><br><span class="line">10.重启容器</span><br><span class="line">docker container restart</span><br></pre></td></tr></table></figure>
+<h1 id="进入容器两种方式"><a href="#进入容器两种方式" class="headerlink" title="进入容器两种方式"></a>进入容器两种方式</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. attach 命令</span><br><span class="line">docker run  -dit ubuntu</span><br><span class="line">docker container ls</span><br><span class="line">docker attach 14bf</span><br><span class="line"></span><br><span class="line">可以看出在退出容器是这个容器也会被停止。</span><br><span class="line"></span><br><span class="line">2. exec命令</span><br><span class="line"> docker exec -it f2a8 bash</span><br><span class="line">这个命令退出时不会停止容器。所有推荐使用这个命令进入容器中进行操作。</span><br></pre></td></tr></table></figure>
+<h1 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">1.创建数据卷</span><br><span class="line">docker volume create my-vol</span><br><span class="line">2.查看所有数据卷</span><br><span class="line">docker volume ls</span><br><span class="line">3.查看某个数据卷的具体信息</span><br><span class="line">docker volume inspect my-vol</span><br><span class="line">4.启动一个挂载数据卷的容器</span><br><span class="line"></span><br><span class="line">docker run -d -P \</span><br><span class="line">&gt; --name web \</span><br><span class="line">&gt; --mount source=my-vol,target=/webapp \</span><br><span class="line">&gt; training/webapp \</span><br><span class="line">&gt; python app.py</span><br><span class="line"></span><br><span class="line">5.删除数据卷</span><br><span class="line">docker volume rm my-vol</span><br><span class="line">如果报错：</span><br><span class="line">Error response from daemon: remove my-vol: volume is in use - [e6520e12082e077ff427d2ec87dc32c61bf30414570009a82363c706d5e2072e]</span><br><span class="line"></span><br><span class="line">则需要先停止正在使用数据卷的容器，并删除它。</span><br><span class="line">docker stop e6520e12082e</span><br><span class="line">docker rm e6520e12082e</span><br><span class="line"></span><br><span class="line">6.清除无主的数据卷</span><br><span class="line">docker volume prune</span><br></pre></td></tr></table></figure>
+<h1 id="docker-构建-Tomcat"><a href="#docker-构建-Tomcat" class="headerlink" title="docker 构建 Tomcat"></a>docker 构建 Tomcat</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.搜索Tomcat镜像</span><br><span class="line">docker search tomcat</span><br><span class="line">2.拉取Tomcat镜像</span><br><span class="line">docker pull tomcat</span><br><span class="line">3.运行容器</span><br><span class="line">docker run --name tomcat -p 8080:8080 -v $PWD/test:/usr/local/tomcat/webapps/test -d tomcat</span><br><span class="line">命令说明：</span><br><span class="line"></span><br><span class="line">-p 8080:8080：将容器的8080端口映射到主机的8080端口</span><br><span class="line">-v $PWD/test:/usr/local/tomcat/webapps/test：将主机中当前目录下的test挂载到容器的/test</span><br></pre></td></tr></table></figure>
+<h1 id="docker-构建-mysql"><a href="#docker-构建-mysql" class="headerlink" title="docker 构建 mysql"></a>docker 构建 mysql</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1.搜索mysql镜像</span><br><span class="line">docker search mysql</span><br><span class="line">2.拉取mysql镜像</span><br><span class="line">docker pull mysql</span><br><span class="line">3.运行mysql镜像，构建mysql容器</span><br><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /usr/local/docker/mysql/conf:/etc/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/logs:/var/log/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-d mysql</span><br><span class="line"></span><br><span class="line">命令参数：</span><br><span class="line"></span><br><span class="line">-p 3306:3306：将容器的3306端口映射到主机的3306端口</span><br><span class="line">-v /usr/local/docker/mysql/conf:/etc/mysql：将主机当前目录下的 conf 挂载到容器的 /etc/mysql</span><br><span class="line">-v /usr/local/docker/mysql/logs:/var/log/mysql：将主机当前目录下的 logs 目录挂载到容器的 /var/log/mysql</span><br><span class="line">-v /usr/local/docker/mysql/data:/var/lib/mysql：将主机当前目录下的 data 目录挂载到容器的 /var/lib/mysql</span><br><span class="line">-e MYSQL\_ROOT\_PASSWORD=123456：初始化root用户的密码</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-17T02:13:36.000Z">2019-10-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 580 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/17/HBase-常用工具类/">HBase 常用工具类</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">object HBaseUtils &#123;</span><br><span class="line">  def logger: Logger = LoggerFactory.getLogger(getClass)</span><br><span class="line">  /**</span><br><span class="line">    * 获取配置参数信息</span><br><span class="line">    * @return    </span><br><span class="line">*/ </span><br><span class="line"> def getHBaseConf : Configuration = &#123;</span><br><span class="line">    val conf : Configuration = HBaseConfiguration.create</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)</span><br><span class="line">    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)</span><br><span class="line">    conf</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取连接</span><br><span class="line">    * @param conf 配置信息</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">  def getConnection(conf:Configuration): Connection =&#123;</span><br><span class="line">    ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取管理员权限</span><br><span class="line">    * @param conn 连接信息</span><br><span class="line">    * @return HBaseAdmin</span><br><span class="line">    */</span><br><span class="line">  def getAdmin(conn:Connection) : HBaseAdmin = &#123;</span><br><span class="line">    conn.getAdmin.asInstanceOf[HBaseAdmin]</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 创建表</span><br><span class="line">    * @param admin 管理员</span><br><span class="line">    * @param tableName 表名</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常</span><br><span class="line">    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常</span><br><span class="line">    * @throws java.io.IOException 异常</span><br><span class="line">    */</span><br><span class="line">  @throws(classOf[MasterNotRunningException])</span><br><span class="line">  @throws(classOf[ZooKeeperConnectionException])</span><br><span class="line">  @throws(classOf[IOException])</span><br><span class="line">  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = &#123;</span><br><span class="line">    val createTableName = TableName.valueOf(tableName)</span><br><span class="line">    if (admin.tableExists(createTableName))&#123;</span><br><span class="line">      logger.info(tableName + &quot;table exists!&quot;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      val tableDesc = new HTableDescriptor(createTableName)      </span><br><span class="line">      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)</span><br><span class="line">      for (singleColumnFamily &lt;- columnFamily)&#123;</span><br><span class="line">        val columnDesc = new HColumnDescriptor(singleColumnFamily)</span><br><span class="line">        tableDesc.addFamily(columnDesc)</span><br><span class="line">      &#125; </span><br><span class="line">admin.createTable(tableDesc)</span><br><span class="line">      logger.info(tableName + &quot; create table success!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">admin.close() </span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 载入数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @param quorum 分布式信息</span><br><span class="line">    * @param value 数值</span><br><span class="line">    */</span><br><span class="line">  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit =&#123;</span><br><span class="line">    val rowPut:Put = new Put(Bytes.toBytes(rowKey))</span><br><span class="line">    if (value == null)&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)</span><br><span class="line">    &#125;</span><br><span class="line">    table.put(rowPut)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 获取表数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @return HBase result</span><br><span class="line">    */</span><br><span class="line">  def getRow(table: Table,rowKey: String ):Result = &#123;</span><br><span class="line">    val get:Get = new Get(Bytes.toBytes(rowKey))</span><br><span class="line">    val result:Result = table.get(get)</span><br><span class="line">    for (rowKv &lt;- result.rawCells())&#123;</span><br><span class="line">      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)</span><br><span class="line">      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))</span><br><span class="line">      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))</span><br><span class="line">   &#125;</span><br><span class="line">    result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 批量添加数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param list 数据列表</span><br><span class="line">    */</span><br><span class="line">  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = &#123;</span><br><span class="line">    try&#123;</span><br><span class="line">      table.put(list)</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; </span><br><span class="line">       logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 查询所有记录</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @return resultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryAll(table: Table):ResultScanner = &#123;</span><br><span class="line">    val scan: Scan = new Scan</span><br><span class="line">    try &#123;</span><br><span class="line">      val result: ResultScanner = table.getScanner(scan)</span><br><span class="line">      result</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: IOException =&gt;</span><br><span class="line">      logger.error(e.getMessage)</span><br><span class="line">        null</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 单条记录查询</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param queryColumn 查询列 </span><br><span class="line">    * @param value 数值</span><br><span class="line">    * @param columns 列集合</span><br><span class="line">    * @return ResultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = &#123;</span><br><span class="line">    if (columns == null || queryColumn == null || value == null )&#123;</span><br><span class="line">      null</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))</span><br><span class="line">        val scan: Scan = new Scan</span><br><span class="line">        for (column  logger.error(e.getMessage)</span><br><span class="line">          null</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 删除表</span><br><span class="line">    * @param hBaseConnection 链接</span><br><span class="line">    * @param tableName HBase表</span><br><span class="line">    */</span><br><span class="line">  def dropTable(hBaseConnection: Connection,tableName: String): Unit = &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))</span><br><span class="line">      admin.deleteTable(TableName.valueOf(tableName))</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.hbase </span><br><span class="line">hbase-client</span><br><span class="line">$&#123;hbase.version&#125;</span><br><span class="line">org.apache.hadoop </span><br><span class="line">hadoop-annotations</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-09-11T06:59:39.000Z">2019-09-11</time>
                 
                 <div class="level-item">
@@ -781,125 +881,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-12T01:18:10.000Z">2019-08-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 562 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/12/Spark-Windows10-安装部署/">Spark Windows10 安装部署</a>
-            
-        </h1>
-        <div class="content">
-            <p>Spark centos 安装部署 </p>
-<h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
-<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>解压安装后配置环境变量<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
-<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
-</blockquote>
-<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
-<p>进入到配置目录<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>然后进入sbin目录,启动集群<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>至此spark安装完成。</p>
-<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
-<p>执行脚本<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-09T08:50:32.000Z">2019-08-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 79 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/09/spark-常用参数设置/">spark 常用参数设置</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
-<h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -970,7 +951,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            64
+                            66
                         </p>
                     </a>
                 </div>
@@ -1126,7 +1107,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1171,7 +1152,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 17.5px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 18px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1180,6 +1161,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flink 基本概念（有状态流式处理引擎）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flink 基本概念（有状态流式处理引擎）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/25/flink-基本概念/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基本概念">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T02:11:45.000Z">2019-12-25</time></div>
+                    <a href="/2019/12/25/flink-基本概念/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基本概念</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1238,44 +1257,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
-                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
-                    <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1293,7 +1274,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1502,7 +1483,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 

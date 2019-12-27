@@ -136,6 +136,123 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-15T06:13:29.000Z">2019-03-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 515 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/15/数据挖掘实战（2）：-信用卡诈骗分析/">数据挖掘实战（2）： 信用卡诈骗分析</a>
+            
+        </h1>
+        <div class="content">
+            <p>信用卡诈骗分析目标：通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷的风险。<br>学习目标：</p>
+<ol>
+<li>学习逻辑回归</li>
+<li>信用卡欺诈属于二分类问题，欺诈交易在所有交易中比例很小，对于这种数据不平衡情况，到底采用什么样的模型评估标准更准确；</li>
+<li>完成信用卡欺诈分析实战项目，并通过数据可视化对数据探索和模型评估进一步加强了解。</li>
+</ol>
+<p>构建逻辑回归分类器<br>  逻辑回归（logistic回归），主要解决二分类问题。在逻辑回归中使用Logistic函数<br>也称Sigmoid函数。</p>
+<p><img src="/images/2019/03/15/c13beb30-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
+<p>函数形如S状：<br><img src="/images/2019/03/15/d9159210-46e7-11e9-a19b-17ea8a04d566.png" alt="image.png"></p>
+<p>算法实现理解：我们要实现一个二分类任务，0为不发生，1为发生。而通过对历史样本学习得到一个新的模型<br>，当新的样本给出时，预测出结果。这里得到是y的一个预测概率。通常我们认为概率大于50%<br>则发生，反之，则不发生。</p>
+<p>在sklearn中，使用LogisticRegression()函数构建逻辑回归分类器，函数常用的构造参数：</p>
+<ol>
+<li>penalty ：惩罚项，取值为l1或l2，默认为l2。当模型参数满足高斯分布时用l2，当模型参数满足拉普拉斯分布时用l1;</li>
+<li>solver: 代表的是逻辑回归损失函数的优化方法。有5个参数可选，分别为liblinear、lbfgs、newton-cg、sag或saga.默认为liblinear,s适用于数据量较小的数据集，当数据量较大的时候可以选用sag或saga方法。</li>
+<li>max_iter:算法收敛最大迭代次数，默认为10.</li>
+<li>n_jobs:拟合和预测的时候CPU的核数，默认为1.</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-15T01:22:52.000Z">2019-03-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/脚本/">脚本</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 203 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/15/shell-编写-脚本常用命令/">shell 编写 脚本常用命令</a>
+            
+        </h1>
+        <div class="content">
+            <p>统计test.sh 文件命令的行数<br>sed -n ‘$=’ /home/hadoop/test/test.sh</p>
+<p>shell 脚本日志写入追加时间文件夹<br>date_time=<code>date +&#39;%Y-%m-%d&#39;</code> &amp;&amp; sh /home/greesj2b/jiaoben/bomrank.sh &gt;&gt; /home/greesj2b/jiaoben/bomrank/log/bomrank_$date_time.log 2&gt;&amp;1</p>
+<p>hive 查看表锁情况</p>
+<p>show locks;</p>
+<p>对表解锁<br>unlock table tablename;</p>
+<p>关闭锁机制<br>set hive.support.concurrency=false;默认为true</p>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><blockquote>
+<p>syntax error: unexpected end of file<br>原因：最后发现我的脚本是在window环境下编写的，然后传到linux服务器上的，这时候问题来了，doc下的文本内容格式和unix下的格式有所不同，比如dos文件传输到unix系统时,会在每行的结尾多一个^M结束符。（我的就是这个原因）<br>解决办法：</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim serverDeploy.sh</span><br><span class="line">:set fileformat=unix</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-03-14T02:23:18.000Z">2019-03-14</time>
                 
                 <div class="level-item">
@@ -741,145 +858,6 @@ pip install pydotplus
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-18T08:56:37.000Z">2019-01-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 241 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/18/学习笔记/">学习笔记</a>
-            
-        </h1>
-        <div class="content">
-            <p>chcp    查看windows系统编码格式</p>
-<p>chcp 65001   将Windows格式编码设为utf-8模式</p>
-<p>设置 hue 指定队列进行查询操作</p>
-<p>set mapred.job.queue.name=QueueA;</p>
-<p>设置 hue 使用 spark 引擎查询</p>
-<p>set spark.master=yarn-cluster;  //默认即为yarn-cluster模式，该参数可以不配置<br>set hive.execution.engine=spark;<br>set spark.eventLog.enabled=true;<br>set spark.eventLog.dir=hdfs://cdh5/tmp/sparkeventlog;<br>set spark.executor.memory=1g;<br>set spark.executor.instances=50;  //executor数量，默认貌似只有2个<br>set spark.driver.memory=1g;<br>set spark.serializer=org.apache.spark.serializer.KryoSerializer;</p>
-<p>host文件配置：</p>
-<p>C:\Windows\System32\drivers\etc</p>
-<p>后台运行Java程序<br>nohup java -jar basedata-1.0-SNAPSHOT.jar &amp;</p>
-<p>7z Linux 解压命令<br>7za x ***.7z</p>
-<p>restful api linux 测试<br>get方法  ： curl “<a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail?mlotno=&quot;9840021904060061&quot;&quot;</a><br>post方法 ： curl -d ‘info={“mlotno”:”9840021904060061”}’ <a href="http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail" target="_blank" rel="noopener">http://sysapp.gree.com/GreeMesOpenApi/GreeMesApi/api/services/app/SupTimeZoneJXDetailService/GetSupTimeZoneJXDetail</a></p>
-<p>注意空格。</p>
-<p>在windows下执行java包命令<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar</span><br></pre></td></tr></table></figure></p>
-<p>后台执行命令<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将jdk 重新命名项目名（如bom.exe）</span><br><span class="line"></span><br><span class="line">bom.exe -jar xx.jar</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-18T01:13:24.000Z">2019-01-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 209 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/18/kylin-jdbc-连接/">kylin jdbc 连接</a>
-            
-        </h1>
-        <div class="content">
-            <p>kylin jdbc 连接</p>
-<p>一 、kylin 简介</p>
-<pre><code>Kylin是ebay开发的一套OLAP系统，与Mondrian不同的是，它是一个MOLAP系统，主要用于支持大数据生态圈的数据分析业务，它主要是通过预计算的方式将用户设定的多维立方体缓存到HBase中。
-</code></pre><p>二、引入pom文件</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.kylin&lt;/groupId&gt;
-    &lt;artifactId&gt;kylin-jdbc&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>三 、例子</p>
-<pre><code>import org.apache.kylin.jdbc.Driver;
-import org.datanucleus.state.LifeCycleState;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-public class KylinJdbc {
-    public static void main(String[] args) throws Exception {
-        Driver driver = (Driver) Class.forName(&quot;org.apache.kylin.jdbc.Driver&quot;).newInstance();
-        Properties info = new Properties();info.put(&quot;user&quot;, &quot;BI&quot;);info.put(&quot;password&quot;, &quot;16de#+ui9&quot;);
-        Connection conn = driver.connect(&quot;jdbc:kylin://10.214.234.111:7070/Test_kylin&quot;, info);
-        Statement state = conn.createStatement();
-        String sqlStr = &quot;&quot;;
-        ResultSet resultSet = state.executeQuery(sqlStr);
-        List list = new ArrayList();
-        while (resultSet.next()){
-            list.add(resultSet.getString(&quot;1&quot;));
-        }
-        list.forEach(citg -&gt; System.out.println(citg));
-    }
-}
-</code></pre>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -950,7 +928,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            64
+                            66
                         </p>
                     </a>
                 </div>
@@ -1106,7 +1084,7 @@ public class KylinJdbc {
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1151,7 +1129,7 @@ public class KylinJdbc {
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 17.5px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 18px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1160,6 +1138,44 @@ public class KylinJdbc {
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flink 基本概念（有状态流式处理引擎）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flink 基本概念（有状态流式处理引擎）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/25/flink-基本概念/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基本概念">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T02:11:45.000Z">2019-12-25</time></div>
+                    <a href="/2019/12/25/flink-基本概念/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基本概念</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1218,44 +1234,6 @@ public class KylinJdbc {
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
-                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
-                    <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1273,7 +1251,7 @@ public class KylinJdbc {
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1482,7 +1460,7 @@ public class KylinJdbc {
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 

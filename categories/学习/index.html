@@ -147,6 +147,167 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 985 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/">Flink 基本概念（有状态流式处理引擎）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、什么是有状态处理"><a href="#一、什么是有状态处理" class="headerlink" title="一、什么是有状态处理"></a>一、什么是有状态处理</h2><ol>
+<li>传统批次处理方法<br><img src="/images/2019/12/27/8f2108b0-2846-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p>可以看出传统批处理的方法是采用持续收取数据，以时间作为划分多个批次的依据，在周期性执行批次处理。<br><img src="/images/2019/12/27/f1950b40-2846-11ea-80df-39774ea2e31e.png" alt="image.png"><br>但当出现需要就算每个小时出现事件转换次数的需求时，并且事件转换跨越了所定义的时间划分，也即两个事件出现在了，两个不同的批次当中，<strong>传统批处理会将中介运算结果带到下一个批次进行计算</strong> ，还有出现接收的事件顺序颠倒时，传统批处理仍会将中介状态带到下一批次的运算结果中。</p>
+</blockquote>
+</li>
+<li>理想方法<br><img src="/images/2019/12/27/8aa1e1d0-2849-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p>第一点，要有理想方法，这个理想方法是引擎必须要有能力可以累积状态和维护状态，累积状态代表着过去历史中接收过的所有事件，会影响到输出。<br>第二点，时间，时间意味着引擎对于数据完整性有机制可以操控，当所有数据都完全接收到后，输出计算结果。<br>第三点，理想方法模型需要实时产生结果，但更重要的是采用新的持续性数据处理模型来处理实时数据，这样才最符合Continuous data 的特性。<br><img src="/images/2019/12/27/cd4164c0-2849-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+</blockquote>
+</li>
+<li>流式处理<br><img src="/images/2019/12/27/43597ad0-284a-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p>流式处理简单来讲即有一个无穷无尽的数据源在持续收取数据，以代码作为数据处理的基础逻辑，数据源的数据经过代码处理后产生出结果，然后输出，这就是流式处理的基本原理。</p>
+</blockquote>
+</li>
+<li>分布式流式处理<br><img src="/images/2019/12/27/0a495de0-284b-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p>假设Input Streams 有很多个使用者，每个使用者都有自己的ID，如果计算每个使用者出现的次数，我们需要让同一个使用者的出现事件流到同一运算代码，这跟其他批次需要做Group by 是同样的概念，所以跟Stream 一样需要做分区，设定相应的Key，然后让同样的 Key 流到同一个 Computation instance 做同样的运算。</p>
+</blockquote>
+</li>
+<li>有状态分布式流式处理<br><img src="/images/2019/12/27/673360a0-284b-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p>如图，上述代码中定义了变数X，X 在数据处理过程中会进行读和写，在最后输出结果时，可以依据变数X 决定输出的内容，即状态X 会影响最终的输出结果。这个过程中，第一个重点是先进行了状态Co-partitioned key by，同样的 Key 都会流到Computation instance，与使用者出现次数的原理相同，次数即所谓的状态，这个状态一定会跟同一个Key 的事件累积在同一个 Computation instance。类似于根据输入流的Key 重新分区的状态，当分区进入 Stream 之后，这个 Stream 会累积起来的状态也变成 Copartiton .<br>第二个重点是embeded local state backend。有状态分散式流式处理的引擎，状态可能会累积到非常大，当 Key 非常多时，状态可能就会超出单一节点的 Memory 的负荷量，这时候状态必须有状态后端去维护它；在这个状态后端在正常状况下，用In-memory 维护即可。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二、有状态流式处理的挑战"><a href="#二、有状态流式处理的挑战" class="headerlink" title="二、有状态流式处理的挑战"></a>二、有状态流式处理的挑战</h2><ol>
+<li><p>状态容错</p>
+</li>
+<li></li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-25T02:11:45.000Z">2019-12-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1971 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/25/flink-基本概念/">flink 基本概念</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、Apache-flink-基本概念，原理和架构"><a href="#一、Apache-flink-基本概念，原理和架构" class="headerlink" title="一、Apache flink 基本概念，原理和架构"></a>一、Apache flink 基本概念，原理和架构</h2><blockquote>
+<p>Apache Flink is a <strong>framework</strong> and <strong>distributed</strong> processing engine for <strong>stateful</strong> computations over unbounded and bounded data <strong>streams</strong>.<br> Apache Flink 是一个分布式大数据处理引擎，可对有限数据流和无限数据流进行有状态或无状态的计算，能够部署在各种集群环境，对各种规模大小的数据进行快速计算。</p>
+</blockquote>
+<h3 id="1-Flink-Application"><a href="#1-Flink-Application" class="headerlink" title="1. Flink Application"></a>1. Flink Application</h3><blockquote>
+<p>首先了解Flink的Streams、State、Time等基本处理语义以及Flink兼顾灵活性和方便性的多层次API。</p>
+<ul>
+<li>Streams：流，分为有限数据流与无限数据流，unbounded stream 是有始无终的数据流，即无限数据流；而bounded stream 是限定大小的有始有终的数据集合，即有限数据流，二者的区别在于无限数据流的数据会随时间的推演而持续增加，计算持续进行且不存在结束的状态，相对的有限数据流数据大小固定，计算最终会完成并处于结束的状态。<br><img src="/images/2019/12/25/3e5f8a80-26e0-11ea-80df-39774ea2e31e.png" alt="image.png"></li>
+</ul>
+</blockquote>
+<ul>
+<li>State，状态是计算过程中的数据信息，在容错恢复和Checkpoint 中有重要的作用，流计算在本质上是Incremental Processing，因此需要不断查询保持状态；另外，为了确保Exactly- once 语义，需要数据能够写入到状态中；而持久化存储，能够保证在整个分布式系统运行失败或者挂掉的情况下做到Exactly- once，这是状态的另外一个价值。flink的状态管理还需加强研究。(Application state is a first-class citizen in flink)</li>
+</ul>
+<p><img src="/images/2019/12/25/c297cec0-26e0-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<ul>
+<li>Time，分为Event time、Ingestion time、Processing time，Flink 的无限数据流是一个持续的过程，时间是我们判断业务状态是否滞后，数据处理是否及时的重要依据。（平常主要用Event Time 和 processing time）<br><img src="/images/2019/12/25/9d1afc70-26e1-11ea-80df-39774ea2e31e.png" alt="image.png"></li>
+</ul>
+<blockquote>
+<p><strong>Event Time</strong> is the time when an event was created. It is usually described by a timestamp in the event.<br><strong>Ingestion time</strong> is the time when an event entrty the flink dataflow at the source operator.<br><strong>Processing Time</strong> is the local time at each operator that performs a time-based operation.</p>
+</blockquote>
+<ul>
+<li>API，API 通常分为三层，由上而下可分为SQL / Table API、DataStream API、ProcessFunction 三层，API 的表达能力及业务抽象能力都非常强大，但越接近SQL 层，表达能力会逐步减弱，抽象能力会增强，反之，ProcessFunction 层API 的表达能力非常强，可以进行多种灵活方便的操作，但抽象能力也相对越小。(目前主要使用 DataStream API 和 ProcessFunction)<br><img src="/images/2019/12/25/e2271d20-26e2-11ea-80df-39774ea2e31e.png" alt="image.png"><blockquote>
+<p><strong>ProcessFunctions</strong> ：the most expressive function interfaces that Flink oﬀers. Flink provides ProcessFunctions to process individual events from one or two input streams or events that were grouped in a window.<br><strong>DataStreamAPI</strong> ：provides primitives for many common stream processing operations, such as windowing, record-at-a-time transformations, and enriching events by querying an external data store.<br><strong>SQL/TableAPI</strong> :  relational APIs.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-Flink-Architecture"><a href="#2-Flink-Architecture" class="headerlink" title="2.Flink Architecture"></a>2.Flink Architecture</h3><p>  主要为以下四个部分：<br>     <img src="/images/2019/12/25/4cf5fd50-26e4-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<p>第一，Flink 具备统一的框架处理有界和无界两种数据流的能力</p>
+<p>第二， 部署灵活，Flink 底层支持多种资源调度器，包括Yarn、Kubernetes 等。Flink 自身带的Standalone 的调度器，在部署上也十分灵活。</p>
+<p>第三， 极高的可伸缩性，可伸缩性对于分布式系统十分重要，阿里巴巴双11大屏采用Flink 处理海量数据，使用过程中测得Flink 峰值可达17 亿/秒。</p>
+<p>第四， 极致的流式处理性能。Flink 相对于Storm 最大的特点是将状态语义完全抽象到框架中，支持本地状态读取，避免了大量网络IO，可以极大提升状态存取的性能。</p>
+<p><img src="/images/2019/12/25/1f87a110-26e5-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<h3 id="3-Flink-Operation"><a href="#3-Flink-Operation" class="headerlink" title="3. Flink Operation"></a>3. Flink Operation</h3><p>后面会有专门课程讲解，此处简单分享Flink 关于运维及业务监控的内容：</p>
+<ul>
+<li><p>Flink具备7 X 24 小时高可用的SOA（面向服务架构），原因是在实现上Flink 提供了一致性的Checkpoint。Checkpoint是Flink 实现容错机制的核心，它周期性的记录计算过程中Operator 的状态，并生成快照持久化存储。当Flink 作业发生故障崩溃时，可以有选择的从Checkpoint 中恢复，保证了计算的一致性。</p>
+</li>
+<li><p>Flink本身提供监控、运维等功能或接口，并有内置的WebUI，对运行的作业提供DAG 图以及各种Metric 等，协助用户管理作业状态。</p>
+</li>
+</ul>
+<h3 id="4-Flink-场景应用"><a href="#4-Flink-场景应用" class="headerlink" title="4.Flink 场景应用"></a>4.Flink 场景应用</h3><h4 id="4-1-Flink-场景应用：Data-Pipeline"><a href="#4-1-Flink-场景应用：Data-Pipeline" class="headerlink" title="4.1 Flink 场景应用：Data Pipeline"></a>4.1 Flink 场景应用：Data Pipeline</h4><p><img src="/images/2019/12/25/e8acbe30-26e6-11ea-80df-39774ea2e31e.png" alt="image.png"><br>Data Pipeline 的核心场景类似于数据搬运并在搬运的过程中进行部分数据清洗或者处理，而整个业务架构图的左边是Periodic ETL，它提供了流式ETL 或者实时ETL，能够订阅消息队列的消息并进行处理，清洗完成后实时写入到下游的Database或File system 中。场景举例：</p>
+<p><strong>实时数仓</strong><br>  当下游要构建实时数仓时，上游则可能需要实时的Stream ETL。这个过程会进行实时清洗或扩展数据，清洗完成后写入到下游的实时数仓的整个链路中，可保证数据查询的时效性，形成实时数据采集、实时数据处理以及下游的实时Query。</p>
+<p><strong>搜索引擎推荐</strong><br>  搜索引擎这块以淘宝为例，当卖家上线新商品时，后台会实时产生消息流，该消息流经过Flink 系统时会进行数据的处理、扩展。然后将处理及扩展后的数据生成实时索引，写入到搜索引擎中。这样当淘宝卖家上线新商品时，能在秒级或者分钟级实现搜索引擎的搜索。</p>
+<h4 id="4-2-Flink-场景应用：Data-Analytics"><a href="#4-2-Flink-场景应用：Data-Analytics" class="headerlink" title="4.2 Flink 场景应用：Data Analytics"></a>4.2 Flink 场景应用：Data Analytics</h4><p><img src="/images/2019/12/25/69d757d0-26e8-11ea-80df-39774ea2e31e.png" alt="image.png"><br>Data Analytics，如图，左边是Batch Analytics，右边是Streaming Analytics。Batch Analytics 就是传统意义上使用类似于Map Reduce、Hive、Spark Batch 等，对作业进行分析、处理、生成离线报表；Streaming Analytics 使用流式分析引擎如Storm、Flink 实时处理分析数据，应用较多的场景如实时大屏、实时报表。</p>
+<h4 id="4-3-Flink-场景应用：Data-Driven"><a href="#4-3-Flink-场景应用：Data-Driven" class="headerlink" title="4.3 Flink 场景应用：Data Driven"></a>4.3 Flink 场景应用：Data Driven</h4><p><img src="/images/2019/12/25/d64efb70-26e8-11ea-80df-39774ea2e31e.png" alt="image.png"><br>从某种程度上来说，所有的实时的数据处理或者是流式数据处理都是属于Data Driven，流计算本质上是Data Driven 计算。应用较多的如风控系统，当风控系统需要处理各种各样复杂的规则时，Data Driven 就会把处理的规则和逻辑写入到Datastream 的API 或者是ProcessFunction 的API 中，然后将逻辑抽象到整个Flink 引擎，当外面的数据流或者是事件进入就会触发相应的规则，这就是Data Driven 的原理。在触发某些规则后，Data Driven 会进行处理或者是进行预警，这些预警会发到下游产生业务通知，这是Data Driven 的应用场景，Data Driven 在应用上更多应用于复杂事件的处理。</p>
+<p>参考资料：<a href="https://ververica.cn/developers/flink-basic-tutorial-1-basic-concept/" target="_blank" rel="noopener">Apache Flink 零基础入门（一&amp;二）：基础概念解析</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-01-18T08:56:37.000Z">2019-01-18</time>
                 
                 <div class="level-item">
@@ -244,7 +405,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            64
+                            66
                         </p>
                     </a>
                 </div>
@@ -400,7 +561,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -445,7 +606,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 17.5px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 18px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -454,6 +615,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flink 基本概念（有状态流式处理引擎）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flink 基本概念（有状态流式处理引擎）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/25/flink-基本概念/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基本概念">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T02:11:45.000Z">2019-12-25</time></div>
+                    <a href="/2019/12/25/flink-基本概念/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基本概念</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -512,44 +711,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sink mysql 和 hbase">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time></div>
-                    <a href="/2019/12/05/flink-sink-mysql-和-hbase/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sink mysql 和 hbase</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux （ubuntu） hbase 单机安装">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-04T03:39:18.000Z">2019-12-04</time></div>
-                    <a href="/2019/12/04/linux-（ubuntu）-hbase-单机安装/" class="title has-link-black-ter is-size-6 has-text-weight-normal">linux （ubuntu） hbase 单机安装</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -567,7 +728,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -776,7 +937,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
