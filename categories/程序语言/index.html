@@ -147,6 +147,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-29T01:53:45.000Z">2019-12-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 123 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/29/scala-引包中遇到问题/">scala 引包中遇到问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.Error:(12, 30) could not find implicit value for evidence parameter of type org.apache.flink.api.common.typeinfo.TypeInformation[(String, String)]     val value = env.addSource(new HBaseReader)</p>
+<blockquote>
+<p>解决方法：import org.apache.flink.api.scala._</p>
+</blockquote>
+<p>2.Scala编程中常见错误：Error:(28, 21) value foreach is not a member of java.util.List[String]</p>
+<blockquote>
+<p>解决方法：因为 Java 集合类型在 Scala 操作时没有 foreach 方法, 所以需要将其转换为Scala的集合类型,<br>因此需要在代码中加入如下内容(Scala支持与Java的隐式转换),<br>import scala.collection.JavaConversions._</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-18T06:24:05.000Z">2019-12-18</time>
                 
                 <div class="level-item">
@@ -682,7 +735,7 @@ pip install pydotplus
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            66
+                            67
                         </p>
                     </a>
                 </div>
@@ -706,7 +759,7 @@ pip install pydotplus
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            33
+                            34
                         </p>
                     </a>
                 </div>
@@ -854,7 +907,7 @@ pip install pydotplus
                 <span class="level-item">程序语言</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/脚本/">
@@ -883,7 +936,7 @@ pip install pydotplus
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 18px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 18px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -892,6 +945,25 @@ pip install pydotplus
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/29/scala-引包中遇到问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="scala 引包中遇到问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-29T01:53:45.000Z">2019-12-29</time></div>
+                    <a href="/2019/12/29/scala-引包中遇到问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">scala 引包中遇到问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -969,25 +1041,6 @@ pip install pydotplus
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/flink-基础知识/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基础知识">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T03:26:35.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/flink-基础知识/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基础知识</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1005,7 +1058,7 @@ pip install pydotplus
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1298,6 +1351,13 @@ pip install pydotplus
                 <div class="control">
                     <a class="tags has-addons" href="/tags/redis/">
                         <span class="tag">redis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/scala/">
+                        <span class="tag">scala</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
