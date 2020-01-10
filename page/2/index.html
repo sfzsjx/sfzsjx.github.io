@@ -136,6 +136,67 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 364 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/29/java-基本知识/">java 基本知识</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.泛型<br>  通过泛型可以定义类型安全的数据结构（类型安全），而无须使用实际的数据类型（可扩展）。这能够显著提高性能并得到更高质量的代码（高性能），因为您可以重用数据处理算法，而无须复制类型特定的代码（可重用）。</p>
+<p>2.java.sql.SQLException: Unknown system variable ‘query_cache_size’<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.java.sql.SQLException: The server time zone value ‘ÖÐ¹ú±ê×¼Ê±¼ä’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/springboot_jpa?charset=utf8mb4&amp;useSSL=false&amp;serverTimezone=GMT</span><br></pre></td></tr></table></figure>
+<p>4.java.lang.Exception: No runnable methods</p>
+<blockquote>
+<p>测试时 未在test方法上加上 @test 注解，同时保证注解依赖org.junit.test</p>
+</blockquote>
+<p>5.STRING…</p>
+<blockquote>
+<p>类型后面三个点(String…)，是从Java 5开始，Java语言对方法参数支持一种新写法，叫可变长度参数列表，其语法就是类型后跟…，表示此处接受的参数为0到多个Object类型的对象，或者是一个Object[]。</p>
+</blockquote>
+<p>java 面向对象编程三条主线</p>
+<blockquote>
+<p>1.java类以及类的成员（属性，方法，构造器，代码块）<br>2.java三大特性：封装（封装与隐藏，主要通过权限修饰符来控制），继承和多态<br>3.java关键字：this</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time>
                 
                 <div class="level-item">
@@ -758,125 +819,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-22T11:00:10.000Z">2019-08-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1222 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/22/redis-数据库/">redis 数据库</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>Redis 数据库</strong></p>
-<blockquote>
-<p>Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。<br>它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。</p>
-</blockquote>
-<p>Redis 安装参考<a href="https://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">redis基础教程</a></p>
-<h3 id="一、客户端模式："><a href="#一、客户端模式：" class="headerlink" title="一、客户端模式："></a>一、客户端模式：</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis/redis-5.0.5/src</span><br><span class="line">./redis-cli --raw</span><br><span class="line">hvals materialinfo</span><br></pre></td></tr></table></figure>
-<h3 id="二、springboot-与-redis-整合"><a href="#二、springboot-与-redis-整合" class="headerlink" title="二、springboot 与 redis 整合"></a>二、springboot 与 redis 整合</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置依赖文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># redisspring.redis.host = 172.80.122.33</span><br><span class="line">spring.redis.port = 6379</span><br><span class="line">spring.redis.database = 0</span><br><span class="line">spring.redis.timeout = 100ms</span><br><span class="line">spring.redis.lettuce.pool.max-active = 8</span><br><span class="line">spring.redis.lettuce.pool.max-idle = 8</span><br><span class="line">spring.redis.lettuce.pool.min-idle = 0</span><br><span class="line">spring.redis.lettuce.pool.max-wait = 100ms</span><br></pre></td></tr></table></figure></p>
-<p>3.使用redisTemplate<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired </span><br><span class="line">private RedisTemplate&lt;String,String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">redisTemplate.opsForHash().entries(&quot;scada:dashboard:enamelling_line_status&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client操作redis数据"><a href="#redis-client操作redis数据" class="headerlink" title="redis-client操作redis数据"></a>redis-client操作redis数据</h3><p>1.引入依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Redis客户端 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.配置数据库连接池<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static JedisPool jedisPool;</span><br><span class="line">    private Jedis jedis;</span><br><span class="line">    static &#123;</span><br><span class="line">        JedisPoolConfig config = new JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(20);</span><br><span class="line">        config.setMaxIdle(5);</span><br><span class="line">        config.setMaxWaitMillis(1000);</span><br><span class="line">        config.setMinIdle(2);</span><br><span class="line">        config.setTestOnBorrow(false);</span><br><span class="line">        jedisPool = new JedisPool(config, &quot;127.0.0.1&quot;, 6379);</span><br><span class="line">    &#125;</span><br><span class="line">    private static synchronized Jedis getJedis()&#123;</span><br><span class="line">        return jedisPool.getResource();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.操作数据库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jedis = getJedis();</span><br><span class="line">jedis.hvals(&quot;materialinfo&quot;);</span><br></pre></td></tr></table></figure></p>
-<h3 id="redis-client-命令操作"><a href="#redis-client-命令操作" class="headerlink" title="redis client 命令操作"></a>redis client 命令操作</h3><pre><code>对String操作命令
-</code></pre><ul>
-<li>set(Key,value) :给数据库中名称为Key的String赋值value</li>
-<li>get(Key):返回数据库中名称为Key的String的value</li>
-<li>getset(key, value)：给名称为 key 的 string 赋予上一次的 value</li>
-<li>mget(key1, key2,…, key N)：返回库中多个 string 的 value</li>
-<li>setnx(key, value)：添加 string，名称为 key，值为 value</li>
-<li>setex(key, time, value)：向库中添加 string，设定过期时间 time</li>
-<li>mset(key N, value N)：批量设置多个 string 的值</li>
-<li>msetnx(key N, value N)：如果所有名称为 key i 的 string 都不存在</li>
-<li>incr(key)：名称为 key 的 string 增 1 操作</li>
-<li>incrby(key, integer)：名称为 key 的 string 增加 integer</li>
-<li>decr(key)：名称为 key 的 string 减 1 操作</li>
-<li>decrby(key, integer)：名称为 key 的 string 减少 integer</li>
-<li>append(key, value)：名称为 key 的 string 的值附加 value</li>
-<li>substr(key, start, end)：返回名称为 key 的 string 的 value 的子串</li>
-</ul>
-<pre><code>对List操作命令
-</code></pre><ul>
-<li>rpush(key, value)：在名称为 key 的 list 尾添加一个值为 value 的元素</li>
-<li>lpush(key, value)：在名称为 key 的 list 头添加一个值为 value 的元素</li>
-<li>llen(key)：返回名称为 key 的 list 的长度</li>
-<li>lrange(key, start, end)：返回名称为 key 的 list 中 start 至 end 之间的元素</li>
-<li>ltrim(key, start, end)：截取名称为 key 的 list</li>
-<li>lindex(key, index)：返回名称为 key 的 list 中 index 位置的元素</li>
-<li>lset(key, index, value)：给名称为 key 的 list 中 index 位置的元素赋值</li>
-<li>lrem(key, count, value)：删除 count 个 key 的 list 中值为 value 的元素</li>
-<li>lpop(key)：返回并删除名称为 key 的 list 中的首元素</li>
-<li>rpop(key)：返回并删除名称为 key 的 list 中的尾元素</li>
-<li>blpop(key1, key2,… key N, timeout)：lpop 命令的 block 版本。</li>
-<li>brpop(key1, key2,… key N, timeout)：rpop 的 block 版本。</li>
-<li><p>rpoplpush(srckey, dstkey)：返回并删除名称为 srckey 的 list 的尾元素，并将该元素添加到名称为 dstkey 的 list 的头部</p>
-<p>  对Set操作命令    </p>
-</li>
-<li>sadd(key, member)：向名称为 key 的 set 中添加元素 member</li>
-<li>srem(key, member) ：删除名称为 key 的 set 中的元素 member</li>
-<li>spop(key) ：随机返回并删除名称为 key 的 set 中一个元素</li>
-<li>smove(srckey, dstkey, member) ：移到集合元素</li>
-<li>scard(key) ：返回名称为 key 的 set 的基数</li>
-<li>sismember(key, member) ：member 是否是名称为 key 的 set 的元素</li>
-<li>sinter(key1, key2,…key N) ：求交集</li>
-<li>sinterstore(dstkey, (keys)) ：求交集并将交集保存到 dstkey 的集合</li>
-<li>sunion(key1, (keys)) ：求并集</li>
-<li>sunionstore(dstkey, (keys)) ：求并集并将并集保存到 dstkey 的集合</li>
-<li>sdiff(key1, (keys)) ：求差集</li>
-<li>sdiffstore(dstkey, (keys)) ：求差集并将差集保存到 dstkey 的集合</li>
-<li>smembers(key) ：返回名称为 key 的 set 的所有元素</li>
-<li><p>srandmember(key) ：随机返回名称为 key 的 set 的一个元素</p>
-<p>  对 Hash 操作的命令</p>
-</li>
-<li>hset(key, field, value)：向名称为 key 的 hash 中添加元素 field</li>
-<li>hget(key, field)：返回名称为 key 的 hash 中 field 对应的 value</li>
-<li>hmget(key, (fields))：返回名称为 key 的 hash 中 field i 对应的 value</li>
-<li>hmset(key, (fields))：向名称为 key 的 hash 中添加元素 field</li>
-<li>hincrby(key, field, integer)：将名称为 key 的 hash 中 field 的 value 增加 integer</li>
-<li>hexists(key, field)：名称为 key 的 hash 中是否存在键为 field 的域</li>
-<li>hdel(key, field)：删除名称为 key 的 hash 中键为 field 的域</li>
-<li>hlen(key)：返回名称为 key 的 hash 中元素个数</li>
-<li>hkeys(key)：返回名称为 key 的 hash 中所有键</li>
-<li>hvals(key)：返回名称为 key 的 hash 中所有键对应的 value</li>
-<li>hgetall(key)：返回名称为 key 的 hash 中所有的键（field）及其对应的 value</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -947,7 +889,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            68
+                            69
                         </p>
                     </a>
                 </div>
@@ -1095,7 +1037,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">36</span>
+                <span class="level-item tag">37</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1148,7 +1090,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.5px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 12.5px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 15px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 12.5px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1157,6 +1099,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/09/nifi-process-介绍与使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="nifi process 介绍与使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T02:02:54.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/nifi-process-介绍与使用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">nifi process 介绍与使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1234,25 +1195,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/19/flink-提交任务/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交任务">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-19T01:35:40.000Z">2019-12-19</time></div>
-                    <a href="/2019/12/19/flink-提交任务/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交任务</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1263,6 +1205,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/12/">
@@ -1451,7 +1404,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/NIFI/">
                         <span class="tag">NIFI</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1684,7 +1637,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 上善若水&nbsp;
+                &copy; 2020 上善若水&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
