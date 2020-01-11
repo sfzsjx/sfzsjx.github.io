@@ -147,6 +147,68 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-30T08:54:39.000Z">2019-08-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 346 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/30/flink-基础/">flink 基础</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、Apache-Flink"><a href="#一、Apache-Flink" class="headerlink" title="一、Apache Flink"></a>一、Apache Flink</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><pre><code>Apache Flink 是一个分布式大数据处理引擎，可以对有限流和无线流进行有状态和无状态进行计算，能够在各种集群环境上部署，对各种大小的数据集进行快速计算。
+</code></pre><h3 id="flink-启动命令"><a href="#flink-启动命令" class="headerlink" title="flink 启动命令"></a>flink 启动命令</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux</span><br><span class="line">./bin/start-cluster.sh</span><br><span class="line">windows</span><br><span class="line">.\start-cluster.bat</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/08/30/063b0630-cb04-11e9-bf46-8baad6d0e743.png" alt="image.png"></p>
+<h3 id="flink-maven-项目依赖"><a href="#flink-maven-项目依赖" class="headerlink" title="flink maven 项目依赖"></a>flink maven 项目依赖</h3><p>java版本：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Scala版本：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">  &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 关联 kafka 依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-connector-kafka-0.10_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>flink 推荐使用shade插件打包maven项目<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">			&lt;executions&gt;</span><br><span class="line">				&lt;execution&gt;</span><br><span class="line">					&lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">					&lt;goals&gt;</span><br><span class="line">						&lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">					&lt;/goals&gt;</span><br><span class="line">					&lt;configuration&gt;</span><br><span class="line">						&lt;artifactSet&gt;</span><br><span class="line">							&lt;excludes&gt;</span><br><span class="line">								&lt;exclude&gt;com.google.code.findbugs:jsr305&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;org.slf4j:*&lt;/exclude&gt;</span><br><span class="line">								&lt;exclude&gt;log4j:*&lt;/exclude&gt;</span><br><span class="line">							&lt;/excludes&gt;</span><br><span class="line">						&lt;/artifactSet&gt;</span><br><span class="line">						&lt;filters&gt;</span><br><span class="line">							&lt;filter&gt;</span><br><span class="line">								&lt;!-- Do not copy the signatures in the META-INF folder.</span><br><span class="line">								Otherwise, this might cause SecurityExceptions when using the JAR. --&gt;</span><br><span class="line">								&lt;artifact&gt;*:*&lt;/artifact&gt;</span><br><span class="line">								&lt;excludes&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</span><br><span class="line">									&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</span><br><span class="line">								&lt;/excludes&gt;</span><br><span class="line">							&lt;/filter&gt;</span><br><span class="line">						&lt;/filters&gt;</span><br><span class="line">						&lt;transformers&gt;</span><br><span class="line">							&lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">								&lt;mainClass&gt;my.programs.main.clazz&lt;/mainClass&gt;</span><br><span class="line">							&lt;/transformer&gt;</span><br><span class="line">						&lt;/transformers&gt;</span><br><span class="line">					&lt;/configuration&gt;</span><br><span class="line">				&lt;/execution&gt;</span><br><span class="line">			&lt;/executions&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="flink-基础-API-概念"><a href="#flink-基础-API-概念" class="headerlink" title="flink 基础 API 概念"></a>flink 基础 API 概念</h3><blockquote>
+<p>DataSet and DataStream:<br>    Flink具有特殊类DataSet并DataStream在程序中表示数据。您可以将它们视为可以包含重复项的不可变数据集合。在DataSet数据有限的情况下，对于一个DataStream元素的数量可以是无界的。</p>
+</blockquote>
+<h3 id="flink-一般处理步骤"><a href="#flink-一般处理步骤" class="headerlink" title="flink 一般处理步骤"></a>flink 一般处理步骤</h3><ol>
+<li>获得一个execution environment，</li>
+<li>加载/创建初始数据，</li>
+<li>指定此数据的转换，</li>
+<li>指定放置计算结果的位置，</li>
+<li>触发程序执行</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-27T02:34:36.000Z">2019-08-27</time>
                 
                 <div class="level-item">
@@ -715,60 +777,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-07T08:57:14.000Z">2019-05-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 218 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/07/Linux-磁盘挂载/">Linux 磁盘挂载</a>
-            
-        </h1>
-        <div class="content">
-            <p>在实际的生产应用中，经常需要对服务器的磁盘进行挂载。故总结下相关的操作，以备不时之需。<br>1、fdisk -l 查看磁盘信息<br><img src="/images/2019/05/07/0fc79190-70a6-11e9-b77c-4dd7e82ca243.png" alt="image.png"></p>
-<p>2、fdisk /dev/vda 分区初始化<br><img src="/images/2019/05/07/b8555440-70a7-11e9-a040-a559da770dd7.png" alt="image.png"></p>
-<p>各个参数解析：</p>
-<ol>
-<li>m 显示所有命令列表</li>
-<li>p 显示硬盘分割情形，打印分区表</li>
-<li>a 设定硬盘启动区</li>
-<li>n 设定新的硬盘分割区<br>4.1 e  硬盘为延伸分割区<br>4.2 p  硬盘为主要分割区<br>5.d 删除硬盘分割区属性<br>6.q 结束不存在硬盘分割区属性<br>7.w 结束并写入硬盘分割区属性<br>umount /opt 卸载挂载<br>mke2fs  -t ext4  /dev/vda1 # ext4创建文件系统<br>df -h :查看当前硬盘使用情况</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -837,7 +845,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            69
+                            70
                         </p>
                     </a>
                 </div>
@@ -985,7 +993,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">37</span>
+                <span class="level-item tag">38</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1038,7 +1046,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 15px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12.5px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.5px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 15px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12.5px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12.5px;">决策树</a> <a href="/tags/学习/" style="font-size: 12.5px;">学习</a> <a href="/tags/数据分析/" style="font-size: 20px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12.5px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 18px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1047,6 +1055,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/10/flink-sources/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink sources">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-10T09:19:36.000Z">2020-01-10</time></div>
+                    <a href="/2020/01/10/flink-sources/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink sources</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1124,25 +1151,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/25/flink-基本概念/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 基本概念">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T02:11:45.000Z">2019-12-25</time></div>
-                    <a href="/2019/12/25/flink-基本概念/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 基本概念</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1160,7 +1168,7 @@
                     <span class="level-item">一月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1380,7 +1388,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
