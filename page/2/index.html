@@ -136,6 +136,61 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 134 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/03/lambda-表达式/">lambda 表达式</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.什么是lambda表达式</p>
+<blockquote>
+<p>简单讲就是实现将一个代码块赋值给一个变量。如将右边代码块赋给左边变量：<br><img src="/images/2019/12/03/b18cf6d0-1594-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+</blockquote>
+<p><img src="/images/2019/12/03/ba23a4f0-1595-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+<p>2.lambda表达式的作用</p>
+<blockquote>
+<p>可以使代码变得简洁<br>如我们在不使用lambda表达式实现接口，并调用它时与使用lambda表达式对比<br><img src="/images/2019/12/03/f0f43cb0-1595-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+</blockquote>
+<p>参考：zhihu.com/question/20125256/answer/324121308</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time>
                 
                 <div class="level-item">
@@ -744,63 +799,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-26T07:54:34.000Z">2019-08-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/蓝牙定位/">蓝牙定位</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 553 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/26/蓝牙信标定位项目总结/">蓝牙信标定位项目总结</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、项目简介："><a href="#一、项目简介：" class="headerlink" title="一、项目简介："></a>一、项目简介：</h2><blockquote>
-<p>  蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，<br>采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。<br>以下是蓝牙基站数据处理时序图：</p>
-</blockquote>
-<p><img src="/images/2019/08/26/d389bdf0-c7d2-11e9-82cd-b1912fd86647.png" alt="image.png"></p>
-<p>数据处理流程：</p>
-<ol>
-<li>作为服务端，需要接受来自客户端tcp/ip数据。(netty)</li>
-<li>数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验成功的数据都写入kafka。(kafka producer)</li>
-<li>消费kafka中的数据，主要有三个部分，一是信标电量信息采集，二是基站状态信息的采集，三是小车位置的计算和物料信息的绑定（structured streaming/flink）</li>
-<li>读取redis小车位置以及状态信息，通过websocket每隔五秒准实时推送一次最新数据到前端。(websocket)</li>
-</ol>
-<p><strong>说明</strong>：<br>1.使用netty作为数据接入使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a><br>2.数据接收后需要写入kafka集群中，关于kafka集群部署可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">kafka集群安装部署</a><br>3.kafka安装后，数据写入kafka,需要创建kafka producer，可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="noopener">kafka相关操作</a><br>4.读取kafka数据，并做相应的计算，需要用到structed streaming/flink技术，相应的需要部署spark 集群或flink集群，spark集群部署可以参考：<a href="https://sfzsjx.github.io/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">spark 集群安装部署</a><br>5.structed streaming 读取kafka 数据并做实时计算可以参考 ：<a href="https://sfzsjx.github.io/2019/08/27/spark-structed-streaming-%E8%AF%BB%E5%8F%96kafka%E6%95%B0%E6%8D%AE/" target="_blank" rel="noopener">structed streaming 读取kafka 数据</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -871,7 +869,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            70
+                            71
                         </p>
                     </a>
                 </div>
@@ -895,7 +893,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            34
+                            35
                         </p>
                     </a>
                 </div>
@@ -1027,7 +1025,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1072,7 +1070,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 18px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 18px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1081,6 +1079,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/18/2019年度总结/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019年度总结">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-18T03:21:20.000Z">2020-01-18</time></div>
+                    <a href="/2020/01/18/2019年度总结/" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019年度总结</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1158,25 +1175,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flink 基本概念（有状态流式处理引擎）">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time></div>
-                    <a href="/2019/12/27/Flink-基本概念（有状态流式处理引擎）/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flink 基本概念（有状态流式处理引擎）</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1194,7 +1192,7 @@
                     <span class="level-item">一月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1555,6 +1553,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

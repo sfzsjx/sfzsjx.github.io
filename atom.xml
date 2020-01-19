@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-10T09:20:13.894Z</updated>
+  <updated>2020-01-19T07:54:27.413Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2019年度总结</title>
+    <link href="http://yoursite.com/2020/01/18/2019%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/01/18/2019年度总结/</id>
+    <published>2020-01-18T03:21:20.000Z</published>
+    <updated>2020-01-19T07:54:27.413Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.回顾<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">主要作业</span><br><span class="line">1.机器学习（Python，spark ml）</span><br><span class="line">2.成品码大数据分析（Scala ，spark sql ,hive）</span><br><span class="line">3.微服务架构（spring boot ，spring cloud等）</span><br><span class="line">4.蓝牙定位（netty -》spark streaming ， structured streaming -&gt; redis,mysql --&gt; websocket）</span><br><span class="line">5.电工 （redis ，flink，java）</span><br></pre></td></tr></table></figure></p><p>2.详细分析</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  2019学了很多，但真正精通，学的深的不多。</span><br><span class="line">1.年初学习了机器学习，主要是python的机器学习的包，但之后未用到实际的项目中，现在基本忘的差不多了，也就不多说了。</span><br><span class="line">2.成品码大数据分析项目，主要分为两部分，前一个月主要熟悉项目，这个项目是半路接手，准备第二期，我主要负责的数据处理部分。将需要的数据通过spark sql 处理形成中间结果表，给到后台进一步处理。</span><br><span class="line">后半部分则是彻底整合家用，商用，生活电器形成一张大而完整的表。</span><br><span class="line">主要学习到了spark 中 dataframe中的api,常用的有 spark.table获取hive数据仓库中的表，.where用来筛选符合条件的记录或者用.filter也是同样的作用，.startWith用来获取字段开始符合的条件，还有substr,na.fill,withColumn,lit,join，seq(),union等等，</span><br><span class="line">在项目中使用正则匹配进行数据处理时还是不够灵活，在与洪工对接需求时，需求较明确，反馈问题也能够及时得到回应。</span><br><span class="line">3.微服务架构，最近微服务也很流行，主要了解了spring boot 和 spring cloud 相关的知识，仅限于简单的使用，没有在复杂的场景中运用。</span><br><span class="line">4.蓝牙定位是本年最主要（即时间最久）的项目，从数据的接入到数据处理生成实时的定位信息传入到前端，在这个项目中学到了很多，也接触到了之前未接触到的的东西，比如kafak集群搭建（三个节点没有权限zk自己自带的），spark 集群（三个节点standalone模式）搭建，只是单独的spark集群没有hdfs。</span><br><span class="line">同时也接触到netty，网络之间数据传输（tcp/udp）数据传输。在做项目是由于前期对数据对接时考虑的问题不是很充足，以及对netty和kafak等一些参数不够了解耽误了不少时间，其中关于流处理的接触让我对流处理的一些框架有一定的了解，</span><br><span class="line">同时也了解了flink这个流处理的利器。总的来说还是完成了这个项目，尽管这个项目总是在关键时刻出现问题，但都合理的解决了。</span><br><span class="line">5.电工这个项目是临时接收的，当初只是简单的处理了一个上报的数据，替换相关数据源，将mysql数据源换成redis数据源，</span><br><span class="line">这里简单说明下，由于上个项目了解到redis，加之这个需求改动不大所有=以很快解决了，之后再很长一段时间是在看之前交接人写的代码，插一句由于项目交接多手，而且项目没有正规需求文档和相关的数据字典，难受。</span><br><span class="line">之后接了个上报收线重量的需求，由于之前的种种，以及flink窗口处理的能力出众，所以选择flink，数据源从activemq中读取，处理后上报给webservice服务。</span><br><span class="line">大致这样。下面配上几张数据流程图。</span><br></pre></td></tr></table></figure><p>1.电工数据流图<br><img src="/images/2020/01/18/399a4c70-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"><br><img src="/images/2020/01/18/5d622650-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p><p>2.蓝牙定位数据流图<br><img src="/images/2020/01/18/756dd9b0-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p><p>3.微服务组件关系图<br><img src="/images/2020/01/18/d1e592a0-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p><p>3.展望<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多读书多看报，少吃零食多睡觉。</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.回顾&lt;br&gt;&lt;figure class=&quot;highlight plain hljs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>flink sources</title>
@@ -497,34 +522,6 @@
       
       
         &lt;h2 id=&quot;一、什么是Apache-NiFi&quot;&gt;&lt;a href=&quot;#一、什么是Apache-NiFi&quot; class=&quot;headerlink&quot; title=&quot;一、什么是Apache NiFi&quot;&gt;&lt;/a&gt;一、什么是Apache NiFi&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;简单来讲，N
-      
-    
-    </summary>
-    
-      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-      <category term="NIFI" scheme="http://yoursite.com/tags/NIFI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NIFI 安装部署</title>
-    <link href="http://yoursite.com/2019/09/09/NIFI-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/"/>
-    <id>http://yoursite.com/2019/09/09/NIFI-安装部署/</id>
-    <published>2019-09-09T01:43:41.000Z</published>
-    <updated>2019-12-05T02:03:22.274Z</updated>
-    
-    <content type="html"><![CDATA[<p>::: hljs-center</p><p>NIFI 安装部署</p><p>:::</p><h2 id="一、NIFI-下载"><a href="#一、NIFI-下载" class="headerlink" title="一、NIFI 下载"></a>一、NIFI 下载</h2><ul><li>NIFI 下载链接：<a href="http://nifi.apache.org/download.html" target="_blank" rel="noopener">NIFI Downloads</a></li><li>选择与自己环境匹配的安装包</li><li><img src="/images/2019/09/09/b6d2a810-d2a0-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li><li>若是下载速度过慢，可以选择另一个下载地址：<a href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.9.2/nifi-1.9.2-bin.zip" target="_blank" rel="noopener">NIFI 下载</a></li><li><img src="/images/2019/09/09/7bb8b160-d2a1-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li></ul><h2 id="二、NIFI-安装"><a href="#二、NIFI-安装" class="headerlink" title="二、NIFI 安装"></a>二、NIFI 安装</h2><ol><li>将下载的安装包放到 E:\software\ ，然后解压安装，非常简单</li><li>修改配置文件E:\software\nifi-1.9.2-bin\nifi-1.9.2\conf\nifi.properties，更改端口号</li><li><img src="/images/2019/09/09/6df7ebd0-d2a2-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li></ol><h2 id="三-、NIFI-运行"><a href="#三-、NIFI-运行" class="headerlink" title="三 、NIFI 运行"></a>三 、NIFI 运行</h2><ol><li>进入E:\software\nifi-1.9.2-bin\nifi-1.9.2\bin 目录，双击run-nifi.bat，若是linux则sh nifi.sh</li><li>打开浏览器，进入<a href="http://localhost:8081/nifi/，可能需要等会页面加载慢" target="_blank" rel="noopener">http://localhost:8081/nifi/，可能需要等会页面加载慢</a></li><li><img src="/images/2019/09/09/2a0a96b0-d2a3-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;::: hljs-center&lt;/p&gt;
-&lt;p&gt;NIFI 安装部署&lt;/p&gt;
-&lt;p&gt;:::&lt;/p&gt;
-&lt;h2 id=&quot;一、NIFI-下载&quot;&gt;&lt;a href=&quot;#一、NIFI-下载&quot; class=&quot;headerlink&quot; title=&quot;一、NIFI 下载&quot;&gt;&lt;/a&gt;一、NIFI 下
       
     
     </summary>
