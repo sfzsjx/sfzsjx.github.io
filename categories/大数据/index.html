@@ -147,6 +147,53 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 280 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/07/spark-常用操作/">spark 常用操作</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="一、spark-分组计算（转rdd-分组计算完再转回-dateset）"><a href="#一、spark-分组计算（转rdd-分组计算完再转回-dateset）" class="headerlink" title="一、spark 分组计算（转rdd 分组计算完再转回 dateset）"></a>一、spark 分组计算（转rdd 分组计算完再转回 dateset）</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Row&gt; rowJavaRdd = orderDistanceCustomer.javaRDD();</span><br><span class="line">JavaRDD&lt;OrderLeaveTime&gt; leaveTimeJavaRDD = rowJavaRdd.groupBy(row -&gt; row.getString(1))</span><br><span class="line">              .map(new Function&lt;Tuple2&lt;String, Iterable&lt;Row&gt;&gt;, OrderLeaveTime&gt;() &#123;</span><br><span class="line">                  @Override</span><br><span class="line">                  public OrderLeaveTime call(Tuple2&lt;String, Iterable&lt;Row&gt;&gt; v1) throws Exception &#123;</span><br><span class="line">                      String order_number = v1._1;</span><br><span class="line">                      Iterator&lt;Row&gt; iterator = v1._2.iterator();</span><br><span class="line">                      String report_time = &quot;&quot;;</span><br><span class="line">                      String flag = &quot;&quot;;</span><br><span class="line">                      while (iterator.hasNext()) &#123;</span><br><span class="line">                          Row next = iterator.next();</span><br><span class="line">                          double order_distance_customer = next.getDouble(14);</span><br><span class="line">                          report_time = next.getString(11);</span><br><span class="line">                          if (order_distance_customer - 2000 &lt; 0) &#123;</span><br><span class="line">                              flag = &quot;已进入&quot;;</span><br><span class="line">                          &#125;</span><br><span class="line">                          if (&quot;已进入&quot;.equals(flag) &amp;&amp; order_distance_customer - 2000 &gt; 0) &#123;</span><br><span class="line">                              break;</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      OrderLeaveTime orderArriveTime1 = new OrderLeaveTime();</span><br><span class="line">                      orderArriveTime1.setOrderNumber(order_number);</span><br><span class="line">                      orderArriveTime1.setLeaveTime(report_time);</span><br><span class="line">                      return orderArriveTime1;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;);</span><br><span class="line"></span><br><span class="line">      Encoder&lt;OrderLeaveTime&gt; orderLeaveTimeEncode = Encoders.bean(OrderLeaveTime.class);</span><br><span class="line">      Dataset&lt;OrderLeaveTime&gt; leaveTimeDataset = spark.createDataset(leaveTimeJavaRDD.rdd(),orderLeaveTimeEncode);</span><br></pre></td></tr></table></figure>
+<h2 id="二、spark-dataset-分组计算（使用groupbyKey）"><a href="#二、spark-dataset-分组计算（使用groupbyKey）" class="headerlink" title="二、spark dataset 分组计算（使用groupbyKey）"></a>二、spark dataset 分组计算（使用groupbyKey）</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Dataset&lt;DeviceLocation&gt; deviceLocationDataset = devicePosition.groupByKey(new MapFunction&lt;Row, String&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public String call(Row value) throws Exception &#123;</span><br><span class="line">               return value.getString(2);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;, Encoders.STRING()).flatMapGroups(new FlatMapGroupsFunction&lt;String, Row, DeviceLocation&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Iterator&lt;DeviceLocation&gt; call(String key, Iterator&lt;Row&gt; values) throws Exception &#123;</span><br><span class="line">               List&lt;DeviceLocation.Location&gt; locations = new ArrayList&lt;&gt;();</span><br><span class="line">               while (values.hasNext()) &#123;</span><br><span class="line">                   DeviceLocation.Location location = new DeviceLocation.Location();</span><br><span class="line">                   Row next = values.next();</span><br><span class="line">                   location.setId((int)next.getLong(0));</span><br><span class="line">                   location.setLocation_code(next.getString(1));</span><br><span class="line">                   location.setLongitude(next.getString(3));</span><br><span class="line">                   location.setLongmark(next.getString(4));</span><br><span class="line">                   location.setLatitude(next.getString(5));</span><br><span class="line">                   location.setLati_mark(next.getString(6));</span><br><span class="line">                   location.setPosition_time(next.getTimestamp(7));</span><br><span class="line">                   location.setSignal_strength(next.getString(8));</span><br><span class="line">                   location.setPower(next.getString(9));</span><br><span class="line">                   location.setAlarm_status(next.getString(10));</span><br><span class="line">                   location.setExtended_data(next.getString(11));</span><br><span class="line">                   locations.add(location);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               DeviceLocation deviceLocation = new DeviceLocation();</span><br><span class="line">               deviceLocation.setImei(key);</span><br><span class="line">               deviceLocation.setDateTime(&quot;2020-04-05&quot;);</span><br><span class="line">               deviceLocation.setLocation(JSON.toJSONString(locations));</span><br><span class="line">               ArrayList&lt;DeviceLocation&gt; deviceLocations = new ArrayList&lt;&gt;();</span><br><span class="line">               deviceLocations.add(deviceLocation);</span><br><span class="line">               return deviceLocations.iterator();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;, Encoders.bean(DeviceLocation.class));</span><br><span class="line"></span><br><span class="line">       deviceLocationDataset.select(col(&quot;imei&quot;),col(&quot;dateTime&quot;),col(&quot;location&quot;).cast(&quot;String&quot;)).write().mode(SaveMode.Append).jdbc(url,&quot;test&quot;,properties);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-01-10T09:19:36.000Z">2020-01-10</time>
                 
                 <div class="level-item">
@@ -643,71 +690,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-09T01:43:41.000Z">2019-09-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 229 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/09/NIFI-安装部署/">NIFI 安装部署</a>
-            
-        </h1>
-        <div class="content">
-            <p>::: hljs-center</p>
-<p>NIFI 安装部署</p>
-<p>:::</p>
-<h2 id="一、NIFI-下载"><a href="#一、NIFI-下载" class="headerlink" title="一、NIFI 下载"></a>一、NIFI 下载</h2><ul>
-<li>NIFI 下载链接：<a href="http://nifi.apache.org/download.html" target="_blank" rel="noopener">NIFI Downloads</a></li>
-<li>选择与自己环境匹配的安装包</li>
-<li><img src="/images/2019/09/09/b6d2a810-d2a0-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-<li>若是下载速度过慢，可以选择另一个下载地址：<a href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.9.2/nifi-1.9.2-bin.zip" target="_blank" rel="noopener">NIFI 下载</a></li>
-<li><img src="/images/2019/09/09/7bb8b160-d2a1-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ul>
-<h2 id="二、NIFI-安装"><a href="#二、NIFI-安装" class="headerlink" title="二、NIFI 安装"></a>二、NIFI 安装</h2><ol>
-<li>将下载的安装包放到 E:\software\ ，然后解压安装，非常简单</li>
-<li>修改配置文件E:\software\nifi-1.9.2-bin\nifi-1.9.2\conf\nifi.properties，更改端口号</li>
-<li><img src="/images/2019/09/09/6df7ebd0-d2a2-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-<h2 id="三-、NIFI-运行"><a href="#三-、NIFI-运行" class="headerlink" title="三 、NIFI 运行"></a>三 、NIFI 运行</h2><ol>
-<li>进入E:\software\nifi-1.9.2-bin\nifi-1.9.2\bin 目录，双击run-nifi.bat，若是linux则sh nifi.sh</li>
-<li>打开浏览器，进入<a href="http://localhost:8081/nifi/，可能需要等会页面加载慢" target="_blank" rel="noopener">http://localhost:8081/nifi/，可能需要等会页面加载慢</a></li>
-<li><img src="/images/2019/09/09/2a0a96b0-d2a3-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -776,7 +758,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            71
+                            74
                         </p>
                     </a>
                 </div>
@@ -800,7 +782,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            35
+                            36
                         </p>
                     </a>
                 </div>
@@ -916,7 +898,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -924,7 +906,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">38</span>
+                <span class="level-item tag">39</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -977,7 +959,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 18px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -986,6 +968,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/07/spark-常用操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
+                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/26/shiro/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="shiro">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-26T02:31:17.000Z">2020-02-26</time></div>
+                    <a href="/2020/02/26/shiro/" class="title has-link-black-ter is-size-6 has-text-weight-normal">shiro</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/24/权限设计管理/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="权限设计管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-24T01:10:01.000Z">2020-02-24</time></div>
+                    <a href="/2020/02/24/权限设计管理/" class="title has-link-black-ter is-size-6 has-text-weight-normal">权限设计管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1025,63 +1064,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/01/09/nifi-process-介绍与使用/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="nifi process 介绍与使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T02:02:54.000Z">2020-01-09</time></div>
-                    <a href="/2020/01/09/nifi-process-介绍与使用/" class="title has-link-black-ter is-size-6 has-text-weight-normal">nifi process 介绍与使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/30/Flink-DataStream-Api-编程/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flink DataStream Api 编程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-30T06:56:27.000Z">2019-12-30</time></div>
-                    <a href="/2019/12/30/Flink-DataStream-Api-编程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flink DataStream Api 编程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/29/scala-引包中遇到问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="scala 引包中遇到问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-29T01:53:45.000Z">2019-12-29</time></div>
-                    <a href="/2019/12/29/scala-引包中遇到问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">scala 引包中遇到问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1092,6 +1074,28 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/01/">
@@ -1424,7 +1428,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -1480,6 +1484,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/朴素贝叶斯/">
                         <span class="tag">朴素贝叶斯</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/权限设计/">
+                        <span class="tag">权限设计</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
