@@ -212,7 +212,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1271 个字)
+                    9 分钟 读完 (大约 1317 个字)
                 </span>
                 
                 
@@ -281,6 +281,7 @@
 <blockquote>
 <p>问题六：<br>org.neo4j.driver.v1.exceptions.TransientException: Timeout waiting for database to become available and allow new transactions. Waited 1s. 1 reasons for blocking: Database available<br>org.neo4j.driver.v1.exceptions.TransientException: Timeout waiting for database to become available and allow new transactions. Waited 1s. 1 reasons for blocking: Database available.</p>
 </blockquote>
+<h4 id="neo4j-查询数据库，返回json格式"><a href="#neo4j-查询数据库，返回json格式" class="headerlink" title="neo4j 查询数据库，返回json格式"></a>neo4j 查询数据库，返回json格式</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Session session=driver.session();</span><br><span class="line">StatementResult result=session.run(sql)</span><br><span class="line">Function&lt;Record, Person&gt; function = a -&gt; &#123;</span><br><span class="line">Person person = new Person();</span><br><span class="line">person.setName(a.get(&quot;name&quot;));</span><br><span class="line">return person;</span><br><span class="line">&#125;;</span><br><span class="line">List&lt;Person&gt; persons = result.list(function);</span><br><span class="line">String json = JSON.toJSONString(persons)</span><br></pre></td></tr></table></figure>
 
         </div>
         
