@@ -136,6 +136,99 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 417 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/11/常用工具类/">常用工具类</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="时间工具类"><a href="#时间工具类" class="headerlink" title="时间工具类"></a>时间工具类</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">import java.sql.Timestamp;</span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Locale;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 时间工具类</span><br><span class="line"> * @author hadoop</span><br><span class="line"> * @date 2020-03-24</span><br><span class="line"> */</span><br><span class="line">public class DateUtils &#123;</span><br><span class="line"></span><br><span class="line">    private static  SimpleDateFormat standardTimeFormat = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 比较两个时间大小 格式yyyy-MM-dd hh:mm:ss</span><br><span class="line">     * @return 布尔值</span><br><span class="line">     */</span><br><span class="line">    public static Boolean compare2Time(Timestamp startTime, Timestamp endTime) throws ParseException &#123;</span><br><span class="line"></span><br><span class="line">        if (startTime == null || endTime == null)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return startTime.before(endTime);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 日期格式转换</span><br><span class="line">     * @param oldDateStr 原先时间格式</span><br><span class="line">     * @return 新时间格式</span><br><span class="line">     * @throws ParseException 转换</span><br><span class="line">     */</span><br><span class="line">    public static String dealDateFormat(String oldDateStr) throws ParseException&#123;</span><br><span class="line">        //此格式只有  jdk 1.7才支持  yyyy-MM-dd‘T‘HH:mm:ss.SSSXXX</span><br><span class="line">        DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSXXX&quot;);</span><br><span class="line">        if (oldDateStr != null)&#123;</span><br><span class="line">            Date  date = df.parse(oldDateStr);</span><br><span class="line">            SimpleDateFormat df1 = new SimpleDateFormat (&quot;EEE MMM dd HH:mm:ss Z yyyy&quot;, Locale.UK);</span><br><span class="line">            Date date1 =  df1.parse(date.toString());</span><br><span class="line">            DateFormat df2 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">            return df2.format(date1);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到两个时间差  格式yyyy-MM-dd HH:mm:ss</span><br><span class="line">     * @param start 2019-06-27 14:12:40</span><br><span class="line">     * @param end   2019-08-27 14:12:40</span><br><span class="line">     * @return 5270400000</span><br><span class="line">     */</span><br><span class="line">    public static Long dateSubtraction(String start, String end) &#123;</span><br><span class="line">        SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Date date1 = df.parse(start);</span><br><span class="line">            Date date2 = df.parse(end);</span><br><span class="line">            Long diff = date2.getTime() - date1.getTime();</span><br><span class="line">            Long days = diff / (1000 * 60 * 60 * 24);</span><br><span class="line">            Long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);</span><br><span class="line">            Long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);</span><br><span class="line">            Long totalMin = days * 12 + hours*60 + minutes;</span><br><span class="line">            return totalMin;</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return 0L;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当前日期前一天</span><br><span class="line">     * @return 2019-08-26</span><br><span class="line">     */</span><br><span class="line">    public static String getBeforeDay() &#123;</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        Date date = new Date();</span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line">        calendar.add(Calendar.DAY_OF_MONTH, -1);</span><br><span class="line">        date = calendar.getTime();</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当前日期前一天新格式（yyyyMMdd）</span><br><span class="line">     * @return 2019-08-26</span><br><span class="line">     */</span><br><span class="line">    public static String getBeforeDayNewFormat() &#123;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMdd&quot;);</span><br><span class="line">        Date date = new Date();</span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line">        calendar.add(Calendar.DAY_OF_MONTH, -1);</span><br><span class="line">        date = calendar.getTime();</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 添加几分钟时间</span><br><span class="line">     * @param timestamp 时间戳</span><br><span class="line">     * @param time 毫秒数</span><br><span class="line">     * @return 时间戳</span><br><span class="line">     */</span><br><span class="line">    public static Timestamp addTime(Timestamp timestamp ,Long time)&#123;</span><br><span class="line"></span><br><span class="line">        return  new Timestamp(timestamp.getTime() + time);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 938 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/07/大数据处理地理数据/">大数据处理地理数据</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-调用http请求工具类"><a href="#1-调用http请求工具类" class="headerlink" title="1.调用http请求工具类"></a>1.调用http请求工具类</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- http start --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;okhttp&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;4.6.0&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- http end --&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">import okhttp3.*;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line">public class OkHttpUtil &#123;</span><br><span class="line">    private static final Logger log = LoggerFactory.getLogger(OkHttpUtil.class);</span><br><span class="line">    public final static int CONNECT_TIMEOUT = 10;</span><br><span class="line">    public final static int READ_TIMEOUT = 30;</span><br><span class="line">    public final static int WRITE_TIMEOUT = 60;</span><br><span class="line">    private OkHttpClient mOkHttpClient;</span><br><span class="line"></span><br><span class="line">    private OkHttpUtil() &#123;</span><br><span class="line">        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();</span><br><span class="line">        clientBuilder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS);//读取超时</span><br><span class="line">        clientBuilder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS);//连接超时</span><br><span class="line">        clientBuilder.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS);//写入超时</span><br><span class="line">        mOkHttpClient = clientBuilder.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static OkHttpUtil getInstance() &#123;</span><br><span class="line">        return Holder.OK_HTTP_UTIL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String get(String url) throws Exception &#123;</span><br><span class="line">        return get(url, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String get(String url, HashMap&lt;String, String&gt; headers, HashMap&lt;String, String&gt; params) &#123;</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        url = handleRequestParams(url, params);</span><br><span class="line"></span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .headers(Headers.of(headers))</span><br><span class="line">                .get()</span><br><span class="line">                .build();</span><br><span class="line">        Call call = mOkHttpClient.newCall(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            Response execute = call.execute();</span><br><span class="line">            result = execute.body().string();</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            log.error(&quot;http 访问错误：&quot; + e);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String get(String url, HashMap&lt;String, String&gt; params) throws Exception &#123;</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        url = handleRequestParams(url, params);</span><br><span class="line"></span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .get()</span><br><span class="line">                .build();</span><br><span class="line">        Call call = mOkHttpClient.newCall(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            Response execute = call.execute();</span><br><span class="line">            int code = execute.code();</span><br><span class="line"></span><br><span class="line">            result = execute.body().string();</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            log.error(&quot;http 访问错误：&quot; + e.getMessage());</span><br><span class="line">            throw new IOException(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String handleRequestParams(String url, HashMap&lt;String, String&gt; params) &#123;</span><br><span class="line">        if (params != null &amp;&amp; params.values().size() &gt; 0) &#123;</span><br><span class="line">            StringBuilder stringBuilder = new StringBuilder();</span><br><span class="line">            stringBuilder.append(&quot;?&quot;);</span><br><span class="line">            for (Map.Entry&lt;String, String&gt; entry : params.entrySet()) &#123;</span><br><span class="line">                stringBuilder.append(entry.getKey() + &quot;=&quot; + entry.getValue() + &quot;&amp;&quot;);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            String substring = stringBuilder.substring(0, stringBuilder.length() - 1);</span><br><span class="line">            url += substring;</span><br><span class="line">        &#125;</span><br><span class="line">        return url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String post(String url, HashMap&lt;String, String&gt; headerParams, String body) &#123;</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .headers(Headers.of(headerParams))</span><br><span class="line">                .post(RequestBody.create(MediaType.parse(&quot;application/json&quot;), body))</span><br><span class="line">                .build();</span><br><span class="line">        Call call = mOkHttpClient.newCall(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            Response execute = call.execute();</span><br><span class="line">            int code = execute.code();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            log.info(&quot;post请求异常&quot; + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String post(String url, String body) &#123;</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .post(RequestBody.create(MediaType.parse(&quot;application/json&quot;), body))</span><br><span class="line">                .build();</span><br><span class="line">        Call call = mOkHttpClient.newCall(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            Response execute = call.execute();</span><br><span class="line">            result = execute.body().string();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String xmlPost(String url, String body) &#123;</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .post(RequestBody.create(MediaType.parse(&quot;application/xml&quot;), body))</span><br><span class="line">                .build();</span><br><span class="line">        Call call = mOkHttpClient.newCall(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            Response execute = call.execute();</span><br><span class="line">            result = execute.body().string();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static class Holder &#123;</span><br><span class="line">        private static final OkHttpUtil OK_HTTP_UTIL = new OkHttpUtil();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-腾讯地图调用工具类"><a href="#2-腾讯地图调用工具类" class="headerlink" title="2.腾讯地图调用工具类"></a>2.腾讯地图调用工具类</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.util;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.gree.bdc.entity.AddressToCoordinateResult;</span><br><span class="line">import com.gree.bdc.entity.CoordinateToAddressResult;</span><br><span class="line">import com.gree.bdc.entity.Point;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hadoop</span><br><span class="line"> */</span><br><span class="line">public class MapUtil &#123;</span><br><span class="line">    private static final Logger log = LoggerFactory.getLogger(MapUtil.class);</span><br><span class="line"></span><br><span class="line">    //key需要自己申请</span><br><span class="line">    public static final String KEY = &quot;xxxx&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过地址转坐标</span><br><span class="line">     * @param address 地址</span><br><span class="line">     * @throws Exception exception</span><br><span class="line">     */</span><br><span class="line">  public static Point addressToCoordinate(String address) throws Exception &#123;</span><br><span class="line">      String url = &quot;https://apis.map.qq.com/ws/geocoder/v1/&quot;;</span><br><span class="line">      HashMap&lt;String, String&gt; params = new HashMap&lt;&gt;(8);</span><br><span class="line">      params.put(&quot;address&quot;,address);</span><br><span class="line">      params.put(&quot;key&quot;,KEY);</span><br><span class="line"></span><br><span class="line">      String result = OkHttpUtil.getInstance().get(url, params);</span><br><span class="line">      AddressToCoordinateResult addressToCoordinateResult = JSON.parseObject(result, AddressToCoordinateResult.class);</span><br><span class="line">      Integer status = addressToCoordinateResult.getStatus();</span><br><span class="line">      if (status == 0 )&#123;</span><br><span class="line">          AddressToCoordinateResult.Result.Location location = addressToCoordinateResult.getResult().getLocation();</span><br><span class="line">          Double lng = location.getLng();</span><br><span class="line">          Double lat = location.getLat();</span><br><span class="line">          Point point = new Point();</span><br><span class="line">          point.setLat(lat);</span><br><span class="line">          point.setLng(lng);</span><br><span class="line">          return point;</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">*两个坐标的距离</span><br><span class="line">*</span><br><span class="line">**/</span><br><span class="line">  public static Double distanceCalculate(double lat1, double lon1, double lat2, double lon2)&#123;</span><br><span class="line"></span><br><span class="line">          Double latitude1, longitude1, latitude2, longitude2;</span><br><span class="line">          Double dlat, dlon;</span><br><span class="line">          latitude1 = lat1;</span><br><span class="line">          longitude1 = lon1;</span><br><span class="line">          latitude2 = lat2;</span><br><span class="line">          longitude2 = lon2;</span><br><span class="line">          //computing procedure</span><br><span class="line">          Double a, c, distance;</span><br><span class="line"></span><br><span class="line">          dlon = Math.abs((longitude2 - longitude1)) * Math.PI / 180;</span><br><span class="line">          dlat = Math.abs((latitude2 - latitude1)) * Math.PI / 180;</span><br><span class="line">          a = (Math.sin(dlat / 2) * Math.sin(dlat / 2)) + Math.cos(latitude1 * Math.PI / 180) * Math.cos(latitude2 * Math.PI / 180) * (Math.sin(dlon / 2) * Math.sin(dlon / 2));</span><br><span class="line">          if (a == 1.0)&#123;</span><br><span class="line">              c = Math.PI;</span><br><span class="line">          &#125; else&#123;</span><br><span class="line">              c = 2 * Math.atan(Math.sqrt(a) / Math.sqrt(1 - a));</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">          distance = 6378137.0 * c;</span><br><span class="line">          return distance;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过地址转坐标</span><br><span class="line">     * @param location 地址</span><br><span class="line">     * @throws Exception exception</span><br><span class="line">     */</span><br><span class="line">    public static String coordinateToAddress(String location) throws Exception &#123;</span><br><span class="line">        String url = &quot;https://apis.map.qq.com/ws/geocoder/v1/&quot;;</span><br><span class="line">        HashMap&lt;String, String&gt; params = new HashMap&lt;&gt;(8);</span><br><span class="line">        params.put(&quot;location&quot;,location);</span><br><span class="line">        params.put(&quot;key&quot;,KEY);</span><br><span class="line"></span><br><span class="line">        String result = OkHttpUtil.getInstance().get(url, params);</span><br><span class="line">        CoordinateToAddressResult coordinateToAddressResult = JSON.parseObject(result, CoordinateToAddressResult.class);</span><br><span class="line">        ///System.out.println(coordinateToAddressResult);</span><br><span class="line">        Integer status = coordinateToAddressResult.getStatus();</span><br><span class="line">        if (status == 0 )&#123;</span><br><span class="line">            String address = coordinateToAddressResult.getResult().getAddress();</span><br><span class="line"></span><br><span class="line">            return address;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一般而言，腾讯地图的接口调用都有限制，对于普通的开发者上线为10000，并发5次/s，不建议正规项目使用，一旦并发过高会导致很多的地址解析失败，单个解析没问题，很难发现这个问题，故最好还是申请企业认证，申请企业认证每天可以300万的次数和1000的并发。<a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceMatrix" target="_blank" rel="noopener">腾讯地图位置服务网站</a></p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-14T09:04:24.000Z">2020-04-14</time>
                 
                 <div class="level-item">
@@ -146,7 +239,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 25 个字)
+                    几秒 读完 (大约 99 个字)
                 </span>
                 
                 
@@ -160,6 +253,7 @@
         </h1>
         <div class="content">
             <h1 id="mysql异常处理"><a href="#mysql异常处理" class="headerlink" title="mysql异常处理"></a>mysql异常处理</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解决java.sql.SQLException: Value &apos;0000-00-00&apos; can not be represented as java.sql.Date</span><br><span class="line"></span><br><span class="line">jdbc:mysql://yourserver:3306/yourdatabase?zeroDateTimeBehavior=convertToNull</span><br></pre></td></tr></table></figure>
+<p>#mysql文本类型数据存储<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql中text 最大长来度为65,535(2的16次方–1)字符的TEXT列。</span><br><span class="line">如果你觉得text长度自不够百，可以选择</span><br><span class="line">MEDIUMTEXT最大长度为16,777,215。</span><br><span class="line">LONGTEXT最大长度为4,294,967,295</span><br><span class="line">Text主要度是用来存放非二进制的文本</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -192,7 +286,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 247 个字)
+                    2 分钟 读完 (大约 352 个字)
                 </span>
                 
                 
@@ -210,6 +304,7 @@
 <p>时间格式采用：2020/04/11 14:12:14</p>
 </blockquote>
 <p>二、java 参数类型与mysql类型比较<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">===========java注入数据库==========</span><br><span class="line"></span><br><span class="line">java类型   mysql类型        成功与否</span><br><span class="line">date         date               yes</span><br><span class="line">date         time               no</span><br><span class="line">date         timestamp       no</span><br><span class="line">date         datetime         no</span><br><span class="line"></span><br><span class="line">time         date               no</span><br><span class="line">time         time               yes</span><br><span class="line">time         timestamp       no</span><br><span class="line">time         datetime         no</span><br><span class="line"></span><br><span class="line">timestamp date              yes</span><br><span class="line">timestamp time              yes</span><br><span class="line">timestamp timestamp     yes</span><br><span class="line">timestamp datetime        yes</span><br><span class="line">==========end java注入数据库========</span><br><span class="line">总规律，如果A完全包含B，则A可以向B注入数据，否则报错</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">==========从数据库提取到java ==========</span><br><span class="line"></span><br><span class="line">mysql类型    java类型     成与否</span><br><span class="line">date             date         yes</span><br><span class="line">date             time         yes --------------缺少的部分使用历元</span><br><span class="line">date           timestamp   yes --------------缺少的部分使用历元  </span><br><span class="line"></span><br><span class="line">time           date           yes --------------缺少的部分使用历元</span><br><span class="line">time           time           yes</span><br><span class="line">time          timestamp    yes --------------缺少的部分使用历元</span><br><span class="line"></span><br><span class="line">timestamp date           yes</span><br><span class="line">timestamp time           yes</span><br><span class="line">timestamp timestamp   yes</span><br><span class="line"></span><br><span class="line">datetime      date         yes</span><br><span class="line">datetime      time         yes</span><br><span class="line">datetime    timestamp   yes</span><br><span class="line">==========end 从数据库提取到java=======</span><br><span class="line">不会出错，缺少的部分使用历元，而不是当前日期时间</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">实战经验：在java中处理时间数据，建议采用java8中的时间工具类</span><br><span class="line">localtime</span><br><span class="line">localdate</span><br><span class="line">localdatetime</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在spark中处理时间的字段类型采用timestamp来计算，不要使用date类型计算</span><br><span class="line">mysql数据库中的日期类型字段采用date类型</span><br><span class="line">时间字段采用datetime 或者timestamp都可以，避免使用字符串，看起来更加正规。</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -666,127 +761,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-30T06:56:27.000Z">2019-12-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1761 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/30/Flink-DataStream-Api-编程/">Flink DataStream Api 编程</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="流处理基本概念"><a href="#流处理基本概念" class="headerlink" title="流处理基本概念"></a>流处理基本概念</h2><blockquote>
-<p>对于什么是流处理，从不同的角度有不同的定义。其实流处理与批处理这两个概念是对立统一的，它们的关系有点类似于对于 Java 中的 ArrayList 中的元素，是直接看作一个有限数据集并用下标去访问，还是用迭代器去访问。<br>  流处理系统本身有很多自己的特点。一般来说，由于需要支持无限数据集的处理，流处理系统一般采用一种数据驱动的处理方式。它会提前设置一些算子，然后等到数据到达后对数据进行处理。为了表达复杂的计算逻辑，包括 Flink 在内的分布式流处理引擎一般采用 DAG 图来表示整个计算逻辑，其中 DAG 图中的每一个点就代表一个基本的逻辑单元，也就是前面说的算子。由于计算逻辑被组织成有向图，数据会按照边的方向，从一些特殊的 Source 节点流入系统，然后通过网络传输、本地传输等不同的数据传输方式在算子之间进行发送和处理，最后会通过另外一些特殊的 Sink 节点将计算结果发送到某个外部系统或数据库中。</p>
-</blockquote>
-<blockquote>
-<p>总结一下：流数据本身就是源源不断的产生，流数据处理就是提前设置一些算子，然后等待数据流到这些提前设置的算子进行处理的过程。而实际在分布式的情况下，需要考虑不同的实例之间数据传输。</p>
-</blockquote>
-<p><img src="/images/2019/12/30/230086f0-2ad1-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
-<blockquote>
-<p>对于实际的分布式流处理引擎，它们的实际运行时物理模型要更复杂一些，这是由于每个算子都可能有多个实例。如图 2 所示，作为 Source 的 A 算子有两个实例，中间算子 C 也有两个实例。在逻辑模型中，A 和 B 是 C 的上游节点，而在对应的物理逻辑中，C 的所有实例和 A、B 的所有实例之间可能都存在数据交换。在物理模型中，我们会根据计算逻辑，采用系统自动优化或人为指定的方式将计算工作分布到不同的实例中。只有当算子实例分布到不同进程上时，才需要通过网络进行数据传输，而同一进程中的多个实例之间的数据传输通常是不需要通过网络的。</p>
-</blockquote>
-<h2 id="Flink-DataStram-API-概览"><a href="#Flink-DataStram-API-概览" class="headerlink" title="Flink DataStram API 概览"></a>Flink DataStram API 概览</h2><p> 首先用一个简单例子说明：</p>
-<blockquote>
-<p>//1、设置运行环境<br>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br>//2、配置数据源读取数据<br>DataStream<string> text = env.readTextFile (“input”);<br>//3、进行一系列转换<br>DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; counts = text.flatMap(new Tokenizer()).keyBy(0).sum(1);<br>//4、配置数据汇写出数据<br>counts.writeAsText(“output”);<br>//5、提交执行<br>env.execute(“Streaming WordCount”);</string></p>
-</blockquote>
-<blockquote>
-<p> 为了实现流式 Word Count，我们首先要先获得一个 StreamExecutionEnvironment 对象。它是我们构建图过程中的上下文对象。基于这个对象，我们可以添加一些算子。对于流处理程度，我们一般需要首先创建一个数据源去接入数据。在这个例子中，我们使用了 Environment 对象中内置的读取文件的数据源。这一步之后，我们拿到的是一个 DataStream 对象，它可以看作一个无限的数据集，可以在该集合上进行一序列的操作。例如，在 Word Count 例子中，我们首先将每一条记录（即文件中的一行）分隔为单词，这是通过 FlatMap 操作来实现的。调用 FlatMap 将会在底层的 DAG 图中添加一个 FlatMap 算子。然后，我们得到了一个记录是单词的流。我们将流中的单词进行分组（keyBy），然后累积计算每一个单词的数据（sum(1)）。计算出的单词的数据组成了一个新的流，我们将它写入到输出文件中。<br>最后，我们需要调用 env#execute 方法来开始程序的执行。需要强调的是，前面我们调用的所有方法，都不是在实际处理数据，而是在构通表达计算逻辑的 DAG 图。只有当我们将整个图构建完成并显式的调用 Execute 方法后，框架才会把计算图提供到集群中，接入数据并执行实际的逻辑。<br>基于流式 Word Count 的例子可以看出，基于 Flink 的 DataStream API 来编写流处理程序一般需要三步：通过 Source 接入数据、进行一系统列的处理以及将数据写出。最后，不要忘记显式调用 Execute 方式，否则前面编写的逻辑并不会真正执行。</p>
-</blockquote>
-<p><img src="/images/2019/12/30/e5920700-2ad3-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
-<blockquote>
-<p>从上面的例子中还可以看出，Flink DataStream API 的核心，就是代表流数据的 DataStream 对象。整个计算逻辑图的构建就是围绕调用 DataStream 对象上的不同操作产生新的 DataStream 对象展开的。整体来说，DataStream 上的操作可以分为四类。第一类是对于单条记录的操作，比如筛除掉不符合要求的记录（Filter 操作），或者将每条记录都做一个转换（Map 操作）。第二类是对多条记录的操作。比如说统计一个小时内的订单总成交量，就需要将一个小时内的所有订单记录的成交量加到一起。为了支持这种类型的操作，就得通过 Window 将需要的记录关联到一起进行处理。第三类是对多个流进行操作并转换为单个流。例如，多个流可以通过 Union、Join 或 Connect 等操作合到一起。这些操作合并的逻辑不同，但是它们最终都会产生了一个新的统一的流，从而可以进行一些跨流的操作。最后， DataStream 还支持与合并对称的操作，即把一个流按一定规则拆分为多个流（Split 操作），每个流是之前流的一个子集，这样我们就可以对不同的流作不同的处理。</p>
-</blockquote>
-<p> <img src="/images/2019/12/30/7d4e2c90-2ad4-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
-<p>参考文献：<a href="https://ververica.cn/developers/apache-flink-basic-zero-iii-datastream-api-programming/" target="_blank" rel="noopener">Apache Flink 零基础入门（四）：DataStream API 编程</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-29T01:53:45.000Z">2019-12-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 123 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/29/scala-引包中遇到问题/">scala 引包中遇到问题</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.Error:(12, 30) could not find implicit value for evidence parameter of type org.apache.flink.api.common.typeinfo.TypeInformation[(String, String)]     val value = env.addSource(new HBaseReader)</p>
-<blockquote>
-<p>解决方法：import org.apache.flink.api.scala._</p>
-</blockquote>
-<p>2.Scala编程中常见错误：Error:(28, 21) value foreach is not a member of java.util.List[String]</p>
-<blockquote>
-<p>解决方法：因为 Java 集合类型在 Scala 操作时没有 foreach 方法, 所以需要将其转换为Scala的集合类型,<br>因此需要在代码中加入如下内容(Scala支持与Java的隐式转换),<br>import scala.collection.JavaConversions._</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -855,7 +829,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -879,7 +853,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -1003,7 +977,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">40</span>
+                <span class="level-item tag">41</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1056,7 +1030,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1065,6 +1039,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/11/常用工具类/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
+                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
+                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1123,44 +1135,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取 kafka 并写入mysql">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取 kafka 并写入mysql</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/07/spark-常用操作/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1171,6 +1145,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1568,6 +1553,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具类/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

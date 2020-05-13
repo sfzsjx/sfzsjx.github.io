@@ -136,6 +136,127 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-30T06:56:27.000Z">2019-12-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1761 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/30/Flink-DataStream-Api-编程/">Flink DataStream Api 编程</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="流处理基本概念"><a href="#流处理基本概念" class="headerlink" title="流处理基本概念"></a>流处理基本概念</h2><blockquote>
+<p>对于什么是流处理，从不同的角度有不同的定义。其实流处理与批处理这两个概念是对立统一的，它们的关系有点类似于对于 Java 中的 ArrayList 中的元素，是直接看作一个有限数据集并用下标去访问，还是用迭代器去访问。<br>  流处理系统本身有很多自己的特点。一般来说，由于需要支持无限数据集的处理，流处理系统一般采用一种数据驱动的处理方式。它会提前设置一些算子，然后等到数据到达后对数据进行处理。为了表达复杂的计算逻辑，包括 Flink 在内的分布式流处理引擎一般采用 DAG 图来表示整个计算逻辑，其中 DAG 图中的每一个点就代表一个基本的逻辑单元，也就是前面说的算子。由于计算逻辑被组织成有向图，数据会按照边的方向，从一些特殊的 Source 节点流入系统，然后通过网络传输、本地传输等不同的数据传输方式在算子之间进行发送和处理，最后会通过另外一些特殊的 Sink 节点将计算结果发送到某个外部系统或数据库中。</p>
+</blockquote>
+<blockquote>
+<p>总结一下：流数据本身就是源源不断的产生，流数据处理就是提前设置一些算子，然后等待数据流到这些提前设置的算子进行处理的过程。而实际在分布式的情况下，需要考虑不同的实例之间数据传输。</p>
+</blockquote>
+<p><img src="/images/2019/12/30/230086f0-2ad1-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>对于实际的分布式流处理引擎，它们的实际运行时物理模型要更复杂一些，这是由于每个算子都可能有多个实例。如图 2 所示，作为 Source 的 A 算子有两个实例，中间算子 C 也有两个实例。在逻辑模型中，A 和 B 是 C 的上游节点，而在对应的物理逻辑中，C 的所有实例和 A、B 的所有实例之间可能都存在数据交换。在物理模型中，我们会根据计算逻辑，采用系统自动优化或人为指定的方式将计算工作分布到不同的实例中。只有当算子实例分布到不同进程上时，才需要通过网络进行数据传输，而同一进程中的多个实例之间的数据传输通常是不需要通过网络的。</p>
+</blockquote>
+<h2 id="Flink-DataStram-API-概览"><a href="#Flink-DataStram-API-概览" class="headerlink" title="Flink DataStram API 概览"></a>Flink DataStram API 概览</h2><p> 首先用一个简单例子说明：</p>
+<blockquote>
+<p>//1、设置运行环境<br>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();<br>//2、配置数据源读取数据<br>DataStream<string> text = env.readTextFile (“input”);<br>//3、进行一系列转换<br>DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; counts = text.flatMap(new Tokenizer()).keyBy(0).sum(1);<br>//4、配置数据汇写出数据<br>counts.writeAsText(“output”);<br>//5、提交执行<br>env.execute(“Streaming WordCount”);</string></p>
+</blockquote>
+<blockquote>
+<p> 为了实现流式 Word Count，我们首先要先获得一个 StreamExecutionEnvironment 对象。它是我们构建图过程中的上下文对象。基于这个对象，我们可以添加一些算子。对于流处理程度，我们一般需要首先创建一个数据源去接入数据。在这个例子中，我们使用了 Environment 对象中内置的读取文件的数据源。这一步之后，我们拿到的是一个 DataStream 对象，它可以看作一个无限的数据集，可以在该集合上进行一序列的操作。例如，在 Word Count 例子中，我们首先将每一条记录（即文件中的一行）分隔为单词，这是通过 FlatMap 操作来实现的。调用 FlatMap 将会在底层的 DAG 图中添加一个 FlatMap 算子。然后，我们得到了一个记录是单词的流。我们将流中的单词进行分组（keyBy），然后累积计算每一个单词的数据（sum(1)）。计算出的单词的数据组成了一个新的流，我们将它写入到输出文件中。<br>最后，我们需要调用 env#execute 方法来开始程序的执行。需要强调的是，前面我们调用的所有方法，都不是在实际处理数据，而是在构通表达计算逻辑的 DAG 图。只有当我们将整个图构建完成并显式的调用 Execute 方法后，框架才会把计算图提供到集群中，接入数据并执行实际的逻辑。<br>基于流式 Word Count 的例子可以看出，基于 Flink 的 DataStream API 来编写流处理程序一般需要三步：通过 Source 接入数据、进行一系统列的处理以及将数据写出。最后，不要忘记显式调用 Execute 方式，否则前面编写的逻辑并不会真正执行。</p>
+</blockquote>
+<p><img src="/images/2019/12/30/e5920700-2ad3-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<blockquote>
+<p>从上面的例子中还可以看出，Flink DataStream API 的核心，就是代表流数据的 DataStream 对象。整个计算逻辑图的构建就是围绕调用 DataStream 对象上的不同操作产生新的 DataStream 对象展开的。整体来说，DataStream 上的操作可以分为四类。第一类是对于单条记录的操作，比如筛除掉不符合要求的记录（Filter 操作），或者将每条记录都做一个转换（Map 操作）。第二类是对多条记录的操作。比如说统计一个小时内的订单总成交量，就需要将一个小时内的所有订单记录的成交量加到一起。为了支持这种类型的操作，就得通过 Window 将需要的记录关联到一起进行处理。第三类是对多个流进行操作并转换为单个流。例如，多个流可以通过 Union、Join 或 Connect 等操作合到一起。这些操作合并的逻辑不同，但是它们最终都会产生了一个新的统一的流，从而可以进行一些跨流的操作。最后， DataStream 还支持与合并对称的操作，即把一个流按一定规则拆分为多个流（Split 操作），每个流是之前流的一个子集，这样我们就可以对不同的流作不同的处理。</p>
+</blockquote>
+<p> <img src="/images/2019/12/30/7d4e2c90-2ad4-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+<p>参考文献：<a href="https://ververica.cn/developers/apache-flink-basic-zero-iii-datastream-api-programming/" target="_blank" rel="noopener">Apache Flink 零基础入门（四）：DataStream API 编程</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-29T01:53:45.000Z">2019-12-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 123 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/29/scala-引包中遇到问题/">scala 引包中遇到问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.Error:(12, 30) could not find implicit value for evidence parameter of type org.apache.flink.api.common.typeinfo.TypeInformation[(String, String)]     val value = env.addSource(new HBaseReader)</p>
+<blockquote>
+<p>解决方法：import org.apache.flink.api.scala._</p>
+</blockquote>
+<p>2.Scala编程中常见错误：Error:(28, 21) value foreach is not a member of java.util.List[String]</p>
+<blockquote>
+<p>解决方法：因为 Java 集合类型在 Scala 操作时没有 foreach 方法, 所以需要将其转换为Scala的集合类型,<br>因此需要在代码中加入如下内容(Scala支持与Java的隐式转换),<br>import scala.collection.JavaConversions._</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-27T01:29:44.000Z">2019-12-27</time>
                 
                 <div class="level-item">
@@ -406,7 +527,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 425 个字)
+                    4 分钟 读完 (大约 658 个字)
                 </span>
                 
                 
@@ -432,6 +553,10 @@
 <p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
 </blockquote>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
+<h2 id="flink-集成-kafka-集群提交任务"><a href="#flink-集成-kafka-集群提交任务" class="headerlink" title="flink 集成 kafka 集群提交任务"></a>flink 集成 kafka 集群提交任务</h2><blockquote>
+<p>由于cdh集群集成了kerberos 以及kafka集群也集成了kerberos 所以需要配置kafkad的jaas.conf文件和krb5文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">KafkaClient &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  doNotPrompt=true</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  renewTicket=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>krb5.conf一般都不需要更改，主要是配置kafka读取到jaas.conf文件，flink的配置则按照flink集群提交的方法完成就可以。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">default = FILE:/lvm/data3/var/log/krb5libs.log</span><br><span class="line">kdc = FILE:/lvm/data3/var/log/krb5kdc.log</span><br><span class="line">admin_server = FILE:/lvm/data3/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">dns_lookup_realm = false</span><br><span class="line">dns_lookup_kdc = false</span><br><span class="line">ticket_lifetime = 24h</span><br><span class="line">renew_lifetime = 7d</span><br><span class="line">forwardable = true</span><br><span class="line">udp_preference_limit = 1</span><br><span class="line">default_realm = GREE.IO</span><br><span class="line">pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">GREE.IO = &#123;</span><br><span class="line"> kdc = cdh-master01</span><br><span class="line"> admin_server = cdh-master01</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line">.cdh-master01 = GREE.IO</span><br><span class="line">cdh-master01 = GREE.IO</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -875,98 +1000,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 62 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/26/spark-常用-api/">spark 常用 api</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.spark 中采用部分关联字段</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接</span><br><span class="line">  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-25T00:55:10.000Z">2019-10-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 198 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/25/Docker-三剑客之-Docker-Compose/">Docker 三剑客之 Docker Compose</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Docker Compose 定位是 定义和运行多个docker容器应用（Defining and running multi-container Docker applications）</span><br><span class="line"></span><br><span class="line">它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）</span><br><span class="line"></span><br><span class="line">Compose 中有两个重要的概念：</span><br><span class="line"></span><br><span class="line">服务 (service)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。</span><br><span class="line">项目 (project)：由一组关联的应用容器组成的一个完整业务单元，在 docker-compose.yml 文件中定义。</span><br></pre></td></tr></table></figure>
-<h1 id="安装与卸载"><a href="#安装与卸载" class="headerlink" title="安装与卸载"></a>安装与卸载</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.安装</span><br><span class="line">$ sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">2.卸载</span><br><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -1037,7 +1070,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -1061,7 +1094,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -1185,7 +1218,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">40</span>
+                <span class="level-item tag">41</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1238,7 +1271,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1247,6 +1280,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/11/常用工具类/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
+                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
+                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1305,44 +1376,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取 kafka 并写入mysql">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取 kafka 并写入mysql</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/07/spark-常用操作/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1353,6 +1386,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1750,6 +1794,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具类/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

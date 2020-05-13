@@ -533,7 +533,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 425 个字)
+                    4 分钟 读完 (大约 658 个字)
                 </span>
                 
                 
@@ -559,6 +559,10 @@
 <p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
 </blockquote>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
+<h2 id="flink-集成-kafka-集群提交任务"><a href="#flink-集成-kafka-集群提交任务" class="headerlink" title="flink 集成 kafka 集群提交任务"></a>flink 集成 kafka 集群提交任务</h2><blockquote>
+<p>由于cdh集群集成了kerberos 以及kafka集群也集成了kerberos 所以需要配置kafkad的jaas.conf文件和krb5文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">KafkaClient &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  doNotPrompt=true</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  renewTicket=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>krb5.conf一般都不需要更改，主要是配置kafka读取到jaas.conf文件，flink的配置则按照flink集群提交的方法完成就可以。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">default = FILE:/lvm/data3/var/log/krb5libs.log</span><br><span class="line">kdc = FILE:/lvm/data3/var/log/krb5kdc.log</span><br><span class="line">admin_server = FILE:/lvm/data3/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">dns_lookup_realm = false</span><br><span class="line">dns_lookup_kdc = false</span><br><span class="line">ticket_lifetime = 24h</span><br><span class="line">renew_lifetime = 7d</span><br><span class="line">forwardable = true</span><br><span class="line">udp_preference_limit = 1</span><br><span class="line">default_realm = GREE.IO</span><br><span class="line">pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">GREE.IO = &#123;</span><br><span class="line"> kdc = cdh-master01</span><br><span class="line"> admin_server = cdh-master01</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line">.cdh-master01 = GREE.IO</span><br><span class="line">cdh-master01 = GREE.IO</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -798,7 +802,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -822,7 +826,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -946,7 +950,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">40</span>
+                <span class="level-item tag">41</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -999,7 +1003,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1008,6 +1012,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/11/常用工具类/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
+                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
+                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1066,44 +1108,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取 kafka 并写入mysql">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取 kafka 并写入mysql</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/07/spark-常用操作/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1114,6 +1118,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1511,6 +1526,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具类/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

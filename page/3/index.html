@@ -136,6 +136,98 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-26T03:20:57.000Z">2019-11-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 62 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/26/spark-常用-api/">spark 常用 api</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.spark 中采用部分关联字段</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//可以看出Temp_khcp 字段包含 first_chart 字段 ，通过部分关联来实现表连接</span><br><span class="line">  val alphabet_Beign = number_Beign.join(custom_file_regular, col(&quot;Temp_khcp&quot;).startsWith(col(&quot;first_chart&quot;)), &quot;left&quot;).drop(&quot;first_chart&quot;).na.fill(&quot;&quot;, Seq(&quot;before_file&quot;))</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-25T00:55:10.000Z">2019-10-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 198 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/25/Docker-三剑客之-Docker-Compose/">Docker 三剑客之 Docker Compose</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Docker Compose 定位是 定义和运行多个docker容器应用（Defining and running multi-container Docker applications）</span><br><span class="line"></span><br><span class="line">它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）</span><br><span class="line"></span><br><span class="line">Compose 中有两个重要的概念：</span><br><span class="line"></span><br><span class="line">服务 (service)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。</span><br><span class="line">项目 (project)：由一组关联的应用容器组成的一个完整业务单元，在 docker-compose.yml 文件中定义。</span><br></pre></td></tr></table></figure>
+<h1 id="安装与卸载"><a href="#安装与卸载" class="headerlink" title="安装与卸载"></a>安装与卸载</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.安装</span><br><span class="line">$ sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">2.卸载</span><br><span class="line">sudo rm /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-10-23T07:13:40.000Z">2019-10-23</time>
                 
                 <div class="level-item">
@@ -785,104 +877,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-15T08:03:58.000Z">2019-08-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/IDEA/">IDEA</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 99 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/15/Intellij-IDEA-问题记录/">Intellij IDEA 问题记录</a>
-            
-        </h1>
-        <div class="content">
-            <p>Intellij IDEA 问题记录 </p>
-<p>问题一、<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Intellij idea Language level和Java Compiler版本自动变化问题</span><br><span class="line">该问题主要是由于刷新pom.xml文件时，IDEA的这两个参数就会恢复成默认值</span><br><span class="line">解决办法：</span><br><span class="line">在pom.xml中加入以下配置</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
-<p>问题二、</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Unchecked assignment: &apos;java.util.HashMap&apos; to &apos;java.util.HashMap&lt;java.lang.String,java.lang.String&gt;</span><br><span class="line"></span><br><span class="line">修改为： Map&lt;String, String&gt; params = new HashMap&lt;&gt;(7);</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-14T08:25:52.000Z">2019-08-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 85 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/14/mysql-8-0以后授权/">mysql 8.0以后授权</a>
-            
-        </h1>
-        <div class="content">
-            <p>mysql 授权操作</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">首先创建一个用户</span><br><span class="line">create user &apos;root&apos;@&apos;172.16.247.129&apos; identified by &apos;lyxbdw&apos;;</span><br><span class="line"></span><br><span class="line">然后进行授权</span><br><span class="line"> grant all privileges on *.* to &apos;root&apos;@&apos;172.16.247.129&apos;</span><br><span class="line">    -&gt; ;</span><br><span class="line"></span><br><span class="line">刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">开启管理员权限，重启mysql</span><br><span class="line">![image.png](/images/2019/08/14/6a9ca990-be6f-11e9-8d50-b3f800759cdf.png)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2019/08/14/74cdc340-be6f-11e9-8d50-b3f800759cdf.png" alt="image.png"></p>
-<p>查看某个用户权限</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for  &apos;root&apos;@&apos;172.16.247.129&apos;;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -955,7 +949,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -979,7 +973,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -1103,7 +1097,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">40</span>
+                <span class="level-item tag">41</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1156,7 +1150,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1165,6 +1159,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/11/常用工具类/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
+                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
+                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1223,44 +1255,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取 kafka 并写入mysql">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取 kafka 并写入mysql</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/07/spark-常用操作/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1271,6 +1265,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1668,6 +1673,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具类/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

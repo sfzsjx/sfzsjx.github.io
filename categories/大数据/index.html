@@ -147,6 +147,52 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 417 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/11/常用工具类/">常用工具类</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="时间工具类"><a href="#时间工具类" class="headerlink" title="时间工具类"></a>时间工具类</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">import java.sql.Timestamp;</span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Locale;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 时间工具类</span><br><span class="line"> * @author hadoop</span><br><span class="line"> * @date 2020-03-24</span><br><span class="line"> */</span><br><span class="line">public class DateUtils &#123;</span><br><span class="line"></span><br><span class="line">    private static  SimpleDateFormat standardTimeFormat = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 比较两个时间大小 格式yyyy-MM-dd hh:mm:ss</span><br><span class="line">     * @return 布尔值</span><br><span class="line">     */</span><br><span class="line">    public static Boolean compare2Time(Timestamp startTime, Timestamp endTime) throws ParseException &#123;</span><br><span class="line"></span><br><span class="line">        if (startTime == null || endTime == null)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return startTime.before(endTime);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 日期格式转换</span><br><span class="line">     * @param oldDateStr 原先时间格式</span><br><span class="line">     * @return 新时间格式</span><br><span class="line">     * @throws ParseException 转换</span><br><span class="line">     */</span><br><span class="line">    public static String dealDateFormat(String oldDateStr) throws ParseException&#123;</span><br><span class="line">        //此格式只有  jdk 1.7才支持  yyyy-MM-dd‘T‘HH:mm:ss.SSSXXX</span><br><span class="line">        DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSXXX&quot;);</span><br><span class="line">        if (oldDateStr != null)&#123;</span><br><span class="line">            Date  date = df.parse(oldDateStr);</span><br><span class="line">            SimpleDateFormat df1 = new SimpleDateFormat (&quot;EEE MMM dd HH:mm:ss Z yyyy&quot;, Locale.UK);</span><br><span class="line">            Date date1 =  df1.parse(date.toString());</span><br><span class="line">            DateFormat df2 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">            return df2.format(date1);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到两个时间差  格式yyyy-MM-dd HH:mm:ss</span><br><span class="line">     * @param start 2019-06-27 14:12:40</span><br><span class="line">     * @param end   2019-08-27 14:12:40</span><br><span class="line">     * @return 5270400000</span><br><span class="line">     */</span><br><span class="line">    public static Long dateSubtraction(String start, String end) &#123;</span><br><span class="line">        SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Date date1 = df.parse(start);</span><br><span class="line">            Date date2 = df.parse(end);</span><br><span class="line">            Long diff = date2.getTime() - date1.getTime();</span><br><span class="line">            Long days = diff / (1000 * 60 * 60 * 24);</span><br><span class="line">            Long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);</span><br><span class="line">            Long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);</span><br><span class="line">            Long totalMin = days * 12 + hours*60 + minutes;</span><br><span class="line">            return totalMin;</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return 0L;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当前日期前一天</span><br><span class="line">     * @return 2019-08-26</span><br><span class="line">     */</span><br><span class="line">    public static String getBeforeDay() &#123;</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        Date date = new Date();</span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line">        calendar.add(Calendar.DAY_OF_MONTH, -1);</span><br><span class="line">        date = calendar.getTime();</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取当前日期前一天新格式（yyyyMMdd）</span><br><span class="line">     * @return 2019-08-26</span><br><span class="line">     */</span><br><span class="line">    public static String getBeforeDayNewFormat() &#123;</span><br><span class="line">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMdd&quot;);</span><br><span class="line">        Date date = new Date();</span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line">        calendar.add(Calendar.DAY_OF_MONTH, -1);</span><br><span class="line">        date = calendar.getTime();</span><br><span class="line">        return sdf.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 添加几分钟时间</span><br><span class="line">     * @param timestamp 时间戳</span><br><span class="line">     * @param time 毫秒数</span><br><span class="line">     * @return 时间戳</span><br><span class="line">     */</span><br><span class="line">    public static Timestamp addTime(Timestamp timestamp ,Long time)&#123;</span><br><span class="line"></span><br><span class="line">        return  new Timestamp(timestamp.getTime() + time);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time>
                 
                 <div class="level-item">
@@ -374,7 +420,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 425 个字)
+                    4 分钟 读完 (大约 658 个字)
                 </span>
                 
                 
@@ -400,6 +446,10 @@
 <p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
 </blockquote>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
+<h2 id="flink-集成-kafka-集群提交任务"><a href="#flink-集成-kafka-集群提交任务" class="headerlink" title="flink 集成 kafka 集群提交任务"></a>flink 集成 kafka 集群提交任务</h2><blockquote>
+<p>由于cdh集群集成了kerberos 以及kafka集群也集成了kerberos 所以需要配置kafkad的jaas.conf文件和krb5文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">KafkaClient &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  doNotPrompt=true</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  renewTicket=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>krb5.conf一般都不需要更改，主要是配置kafka读取到jaas.conf文件，flink的配置则按照flink集群提交的方法完成就可以。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">default = FILE:/lvm/data3/var/log/krb5libs.log</span><br><span class="line">kdc = FILE:/lvm/data3/var/log/krb5kdc.log</span><br><span class="line">admin_server = FILE:/lvm/data3/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">dns_lookup_realm = false</span><br><span class="line">dns_lookup_kdc = false</span><br><span class="line">ticket_lifetime = 24h</span><br><span class="line">renew_lifetime = 7d</span><br><span class="line">forwardable = true</span><br><span class="line">udp_preference_limit = 1</span><br><span class="line">default_realm = GREE.IO</span><br><span class="line">pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">GREE.IO = &#123;</span><br><span class="line"> kdc = cdh-master01</span><br><span class="line"> admin_server = cdh-master01</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line">.cdh-master01 = GREE.IO</span><br><span class="line">cdh-master01 = GREE.IO</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -640,51 +690,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-17T02:13:36.000Z">2019-10-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 580 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/17/HBase-常用工具类/">HBase 常用工具类</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">object HBaseUtils &#123;</span><br><span class="line">  def logger: Logger = LoggerFactory.getLogger(getClass)</span><br><span class="line">  /**</span><br><span class="line">    * 获取配置参数信息</span><br><span class="line">    * @return    </span><br><span class="line">*/ </span><br><span class="line"> def getHBaseConf : Configuration = &#123;</span><br><span class="line">    val conf : Configuration = HBaseConfiguration.create</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;, &quot;cdh-master01,cdh-master02,cdh-master03&quot;)</span><br><span class="line">    conf.set(&quot;hadoop.security.authentication&quot;, &quot;Kerberos&quot;)</span><br><span class="line">    conf</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取连接</span><br><span class="line">    * @param conf 配置信息</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">  def getConnection(conf:Configuration): Connection =&#123;</span><br><span class="line">    ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 获取管理员权限</span><br><span class="line">    * @param conn 连接信息</span><br><span class="line">    * @return HBaseAdmin</span><br><span class="line">    */</span><br><span class="line">  def getAdmin(conn:Connection) : HBaseAdmin = &#123;</span><br><span class="line">    conn.getAdmin.asInstanceOf[HBaseAdmin]</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 创建表</span><br><span class="line">    * @param admin 管理员</span><br><span class="line">    * @param tableName 表名</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @throws org.apache.hadoop.hbase.MasterNotRunningException 异常</span><br><span class="line">    * @throws org.apache.hadoop.hbase.ZooKeeperConnectionException 异常</span><br><span class="line">    * @throws java.io.IOException 异常</span><br><span class="line">    */</span><br><span class="line">  @throws(classOf[MasterNotRunningException])</span><br><span class="line">  @throws(classOf[ZooKeeperConnectionException])</span><br><span class="line">  @throws(classOf[IOException])</span><br><span class="line">  def createTable(admin: HBaseAdmin,tableName: String,columnFamily:Array[String]):Unit = &#123;</span><br><span class="line">    val createTableName = TableName.valueOf(tableName)</span><br><span class="line">    if (admin.tableExists(createTableName))&#123;</span><br><span class="line">      logger.info(tableName + &quot;table exists!&quot;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      val tableDesc = new HTableDescriptor(createTableName)      </span><br><span class="line">      tableDesc.addCoprocessor(&quot;org.apache.hadoop.hbase.coprocessor.AggregateImplementation&quot;)</span><br><span class="line">      for (singleColumnFamily &lt;- columnFamily)&#123;</span><br><span class="line">        val columnDesc = new HColumnDescriptor(singleColumnFamily)</span><br><span class="line">        tableDesc.addFamily(columnDesc)</span><br><span class="line">      &#125; </span><br><span class="line">admin.createTable(tableDesc)</span><br><span class="line">      logger.info(tableName + &quot; create table success!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">admin.close() </span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 载入数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @param columnFamily 列族</span><br><span class="line">    * @param quorum 分布式信息</span><br><span class="line">    * @param value 数值</span><br><span class="line">    */</span><br><span class="line">  def addRow(table: Table,rowKey:String,columnFamily:String ,quorum:String,value:String): Unit =&#123;</span><br><span class="line">    val rowPut:Put = new Put(Bytes.toBytes(rowKey))</span><br><span class="line">    if (value == null)&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,&quot;&quot;.getBytes)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      rowPut.addColumn(columnFamily.getBytes,quorum.getBytes,value.getBytes)</span><br><span class="line">    &#125;</span><br><span class="line">    table.put(rowPut)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 获取表数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param rowKey 行键</span><br><span class="line">    * @return HBase result</span><br><span class="line">    */</span><br><span class="line">  def getRow(table: Table,rowKey: String ):Result = &#123;</span><br><span class="line">    val get:Get = new Get(Bytes.toBytes(rowKey))</span><br><span class="line">    val result:Result = table.get(get)</span><br><span class="line">    for (rowKv &lt;- result.rawCells())&#123;</span><br><span class="line">      println(&quot;Family:&quot; + new String(rowKv.getFamilyArray,rowKv.getFamilyOffset,rowKv.getFamilyLength,&quot;UT-8&quot;))      println(&quot;Qualifier:&quot; + new String(rowKv.getQualifierArray,rowKv.getQualifierOffset,rowKv.getQualifierLength,&quot;UT-8&quot;))      println(&quot;TimeStamp:&quot; + rowKv.getTimestamp)</span><br><span class="line">      println(&quot;rowKey:&quot; + new String(rowKv.getRowArray,rowKv.getRowOffset,rowKv.getRowLength,&quot;UT-8&quot;))</span><br><span class="line">      println(&quot;Value:&quot; + new String(rowKv.getValueArray,rowKv.getValueOffset,rowKv.getValueLength,&quot;UT-8&quot;))</span><br><span class="line">   &#125;</span><br><span class="line">    result</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">    * 批量添加数据</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param list 数据列表</span><br><span class="line">    */</span><br><span class="line">  def addDataBatch(table: Table,list: java.util.List[Put]): Unit = &#123;</span><br><span class="line">    try&#123;</span><br><span class="line">      table.put(list)</span><br><span class="line">    &#125;catch&#123;</span><br><span class="line">        logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; </span><br><span class="line">       logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 查询所有记录</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @return resultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryAll(table: Table):ResultScanner = &#123;</span><br><span class="line">    val scan: Scan = new Scan</span><br><span class="line">    try &#123;</span><br><span class="line">      val result: ResultScanner = table.getScanner(scan)</span><br><span class="line">      result</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: IOException =&gt;</span><br><span class="line">      logger.error(e.getMessage)</span><br><span class="line">        null</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">    * 单条记录查询</span><br><span class="line">    * @param table HBase表</span><br><span class="line">    * @param queryColumn 查询列 </span><br><span class="line">    * @param value 数值</span><br><span class="line">    * @param columns 列集合</span><br><span class="line">    * @return ResultScanner</span><br><span class="line">    */</span><br><span class="line">  def queryBySingleColumn(table: Table, queryColumn: String, value: String, columns: Array[String]): ResultScanner = &#123;</span><br><span class="line">    if (columns == null || queryColumn == null || value == null )&#123;</span><br><span class="line">      null</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        val filter: SingleColumnValueFilter = new SingleColumnValueFilter(Bytes.toBytes(queryColumn),Bytes.toBytes(queryColumn),CompareOperator.EQUAL,new SubstringComparator(value))</span><br><span class="line">        val scan: Scan = new Scan</span><br><span class="line">        for (column  logger.error(e.getMessage)</span><br><span class="line">          null</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">    * 删除表</span><br><span class="line">    * @param hBaseConnection 链接</span><br><span class="line">    * @param tableName HBase表</span><br><span class="line">    */</span><br><span class="line">  def dropTable(hBaseConnection: Connection,tableName: String): Unit = &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      val admin: HBaseAdmin = hBaseConnection.getAdmin.asInstanceOf[HBaseAdmin]      admin.disableTable(TableName.valueOf(tableName))</span><br><span class="line">      admin.deleteTable(TableName.valueOf(tableName))</span><br><span class="line">    &#125;catch &#123;</span><br><span class="line">      case e: MasterNotRunningException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: ZooKeeperConnectionException =&gt; logger.error(e.getMessage)</span><br><span class="line">      case e: IOException =&gt; logger.error(e.getMessage)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.hbase </span><br><span class="line">hbase-client</span><br><span class="line">$&#123;hbase.version&#125;</span><br><span class="line">org.apache.hadoop </span><br><span class="line">hadoop-annotations</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -701,9 +706,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/2/">2</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/3/">3</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/4/">4</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/categories/大数据/page/5/">5</a></li>
             
         </ul>
     </nav>
@@ -753,7 +758,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -777,7 +782,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -901,7 +906,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">40</span>
+                <span class="level-item tag">41</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -954,7 +959,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -963,6 +968,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/11/常用工具类/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
+                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
+                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1021,44 +1064,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取 kafka 并写入mysql">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/spark-读取-kafka-并写入mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取 kafka 并写入mysql</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/07/spark-常用操作/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 常用操作">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/spark-常用操作/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 常用操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1069,6 +1074,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1466,6 +1482,13 @@
                     <a class="tags has-addons" href="/tags/学习/">
                         <span class="tag">学习</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具类/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
