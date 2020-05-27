@@ -147,6 +147,179 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-14T06:34:23.000Z">2019-01-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2317 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/14/CDH-5-15-简易版离线安装完整版/">CDH 5.15 简易版离线安装完整版</a>
+            
+        </h1>
+        <div class="content">
+            <p>CDH 简易版离线安装</p>
+<p>一、虚拟机搭建</p>
+<p>准备一台32G内存的电脑，安装虚拟机VMware-workstation。虚拟机下载地址：<a href="http://download3.vmware.com/software/wkst/file/VMware-Workstation-Full-14.1.2-8497320.x86_64.bundle。根据自己的电脑系统下载不同的版本，我下载的是VMware-Workstation-Full-14.1.2-8497320.x86_64.bundle。安装完虚拟机后，下载操作系统镜像CentOS-7-x86_64-DVD-1804.iso（这是我选择的版本，你们可以选择不同的版本），创建一个新的虚拟机，至于虚拟机如何创建请自行解决。" target="_blank" rel="noopener">http://download3.vmware.com/software/wkst/file/VMware-Workstation-Full-14.1.2-8497320.x86_64.bundle。根据自己的电脑系统下载不同的版本，我下载的是VMware-Workstation-Full-14.1.2-8497320.x86_64.bundle。安装完虚拟机后，下载操作系统镜像CentOS-7-x86_64-DVD-1804.iso（这是我选择的版本，你们可以选择不同的版本），创建一个新的虚拟机，至于虚拟机如何创建请自行解决。</a></p>
+<p>经过上面的一系列的操作，目前拥有三台虚拟机</p>
+<p>master  内存 16G 磁盘 150G  </p>
+<p>slave1   内存   6G 磁盘 150G</p>
+<p>slave2   内存    6G 磁盘 150G</p>
+<p>二、虚拟机配置</p>
+<p>1.修改所有的主机名，这样便于管理。</p>
+<p>hostnamectl set-hostname master<br>hostnamectl set-hostname slave1<br>hostnamectl set-hostname slave2<br>2.配置静态IP</p>
+<p>首先，选择NAT网络连接模式</p>
+<p> 然后，点击Edit编辑虚拟机网络设置，进入VMware network edit ,选中vmnet8 ,将Use local DHCP service to distribute IP addresses to VMs 前面的勾去掉。</p>
+<p>接着，进入 /etc/sysconfig/network-scripts中查看现有的配置文件然后修改其中的配置文件，其中有个类似ifcfg-enth0的文件是你的网络名字</p>
+<p>TYPE=Ethernet<br>PROXY_METHOD=none<br>BROWSER_ONLY=no<br>BOOTPROTO=static<br>DEFROUTE=yes<br>IPV4_FAILURE_FATAL=no<br>IPV6INIT=yes<br>IPV6_AUTOCONF=yes<br>IPV6_DEFROUTE=yes<br>IPV6_FAILURE_FATAL=no<br>IPV6_ADDR_GEN_MODE=stable-privacy<br>NAME=$’\751\605\615\747\675\656 1’<br>UUID=2bfdf6df-9fd6-44e3-ade7-5a397cf8d2e4<br>ONBOOT=yes<br>IPADDR=172.16.247.135<br>GATEWAY=172.16.247.2<br>NETMASK=255.255.255.0<br>PREFIX=24</p>
+<p>上面主要修改红色字体部分，其中BOOTPROTO=static 表示静态，IPADDR=172.16.247.135 表示静态IP地址</p>
+<p>最后，保存退出，执行</p>
+<p>重启网络<br>service network restart<br>查看IP<br>ifconfig<br>ping网络<br>ping <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>3.编辑hosts 文件 添加ip地址</p>
+<p>vi /etc/hosts<br> 添加以下配置，你对应的三台机器的IP地址和对应的主机名</p>
+<p>172.16.247.135 master<br>172.16.247.132 slave1<br>172.16.247.136 slave2</p>
+<p>然后将这个文件分别拷贝到各个节点上</p>
+<p>scp /etc/hosts root@slave1:/etc/hosts<br>scp /etc/hosts root@slave2:/etc/hosts</p>
+<p>4.配置SSH免密登陆</p>
+<p>主要分为两个步骤：首先在所有的节点生成公钥</p>
+<p>ssh-keygen -t rsa<br>然后将所有的节点执行拷贝公钥</p>
+<p>ssh-copy-id root@master<br>ssh-copy-id root@slave1<br>ssh-copy-id root@slave2<br>当然也可以公钥添加到认证文件中，并设置authorized_keys的访问权限：<a href="https://blog.csdn.net/johnzhc/article/details/81119030" target="_blank" rel="noopener">https://blog.csdn.net/johnzhc/article/details/81119030</a></p>
+<p>5.关闭selinux和防火墙</p>
+<p>vi /etc/selinux/config</p>
+<p>SELINUX=disabled</p>
+<p>[hadoop@master network-scripts]$ cat /etc/selinux/config</p>
+<h1 id="This-file-controls-the-state-of-SELinux-on-the-system"><a href="#This-file-controls-the-state-of-SELinux-on-the-system" class="headerlink" title="This file controls the state of SELinux on the system."></a>This file controls the state of SELinux on the system.</h1><h1 id="SELINUX-can-take-one-of-these-three-values"><a href="#SELINUX-can-take-one-of-these-three-values" class="headerlink" title="SELINUX= can take one of these three values:"></a>SELINUX= can take one of these three values:</h1><h1 id="enforcing-SELinux-security-policy-is-enforced"><a href="#enforcing-SELinux-security-policy-is-enforced" class="headerlink" title="enforcing - SELinux security policy is enforced."></a>enforcing - SELinux security policy is enforced.</h1><h1 id="permissive-SELinux-prints-warnings-instead-of-enforcing"><a href="#permissive-SELinux-prints-warnings-instead-of-enforcing" class="headerlink" title="permissive - SELinux prints warnings instead of enforcing."></a>permissive - SELinux prints warnings instead of enforcing.</h1><h1 id="disabled-No-SELinux-policy-is-loaded"><a href="#disabled-No-SELinux-policy-is-loaded" class="headerlink" title="disabled - No SELinux policy is loaded."></a>disabled - No SELinux policy is loaded.</h1><p>SELINUX=disabled</p>
+<h1 id="SELINUXTYPE-can-take-one-of-three-two-values"><a href="#SELINUXTYPE-can-take-one-of-three-two-values" class="headerlink" title="SELINUXTYPE= can take one of three two values:"></a>SELINUXTYPE= can take one of three two values:</h1><h1 id="targeted-Targeted-processes-are-protected"><a href="#targeted-Targeted-processes-are-protected" class="headerlink" title="targeted - Targeted processes are protected,"></a>targeted - Targeted processes are protected,</h1><h1 id="minimum-Modification-of-targeted-policy-Only-selected-processes-are-protected"><a href="#minimum-Modification-of-targeted-policy-Only-selected-processes-are-protected" class="headerlink" title="minimum - Modification of targeted policy. Only selected processes are protected."></a>minimum - Modification of targeted policy. Only selected processes are protected.</h1><h1 id="mls-Multi-Level-Security-protection"><a href="#mls-Multi-Level-Security-protection" class="headerlink" title="mls - Multi Level Security protection."></a>mls - Multi Level Security protection.</h1><p>SELINUXTYPE=targeted</p>
+<p> 关闭防火墙和查看防火墙状态：</p>
+<p>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld<br>6.安装NTP时间同步</p>
+<p>yum install  -y ntp     #安装ntp服务（所有节点）</p>
+<p>vi /etc/ntp.conf          #编辑ntp服务的配置文件（所有节点）</p>
+<p>主节点master的ntp.conf修改红色部分，蓝色要注释掉</p>
+<h1 id="Note-Monitoring-will-not-be-disabled-with-the-limited-restriction-flag"><a href="#Note-Monitoring-will-not-be-disabled-with-the-limited-restriction-flag" class="headerlink" title="Note: Monitoring will not be disabled with the limited restriction flag."></a>Note: Monitoring will not be disabled with the limited restriction flag.</h1><p>#disable monitor<br>restrict default nomodify<br>restrict default nomodify notrap<br>server 127.127.1.0<br>fudge 127.127.1.0 stratum 10<br>includefile /etc/ntp/crypto/pw<br>keys /etc/ntp/keys</p>
+<h1 id="中国这边最活跃的时间服务器-http-www-pool-ntp-org-zone-cn"><a href="#中国这边最活跃的时间服务器-http-www-pool-ntp-org-zone-cn" class="headerlink" title="中国这边最活跃的时间服务器 : http://www.pool.ntp.org/zone/cn"></a>中国这边最活跃的时间服务器 : <a href="http://www.pool.ntp.org/zone/cn" target="_blank" rel="noopener">http://www.pool.ntp.org/zone/cn</a></h1><p>server 0.cn.pool.ntp.org<br>server 0.asia.pool.ntp.org<br>server 3.asia.pool.ntp.org</p>
+<h1 id="allow-update-time-by-the-upper-server"><a href="#allow-update-time-by-the-upper-server" class="headerlink" title="allow update time by the upper server"></a>allow update time by the upper server</h1><h1 id="允许上层时间服务器主动修改本机时间"><a href="#允许上层时间服务器主动修改本机时间" class="headerlink" title="允许上层时间服务器主动修改本机时间"></a>允许上层时间服务器主动修改本机时间</h1><p>restrict 0.cn.pool.ntp.org nomodify notrap noquery<br>restrict 0.asia.pool.ntp.org nomodify notrap noquery<br>restrict 3.asia.pool.ntp.org nomodify notrap noquery</p>
+<h1 id="Undisciplined-Local-Clock-This-is-a-fake-driver-intended-for-backup"><a href="#Undisciplined-Local-Clock-This-is-a-fake-driver-intended-for-backup" class="headerlink" title="Undisciplined Local Clock. This is a fake driver intended for backup"></a>Undisciplined Local Clock. This is a fake driver intended for backup</h1><h1 id="and-when-no-outside-source-of-synchronized-time-is-available"><a href="#and-when-no-outside-source-of-synchronized-time-is-available" class="headerlink" title="and when no outside source of synchronized time is available."></a>and when no outside source of synchronized time is available.</h1><h1 id="外部时间服务器不可用时，以本地时间作为时间服务"><a href="#外部时间服务器不可用时，以本地时间作为时间服务" class="headerlink" title="外部时间服务器不可用时，以本地时间作为时间服务"></a>外部时间服务器不可用时，以本地时间作为时间服务</h1><p> 从节点slave的ntp.conf修改红色部分，紫色要注释掉</p>
+<h1 id="with-symmetric-key-cryptography"><a href="#with-symmetric-key-cryptography" class="headerlink" title="with symmetric key cryptography."></a>with symmetric key cryptography.</h1><p>keys /etc/ntp/keys</p>
+<h1 id="Specify-the-key-identifiers-which-are-trusted"><a href="#Specify-the-key-identifiers-which-are-trusted" class="headerlink" title="Specify the key identifiers which are trusted."></a>Specify the key identifiers which are trusted.</h1><p>#trustedkey 4 8 42</p>
+<h1 id="Specify-the-key-identifier-to-use-with-the-ntpdc-utility"><a href="#Specify-the-key-identifier-to-use-with-the-ntpdc-utility" class="headerlink" title="Specify the key identifier to use with the ntpdc utility."></a>Specify the key identifier to use with the ntpdc utility.</h1><p>#requestkey 8</p>
+<h1 id="Specify-the-key-identifier-to-use-with-the-ntpq-utility"><a href="#Specify-the-key-identifier-to-use-with-the-ntpq-utility" class="headerlink" title="Specify the key identifier to use with the ntpq utility."></a>Specify the key identifier to use with the ntpq utility.</h1><p>#controlkey 8</p>
+<h1 id="Enable-writing-of-statistics-records"><a href="#Enable-writing-of-statistics-records" class="headerlink" title="Enable writing of statistics records."></a>Enable writing of statistics records.</h1><p>#statistics clockstats cryptostats loopstats peerstats</p>
+<h1 id="Disable-the-monitoring-facility-to-prevent-amplification-attacks-using-ntpdc"><a href="#Disable-the-monitoring-facility-to-prevent-amplification-attacks-using-ntpdc" class="headerlink" title="Disable the monitoring facility to prevent amplification attacks using ntpdc"></a>Disable the monitoring facility to prevent amplification attacks using ntpdc</h1><h1 id="monlist-command-when-default-restrict-does-not-include-the-noquery-flag-See"><a href="#monlist-command-when-default-restrict-does-not-include-the-noquery-flag-See" class="headerlink" title="monlist command when default restrict does not include the noquery flag. See"></a>monlist command when default restrict does not include the noquery flag. See</h1><h1 id="CVE-2013-5211-for-more-details"><a href="#CVE-2013-5211-for-more-details" class="headerlink" title="CVE-2013-5211 for more details."></a>CVE-2013-5211 for more details.</h1><h1 id="Note-Monitoring-will-not-be-disabled-with-the-limited-restriction-flag-1"><a href="#Note-Monitoring-will-not-be-disabled-with-the-limited-restriction-flag-1" class="headerlink" title="Note: Monitoring will not be disabled with the limited restriction flag."></a>Note: Monitoring will not be disabled with the limited restriction flag.</h1><p>#disable monitor<br>server master prefer     #master 是指你的主机名<br>restrict default nomodify notrap nopeer noquery<br>restrict -6 default kod nomodify notrap nopeer noquery</p>
+<p>设置开机启动ntp服务</p>
+<p>#关闭chronyd服务<br>systemctl disable chronyd.service</p>
+<p>#开机自启动<br> systemctl enable ntpd.service</p>
+<p>以上都配置完成后，执行</p>
+<p>systemctl start ntpd    #开启ntp服务</p>
+<p>ntpstat                         #查看ntp运行状态</p>
+<p>synchronised to NTP server (172.16.247.135) at stratum 3<br>   time correct to within 350 ms<br>   polling server every 1024 s         #出现这个表示成功同步</p>
+<p>7.卸载Centos 系统自带的JDK</p>
+<p>rpm -qa | grep jdk  #查看系统自带的jdk</p>
+<p>yum -y remove   xxjdk   #删除所有的jdk</p>
+<p>8.CM 和CDH下载以及JDK和java驱动</p>
+<p>Cloudera Manager下载地址：<a href="http://archive.cloudera.com/cm5/cm/5/cloudera-manager-centos7-cm5.15.0_x86_64.tar.gz" target="_blank" rel="noopener">http://archive.cloudera.com/cm5/cm/5/cloudera-manager-centos7-cm5.15.0_x86_64.tar.gz</a></p>
+<p>CDH安装包地址：<a href="http://archive.cloudera.com/cdh5/parcels/latest/，由于我们的操作系统为CentOS7.2，需要下载以下文件：" target="_blank" rel="noopener">http://archive.cloudera.com/cdh5/parcels/latest/，由于我们的操作系统为CentOS7.2，需要下载以下文件：</a></p>
+<p>CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel</p>
+<p>CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel.sha1</p>
+<p>manifest.json</p>
+<p>JDK 可以去官网下载 下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>  下载版本为： jdk-8u172-linux-x64.rpm</p>
+<p>mysql的java驱动 下载地址：<a href="https://dev.mysql.com/downloads/connector/j/5.1.html" target="_blank" rel="noopener">https://dev.mysql.com/downloads/connector/j/5.1.html</a> </p>
+<pre><code>下载版本为：mysql-connector-java-5.1.46.tar.gz
+</code></pre><p>9.安装CM和jdk以及mysql驱动</p>
+<p>将下载好的安装包分发到各个节点上，并解压缩。</p>
+<p>1.将和cloudera-manager-daemons-5.15.0-1.cm5150.p0.62.el7.x86_64.rpm以及cloudera-manager-server-5.15.0-1.cm5150.p0.62.el7.x86_64.rpm三个安装包传入管理节点（master节点）/tmp 目录下，当然其他目录也可以。但是tmp目录可以使得解压后的rpm包重启后删除不占内存。</p>
+<p>2.将cloudera-manager-agent-5.15.0-1.cm5150.p0.62.el7.x86_64.rpm和cloudera-manager-daemons-5.15.0-1.cm5150.p0.62.el7.x86_64.rpm两个安装包传入所有从节点上（slave1和slave2节点）的/tmp目录下</p>
+<p>3.将jdk-8u172-linux-x64.rpm安装包传入所有节点上/tmp目录,复制语句类似下面：</p>
+<p>scp cloudera-manager-agent-5.15.0-1.cm5150.p0.62.el7.x86_64.rpm root@master:/tmp<br>4.然后解压所有对应的安装包（所有节点）</p>
+<p>yum localinstall *.rpm<br>5.配置JAVA_HOME变量（所有节点）</p>
+<p>echo “JAVA_HOME=/usr/java/latest/“ &gt;&gt; /etc/environment<br>6.安装mysql驱动程序</p>
+<p>将mysql-connector-java-5.1.46.tar.gz解压mysql-connector-java-5.1.46后将解压后包中的mysql-connector-java-5.1.46-bin.jar重命名为mysql-connector-java.jar传入 /usr/share/java目录里面。</p>
+<p>tar mysql-connector-java-5.1.46.tar.gz<br>sudo mkdir -p /usr/share/java<br>cd mysql-connector-java-5.1.46<br>sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar</p>
+<p>10.数据库安装</p>
+<p>1.在master节点安装MariaDB(Mysql)这里安装MariDB,若要安装mysql，可参考<a href="https://blog.csdn.net/johnzhc/article/details/81119030。" target="_blank" rel="noopener">https://blog.csdn.net/johnzhc/article/details/81119030。</a></p>
+<p>sudo yum install mariadb-server  #安装maridb<br>sudo systemctl enable mariadb    #设置开机启动<br>sudo systemctl start mariadb     #启动mariadb<br>sudo /usr/bin/mysql_secure_installation  #配置mariadb<br> 可参考文档<a href="https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/CDH5-Installation-Guide.html" target="_blank" rel="noopener">https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/CDH5-Installation-Guide.html</a></p>
+<p>2.为CDH创建数据库和用户</p>
+<p>mysql -u root -p<br>输入密码登陆mysql ，然后创建多个数据库，并完成授权。</p>
+<p>CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON scm.* TO ‘scm‘@’%’ IDENTIFIED BY ‘scm’;</p>
+<p>CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON amon.* TO ‘amon‘@’%’ IDENTIFIED BY ‘amon’;</p>
+<p>CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON rman.* TO ‘rman‘@’%’ IDENTIFIED BY ‘rman’;</p>
+<p>CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON hue.* TO ‘hue‘@’%’ IDENTIFIED BY ‘hue’;</p>
+<p>CREATE DATABASE hive DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON hive.* TO ‘hive‘@’%’ IDENTIFIED BY ‘hive’;</p>
+<p>CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON sentry.* TO ‘sentry‘@’%’ IDENTIFIED BY ‘sentry’;</p>
+<p>CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>GRANT ALL ON oozie.* TO ‘oozie‘@’%’ IDENTIFIED BY ‘oozie’;<br>最后，退出数据库进行数据库的初始化，执行语句类似下面。</p>
+<p>exit #退出数据库<br>/user/share/cmf/schema/scm_prepare_database.sh (databaseType) (databaseName) (databaseuser) (databasepassword)<br>例如scm数据库： /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm scm</p>
+<p>11.安装CDH</p>
+<p>1.在master节点创建parcel-repo仓库</p>
+<p>mkdir -p /opt/cloudera/parcel-repo<br>chown cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo<br>2.将CDH安装包复制到/opt/cloudera/parcel-repo 目录下。</p>
+<p>CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel</p>
+<p>CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel.sha1</p>
+<p>manifest.json</p>
+<p>然后将CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel.sha1 重命名CDH-5.15.0-1.cdh5.15.0.p0.21-el7.parcel.sha</p>
+<p>3.修改slave1和slave2的/etc/cloudera-scm-agent/config.ini</p>
+<p>将server_host改为管理节点的网络名本例为master</p>
+<p>4.分别启动cloudera-scm-server和cloudera-scm-agent</p>
+<p>在主节点启动agent和server执行以下命令</p>
+<p>systemctl start cloudera-scm-agent</p>
+<p>systemctl start cloudera-scm-server<br>在slave1和slave2执行以下代码</p>
+<p>systemctl start cloudera-scm-agent<br>5.进入<a href="http://master:7180,默认的用户名和密码均为admin开始添加集群，下面是一种添加服务的顺序。" target="_blank" rel="noopener">http://master:7180,默认的用户名和密码均为admin开始添加集群，下面是一种添加服务的顺序。</a></p>
+<p>hdfs-&gt; yarn-&gt; hive-&gt; impala-&gt; zookeeper-&gt; hbase-&gt; oozie-&gt; hue-&gt;sqoop-&gt;kafka-&gt;spark</p>
+<p> 12.总结</p>
+<p>安装过程主要遇到的坑：</p>
+<p>1.静态IP的配置</p>
+<p>2.时间同步ntp服务</p>
+<p>3.安装服务的对应文件夹的权限问题。主要就是查看日志更改对应文件的权限：</p>
+<p>chmod 777 xxx<br>chown root XXX<br>4.kafka安装</p>
+<p>在安装界面点击主机</p>
+<p>点击parcel</p>
+<p>点击KAFKA分配，并激活</p>
+<p>然后添加kafka服务，并再配置的设置如下的参数：</p>
+<p> kafak mirrormaker：</p>
+<p>Destination Broker list slave1:9092</p>
+<p>source list slave1:9092</p>
+<p>topical whitelist slave1:9092</p>
+<p>kafak Broker</p>
+<p>Advertiesd Host   slave1</p>
+<p>java heap size of broker 256</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-15T06:15:14.000Z">2018-08-15</time>
                 
                 <div class="level-item">
@@ -258,7 +431,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            80
+                            81
                         </p>
                     </a>
                 </div>
@@ -406,7 +579,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">41</span>
+                <span class="level-item tag">42</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -459,7 +632,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 18.33px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 16.67px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 16px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 14px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 12px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 14px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 14px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/决策树/" style="font-size: 12px;">决策树</a> <a href="/tags/学习/" style="font-size: 12px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 18px;">数据分析</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 12px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -468,6 +641,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/27/flink-常见问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 常见问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T08:15:57.000Z">2020-05-27</time></div>
+                    <a href="/2020/05/27/flink-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 常见问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -545,25 +737,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/04/09/flink数据处理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink数据处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T01:54:23.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/flink数据处理/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink数据处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -581,7 +754,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -834,7 +1007,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
