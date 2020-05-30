@@ -194,7 +194,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 50 个字)
+                    几秒 读完 (大约 96 个字)
                 </span>
                 
                 
@@ -209,6 +209,8 @@
         <div class="content">
             <p>1.druidpool连接池空指针异常<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn;</span><br><span class="line">       Statement statement;</span><br><span class="line">       conn = DruidPoolUtils.getConnection();</span><br><span class="line">       statement = conn.createStatement();</span><br></pre></td></tr></table></figure></p>
 <p>2.Exception in thread “main” java.sql.SQLException: Can not call getNString() when field’s charset isn’t UTF-8<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wayBill.setWayBill(resultSet.getNString(&quot;waybill_no&quot;));</span><br><span class="line">          System.out.println(resultSet.getString(&quot;waybill_no&quot;));</span><br></pre></td></tr></table></figure></p>
+<p>3.当数据为null时，插入数据库是，程序异常</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">statement.setInt( 1,  wayBillInfo.getBindStatus() );</span><br><span class="line">     statement.setTimestamp( 2, wayBillInfo.getLeaveTime());</span><br><span class="line">     statement.setDouble( 3, wayBillInfo.getDistanceDeparture());</span><br><span class="line">     statement.setLong( 4, wayBillInfo.getTimeDeparture());</span><br><span class="line">     statement.setInt( 5, wayBillInfo.getWayBillStatus());</span><br><span class="line">     statement.setTimestamp( 6,  wayBillInfo.getFinishTime() );</span><br><span class="line">     statement.setString( 7, wayBillInfo.getWayBillNo() );</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -241,7 +243,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 156 个字)
+                    1 分钟 读完 (大约 189 个字)
                 </span>
                 
                 
@@ -260,6 +262,7 @@
 <p>2.flink 一直重复计算第一条数据<br><img src="/images/2020/05/29/c3e8f080-a19a-11ea-ba39-730617437852.png" alt="image.png"></p>
 <p>原因：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">与flink的状态值有关</span><br></pre></td></tr></table></figure></p>
 <p>解决办法<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每次用到value是都调用 .value方法,如：</span><br><span class="line"></span><br><span class="line"> wayBillState.value().equals(0)</span><br></pre></td></tr></table></figure></p>
+<p>可能原因2：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">该算子自身报错，flinkcheckpoint 后重新计算导致程序一直在处理第一条数据</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
