@@ -194,7 +194,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 143 个字)
+                    1 分钟 读完 (大约 194 个字)
                 </span>
                 
                 
@@ -212,6 +212,7 @@
 <p>3.当数据为null时，插入数据库是，程序异常</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   statement.setInt( 1,  wayBillInfo.getBindStatus() );</span><br><span class="line">        statement.setTimestamp( 2, wayBillInfo.getLeaveTime());</span><br><span class="line">        statement.setDouble( 3, wayBillInfo.getDistanceDeparture());</span><br><span class="line">        statement.setLong( 4, wayBillInfo.getTimeDeparture());</span><br><span class="line">        statement.setInt( 5, wayBillInfo.getWayBillStatus());</span><br><span class="line">        statement.setTimestamp( 6,  wayBillInfo.getFinishTime() );</span><br><span class="line">        statement.setString( 7, wayBillInfo.getWayBillNo() );</span><br><span class="line"></span><br><span class="line">解决办法：setObject()</span><br></pre></td></tr></table></figure>
 <p>4.sql防注入以及参数传递<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = DruidPoolUtils.getConnection();</span><br><span class="line">        PreparedStatement statement = conn.prepareStatement(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(&quot;SELECT order_no,purpose_latitude,purpose_longitude ,finish_time FROM t_gps_order_list WHERE waybill_no = &apos;&quot; +wayBill.getWayBillNo() +&quot;&apos;&quot; );</span><br></pre></td></tr></table></figure></p>
+<p>5.mysql差集<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.oname, a.odesc </span><br><span class="line">FROM</span><br><span class="line">  object_a a </span><br><span class="line">  LEFT JOIN object_b b </span><br><span class="line">    ON a.oname = b.oname </span><br><span class="line">    AND a.odesc = b.odesc </span><br><span class="line">WHERE b.id IS NULL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SELECT a.oname, a.odesc FROM object_a a </span><br><span class="line">MINUS </span><br><span class="line">SELECT b.oname, b.odesc FROM object_b b</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
