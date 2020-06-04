@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/05/29/flink-%E7%AE%97%E5%AD%90%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2020-06-04T01:43:57.509Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/05/29/mysql-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2020-06-02T07:55:07.144Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2020/05/27/flink-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2020-06-01T08:14:53.011Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/05/29/flink-%E7%AE%97%E5%AD%90%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2020-05-29T07:21:00.827Z</lastmod>
     
   </url>
   
