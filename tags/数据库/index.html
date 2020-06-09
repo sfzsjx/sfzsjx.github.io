@@ -146,6 +146,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 205 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/06/mysql-mybatis/">mysql mybatis</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.mybatis 动态查询<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;select id=&quot;isExistWarehouse&quot; resultType=&quot;integer&quot; resultMap=&quot;BaseResultMap&quot;&gt;</span><br><span class="line">   select count(*) from t_gps_warehouse</span><br><span class="line">   &lt;where&gt;</span><br><span class="line">     &lt;if test=&quot;warehouseAddress != null &quot;&gt;</span><br><span class="line">       warehouse_address = #&#123;warehouseAddress&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line"></span><br><span class="line">     &lt;if test=&quot;warehouseCode != null &quot;&gt;</span><br><span class="line">       AND warehouse_code = #&#123;warehouseCode&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line">     &lt;if test=&quot;areaCode != null &quot;&gt;</span><br><span class="line">       AND area_code = #&#123;areaCode&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line">   &lt;/where&gt;</span><br><span class="line"> &lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.mybatis插入数据报错<br><img src="/images/2020/06/08/0d2815a0-a975-11ea-9fb5-4b8d3e35b365.png" alt="image.png"></p>
+<p>原因：数据库中表的自增id没有设置成自增模式<br>解决办法：将自增id设置自动增加<br><img src="/images/2020/06/08/61474570-a975-11ea-9fb5-4b8d3e35b365.png" alt="image.png"></p>
+<p>3.mysql重新设置主键生成策略为auto_increment时报错：resulting in duplicate entry ‘1’ for key ‘PRIMARY’</p>
+<blockquote>
+<p>原因：自增字段有值为0或其他小于0值<br>解决方法：改为其他值大于0<br>参考解决方案：<a href="https://blog.csdn.net/huanghanqian/article/details/80866802" target="_blank" rel="noopener">自增id设置出错</a></p>
+</blockquote>
+<p>4.mybatis插入操作<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertWaybillNo&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gree.bdc.entity.TGpsWaybill&quot;&gt;</span><br><span class="line"></span><br><span class="line">   insert into t_gps_waybill (waybill_no,licence_plate, company_name, device_id,imei,</span><br><span class="line">                              leave_warehouse_id,latitude,longitude,geo_hash,factory_time,bind_status)</span><br><span class="line">    values (#&#123;waybillNo&#125;,#&#123;licencePlate&#125;,#&#123;companyName&#125;,#&#123;deviceId&#125;,#&#123;imei&#125;,#&#123;leaveWarehouseId&#125;,</span><br><span class="line">   #&#123;latitude&#125;,#&#123;longitude&#125;,#&#123;geoHash&#125;,#&#123;factoryTime&#125;,#&#123;bindStatus&#125;)</span><br><span class="line"></span><br><span class="line"> &lt;/insert&gt;</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time>
                 
                 <div class="level-item">
@@ -235,7 +288,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            83
+                            84
                         </p>
                     </a>
                 </div>
@@ -399,7 +452,7 @@
                 <span class="level-item">数据库 </span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/程序语言/">
@@ -436,7 +489,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 18.57px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.43px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 18.57px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.43px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -445,6 +498,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/06/06/mysql-mybatis/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql mybatis">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/mysql-mybatis/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql mybatis</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -522,25 +594,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/05/07/大数据处理地理数据/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="大数据处理地理数据">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T11:55:22.000Z">2020-05-07</time></div>
-                    <a href="/2020/05/07/大数据处理地理数据/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大数据处理地理数据</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -551,6 +604,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/05/">
@@ -986,7 +1050,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
