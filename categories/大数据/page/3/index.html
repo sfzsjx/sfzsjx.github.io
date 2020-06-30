@@ -147,6 +147,203 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-26T02:31:37.000Z">2019-08-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 996 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/26/spark-standalone-运行原理/">spark standalone  运行原理</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<blockquote>
+<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint</span><br><span class="line">2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。</span><br><span class="line">3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。</span><br><span class="line">4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。</span><br><span class="line">5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)</span><br><span class="line">6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。</span><br><span class="line">7.应用程序运行完成后，SparkContext会进行资源回收。</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="二、spark-standalone两种提交模式"><a href="#二、spark-standalone两种提交模式" class="headerlink" title="二、spark standalone两种提交模式"></a>二、spark standalone两种提交模式</h3><h4 id="1-standalone-client-任务提交模式"><a href="#1-standalone-client-任务提交模式" class="headerlink" title="1. standalone-client 任务提交模式"></a>1. standalone-client 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in client deploy mode</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
+<p>standalone client 模式任务流程<br><img src="/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<p>执行流程</p>
+<ol>
+<li>client 模式提交任务后，会在客户端启动Driver进程。</li>
+<li>Driver 会向Master申请启动Application启动资源。</li>
+<li>资源申请成功后，Driver端会将task发送到worker端执行。</li>
+<li>worker端执行成功后将执行结果返回给Driver端</li>
+</ol>
+<h4 id="1-standalone-cluster-任务提交模式"><a href="#1-standalone-cluster-任务提交模式" class="headerlink" title="1. standalone-cluster 任务提交模式"></a>1. standalone-cluster 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in cluster deploy mode with supervise</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --deploy-mode cluster \</span><br><span class="line">  --supervise \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
+</blockquote>
+<p>standalone-cluster模式提交任务<br><img src="/images/2019/08/26/b76b5dc0-c7ac-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
+<p>执行流程：</p>
+<ol>
+<li>客户端使用命令spark-submit –deploy-mode cluster 后会启动spark-submit进程</li>
+<li>此进程为Driver向Master 申请资源。</li>
+<li>Master会随机在一台Worker节点来启动Driver进程。</li>
+<li>Driver启动成功后，spark-submit关闭，然后Driver向Master申请资源。</li>
+<li>Master接收到请求后，会在资源充足的Worker节点上启动Executor进程。</li>
+<li>Driver分发Task到Executor中执行。</li>
+</ol>
+<p>建议：<strong>在平时调试时使用client模式，在正式生产环境时建议使用cluster模式</strong></p>
+<p>参考文章：<a href="https://www.cnblogs.com/wangtcc/p/da-huaSpark-5san-tu-xiang-shuSpark-StandaloneClien.html" target="_blank" rel="noopener">1、大话Spark(5)-三图详述Spark Standalone/Client/Cluster运行模式</a><br><a href="https://blog.csdn.net/qq_39131779/article/details/83539608" target="_blank" rel="noopener">2、Spark中Standalone的两种提交模式（Standalone-client模式与Standalone-cluster模式）</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-12T01:18:10.000Z">2019-08-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 571 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/12/Spark-Windows10-安装部署/">Spark Windows10 安装部署</a>
+            
+        </h1>
+        <div class="content">
+            <p>Spark centos 安装部署 </p>
+<h2 id="一、Scala-安装"><a href="#一、Scala-安装" class="headerlink" title="一、Scala 安装"></a>一、Scala 安装</h2><blockquote>
+<p>jdk安装不用多说，一般没什么问题，下载Scala安装包，<a href="https://www.scala-lang.org/download/all.html" target="_blank" rel="noopener">Scala安装包下载链接</a>，选择自己安装的版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir scala</span><br><span class="line">tar -zxvf scala-2.11.8.tgz</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>解压安装后配置环境变量<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line"> export SPARK_HOME=/usr/local/spark/spark-2.4.3-bin-hadoop2.7</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$&#123;SCALA_HOME&#125;/lib:$&#123;SPARK_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH:$&#123;SCALA_HOME&#125;/bin:$PATH:$&#123;SPARK_HOME&#125;/bin</span><br><span class="line"> export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>主要是配置SCALA_HOME参数，然后运行source /etc/profile,并执行scala<br><img src="/images/2019/08/21/5e145a30-c3e5-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
+</blockquote>
+<h2 id="二、Spark安装"><a href="#二、Spark安装" class="headerlink" title="二、Spark安装"></a>二、Spark安装</h2><blockquote>
+<p>Spark安装也没什么技术含量，直接下载spark安装包，<a href="https://archive.apache.org/dist/spark/spark-2.4.3/" target="_blank" rel="noopener">spark下载链接</a>，选择自己安装版本。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">mkdir spark</span><br><span class="line">cd spark</span><br><span class="line">tar -zxvf spark-2.4.3-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>同样解压后配置环境变量，主要是SPARK_HOME配置，再次执行source /etc/profile,并执行spark-shell.<br><img src="/images/2019/08/21/c1fd7b20-c3e6-11e9-b19d-dbb0f4ee7101.png" alt="image.png"></p>
+</blockquote>
+<h2 id="三、spark-standalone模式部署"><a href="#三、spark-standalone模式部署" class="headerlink" title="三、spark standalone模式部署"></a>三、spark standalone模式部署</h2><blockquote>
+<p>进入到配置目录<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/conf</span><br><span class="line">mv slaves.template slaves</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br><span class="line">添加以下配置</span><br><span class="line"># spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/scala/scala-2.11.8</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"># 本地安装绑定</span><br><span class="line">export SPARK_MASTER_IP=127.0.0.1</span><br><span class="line">#export SPARK_LOCAL_IP=127.0.0.1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=8G</span><br><span class="line">export SPARK_EXECUTOR_CORES=4</span><br><span class="line">export SPARK_LOG_DIR=/lvm/data1/spark/log</span><br><span class="line">#export master=spark://10.7.20.191:7077</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>然后进入sbin目录,启动集群<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/spark-2.4.3-bin-hadoop2.7/sbin</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>注意若是服务器之间的免密登录端口不是22端口，则需要在 /etc/profile文件添加配置，改到对应端口<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_SSH_OPTS=&quot;-p 2122&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>至此spark安装完成。</p>
+<h2 id="Spark命令提交程序"><a href="#Spark命令提交程序" class="headerlink" title="Spark命令提交程序"></a>Spark命令提交程序</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location.log &amp;</span><br></pre></td></tr></table></figure>
+<p>执行脚本<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
+<p>spark slave 启动</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start-slave.sh spark://masterip:7077</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-09T08:50:32.000Z">2019-08-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 79 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/09/spark-常用参数设置/">spark 常用参数设置</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// task数量设置</span><br><span class="line">spark.sql.shuffle.partitions 50</span><br><span class="line">//并行度设置</span><br><span class="line">spark.default.parallelism 10</span><br></pre></td></tr></table></figure>
+<h4 id="spark提交部署程序脚本"><a href="#spark提交部署程序脚本" class="headerlink" title="spark提交部署程序脚本"></a>spark提交部署程序脚本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-18T08:22:27.000Z">2019-07-18</time>
                 
                 <div class="level-item">
@@ -573,178 +770,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-30T03:45:07.000Z">2019-04-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 413 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/30/kafka-集群安装-部署/">kafka 集群安装 部署</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="kafka-集群安装部署"><a href="#kafka-集群安装部署" class="headerlink" title="kafka 集群安装部署"></a>kafka 集群安装部署</h1><p>  安装kafka首先需要安装zookeeper集群，这里使用的是kafka自带的zookeeper,不推荐使用（我也不知道为啥，别人都这么说）。</p>
-<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2><p>jdk 自己下载吧，后解压<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/java</span><br><span class="line">tar -zxvf jdk-8u11-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>配置环境变量<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">#jdk环境变量配置</span><br><span class="line"> export JAVA_HOME=/usr/local/java/jdk1.8.0_11</span><br><span class="line"> export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line"> export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line"> export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>echo “JAVA_HOME=/usr/local/java/jdk1.8.0_11/“ &gt;&gt; /etc/environment</p>
-<p>然后配置其他机器<br>scp -r -P 2122  root@lyxbdw-02:/usr/local/java /usr/local</p>
-<h2 id="zookeepeer集群安装"><a href="#zookeepeer集群安装" class="headerlink" title="zookeepeer集群安装"></a>zookeepeer集群安装</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/kafka</span><br><span class="line">tar -xzf kafka_2.12-2.2.0.tgz</span><br><span class="line">cd kafka_2.12-2.2.0</span><br></pre></td></tr></table></figure>
-<p>配置zookeeper配置文件 zookeeper.properties<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim config/zookeeper.properties</span><br><span class="line">====================================================</span><br><span class="line">dataDir=/usr/local/kafka/kafka_2.11-2.2.0/zookeeper</span><br><span class="line">Time=2000  </span><br><span class="line">initLimit=10  </span><br><span class="line">syncLimit=5</span><br><span class="line"></span><br><span class="line">server.1=lyxbdw-01:2888:3888  </span><br><span class="line">server.2=lyxbdw-02:2888:3888  </span><br><span class="line">server.3=lyxbdw-03:2888:3888</span><br></pre></td></tr></table></figure></p>
-<p>然后在/usr/local/kafka/kafka_2.11-2.2.0/zookeeper 创建myid文件编辑<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi myid</span><br><span class="line">==================</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器复制 zookeeper.properties到相应的目录，并设置不同的myid值<br>每台机器都启动<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
-<h2 id="kafka集群安装"><a href="#kafka集群安装" class="headerlink" title="kafka集群安装"></a>kafka集群安装</h2><p>这里主要就是配置相关的配置信息，server.properties<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim config/server.properties</span><br><span class="line">=====================================</span><br><span class="line">broker.id=1</span><br><span class="line">host.name=lyxbdw-02</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">zookeeper.connect=lyxbdw-01:2181,lyxbdw-02:2181,lyxbdw-03:2181</span><br></pre></td></tr></table></figure></p>
-<p>然后进入到log日志目录下，修改meta.properties文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/kafka-logs/meta.properties</span><br><span class="line">======================================</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
-<p>其他机器类似，最后启动kafak 服务<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh  -daemon config/server.properties</span><br></pre></td></tr></table></figure></p>
-<p>到此，使用kafka自带的zookeeper安装就完成了。</p>
-<blockquote>
-<p>当然，在实际的生成应用中，需要注意以下事项：<br>1、数据目录需要放在磁盘的目录下<br>2、进程启动最好是在后台启动 -daemon 命令可以实现。</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-04T01:47:50.000Z">2019-04-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 26 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/04/hive-笔记/">hive 笔记</a>
-            
-        </h1>
-        <div class="content">
-            <p>hive设置队列三种方式：</p>
-<blockquote>
-<p>set mapred.job.queue.name=queue3;<br>SET mapreduce.job.queuename=queue3;<br>set mapred.queue.names=queue3;</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-18T07:11:45.000Z">2019-03-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1352 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/18/数据挖掘实战（3）-：-如何对比特币走势进行预测/">数据挖掘实战（3） ： 如何对比特币走势进行预测</a>
-            
-        </h1>
-        <div class="content">
-            <p>时间序列分析：<br>   时间序列分析模型建立了观察结果与时间变化的关系，能够帮助我们预测未来一段时间内的结果变化情况。</p>
-<p>需要掌握的目标：</p>
-<ol>
-<li>了解时间序列预测的概念，以及常用的算法，包括AR、MA、ARMA、ARIMA模型等；</li>
-<li>掌握并使用ARMA模型工具，对一个时间序列数据进行建模和预测；</li>
-<li>对比特币的历史数据进行时间序列建模，并预测未来6个月的走势。</li>
-</ol>
-<p><strong>时间序列预测</strong><br>   关于时间序列，可以简单理解为按照时间组成的数字序列。在时间序列预测模型中，经典模型有：<br>AR、MA、ARIMA、ARMA。<br>   AR(Auto Regressive) 又叫自回归模型。它认为过去若干个时刻的点通过线性组合，再加上白噪声就可以预测未来某个时刻的点。白噪声可以理解成一个期望为0，方差为常数的纯随机过程。AR模型还存在一个阶数，称为 AR（p）模型，也叫做 p 阶自回归模型。他指的是通过这个时刻的前p个点，通过线性组合再加上白噪声来预测当前时刻点的值。</p>
-<p>   MA（Moving Average）,又叫滑动平均模型。它与 AR模型大同小异，AR模型是历史时序值的线性组合，MA是通过历史白噪声点进行线性组合来 影响当前时刻点。同样MA模型也存在一个阶数，称为MA(q)阶模型，也叫做q阶移动平均模型。</p>
-<p>   ARMA（Auto Regressive Moving Average）,又叫自回归滑动平均模型，也是AR和MA两者的混合。相较于ARMA,ARIMA多了个差分的过程，作用是对不平稳数据进行差分平稳，在差分平稳后再进行建模。ARMA(p,q) 两个阶数，ARIMA（p,d,q）三个阶数，其中d 表示差分阶数。</p>
-<p><strong>  ARMA 模型工具</strong><br>  引入相关工具包<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br></pre></td></tr></table></figure></p>
-<p>然后通过ARMA(endog,order,exog=None)创建ARMA类，参数说明：<br>  endog: endogenous variable,代表内生变量，又叫非政策性变量，它由模型决定，不被政策左右，可以说是我们想要分析的变量，或者说是我们这次项目需要用到的变量。</p>
-<p>  order ：代表是p和q的值，也就是ARMA中的阶数。</p>
-<p>  exog: exogenous variables,代表外生变量。外生变量和内生变量一样是经济模型中重要变量。相较于内生变量而言，外生变量有称为政策性变量，在经济机制内受外部的影响，不是我们模型要研究的变量。</p>
-<p>代码例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import statsmodels.api as sm</span><br><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br><span class="line">from statsmodels.graphics.api import qqplot</span><br><span class="line"></span><br><span class="line"># 创建数据</span><br><span class="line">data = [5922, 5308, 5546, 5975, 2704, 1767, 4111, 5542, 4726, 5866, 6183, 3199, 1471, 1325, 6618, 6644, 5337, 7064, 2912, 1456, 4705, 4579, 4990, 4331, 4481, 1813, 1258, 4383, 5451, 5169, 5362, 6259, 3743, 2268, 5397, 5821, 6115, 6631, 6474, 4134, 2728, 5753, 7130, 7860, 6991, 7499, 5301, 2808, 6755, 6658, 7644, 6472, 8680, 6366, 5252, 8223, 8181, 10548, 11823, 14640, 9873, 6613, 14415, 13204, 14982, 9690, 10693, 8276, 4519, 7865, 8137, 10022, 7646, 8749, 5246, 4736, 9705, 7501, 9587, 10078, 9732, 6986, 4385, 8451, 9815, 10894, 10287, 9666, 6072, 5418]</span><br><span class="line">data = pd.Series(data)</span><br><span class="line">data_index = sm.tsa.datetools.dates_from_range(&apos;1901&apos;,&apos;1990&apos;)</span><br><span class="line"></span><br><span class="line"># 绘制数据图</span><br><span class="line">data.index = pd.Index(data_index)</span><br><span class="line">data.plot(figsize=(12,8))</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"># 创建 ARMA 模型</span><br><span class="line">arma = ARMA(data,(7,0)).fit()</span><br><span class="line">print(&apos;AIC: %0.4lf&apos;  %arma.aic)</span><br><span class="line"></span><br><span class="line"># 模型预测</span><br><span class="line">predict_y = arma.predict(&apos;1990&apos;,&apos;2000&apos;)</span><br><span class="line"></span><br><span class="line"># 预测结果绘制</span><br><span class="line">fig,ax = plt.subplots(figsize=(12,8))</span><br><span class="line">ax = data.ix[&apos;1901&apos;:].plot(ax=ax)</span><br><span class="line">predict_y.plot(ax= ax)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
-<p>如何判断一个模型是否合适？<br> 需要引入AIC准则，也叫赤池准则，数值越小代表模型拟合的越好。</p>
-<p><strong>比特币预测</strong><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># 比特币走势预测，使用时间序列 ARMA</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from statsmodels.tsa.arima_model import ARMA</span><br><span class="line">import warnings</span><br><span class="line">from itertools import product</span><br><span class="line">from datetime import datetime</span><br><span class="line">warnings.filterwarnings(&apos;ignore&apos;)</span><br><span class="line"># 数据加载</span><br><span class="line">df = pd.read_csv(&apos;./bitcoin_2012-01-01_to_2018-10-31.csv&apos;)</span><br><span class="line"># 将时间作为 df 的索引</span><br><span class="line">df.Timestamp = pd.to_datetime(df.Timestamp)</span><br><span class="line">df.index = df.Timestamp</span><br><span class="line"># 数据探索</span><br><span class="line">print(df.head())</span><br><span class="line"># 按照月，季度，年来统计</span><br><span class="line">df_month = df.resample(&apos;M&apos;).mean()</span><br><span class="line">df_Q = df.resample(&apos;Q-DEC&apos;).mean()</span><br><span class="line">df_year = df.resample(&apos;A-DEC&apos;).mean()</span><br><span class="line"># 按照天，月，季度，年来显示比特币的走势</span><br><span class="line">fig = plt.figure(figsize=[15, 7])</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] # 用来正常显示中文标签</span><br><span class="line">plt.suptitle(&apos;比特币金额（美金）&apos;, fontsize=20)</span><br><span class="line">plt.subplot(221)</span><br><span class="line">plt.plot(df.Weighted_Price, &apos;-&apos;, label=&apos;按天&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(222)</span><br><span class="line">plt.plot(df_month.Weighted_Price, &apos;-&apos;, label=&apos;按月&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(223)</span><br><span class="line">plt.plot(df_Q.Weighted_Price, &apos;-&apos;, label=&apos;按季度&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.subplot(224)</span><br><span class="line">plt.plot(df_year.Weighted_Price, &apos;-&apos;, label=&apos;按年&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"># 设置参数范围</span><br><span class="line">ps = range(0, 3)</span><br><span class="line">qs = range(0, 3)</span><br><span class="line">parameters = product(ps, qs)</span><br><span class="line">parameters_list = list(parameters)</span><br><span class="line"># 寻找最优 ARMA 模型参数，即 best_aic 最小</span><br><span class="line">results = []</span><br><span class="line">best_aic = float(&quot;inf&quot;) # 正无穷</span><br><span class="line">for param in parameters_list:</span><br><span class="line">    try:</span><br><span class="line">        model = ARMA(df_month.Weighted_Price,order=(param[0], param[1])).fit()</span><br><span class="line">    except ValueError:</span><br><span class="line">        print(&apos;参数错误:&apos;, param)</span><br><span class="line">        continue</span><br><span class="line">    aic = model.aic</span><br><span class="line">    if aic &lt; best_aic:</span><br><span class="line">        best_model = model</span><br><span class="line">        best_aic = aic</span><br><span class="line">        best_param = param</span><br><span class="line">    results.append([param, model.aic])</span><br><span class="line"># 输出最优模型</span><br><span class="line">result_table = pd.DataFrame(results)</span><br><span class="line">result_table.columns = [&apos;parameters&apos;, &apos;aic&apos;]</span><br><span class="line">print(&apos;最优模型: &apos;, best_model.summary())</span><br><span class="line"># 比特币预测</span><br><span class="line">df_month2 = df_month[[&apos;Weighted_Price&apos;]]</span><br><span class="line">date_list = [datetime(2018, 11, 30), datetime(2018, 12, 31), datetime(2019, 1, 31), datetime(2019, 2, 28), datetime(2019, 3, 31), </span><br><span class="line">             datetime(2019, 4, 30), datetime(2019, 5, 31), datetime(2019, 6, 30)]</span><br><span class="line">future = pd.DataFrame(index=date_list, columns= df_month.columns)</span><br><span class="line">df_month2 = pd.concat([df_month2, future])</span><br><span class="line">df_month2[&apos;forecast&apos;] = best_model.predict(start=0, end=91)</span><br><span class="line"># 比特币预测结果显示</span><br><span class="line">plt.figure(figsize=(20,7))</span><br><span class="line">df_month2.Weighted_Price.plot(label=&apos;实际金额&apos;)</span><br><span class="line">df_month2.forecast.plot(color=&apos;r&apos;, ls=&apos;--&apos;, label=&apos;预测金额&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(&apos;比特币金额（月）&apos;)</span><br><span class="line">plt.xlabel(&apos;时间&apos;)</span><br><span class="line">plt.ylabel(&apos;美金&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -815,7 +840,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            84
+                            93
                         </p>
                     </a>
                 </div>
@@ -839,7 +864,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            41
                         </p>
                     </a>
                 </div>
@@ -947,7 +972,7 @@
                 <span class="level-item">IDEA</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/后台/">
@@ -955,7 +980,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -963,7 +988,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">43</span>
+                <span class="level-item tag">46</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -971,7 +996,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1016,7 +1041,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 18.57px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.43px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1028,35 +1053,16 @@
         
         <article class="media">
             
-            <a href="/2020/06/06/mysql-mybatis/" class="media-left">
+            <a href="/2020/06/30/flink-提交命令/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql mybatis">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交命令">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time></div>
-                    <a href="/2020/06/06/mysql-mybatis/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql mybatis</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/flink-算子记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 算子记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/flink-算子记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 算子记录</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time></div>
+                    <a href="/2020/06/30/flink-提交命令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交命令</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -1066,35 +1072,16 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/mysql-常见问题/" class="media-left">
+            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql 常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql 常见问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/27/flink-常见问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 常见问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T08:15:57.000Z">2020-05-27</time></div>
-                    <a href="/2020/05/27/flink-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 常见问题</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
+                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -1104,18 +1091,56 @@
         
         <article class="media">
             
-            <a href="/2020/05/11/常用工具类/" class="media-left">
+            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
-                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
+                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
+                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
+                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
                     </p>
                 </div>
             </div>
@@ -1138,7 +1163,7 @@
                     <span class="level-item">六月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1402,7 +1427,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1514,7 +1539,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1535,7 +1560,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/springboot/">
                         <span class="tag">springboot</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1554,6 +1579,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1563,6 +1595,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/总结/">
                         <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/插件/">
+                        <span class="tag">插件</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

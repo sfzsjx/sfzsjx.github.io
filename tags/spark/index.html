@@ -146,6 +146,99 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 82 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/26/spark-集群常见错误/">spark 集群常见错误</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.本地依赖jar与集群jar包冲突<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.oozie.action.ActionExecutorException: JA009: cache file (mapreduce.job.cache.files) scheme: &quot;hdfs&quot; host: &quot;nameservice1&quot; port: -1 file: &quot;/user/hue/oozie/workspaces/hue-oozie-1585558811.97/lib/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar&quot; conflicts with cache file (mapreduce.job.cache.files) hdfs://nameservice1/user/oozie/share/lib/lib_20190819164924/spark/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar</span><br><span class="line"></span><br><span class="line">解决办法：在本地工作区内去除所依赖的jar</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 220 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/13/spark-读取外部配置文件/">spark 读取外部配置文件</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.spark如何读取外部配置文件，能够更好的动态迁移程序以及当数据库等迁移是，只需要重新修改配置文件即可，而不需要指定重新编译程序，提交配置。<br>以下方法本人亲测有效<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package load;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkFiles;</span><br><span class="line">import org.apache.spark.sql.SparkSession;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">public class ReadConfig &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        SparkSession spark = SparkSession.builder()</span><br><span class="line">                .appName(&quot;test&quot;)</span><br><span class="line">                .config(&quot;spark.debug.maxToStringFields&quot;,&quot;100&quot;)</span><br><span class="line">                .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;50&quot;)</span><br><span class="line">                .config(&quot;spark.default.parallelism&quot;, &quot;12&quot;)</span><br><span class="line">                .getOrCreate();</span><br><span class="line"></span><br><span class="line">        String s = SparkFiles.get(&quot;property.yml&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Properties props = new Properties();</span><br><span class="line">            props.load(new FileInputStream(s));</span><br><span class="line">            String nodes = props.getProperty(&quot;es.nodes&quot;);</span><br><span class="line">            String port = props.getProperty(&quot;es.port&quot;);</span><br><span class="line">            System.out.println(nodes);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        spark.stop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/2020/06/13/80058250-ad13-11ea-9fb5-4b8d3e35b365.png" alt="image.png"><br>参考地址：<a href="https://blog.csdn.net/high2011/article/details/96288072?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase" target="_blank" rel="noopener">spark读取配置文件</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-08T01:46:21.000Z">2020-04-08</time>
                 
                 <div class="level-item">
@@ -605,56 +698,25 @@
 
 
 
+
     
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-15T06:15:14.000Z">2018-08-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 187 个字)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/tags/spark/page/0/">上一页</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/15/RDD常用算子/">RDD常用算子</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>1.mapPartitionsWithIndex:独立运行在每个分片上，并带有分区的编号。</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val rdd1 = sc.parallelize(List(1,2,3,4,5,6,7,8,9),2)</span><br><span class="line"> rdd1.saveAsTextFile(&quot;hdfs://master:8020/sfz&quot;) def func1(index:</span><br><span class="line">Int,iter: Iterator[(Int)]) : Iterator[String] = &#123;iter.toList.map(x =&gt;</span><br><span class="line"> &quot;[partID:&quot; + index + &quot;,val: &quot; + x +&quot;]&quot;).iterator&#125;</span><br><span class="line"> rdd1.mapPartitionsWithIndex(func1).collect</span><br></pre></td></tr></table></figure>
-<p><strong><em>2.aggregate:先局部操作，再整体操作。</em></strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">val rdd2 = sc.parallelize(List(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;),2)</span><br><span class="line">def func2(index: Int,iter: Iterator[(String)]) : Iterator[String] = &#123;iter.toList.map(x =&gt; &quot;[partID:&quot; + index + &quot;,val: &quot; + x +&quot;]&quot;).iterator&#125;</span><br><span class="line">rdd2.mapPartitionsWithIndex(func2).collect</span><br><span class="line">rdd2.aggregate(&quot;&quot;)(_+_,_+_)</span><br><span class="line"></span><br><span class="line">val rdd3 = sc.parallelize(List(&quot;12&quot;,&quot;23&quot;,&quot;345&quot;,&quot;4567&quot;),2)</span><br><span class="line">rdd3.aggregate(&quot;&quot;)((x,y) =&gt; math.max(x.length,y.length).toString,(x,y) =&gt; x+y)</span><br><span class="line"></span><br><span class="line">val rdd5 = sc.parallelize(List(&quot;12&quot;,&quot;23&quot;,&quot;&quot;,&quot;345&quot;),2)</span><br><span class="line">rdd5.aggregate(&quot;&quot;)((x,y) =&gt; math.min(x.length,y.length).toString,(x,y) =&gt; x+y)</span><br></pre></td></tr></table></figure>
-<p><strong><em>3.aggregateByKey：将key值相同的，先局部操作，再整体操作。和reduceByKey内部实现差不多</em></strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">val pairRDD = sc.parallelize(List( (&quot;cat&quot;,2), (&quot;cat&quot;, 5), (&quot;mouse&quot;,    4),(&quot;cat&quot;, 12), (&quot;dog&quot;, 12), (&quot;mouse&quot;, 2)), 2)    pairRDD.aggregateByKey(0)(math.max(_, _), _ + _).collect</span><br></pre></td></tr></table></figure>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/tags/spark/page/2/">下一页</a>
         </div>
-        
-        
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link is-current" href="/tags/spark/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/tags/spark/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -700,7 +762,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            84
+                            93
                         </p>
                     </a>
                 </div>
@@ -724,7 +786,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            41
                         </p>
                     </a>
                 </div>
@@ -832,7 +894,7 @@
                 <span class="level-item">IDEA</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/后台/">
@@ -840,7 +902,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -848,7 +910,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">43</span>
+                <span class="level-item tag">46</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -856,7 +918,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -901,7 +963,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 18.57px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.43px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -913,35 +975,16 @@
         
         <article class="media">
             
-            <a href="/2020/06/06/mysql-mybatis/" class="media-left">
+            <a href="/2020/06/30/flink-提交命令/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql mybatis">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交命令">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time></div>
-                    <a href="/2020/06/06/mysql-mybatis/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql mybatis</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/flink-算子记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 算子记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/flink-算子记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 算子记录</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time></div>
+                    <a href="/2020/06/30/flink-提交命令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交命令</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -951,35 +994,16 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/mysql-常见问题/" class="media-left">
+            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql 常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql 常见问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/27/flink-常见问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 常见问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T08:15:57.000Z">2020-05-27</time></div>
-                    <a href="/2020/05/27/flink-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 常见问题</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
+                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -989,18 +1013,56 @@
         
         <article class="media">
             
-            <a href="/2020/05/11/常用工具类/" class="media-left">
+            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
-                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
+                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
+                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
+                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
                     </p>
                 </div>
             </div>
@@ -1023,7 +1085,7 @@
                     <span class="level-item">六月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1287,7 +1349,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1399,7 +1461,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1420,7 +1482,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/springboot/">
                         <span class="tag">springboot</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1439,6 +1501,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1448,6 +1517,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/总结/">
                         <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/插件/">
+                        <span class="tag">插件</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

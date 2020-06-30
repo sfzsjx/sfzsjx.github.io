@@ -147,6 +147,146 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 154 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/30/flink-提交命令/">flink 提交命令</a>
+            
+        </h1>
+        <div class="content">
+            <p>一、flink 提交运行程序一般有两种方式<br>1.通过flink监控界面来提交flink程序<br>2.通过命令行的方式提交命令</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">nohup flink run -p 1 -c com.gree.bdc.track.DeviceTrackInfo /home/bdcopt/spark/logistics/test/car-track-show-test.jar --paramProperties /home/bdcopt/spark/logistics/test/druid-test.properties  &gt; /home/bdcopt/spark/logistics/test/car-track-show-test.log 2&gt;&amp;1  &amp;</span><br><span class="line"></span><br><span class="line">解释 ：flink run 运行</span><br><span class="line"></span><br><span class="line">-p 配置job的并行度</span><br><span class="line">-c 指定主类</span><br><span class="line">/home/bdcopt/spark/logistics/test/car-track-show-test.jar 可运行jar</span><br><span class="line"></span><br><span class="line">--paramProperties 自定义指定额外配置文件</span><br><span class="line">如：</span><br><span class="line"> try &#123;</span><br><span class="line">            ParameterTool parameterTool = ParameterTool.fromArgs(args);</span><br><span class="line">            String druidProperties = parameterTool.get(&quot;paramProperties&quot;);</span><br><span class="line">            ///加载类路径</span><br><span class="line">            properties.load(new FileInputStream(druidProperties));</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 82 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/26/spark-集群常见错误/">spark 集群常见错误</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.本地依赖jar与集群jar包冲突<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.oozie.action.ActionExecutorException: JA009: cache file (mapreduce.job.cache.files) scheme: &quot;hdfs&quot; host: &quot;nameservice1&quot; port: -1 file: &quot;/user/hue/oozie/workspaces/hue-oozie-1585558811.97/lib/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar&quot; conflicts with cache file (mapreduce.job.cache.files) hdfs://nameservice1/user/oozie/share/lib/lib_20190819164924/spark/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar</span><br><span class="line"></span><br><span class="line">解决办法：在本地工作区内去除所依赖的jar</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 220 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/13/spark-读取外部配置文件/">spark 读取外部配置文件</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.spark如何读取外部配置文件，能够更好的动态迁移程序以及当数据库等迁移是，只需要重新修改配置文件即可，而不需要指定重新编译程序，提交配置。<br>以下方法本人亲测有效<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package load;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkFiles;</span><br><span class="line">import org.apache.spark.sql.SparkSession;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">public class ReadConfig &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        SparkSession spark = SparkSession.builder()</span><br><span class="line">                .appName(&quot;test&quot;)</span><br><span class="line">                .config(&quot;spark.debug.maxToStringFields&quot;,&quot;100&quot;)</span><br><span class="line">                .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;50&quot;)</span><br><span class="line">                .config(&quot;spark.default.parallelism&quot;, &quot;12&quot;)</span><br><span class="line">                .getOrCreate();</span><br><span class="line"></span><br><span class="line">        String s = SparkFiles.get(&quot;property.yml&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Properties props = new Properties();</span><br><span class="line">            props.load(new FileInputStream(s));</span><br><span class="line">            String nodes = props.getProperty(&quot;es.nodes&quot;);</span><br><span class="line">            String port = props.getProperty(&quot;es.port&quot;);</span><br><span class="line">            System.out.println(nodes);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        spark.stop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/2020/06/13/80058250-ad13-11ea-9fb5-4b8d3e35b365.png" alt="image.png"><br>参考地址：<a href="https://blog.csdn.net/high2011/article/details/96288072?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase" target="_blank" rel="noopener">spark读取配置文件</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time>
                 
                 <div class="level-item">
@@ -506,185 +646,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-19T01:35:40.000Z">2019-12-19</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 658 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/19/flink-提交任务/">flink 提交任务</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="flink-提交任务"><a href="#flink-提交任务" class="headerlink" title="flink 提交任务"></a>flink 提交任务</h1><h2 id="flink本地提交任务"><a href="#flink本地提交任务" class="headerlink" title="flink本地提交任务"></a>flink本地提交任务</h2><blockquote>
-<p>一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种：<br> 1.通过命令行的方式提交flink任务：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run ./examples/batch/WordCount.jar</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>2.通过网页ip:8081提交任务<br>点击 add new 上传jar包<br><img src="/images/2019/12/19/3d365750-21ff-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
-</blockquote>
-<blockquote>
-<p>选择想要执行的jar包，点击主类，设置并行度，点击submit提交按钮<br><img src="/images/2019/12/19/1476e7b0-2201-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
-</blockquote>
-<h2 id="flink集群提交任务"><a href="#flink集群提交任务" class="headerlink" title="flink集群提交任务"></a>flink集群提交任务</h2><blockquote>
-<p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
-<h2 id="flink-集成-kafka-集群提交任务"><a href="#flink-集成-kafka-集群提交任务" class="headerlink" title="flink 集成 kafka 集群提交任务"></a>flink 集成 kafka 集群提交任务</h2><blockquote>
-<p>由于cdh集群集成了kerberos 以及kafka集群也集成了kerberos 所以需要配置kafkad的jaas.conf文件和krb5文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">KafkaClient &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  doNotPrompt=true</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  renewTicket=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>krb5.conf一般都不需要更改，主要是配置kafka读取到jaas.conf文件，flink的配置则按照flink集群提交的方法完成就可以。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">default = FILE:/lvm/data3/var/log/krb5libs.log</span><br><span class="line">kdc = FILE:/lvm/data3/var/log/krb5kdc.log</span><br><span class="line">admin_server = FILE:/lvm/data3/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">dns_lookup_realm = false</span><br><span class="line">dns_lookup_kdc = false</span><br><span class="line">ticket_lifetime = 24h</span><br><span class="line">renew_lifetime = 7d</span><br><span class="line">forwardable = true</span><br><span class="line">udp_preference_limit = 1</span><br><span class="line">default_realm = GREE.IO</span><br><span class="line">pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">GREE.IO = &#123;</span><br><span class="line"> kdc = cdh-master01</span><br><span class="line"> admin_server = cdh-master01</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line">.cdh-master01 = GREE.IO</span><br><span class="line">cdh-master01 = GREE.IO</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-06T03:26:35.000Z">2019-12-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 444 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/06/flink-基础知识/">flink 基础知识</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、Flink核心概念和基础"><a href="#一、Flink核心概念和基础" class="headerlink" title="一、Flink核心概念和基础"></a>一、Flink核心概念和基础</h2><blockquote>
-<p>Flink 是一个框架和分布式处理引擎。用于对有界和无界数据流进行有状态计算。并且Flink提供了数据分布和<br>容错机制以及资源管理等核心功能。</p>
-</blockquote>
-<p>flink 提供了诸多高抽象层API以便用户进行分布式任务编写：</p>
-<ul>
-<li>DateSet API ,对静态数据进行批处理，将静态数据抽象成分布式的数据集，用户可以方便对分布式数据集进行处理。</li>
-<li>DateStream API ,对数据流进行流处理操作，将流数据抽象成分布式数据流。</li>
-<li>Table API ,对结果化数据进行查询操作，将流式数据抽象成关系表，并通过类SQL的DSL对关系表进行操作</li>
-</ul>
-<p>flink的特性：</p>
-<blockquote>
-<p>支持高吞吐、低延迟、高性能的流处理<br>支持带有事件时间的窗口（Window）操作<br>支持有状态计算的Exactly-once语义<br>支持高度灵活的窗口（Window） 操作<br>支持具有Backpressure功能的持续流模型<br>支持基于轻量级分布式快照实现容错（snapshot）<br>一个运行时同时支持Batch on Streaming处理和Streaming 处理<br>Flink在JVM实现了自己的内存管理<br>支持迭代计算<br>支持程序自动优化：避免特定情况下：Shuffle、排序等昂贵操作，中间结果有必要进行缓存</p>
-</blockquote>
-<h2 id="二、Flink-与-spark-streaming-区别"><a href="#二、Flink-与-spark-streaming-区别" class="headerlink" title="二、Flink 与 spark streaming 区别"></a>二、Flink 与 spark streaming 区别</h2><p><strong>Flink 是标准的实时处理引擎，基于事件驱动，而spark streaming 是微批处理（Micro-Batch）</strong></p>
-<p>参考：<a href="https://mp.weixin.qq.com/s/U6ctAawGl29ULIz7FLsY2A" target="_blank" rel="noopener">Flink面试通关手册</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 717 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/05/flink-sink-mysql-和-hbase/">flink sink mysql 和 hbase</a>
-            
-        </h1>
-        <div class="content">
-            <p>直接上例子，本人亲测有效<br>1.搭建kafka(单机)，hbase（单机）<br>2.引入依赖<br>主要包括 flink-connector-kafka-0.11_2.11、hbase-client、mysql-connector-java、gson<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.gree.bdc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-source&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;flink-source&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Demo project for flink-source&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">        &lt;flink.version&gt;1.8.0&lt;/flink.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- flink 快速开始--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-connector-kafka-0.11_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-streaming-scala_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;flink.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- flink 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- log4j 开始 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7.25&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- log4j 结束--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.47&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hbase-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--插件 --&gt;</span><br><span class="line">        &lt;!--  Gson: Java to Json conversion --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.8.5&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.3.1&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                    &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
-<p>3.项目结构<br><img src="/images/2019/12/05/7b5b2b40-1701-11ea-8aaf-4df9698be8a5.png" alt="image.png"><br>4.创建MysqlSink<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line">import java.sql.&#123;Connection, Driver, DriverManager&#125;</span><br><span class="line"></span><br><span class="line">import com.google.gson.Gson</span><br><span class="line">import com.gree.bdc.KafkaToSinkStreaming.Student</span><br><span class="line">import org.apache.flink.configuration.Configuration</span><br><span class="line">import org.apache.flink.streaming.api.functions.sink.&#123;RichSinkFunction, SinkFunction&#125;</span><br><span class="line"></span><br><span class="line">class MysqlSink (url:String, user:String, pwd:String ) extends RichSinkFunction[String]&#123;</span><br><span class="line"></span><br><span class="line">  var conn:Connection = _</span><br><span class="line"></span><br><span class="line">  override def open(parameters: Configuration): Unit =&#123;</span><br><span class="line">    super.open(parameters)</span><br><span class="line">    Class.forName(&quot;com.mysql.jdbc.Driver&quot;)</span><br><span class="line">    conn = DriverManager.getConnection(url,user,pwd)</span><br><span class="line">    conn.setAutoCommit(false)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def invoke(value: String,context:SinkFunction.Context[_]): Unit =&#123;</span><br><span class="line">//    super.invoke(value)</span><br><span class="line">    val gson = new Gson()</span><br><span class="line">    val student = gson.fromJson(value,classOf[Student])</span><br><span class="line">    println(value)</span><br><span class="line"></span><br><span class="line">    val person = conn.prepareStatement(&quot;replace into student(name,age,sex,sid) values(?,?,?,?)&quot;)</span><br><span class="line">    person.setString(1,student.name)</span><br><span class="line">    person.setString(2,student.age.toString)</span><br><span class="line">    person.setString(3,student.sex)</span><br><span class="line">    person.setString(4,student.sid)</span><br><span class="line">    person.execute()</span><br><span class="line">    conn.commit()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def close(): Unit = &#123;</span><br><span class="line">    super.close()</span><br><span class="line">    conn.close()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5.创建HbaseSink<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.google.gson.Gson</span><br><span class="line">import com.gree.bdc.KafkaToSinkStreaming.Student</span><br><span class="line">import org.apache.flink.configuration.Configuration</span><br><span class="line">import org.apache.flink.streaming.api.functions.sink.&#123;RichSinkFunction, SinkFunction&#125;</span><br><span class="line">import org.apache.hadoop.hbase.&#123;HBaseConfiguration, TableName&#125;</span><br><span class="line">import org.apache.hadoop.hbase.client.&#123;Connection, ConnectionFactory, Put&#125;</span><br><span class="line">import org.apache.hadoop.hbase.util.Bytes</span><br><span class="line"></span><br><span class="line">class HBaseSink(tableName:String, family:String) extends RichSinkFunction[String] &#123;</span><br><span class="line">  var conn:Connection = _</span><br><span class="line"></span><br><span class="line">  override def open(parameters: Configuration): Unit = &#123;</span><br><span class="line">    super.open(parameters)</span><br><span class="line">    val conf = HBaseConfiguration.create()</span><br><span class="line">    conf.set(&quot;hbase.zookeeper.quorum&quot;,&quot;172.16.247.131&quot;)</span><br><span class="line">    conn = ConnectionFactory.createConnection(conf)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def invoke(value: String, context: SinkFunction.Context[_]): Unit =&#123;</span><br><span class="line">    val gson = new Gson()</span><br><span class="line">    val student = gson.fromJson(value,classOf[Student])</span><br><span class="line">    println(value)</span><br><span class="line">    println(student)</span><br><span class="line"></span><br><span class="line">    val table = conn.getTable(TableName.valueOf(tableName))</span><br><span class="line">    val put = new Put(Bytes.toBytes(student.sid))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;name&quot;),Bytes.toBytes(student.name))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;age&quot;),Bytes.toBytes(student.age))</span><br><span class="line">    put.addColumn(Bytes.toBytes(family),Bytes.toBytes(&quot;sex&quot;),Bytes.toBytes(student.sex))</span><br><span class="line">    table.put(put)</span><br><span class="line">    table.close()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  override def close(): Unit =&#123;</span><br><span class="line">    super.close()</span><br><span class="line">    conn.close()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>6.创建KafkaToSinkStreaming<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc</span><br><span class="line"></span><br><span class="line">import java.util.Properties</span><br><span class="line"></span><br><span class="line">import org.apache.flink.api.common.serialization.SimpleStringSchema</span><br><span class="line">import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment</span><br><span class="line">import org.apache.flink.streaming.connectors.kafka.&#123;FlinkKafkaConsumer010, FlinkKafkaConsumer011&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">flink 读取 kafka数据</span><br><span class="line">sink mysql 和 hbase</span><br><span class="line"> */</span><br><span class="line">object KafkaToSinkStreaming &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val env = StreamExecutionEnvironment.getExecutionEnvironment</span><br><span class="line"></span><br><span class="line">    val prop = new Properties()</span><br><span class="line">    prop.setProperty(&quot;bootstrap.servers&quot;,&quot;localhost:9092&quot;)</span><br><span class="line">    prop.setProperty(&quot;group.id&quot;,&quot;test&quot;)</span><br><span class="line"></span><br><span class="line">    val input = env.addSource(new FlinkKafkaConsumer010[String](&quot;test&quot;, new SimpleStringSchema(),prop))</span><br><span class="line"></span><br><span class="line">    //自定义MysqlSink类。将数据写入到mysql</span><br><span class="line">    val mysqlSink = new MysqlSink(&quot;jdbc:mysql://localhost:3306/test?serverTimezone=GMT&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&quot;, &quot;root&quot;, &quot;123456&quot;)</span><br><span class="line">    input.addSink(mysqlSink)</span><br><span class="line"></span><br><span class="line">    //自定义HBaseSink类，将数据Sink到HBase</span><br><span class="line"></span><br><span class="line">    val hBaseSink = new HBaseSink(&quot;student&quot;,&quot;sfz&quot;)</span><br><span class="line">    input.addSink(hBaseSink)</span><br><span class="line"></span><br><span class="line">    env.execute(&quot;KafkaToSinkStreaming&quot;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  case class Student(name: String,age: Int,sex:String,sid:String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>7.遇到问题总结</p>
-<blockquote>
-<p>1.NoSuchColumnFamilyException<br>主要是创建hbase table 是 familycloumn 和表对应的列族相同</p>
-</blockquote>
-<blockquote>
-<p>2.java.net.UnknownHostException<br>hosts文件中未配置主机名和ip对应表<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line"></span><br><span class="line">172.16.247.131 kubernetes-master</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>参考文章：<a href="https://blog.csdn.net/qq_33689414/article/details/86629720" target="_blank" rel="noopener">Flink读取Kafka数据Sink到MySQL和HBase数据库</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -753,7 +714,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            84
+                            93
                         </p>
                     </a>
                 </div>
@@ -777,7 +738,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            41
                         </p>
                     </a>
                 </div>
@@ -885,7 +846,7 @@
                 <span class="level-item">IDEA</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/后台/">
@@ -893,7 +854,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -901,7 +862,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">43</span>
+                <span class="level-item tag">46</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -909,7 +870,7 @@
                 <span class="level-item">学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -954,7 +915,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 18.57px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 11.43px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -966,35 +927,16 @@
         
         <article class="media">
             
-            <a href="/2020/06/06/mysql-mybatis/" class="media-left">
+            <a href="/2020/06/30/flink-提交命令/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql mybatis">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交命令">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time></div>
-                    <a href="/2020/06/06/mysql-mybatis/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql mybatis</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/flink-算子记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 算子记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/flink-算子记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 算子记录</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time></div>
+                    <a href="/2020/06/30/flink-提交命令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交命令</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -1004,35 +946,16 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/mysql-常见问题/" class="media-left">
+            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql 常见问题">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql 常见问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/27/flink-常见问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 常见问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T08:15:57.000Z">2020-05-27</time></div>
-                    <a href="/2020/05/27/flink-常见问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 常见问题</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
+                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
                     </p>
@@ -1042,18 +965,56 @@
         
         <article class="media">
             
-            <a href="/2020/05/11/常用工具类/" class="media-left">
+            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="常用工具类">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-11T07:27:49.000Z">2020-05-11</time></div>
-                    <a href="/2020/05/11/常用工具类/" class="title has-link-black-ter is-size-6 has-text-weight-normal">常用工具类</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
+                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
+                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
+                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
                     </p>
                 </div>
             </div>
@@ -1076,7 +1037,7 @@
                     <span class="level-item">六月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1340,7 +1301,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/flink/">
                         <span class="tag">flink</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1452,7 +1413,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1473,7 +1434,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/springboot/">
                         <span class="tag">springboot</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1492,6 +1453,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
                         <span class="tag is-grey">1</span>
@@ -1501,6 +1469,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/总结/">
                         <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/插件/">
+                        <span class="tag">插件</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
