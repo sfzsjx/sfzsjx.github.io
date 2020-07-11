@@ -136,6 +136,100 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 102 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/06/hive-数据库/">hive 数据库</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.hive临时表<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：hive临时表只对当前的会话有效，可以在程序执行是选择创建，但其也有缺陷就是不支持分区字段和创建索引</span><br></pre></td></tr></table></figure></p>
+<p>2.hive临时表一般用处不大，再出现中不容易使用<br>建议采用创建内部表，并在程序执行前后执行删除内部表的操作</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 28 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/03/spark-读取hive-jdbc方式/">spark 读取hive jdbc方式</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.先通过hive-jdbc读取出来的到resultset，然后再将resultset转成list，在将list 转成dataset<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>2.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time>
                 
                 <div class="level-item">
@@ -193,7 +287,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 82 个字)
+                    2 分钟 读完 (大约 306 个字)
                 </span>
                 
                 
@@ -207,6 +301,8 @@
         </h1>
         <div class="content">
             <p>1.本地依赖jar与集群jar包冲突<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.oozie.action.ActionExecutorException: JA009: cache file (mapreduce.job.cache.files) scheme: &quot;hdfs&quot; host: &quot;nameservice1&quot; port: -1 file: &quot;/user/hue/oozie/workspaces/hue-oozie-1585558811.97/lib/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar&quot; conflicts with cache file (mapreduce.job.cache.files) hdfs://nameservice1/user/oozie/share/lib/lib_20190819164924/spark/spark-sql-kafka-0-10_2.11-2.4.0-cdh6.3.0.jar</span><br><span class="line"></span><br><span class="line">解决办法：在本地工作区内去除所依赖的jar</span><br></pre></td></tr></table></figure></p>
+<p>2.scala版本不一致导致出错<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NoSuchMethodError: scala.Predef$.ArrowAssoc(Ljava/lang/Object;)Ljava/lang/Object;</span><br><span class="line"></span><br><span class="line">解决办法：重新设置scala版本号</span><br></pre></td></tr></table></figure></p>
+<p>3.hue提交spark注意点<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">java.lang.reflect.InvocationTargetException</span><br><span class="line">at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM.runActionMain(LauncherAM.java:410)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM.access$300(LauncherAM.java:55)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM$2.run(LauncherAM.java:223)</span><br><span class="line">at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1875)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM.run(LauncherAM.java:217)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM$1.run(LauncherAM.java:153)</span><br><span class="line">at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1875)</span><br><span class="line">at org.apache.oozie.action.hadoop.LauncherAM.main(LauncherAM.java:141)</span><br><span class="line">Caused by: org.apache.spark.SparkException: Application application_1588215511098_574080 finished with failed status</span><br><span class="line"></span><br><span class="line">可能是spark提交时未去掉master设置，在代码里注释就可以了。</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -605,107 +701,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 215 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/05/29/flink-算子记录/">flink 算子记录</a>
-            
-        </h1>
-        <div class="content">
-            <p>1、join静态数据库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 关联运单表,以及订单完成情况</span><br><span class="line"> * 输入 Tuple5&lt;&gt;(positionTime, imei, latitude, longitude, geoHashValue)</span><br><span class="line"> * 输出 WayBill</span><br><span class="line"> * @author hadoop</span><br><span class="line"> */</span><br><span class="line">public class JoinWaybill extends RichFlatMapFunction&lt;Tuple5&lt;Timestamp, String, Double, Double, String&gt;, WayBill&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void flatMap(Tuple5&lt;Timestamp, String, Double, Double, String&gt; value, Collector&lt;WayBill&gt; out) throws Exception &#123;</span><br><span class="line">        Connection conn;</span><br><span class="line">        Statement statement;</span><br><span class="line">        conn = DruidPoolUtils.getConnection();</span><br><span class="line">        statement = conn.createStatement();</span><br><span class="line">        ResultSet resultSet =  statement.executeQuery(&quot;SELECT waybill_no,device_id,longitude,latitude,&quot; +</span><br><span class="line">                    &quot; geo_hash,factory_time,bind_status,leave_time,distance_departure,waybill_status,finish_time FROM  t_gps_waybill where device_id = &quot; + value.f1);</span><br><span class="line"></span><br><span class="line">        while (resultSet.next())&#123;</span><br><span class="line">                WayBill wayBill = new WayBill();</span><br><span class="line">                wayBill.setWayBill(resultSet.getString(&quot;waybill_no&quot;));</span><br><span class="line">                out.collect(wayBill);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        DruidPoolUtils.close(conn,statement);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.sink mysql<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.flatMap(new JoinWaybill())</span><br><span class="line">      .addSink(new RichSinkFunction&lt;WayBill&gt;() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void invoke(WayBill value, Context context) throws Exception &#123;</span><br><span class="line">              Connection conn;</span><br><span class="line">              PreparedStatement statement;</span><br><span class="line">              conn = DruidPoolUtils.getConnection();</span><br><span class="line"></span><br><span class="line">              statement = conn.prepareStatement(</span><br><span class="line">                      &quot; INSERT INTO t_gps_test (waybill_no)&quot; +</span><br><span class="line">                              &quot; values(?)&quot; );</span><br><span class="line"></span><br><span class="line">              statement.setString( 1,  value.getWayBill() );</span><br><span class="line">              statement.execute();</span><br><span class="line">              DruidPoolUtils.close(conn,statement);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure></p>
-<p>3.window<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.window(SlidingEventTimeWindows.of(Time.minutes(1),Time.minutes(1)))</span><br><span class="line">                .process(new JoinWaybill()).print()</span><br></pre></td></tr></table></figure></p>
-<p>4.flink全局变量</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//③配置参数</span><br><span class="line">        Configuration conf = new Configuration();</span><br><span class="line">        conf.setDouble(&quot;fixDistance&quot;,2000);</span><br><span class="line">        conf.setLong(&quot;fixTime&quot;,120L);</span><br><span class="line">        env.getConfig().setGlobalJobParameters(conf);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> ExecutionConfig.GlobalJobParameters globalParams = getRuntimeContext().getExecutionConfig().getGlobalJobParameters();</span><br><span class="line">        Configuration globConf = (Configuration) globalParams;</span><br><span class="line">        fixDistance = globConf.getDouble(&quot;fixDistance&quot;, 2000);</span><br><span class="line">        fixTime = globConf.getLong(&quot;fixTime&quot;, 120L);</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 194 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/05/29/mysql-常见问题/">mysql 常见问题</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.druidpool连接池空指针异常<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn;</span><br><span class="line">       Statement statement;</span><br><span class="line">       conn = DruidPoolUtils.getConnection();</span><br><span class="line">       statement = conn.createStatement();</span><br></pre></td></tr></table></figure></p>
-<p>2.Exception in thread “main” java.sql.SQLException: Can not call getNString() when field’s charset isn’t UTF-8<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wayBill.setWayBill(resultSet.getNString(&quot;waybill_no&quot;));</span><br><span class="line">          System.out.println(resultSet.getString(&quot;waybill_no&quot;));</span><br></pre></td></tr></table></figure></p>
-<p>3.当数据为null时，插入数据库是，程序异常</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   statement.setInt( 1,  wayBillInfo.getBindStatus() );</span><br><span class="line">        statement.setTimestamp( 2, wayBillInfo.getLeaveTime());</span><br><span class="line">        statement.setDouble( 3, wayBillInfo.getDistanceDeparture());</span><br><span class="line">        statement.setLong( 4, wayBillInfo.getTimeDeparture());</span><br><span class="line">        statement.setInt( 5, wayBillInfo.getWayBillStatus());</span><br><span class="line">        statement.setTimestamp( 6,  wayBillInfo.getFinishTime() );</span><br><span class="line">        statement.setString( 7, wayBillInfo.getWayBillNo() );</span><br><span class="line"></span><br><span class="line">解决办法：setObject()</span><br></pre></td></tr></table></figure>
-<p>4.sql防注入以及参数传递<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = DruidPoolUtils.getConnection();</span><br><span class="line">        PreparedStatement statement = conn.prepareStatement(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(&quot;SELECT order_no,purpose_latitude,purpose_longitude ,finish_time FROM t_gps_order_list WHERE waybill_no = &apos;&quot; +wayBill.getWayBillNo() +&quot;&apos;&quot; );</span><br></pre></td></tr></table></figure></p>
-<p>5.mysql差集<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.oname, a.odesc </span><br><span class="line">FROM</span><br><span class="line">  object_a a </span><br><span class="line">  LEFT JOIN object_b b </span><br><span class="line">    ON a.oname = b.oname </span><br><span class="line">    AND a.odesc = b.odesc </span><br><span class="line">WHERE b.id IS NULL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SELECT a.oname, a.odesc FROM object_a a </span><br><span class="line">MINUS </span><br><span class="line">SELECT b.oname, b.odesc FROM object_b b</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -774,7 +769,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            93
+                            95
                         </p>
                     </a>
                 </div>
@@ -922,7 +917,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">46</span>
+                <span class="level-item tag">48</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -975,7 +970,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -984,6 +979,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/06/hive-数据库/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hive 数据库">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time></div>
+                    <a href="/2020/07/06/hive-数据库/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hive 数据库</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取hive jdbc方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time></div>
+                    <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取hive jdbc方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1042,44 +1075,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1090,6 +1085,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -1375,7 +1381,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hive/">
                         <span class="tag">hive</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1473,7 +1479,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 

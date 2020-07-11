@@ -136,6 +136,116 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-03T06:23:59.000Z">2019-12-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 134 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/03/lambda-表达式/">lambda 表达式</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.什么是lambda表达式</p>
+<blockquote>
+<p>简单讲就是实现将一个代码块赋值给一个变量。如将右边代码块赋给左边变量：<br><img src="/images/2019/12/03/b18cf6d0-1594-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+</blockquote>
+<p><img src="/images/2019/12/03/ba23a4f0-1595-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+<p>2.lambda表达式的作用</p>
+<blockquote>
+<p>可以使代码变得简洁<br>如我们在不使用lambda表达式实现接口，并调用它时与使用lambda表达式对比<br><img src="/images/2019/12/03/f0f43cb0-1595-11ea-be28-a13eed6a6a63.png" alt="image.png"></p>
+</blockquote>
+<p>参考：zhihu.com/question/20125256/answer/324121308</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-30T01:04:38.000Z">2019-11-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 626 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/30/spring-boot-jpa/">spring boot jpa</a>
+            
+        </h1>
+        <div class="content">
+            <p>spring boot jpa<br> jpa 常用于数据库访问</p>
+<p>1.依赖<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.1.5.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;groupId&gt;com.gree.bdc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-jpa&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;jpa-test&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;jpa-test&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- spring boot begin--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--mysql 依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.11&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- log4j--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.8.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- spring boot jpa --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.application.properties 配置，创建入口类。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#通用数据源配置</span><br><span class="line"></span><br><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/springboot_jpa?charset=utf8mb4&amp;useSSL=false&amp;serverTimezone=GMT</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=123456</span><br><span class="line"># Hikari 数据源专用配置</span><br><span class="line">spring.datasource.hikari.maximum-pool-size=20</span><br><span class="line">spring.datasource.hikari.minimum-idle=5</span><br><span class="line"># JPA 相关配置</span><br><span class="line">spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect</span><br><span class="line">spring.jpa.show-sql=true</span><br><span class="line">spring.jpa.hibernate.ddl-auto=create</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.jpa;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class JpaApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(JpaApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.创建实体<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.jpa.entity;</span><br><span class="line"></span><br><span class="line">import javax.persistence.Column;</span><br><span class="line">import javax.persistence.Entity;</span><br><span class="line">import javax.persistence.Id;</span><br><span class="line">import javax.persistence.Table;</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;AUTH_USER&quot;)</span><br><span class="line">public class UserDO &#123;</span><br><span class="line">        @Id</span><br><span class="line">        private Long id;</span><br><span class="line">        @Column(length = 32)</span><br><span class="line">        private String name;</span><br><span class="line">        @Column(length = 32)</span><br><span class="line">        private String account;</span><br><span class="line">        @Column(length = 64)</span><br><span class="line">        private String pwd;</span><br><span class="line"></span><br><span class="line">        public Long getId() &#123;</span><br><span class="line">            return id;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setId(Long id) &#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getName() &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setName(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getAccount() &#123;</span><br><span class="line">            return account;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setAccount(String account) &#123;</span><br><span class="line">            this.account = account;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getPwd() &#123;</span><br><span class="line">            return pwd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPwd(String pwd) &#123;</span><br><span class="line">            this.pwd = pwd;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.写一个DAO继承Repository或他的子类，执行入口类创建数据库表。后注释掉配置文件</p>
+<p>spring.jpa.hibernate.ddl-auto=create</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.jpa.repository;</span><br><span class="line"></span><br><span class="line">import com.gree.bdc.jpa.entity.UserDO;</span><br><span class="line">import org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">@Repository</span><br><span class="line">public interface UserDAO extends JpaRepository&lt;UserDO,Long&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.使用DAO调用其操作数据库方法<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package com.gree.bdc.jpa;</span><br><span class="line"></span><br><span class="line">import com.gree.bdc.jpa.entity.UserDO;</span><br><span class="line">import com.gree.bdc.jpa.repository.UserDAO;</span><br><span class="line">import org.junit.After;</span><br><span class="line">import org.junit.Before;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class UserDOTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserDAO userDAO;</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    public void before()&#123;</span><br><span class="line">        UserDO userDO = new UserDO();</span><br><span class="line">        userDO.setId(1L);</span><br><span class="line">        userDO.setName(&quot;风清扬&quot;);</span><br><span class="line">        userDO.setAccount(&quot;fengqy&quot;);</span><br><span class="line">        userDO.setPwd(&quot;123456&quot;);</span><br><span class="line">        userDAO.save(userDO);</span><br><span class="line">        userDO = new UserDO();</span><br><span class="line">        userDO.setId(3L);</span><br><span class="line">        userDO.setName(&quot;东方不败&quot;);</span><br><span class="line">        userDO.setAccount(&quot;bubai&quot;);</span><br><span class="line">        userDO.setPwd(&quot;123456&quot;);</span><br><span class="line">        userDAO.save(userDO);</span><br><span class="line">        userDO.setId(5L);</span><br><span class="line">        userDO.setName(&quot;向问天&quot;);</span><br><span class="line">        userDO.setAccount(&quot;wentian&quot;);</span><br><span class="line">        userDO.setPwd(&quot;123456&quot;);</span><br><span class="line">        userDAO.save(userDO);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testAdd()&#123;</span><br><span class="line">        UserDO userDO = new UserDO();</span><br><span class="line">        userDO.setId(2L);</span><br><span class="line">        userDO.setName(&quot;任我行&quot;);</span><br><span class="line">        userDO.setAccount(&quot;renwox&quot;);</span><br><span class="line">        userDO.setPwd(&quot;123456&quot;);</span><br><span class="line">        userDAO.save(userDO);</span><br><span class="line">        userDO = new UserDO();</span><br><span class="line">        userDO.setId(4L);</span><br><span class="line">        userDO.setName(&quot;令狐冲&quot;);</span><br><span class="line">        userDO.setAccount(&quot;linghuc&quot;);</span><br><span class="line">        userDO.setPwd(&quot;123456&quot;);</span><br><span class="line">        userDAO.save(userDO);</span><br><span class="line">    &#125;</span><br><span class="line">    @After</span><br><span class="line">    public void after()&#123;</span><br><span class="line">        userDAO.deleteById(1L);</span><br><span class="line">        List&lt;UserDO&gt; users = userDAO.findAll();</span><br><span class="line">        for(UserDO user: users)&#123;</span><br><span class="line">            System.out.println(user.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考文档：<a href="https://www.jianshu.com/p/c14640b63653" target="_blank" rel="noopener">spring boot jpa</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-29T02:00:58.000Z">2019-11-29</time>
                 
                 <div class="level-item">
@@ -689,139 +799,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-26T07:54:34.000Z">2019-08-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/蓝牙定位/">蓝牙定位</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 553 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/26/蓝牙信标定位项目总结/">蓝牙信标定位项目总结</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、项目简介："><a href="#一、项目简介：" class="headerlink" title="一、项目简介："></a>一、项目简介：</h2><blockquote>
-<p>  蓝牙信标定位项目又称物流容器信息化管理系统。主要是为了解决缩短物理配送周期，提高物流配送效率问题，<br>采用蓝牙定位技术,实时定位小车的位置以及监控小车的状态信息，达到及时优化和调整配送流程的效果。<br>以下是蓝牙基站数据处理时序图：</p>
-</blockquote>
-<p><img src="/images/2019/08/26/d389bdf0-c7d2-11e9-82cd-b1912fd86647.png" alt="image.png"></p>
-<p>数据处理流程：</p>
-<ol>
-<li>作为服务端，需要接受来自客户端tcp/ip数据。(netty)</li>
-<li>数据接收并校验成功后作出相应的动作，一部分数据需要返回时间戳，所有校验成功的数据都写入kafka。(kafka producer)</li>
-<li>消费kafka中的数据，主要有三个部分，一是信标电量信息采集，二是基站状态信息的采集，三是小车位置的计算和物料信息的绑定（structured streaming/flink）</li>
-<li>读取redis小车位置以及状态信息，通过websocket每隔五秒准实时推送一次最新数据到前端。(websocket)</li>
-</ol>
-<p><strong>说明</strong>：<br>1.使用netty作为数据接入使用可以参考：<a href="https://sfzsjx.github.io/2019/05/22/netty-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" target="_blank" rel="noopener">netty整合spring boot</a><br>2.数据接收后需要写入kafka集群中，关于kafka集群部署可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85-%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">kafka集群安装部署</a><br>3.kafka安装后，数据写入kafka,需要创建kafka producer，可以参考：<a href="https://sfzsjx.github.io/2019/04/30/kafka%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="noopener">kafka相关操作</a><br>4.读取kafka数据，并做相应的计算，需要用到structed streaming/flink技术，相应的需要部署spark 集群或flink集群，spark集群部署可以参考：<a href="https://sfzsjx.github.io/2019/08/12/Spark-Windows10-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">spark 集群安装部署</a><br>5.structed streaming 读取kafka 数据并做实时计算可以参考 ：<a href="https://sfzsjx.github.io/2019/08/27/spark-structed-streaming-%E8%AF%BB%E5%8F%96kafka%E6%95%B0%E6%8D%AE/" target="_blank" rel="noopener">structed streaming 读取kafka 数据</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-26T02:31:37.000Z">2019-08-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 996 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/26/spark-standalone-运行原理/">spark standalone  运行原理</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="一-、spark-standalone-运行模式"><a href="#一-、spark-standalone-运行模式" class="headerlink" title="一 、spark standalone 运行模式"></a>一 、spark standalone 运行模式</h3><p><img src="/images/2019/08/26/2f6b2e50-c7a7-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<blockquote>
-<p>standalone 运行模式 是由客户端，主节点和多个worker节点组成。<br>Worker节点可以通过ExecutorRunner运行在当前节点上的CoarseGrainedExecutorBackend进程，每个Worker节点上存在一个或多个CoarseGrainedExecutorBackend进程，每个进程包含一个Executor对象。 该对象持有一个线程池,每个线程可以执行一个task。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.启动应用程序，在SparkContext启动过程中，先初始化DAGScheduler 和 TaskSchedulerImpl两个调度器， 同时初始化SparkDeploySchedulerBackend，并在其内部启动DriverEndpoint 和 ClientEndpoint</span><br><span class="line">2.ClientEndpoint向Master注册应用程序。Master收到注册消息后把应用放到待运行应用列表，使用自己的资源调度算法分配Worker资源给应用程序。</span><br><span class="line">3.应用程序获得Worker时，Master会通知Worker中的WorkerEndpoint创建CoarseGrainedExecutorBackend进程，在该进程中创建执行容器Executor。</span><br><span class="line">4.Executor创建完毕后发送消息到Master 和 DriverEndpoint。在SparkContext创建成功后， 等待Driver端发过来的任务。</span><br><span class="line">5.SparkContext分配任务给CoarseGrainedExecutorBackend执行，在Executor上按照一定调度执行任务(这些任务就是自己写的代码)</span><br><span class="line">6.CoarseGrainedExecutorBackend在处理任务的过程中把任务状态发送给SparkContext，SparkContext根据任务不同的结果进行处理。如果任务集处理完毕后，则继续发送其他任务集。</span><br><span class="line">7.应用程序运行完成后，SparkContext会进行资源回收。</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="二、spark-standalone两种提交模式"><a href="#二、spark-standalone两种提交模式" class="headerlink" title="二、spark standalone两种提交模式"></a>二、spark standalone两种提交模式</h3><h4 id="1-standalone-client-任务提交模式"><a href="#1-standalone-client-任务提交模式" class="headerlink" title="1. standalone-client 任务提交模式"></a>1. standalone-client 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in client deploy mode</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">nohup spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar &gt; /lvm/data1/spark/log/location/$&#123;result_time&#125;_result.log &amp;</span><br></pre></td></tr></table></figure></p>
-<p>standalone client 模式任务流程<br><img src="/images/2019/08/26/183089c0-c7ab-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程</p>
-<ol>
-<li>client 模式提交任务后，会在客户端启动Driver进程。</li>
-<li>Driver 会向Master申请启动Application启动资源。</li>
-<li>资源申请成功后，Driver端会将task发送到worker端执行。</li>
-<li>worker端执行成功后将执行结果返回给Driver端</li>
-</ol>
-<h4 id="1-standalone-cluster-任务提交模式"><a href="#1-standalone-cluster-任务提交模式" class="headerlink" title="1. standalone-cluster 任务提交模式"></a>1. standalone-cluster 任务提交模式</h4><p>提交命令：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Run on a Spark standalone cluster in cluster deploy mode with supervise</span><br><span class="line">./bin/spark-submit \</span><br><span class="line">  --class org.apache.spark.examples.SparkPi \</span><br><span class="line">  --master spark://207.184.161.138:7077 \</span><br><span class="line">  --deploy-mode cluster \</span><br><span class="line">  --supervise \</span><br><span class="line">  --executor-memory 20G \</span><br><span class="line">  --total-executor-cores 100 \</span><br><span class="line">  /path/to/examples.jar \</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">result_time=$(date +%Y%m%d)</span><br><span class="line">echo &quot;小车定位程序&quot;</span><br><span class="line"></span><br><span class="line">spark-submit --class com.gree.cn.location.LocationMap --master spark://lyxbdw-02:7077 --deploy-mode cluster --supervise  --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.3 --executor-memory 4G --total-executor-cores 12  /home/lyxbdw/basedata/spark/structstreaminglocation-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：Standalone-cluster提交方式，应用程序使用的所有jar包和文件，必须保证所有的worker节点都要有，因为此种方式，spark不会自动上传包。</p>
-</blockquote>
-<p>standalone-cluster模式提交任务<br><img src="/images/2019/08/26/b76b5dc0-c7ac-11e9-b720-45f763a73cbf.png" alt="image.png"></p>
-<p>执行流程：</p>
-<ol>
-<li>客户端使用命令spark-submit –deploy-mode cluster 后会启动spark-submit进程</li>
-<li>此进程为Driver向Master 申请资源。</li>
-<li>Master会随机在一台Worker节点来启动Driver进程。</li>
-<li>Driver启动成功后，spark-submit关闭，然后Driver向Master申请资源。</li>
-<li>Master接收到请求后，会在资源充足的Worker节点上启动Executor进程。</li>
-<li>Driver分发Task到Executor中执行。</li>
-</ol>
-<p>建议：<strong>在平时调试时使用client模式，在正式生产环境时建议使用cluster模式</strong></p>
-<p>参考文章：<a href="https://www.cnblogs.com/wangtcc/p/da-huaSpark-5san-tu-xiang-shuSpark-StandaloneClien.html" target="_blank" rel="noopener">1、大话Spark(5)-三图详述Spark Standalone/Client/Cluster运行模式</a><br><a href="https://blog.csdn.net/qq_39131779/article/details/83539608" target="_blank" rel="noopener">2、Spark中Standalone的两种提交模式（Standalone-client模式与Standalone-cluster模式）</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -896,7 +873,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            93
+                            95
                         </p>
                     </a>
                 </div>
@@ -1044,7 +1021,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">46</span>
+                <span class="level-item tag">48</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1097,7 +1074,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1106,6 +1083,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/06/hive-数据库/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hive 数据库">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time></div>
+                    <a href="/2020/07/06/hive-数据库/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hive 数据库</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取hive jdbc方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time></div>
+                    <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取hive jdbc方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1164,44 +1179,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1212,6 +1189,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -1497,7 +1485,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hive/">
                         <span class="tag">hive</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1595,7 +1583,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 

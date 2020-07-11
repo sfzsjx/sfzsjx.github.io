@@ -136,6 +136,107 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-29T05:37:12.000Z">2020-05-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 215 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/29/flink-算子记录/">flink 算子记录</a>
+            
+        </h1>
+        <div class="content">
+            <p>1、join静态数据库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 关联运单表,以及订单完成情况</span><br><span class="line"> * 输入 Tuple5&lt;&gt;(positionTime, imei, latitude, longitude, geoHashValue)</span><br><span class="line"> * 输出 WayBill</span><br><span class="line"> * @author hadoop</span><br><span class="line"> */</span><br><span class="line">public class JoinWaybill extends RichFlatMapFunction&lt;Tuple5&lt;Timestamp, String, Double, Double, String&gt;, WayBill&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void flatMap(Tuple5&lt;Timestamp, String, Double, Double, String&gt; value, Collector&lt;WayBill&gt; out) throws Exception &#123;</span><br><span class="line">        Connection conn;</span><br><span class="line">        Statement statement;</span><br><span class="line">        conn = DruidPoolUtils.getConnection();</span><br><span class="line">        statement = conn.createStatement();</span><br><span class="line">        ResultSet resultSet =  statement.executeQuery(&quot;SELECT waybill_no,device_id,longitude,latitude,&quot; +</span><br><span class="line">                    &quot; geo_hash,factory_time,bind_status,leave_time,distance_departure,waybill_status,finish_time FROM  t_gps_waybill where device_id = &quot; + value.f1);</span><br><span class="line"></span><br><span class="line">        while (resultSet.next())&#123;</span><br><span class="line">                WayBill wayBill = new WayBill();</span><br><span class="line">                wayBill.setWayBill(resultSet.getString(&quot;waybill_no&quot;));</span><br><span class="line">                out.collect(wayBill);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        DruidPoolUtils.close(conn,statement);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.sink mysql<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.flatMap(new JoinWaybill())</span><br><span class="line">      .addSink(new RichSinkFunction&lt;WayBill&gt;() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void invoke(WayBill value, Context context) throws Exception &#123;</span><br><span class="line">              Connection conn;</span><br><span class="line">              PreparedStatement statement;</span><br><span class="line">              conn = DruidPoolUtils.getConnection();</span><br><span class="line"></span><br><span class="line">              statement = conn.prepareStatement(</span><br><span class="line">                      &quot; INSERT INTO t_gps_test (waybill_no)&quot; +</span><br><span class="line">                              &quot; values(?)&quot; );</span><br><span class="line"></span><br><span class="line">              statement.setString( 1,  value.getWayBill() );</span><br><span class="line">              statement.execute();</span><br><span class="line">              DruidPoolUtils.close(conn,statement);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>3.window<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.window(SlidingEventTimeWindows.of(Time.minutes(1),Time.minutes(1)))</span><br><span class="line">                .process(new JoinWaybill()).print()</span><br></pre></td></tr></table></figure></p>
+<p>4.flink全局变量</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//③配置参数</span><br><span class="line">        Configuration conf = new Configuration();</span><br><span class="line">        conf.setDouble(&quot;fixDistance&quot;,2000);</span><br><span class="line">        conf.setLong(&quot;fixTime&quot;,120L);</span><br><span class="line">        env.getConfig().setGlobalJobParameters(conf);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> ExecutionConfig.GlobalJobParameters globalParams = getRuntimeContext().getExecutionConfig().getGlobalJobParameters();</span><br><span class="line">        Configuration globConf = (Configuration) globalParams;</span><br><span class="line">        fixDistance = globConf.getDouble(&quot;fixDistance&quot;, 2000);</span><br><span class="line">        fixTime = globConf.getLong(&quot;fixTime&quot;, 120L);</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-29T05:33:17.000Z">2020-05-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 194 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/29/mysql-常见问题/">mysql 常见问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.druidpool连接池空指针异常<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn;</span><br><span class="line">       Statement statement;</span><br><span class="line">       conn = DruidPoolUtils.getConnection();</span><br><span class="line">       statement = conn.createStatement();</span><br></pre></td></tr></table></figure></p>
+<p>2.Exception in thread “main” java.sql.SQLException: Can not call getNString() when field’s charset isn’t UTF-8<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wayBill.setWayBill(resultSet.getNString(&quot;waybill_no&quot;));</span><br><span class="line">          System.out.println(resultSet.getString(&quot;waybill_no&quot;));</span><br></pre></td></tr></table></figure></p>
+<p>3.当数据为null时，插入数据库是，程序异常</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   statement.setInt( 1,  wayBillInfo.getBindStatus() );</span><br><span class="line">        statement.setTimestamp( 2, wayBillInfo.getLeaveTime());</span><br><span class="line">        statement.setDouble( 3, wayBillInfo.getDistanceDeparture());</span><br><span class="line">        statement.setLong( 4, wayBillInfo.getTimeDeparture());</span><br><span class="line">        statement.setInt( 5, wayBillInfo.getWayBillStatus());</span><br><span class="line">        statement.setTimestamp( 6,  wayBillInfo.getFinishTime() );</span><br><span class="line">        statement.setString( 7, wayBillInfo.getWayBillNo() );</span><br><span class="line"></span><br><span class="line">解决办法：setObject()</span><br></pre></td></tr></table></figure>
+<p>4.sql防注入以及参数传递<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = DruidPoolUtils.getConnection();</span><br><span class="line">        PreparedStatement statement = conn.prepareStatement(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(&quot;SELECT order_no,purpose_latitude,purpose_longitude ,finish_time FROM t_gps_order_list WHERE waybill_no = &apos;&quot; +wayBill.getWayBillNo() +&quot;&apos;&quot; );</span><br></pre></td></tr></table></figure></p>
+<p>5.mysql差集<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.oname, a.odesc </span><br><span class="line">FROM</span><br><span class="line">  object_a a </span><br><span class="line">  LEFT JOIN object_b b </span><br><span class="line">    ON a.oname = b.oname </span><br><span class="line">    AND a.odesc = b.odesc </span><br><span class="line">WHERE b.id IS NULL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SELECT a.oname, a.odesc FROM object_a a </span><br><span class="line">MINUS </span><br><span class="line">SELECT b.oname, b.odesc FROM object_b b</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-27T08:15:57.000Z">2020-05-27</time>
                 
                 <div class="level-item">
@@ -653,107 +754,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-18T03:21:20.000Z">2020-01-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/学习/">学习</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1055 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/01/18/2019年度总结/">2019年度总结</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.回顾<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">主要作业</span><br><span class="line">1.机器学习（Python，spark ml）</span><br><span class="line">2.成品码大数据分析（Scala ，spark sql ,hive）</span><br><span class="line">3.微服务架构（spring boot ，spring cloud等）</span><br><span class="line">4.蓝牙定位（netty -》spark streaming ， structured streaming -&gt; redis,mysql --&gt; websocket）</span><br><span class="line">5.电工 （redis ，flink，java）</span><br></pre></td></tr></table></figure></p>
-<p>2.详细分析</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  2019学了很多，但真正精通，学的深的不多。</span><br><span class="line">1.年初学习了机器学习，主要是python的机器学习的包，但之后未用到实际的项目中，现在基本忘的差不多了，也就不多说了。</span><br><span class="line">2.成品码大数据分析项目，主要分为两部分，前一个月主要熟悉项目，这个项目是半路接手，准备第二期，我主要负责的数据处理部分。将需要的数据通过spark sql 处理形成中间结果表，给到后台进一步处理。</span><br><span class="line">后半部分则是彻底整合家用，商用，生活电器形成一张大而完整的表。</span><br><span class="line">主要学习到了spark 中 dataframe中的api,常用的有 spark.table获取hive数据仓库中的表，.where用来筛选符合条件的记录或者用.filter也是同样的作用，.startWith用来获取字段开始符合的条件，还有substr,na.fill,withColumn,lit,join，seq(),union等等，</span><br><span class="line">在项目中使用正则匹配进行数据处理时还是不够灵活，在与洪工对接需求时，需求较明确，反馈问题也能够及时得到回应。</span><br><span class="line">3.微服务架构，最近微服务也很流行，主要了解了spring boot 和 spring cloud 相关的知识，仅限于简单的使用，没有在复杂的场景中运用。</span><br><span class="line">4.蓝牙定位是本年最主要（即时间最久）的项目，从数据的接入到数据处理生成实时的定位信息传入到前端，在这个项目中学到了很多，也接触到了之前未接触到的的东西，比如kafak集群搭建（三个节点没有权限zk自己自带的），spark 集群（三个节点standalone模式）搭建，只是单独的spark集群没有hdfs。</span><br><span class="line">同时也接触到netty，网络之间数据传输（tcp/udp）数据传输。在做项目是由于前期对数据对接时考虑的问题不是很充足，以及对netty和kafak等一些参数不够了解耽误了不少时间，其中关于流处理的接触让我对流处理的一些框架有一定的了解，</span><br><span class="line">同时也了解了flink这个流处理的利器。总的来说还是完成了这个项目，尽管这个项目总是在关键时刻出现问题，但都合理的解决了。</span><br><span class="line">5.电工这个项目是临时接收的，当初只是简单的处理了一个上报的数据，替换相关数据源，将mysql数据源换成redis数据源，</span><br><span class="line">这里简单说明下，由于上个项目了解到redis，加之这个需求改动不大所有=以很快解决了，之后再很长一段时间是在看之前交接人写的代码，插一句由于项目交接多手，而且项目没有正规需求文档和相关的数据字典，难受。</span><br><span class="line">之后接了个上报收线重量的需求，由于之前的种种，以及flink窗口处理的能力出众，所以选择flink，数据源从activemq中读取，处理后上报给webservice服务。</span><br><span class="line">大致这样。下面配上几张数据流程图。</span><br></pre></td></tr></table></figure>
-<p>1.电工数据流图<br><img src="/images/2020/01/18/399a4c70-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"><br><img src="/images/2020/01/18/5d622650-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p>
-<p>2.蓝牙定位数据流图<br><img src="/images/2020/01/18/756dd9b0-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p>
-<p>3.微服务组件关系图<br><img src="/images/2020/01/18/d1e592a0-39c7-11ea-b221-c32b78c1642c.png" alt="image.png"></p>
-<p>3.展望<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多读书多看报，少吃零食多睡觉。</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-10T09:19:36.000Z">2020-01-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 189 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/01/10/flink-sources/">flink sources</a>
-            
-        </h1>
-        <div class="content">
-            <ol>
-<li>activemq </li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.gree.bdc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;flink-table-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-streaming-java_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.flink&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.8.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.bahir&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;flink-connector-activemq_2.11&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.io;</span><br><span class="line"></span><br><span class="line">import org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line">import org.apache.flink.streaming.api.functions.source.SourceFunction;</span><br><span class="line"></span><br><span class="line">import javax.jms.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取activeMQ数据</span><br><span class="line"> */</span><br><span class="line">public class FlinkActiveMQStreamSources implements SourceFunction &#123;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Session session = null;</span><br><span class="line">    private MessageConsumer messageConsumer = null;</span><br><span class="line">    private boolean running = Boolean.TRUE;</span><br><span class="line"></span><br><span class="line">    public void run(SourceContext ctx) throws Exception &#123;</span><br><span class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_USER, ActiveMQConnectionFactory.DEFAULT_PASSWORD, ActiveMQConnectionFactory.DEFAULT_BROKER_URL);</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = activeMQConnectionFactory.createConnection();</span><br><span class="line">            connection.start();</span><br><span class="line">            session = connection.createSession(Boolean.FALSE,Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">            String queueName = &quot;test?consumer.exclusive=true&quot;;</span><br><span class="line">            Destination destination  = session.createQueue(queueName);</span><br><span class="line">            messageConsumer = session.createConsumer(destination);</span><br><span class="line"></span><br><span class="line">            while (running)&#123;</span><br><span class="line">                TextMessage message = (TextMessage)messageConsumer.receive(60 * 100);</span><br><span class="line">                if (message instanceof TextMessage)&#123;</span><br><span class="line">                    TextMessage textMessage =(TextMessage) message;</span><br><span class="line">                    String text = textMessage.getText();</span><br><span class="line">                    ctx.collect(text);</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    System.out.println(&quot;未收到消息！！！&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                messageConsumer.close();</span><br><span class="line">                session.close();</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;catch (JMSException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;finally &#123;</span><br><span class="line">                Thread.sleep(10 * 1000);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void cancel() &#123;</span><br><span class="line">        running = Boolean.FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -824,7 +824,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            93
+                            95
                         </p>
                     </a>
                 </div>
@@ -972,7 +972,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">46</span>
+                <span class="level-item tag">48</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1025,7 +1025,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 13.33px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flink/" style="font-size: 20px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.67px;">hbase</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 13.33px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 13.33px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.67px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.67px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 18.33px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.67px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1034,6 +1034,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/06/hive-数据库/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hive 数据库">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time></div>
+                    <a href="/2020/07/06/hive-数据库/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hive 数据库</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取hive jdbc方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time></div>
+                    <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取hive jdbc方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1092,44 +1130,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/13/spark-读取外部配置文件/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取外部配置文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T01:16:43.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/spark-读取外部配置文件/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取外部配置文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/git-ssh-免密配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="git ssh 免密配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T03:28:53.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/git-ssh-免密配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git ssh 免密配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1140,6 +1140,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -1425,7 +1436,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hive/">
                         <span class="tag">hive</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1523,7 +1534,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/spark/">
                         <span class="tag">spark</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
