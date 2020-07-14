@@ -425,7 +425,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 572 个字)
+                    4 分钟 读完 (大约 642 个字)
                 </span>
                 
                 
@@ -508,6 +508,7 @@
 <h2 id="查看pid下的进程"><a href="#查看pid下的进程" class="headerlink" title="查看pid下的进程"></a>查看pid下的进程</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux |grep -v grep|grep 31938</span><br></pre></td></tr></table></figure>
 <h2 id="查看Linux的核数"><a href="#查看Linux的核数" class="headerlink" title="查看Linux的核数"></a>查看Linux的核数</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;physical id&quot; | sort | uniq | wc -l</span><br><span class="line">1</span><br><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;core id&quot; | sort | uniq | wc -l</span><br><span class="line">2</span><br><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;process&quot; | sort | uniq | wc -l</span><br></pre></td></tr></table></figure>
 <h2 id="查看linux-M"><a href="#查看linux-M" class="headerlink" title="查看linux M"></a>查看linux M</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lht</span><br></pre></td></tr></table></figure>
+<p>##linux服务器ip公网查看<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">linux系统中输入上述的命令，可以查看到本机连接的公网信息；如果该命令无效，可以使用下面一个命令，也同样可以获得对应的信息</span><br><span class="line"></span><br><span class="line">curl cip.cc</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
