@@ -147,6 +147,52 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-17T01:25:21.000Z">2020-07-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 306 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/17/hue-提交程序报错总结/">hue 提交程序报错总结</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.hue提交程序时依赖jar包小技巧<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">默认是先在工作区和默认路径找到所有的jar包，若有jar包冲突，则需要手动去除掉工作区的jar包，若jar包缺失则需要手动加上jar包</span><br><span class="line">若两个工作目录都有jar包，但版本不一致，默认使用工作区间的jar包，此时需要选择正确的版本号。</span><br><span class="line"></span><br><span class="line">① jar包冲突 Caused by: org.apache.hadoop.mapred.InvalidJobConfException: cache file (mapreduce.job.cache.files) scheme: &quot;hdfs&quot; host: &quot;nameservice1&quot; port: -1 file: &quot;/user/hue/oozie/workspaces/hue-oozie-1585550821.94/lib/slf4j-log4j12-1.7.25.jar&quot; conflicts with cache file (mapreduce.job.cache.files) hdfs://nameservice1/user/oozie/share/lib/lib_20190819164924/spark/slf4j-log4j12-1.7.25.jar</span><br><span class="line">（解决办法 ：去掉工作区jar包 ）</span><br><span class="line">② jar包缺失 [main] ERROR org.apache.spark.deploy.yarn.Client - Application diagnostics message: User class threw exception: org.apache.spark.sql.AnalysisException: Failed to find data source: kafka. Please deploy the application as per the deployment section of &quot;Structured Streaming + Kafka Integration Guide&quot;.;</span><br><span class="line">（解决办法：在工作区新增jar包）</span><br><span class="line">③jar包版本不对 </span><br><span class="line">Application diagnostics message: User class threw exception: java.lang.NoSuchMethodError: org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Iface.get_all_functions()Lorg/apache/hadoop/hive/metastore/api/GetAllFunctionsResponse;</span><br><span class="line">（解决办法：更换正确版本jar包，或者去掉工作区jar包）</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time>
                 
                 <div class="level-item">
@@ -584,55 +630,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-07T11:28:53.000Z">2020-04-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 611 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/07/spark-常用操作/">spark 常用操作</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="一、spark-分组计算（转rdd-分组计算完再转回-dateset）"><a href="#一、spark-分组计算（转rdd-分组计算完再转回-dateset）" class="headerlink" title="一、spark 分组计算（转rdd 分组计算完再转回 dateset）"></a>一、spark 分组计算（转rdd 分组计算完再转回 dateset）</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;Row&gt; rowJavaRdd = orderDistanceCustomer.javaRDD();</span><br><span class="line">JavaRDD&lt;OrderLeaveTime&gt; leaveTimeJavaRDD = rowJavaRdd.groupBy(row -&gt; row.getString(1))</span><br><span class="line">              .map(new Function&lt;Tuple2&lt;String, Iterable&lt;Row&gt;&gt;, OrderLeaveTime&gt;() &#123;</span><br><span class="line">                  @Override</span><br><span class="line">                  public OrderLeaveTime call(Tuple2&lt;String, Iterable&lt;Row&gt;&gt; v1) throws Exception &#123;</span><br><span class="line">                      String order_number = v1._1;</span><br><span class="line">                      Iterator&lt;Row&gt; iterator = v1._2.iterator();</span><br><span class="line">                      String report_time = &quot;&quot;;</span><br><span class="line">                      String flag = &quot;&quot;;</span><br><span class="line">                      while (iterator.hasNext()) &#123;</span><br><span class="line">                          Row next = iterator.next();</span><br><span class="line">                          double order_distance_customer = next.getDouble(14);</span><br><span class="line">                          report_time = next.getString(11);</span><br><span class="line">                          if (order_distance_customer - 2000 &lt; 0) &#123;</span><br><span class="line">                              flag = &quot;已进入&quot;;</span><br><span class="line">                          &#125;</span><br><span class="line">                          if (&quot;已进入&quot;.equals(flag) &amp;&amp; order_distance_customer - 2000 &gt; 0) &#123;</span><br><span class="line">                              break;</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      OrderLeaveTime orderArriveTime1 = new OrderLeaveTime();</span><br><span class="line">                      orderArriveTime1.setOrderNumber(order_number);</span><br><span class="line">                      orderArriveTime1.setLeaveTime(report_time);</span><br><span class="line">                      return orderArriveTime1;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;);</span><br><span class="line"></span><br><span class="line">      Encoder&lt;OrderLeaveTime&gt; orderLeaveTimeEncode = Encoders.bean(OrderLeaveTime.class);</span><br><span class="line">      Dataset&lt;OrderLeaveTime&gt; leaveTimeDataset = spark.createDataset(leaveTimeJavaRDD.rdd(),orderLeaveTimeEncode);</span><br></pre></td></tr></table></figure>
-<h2 id="二、spark-dataset-分组计算（使用groupbyKey）"><a href="#二、spark-dataset-分组计算（使用groupbyKey）" class="headerlink" title="二、spark dataset 分组计算（使用groupbyKey）"></a>二、spark dataset 分组计算（使用groupbyKey）</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Dataset&lt;DeviceLocation&gt; deviceLocationDataset = devicePosition.groupByKey(new MapFunction&lt;Row, String&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public String call(Row value) throws Exception &#123;</span><br><span class="line">               return value.getString(2);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;, Encoders.STRING()).flatMapGroups(new FlatMapGroupsFunction&lt;String, Row, DeviceLocation&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Iterator&lt;DeviceLocation&gt; call(String key, Iterator&lt;Row&gt; values) throws Exception &#123;</span><br><span class="line">               List&lt;DeviceLocation.Location&gt; locations = new ArrayList&lt;&gt;();</span><br><span class="line">               while (values.hasNext()) &#123;</span><br><span class="line">                   DeviceLocation.Location location = new DeviceLocation.Location();</span><br><span class="line">                   Row next = values.next();</span><br><span class="line">                   location.setId((int)next.getLong(0));</span><br><span class="line">                   location.setLocation_code(next.getString(1));</span><br><span class="line">                   location.setLongitude(next.getString(3));</span><br><span class="line">                   location.setLongmark(next.getString(4));</span><br><span class="line">                   location.setLatitude(next.getString(5));</span><br><span class="line">                   location.setLati_mark(next.getString(6));</span><br><span class="line">                   location.setPosition_time(next.getTimestamp(7));</span><br><span class="line">                   location.setSignal_strength(next.getString(8));</span><br><span class="line">                   location.setPower(next.getString(9));</span><br><span class="line">                   location.setAlarm_status(next.getString(10));</span><br><span class="line">                   location.setExtended_data(next.getString(11));</span><br><span class="line">                   locations.add(location);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               DeviceLocation deviceLocation = new DeviceLocation();</span><br><span class="line">               deviceLocation.setImei(key);</span><br><span class="line">               deviceLocation.setDateTime(&quot;2020-04-05&quot;);</span><br><span class="line">               deviceLocation.setLocation(JSON.toJSONString(locations));</span><br><span class="line">               ArrayList&lt;DeviceLocation&gt; deviceLocations = new ArrayList&lt;&gt;();</span><br><span class="line">               deviceLocations.add(deviceLocation);</span><br><span class="line">               return deviceLocations.iterator();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;, Encoders.bean(DeviceLocation.class));</span><br><span class="line"></span><br><span class="line">       deviceLocationDataset.select(col(&quot;imei&quot;),col(&quot;dateTime&quot;),col(&quot;location&quot;).cast(&quot;String&quot;)).write().mode(SaveMode.Append).jdbc(url,&quot;test&quot;,properties);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="spark-分组计算"><a href="#spark-分组计算" class="headerlink" title="spark 分组计算"></a>spark 分组计算</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">//Encoder&lt;OrderArriveTime&gt; orderArriveTimeEncoder = Encoders.bean(OrderArriveTime.class);</span><br><span class="line"></span><br><span class="line"> //通过转成list来遍历得到数据</span><br><span class="line">//        List&lt;OrderArriveTime&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">//        //效率太低，考虑自定义函数</span><br><span class="line">//        List&lt;OrderArriveTime&gt; orderArriveTimes = orderArriveTimeDataset.collectAsList();</span><br><span class="line">//        orderArriveTimes.stream().collect(Collectors.groupingBy(OrderArriveTime::getCustomerAddress))</span><br><span class="line">//                .forEach(new BiConsumer&lt;String, List&lt;OrderArriveTime&gt;&gt;() &#123;</span><br><span class="line">//                    @Override</span><br><span class="line">//                    public void accept(String s, List&lt;OrderArriveTime&gt; orderArriveTimes) &#123;</span><br><span class="line">//</span><br><span class="line">//                        String arriveTime = null;</span><br><span class="line">//                        String finishTime = null;</span><br><span class="line">//</span><br><span class="line">//                        for (OrderArriveTime next : orderArriveTimes) &#123;</span><br><span class="line">//                            OrderArriveTime orderArriveTime = new OrderArriveTime();</span><br><span class="line">//                            if (arriveTime == null) &#123;</span><br><span class="line">//                                arriveTime = next.getArriveTime();</span><br><span class="line">//                            &#125; else &#123;</span><br><span class="line">//                                arriveTime = finishTime;</span><br><span class="line">//                            &#125;</span><br><span class="line">//                            finishTime = next.getFinishTime();</span><br><span class="line">//                            orderArriveTime.setOrderNumber(next.getOrderNumber());</span><br><span class="line">//                            orderArriveTime.setCustomerAddress(next.getCustomerAddress());</span><br><span class="line">//                            orderArriveTime.setArriveTime(arriveTime);</span><br><span class="line">//                            orderArriveTime.setFinishTime(finishTime);</span><br><span class="line">//                            list.add(orderArriveTime);</span><br><span class="line">//                        &#125;</span><br><span class="line">//</span><br><span class="line">//                    &#125;</span><br><span class="line">//                &#125;);</span><br><span class="line">//</span><br><span class="line">//        Dataset&lt;OrderArriveTime&gt; realArriveDataset = spark.createDataset(list, orderArriveTimeEncoder);</span><br></pre></td></tr></table></figure>
-<h3 id="spark-自定义函数"><a href="#spark-自定义函数" class="headerlink" title="spark 自定义函数"></a>spark 自定义函数</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">时间格式转换自定义函数</span><br><span class="line">//        spark.udf().register(&quot;TimeFormat&quot;, new UDF1&lt;String, String&gt;() &#123;</span><br><span class="line">//            @Override</span><br><span class="line">//            public String call(String oldDateStr) throws Exception &#123;</span><br><span class="line">//                if (oldDateStr != null)&#123;</span><br><span class="line">//                    DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSXXX&quot;);</span><br><span class="line">//                    Date date = df.parse(oldDateStr);</span><br><span class="line">//                    SimpleDateFormat df1 = new SimpleDateFormat (&quot;EEE MMM dd HH:mm:ss Z yyyy&quot;, Locale.UK);</span><br><span class="line">//                    Date date1 =  df1.parse(date.toString());</span><br><span class="line">//                    DateFormat df2 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">//                    return df2.format(date1);</span><br><span class="line">//                &#125;</span><br><span class="line">//              return null;</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;, DataTypes.StringType);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> //自定义函数适应于多列数据通过逻辑处理得到一列数据的情况</span><br><span class="line"> //定义自定义函数</span><br><span class="line">        spark.udf().register(&quot;orderDistanceCustomer&quot;, (UDF4&lt;Double, Double, Double, Double, Double&gt;)</span><br><span class="line">                (lat1, lon1, lat2, lon2) -&gt; &#123;</span><br><span class="line">            if (lat1 != null &amp;&amp; lon1 != null &amp;&amp; lat2 != null &amp;&amp; lon2 != null)&#123;</span><br><span class="line">                return MapUtil.distanceCalculate(lat1, lon1, lat2, lon2);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                return -1.0;</span><br><span class="line">            &#125; &#125;, DataTypes.DoubleType);</span><br><span class="line"></span><br><span class="line">   //使用自定义函数   </span><br><span class="line">        Dataset&lt;Row&gt; orderDistanceCustomer = orderLocalInfo.withColumn(&quot;order_distance_customer&quot;,</span><br><span class="line">                callUDF(&quot;orderDistanceCustomer&quot;,</span><br><span class="line">                orderLocalInfo.col(&quot;customer_lat&quot;), orderLocalInfo.col(&quot;customer_long&quot;),</span><br><span class="line">                orderLocalInfo.col(&quot;latitude&quot;), orderLocalInfo.col(&quot;longitude&quot;)));</span><br></pre></td></tr></table></figure>
-<h3 id="spark提交命令"><a href="#spark提交命令" class="headerlink" title="spark提交命令"></a>spark提交命令</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup spark-submit --class com.gree.bdc.analysis.DispatchDetailsInfo  --master local[2] --executor-memory 8G --total-executor-cores 4  /home/bdcopt/spark/order-details-handle-1.0-SNAPSHOT-jar-with-dependencies.jar  &gt; /tmp/spark/order/order-datails.log &amp;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -701,7 +698,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            95
+                            97
                         </p>
                     </a>
                 </div>
@@ -713,7 +710,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -725,7 +722,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            41
+                            43
                         </p>
                     </a>
                 </div>
@@ -849,7 +846,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">48</span>
+                <span class="level-item tag">49</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -858,6 +855,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/开发工具/">
+            <span class="level-start">
+                <span class="level-item">开发工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -902,7 +907,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -911,6 +916,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/17/hue-提交程序报错总结/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hue 提交程序报错总结">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-17T01:25:21.000Z">2020-07-17</time></div>
+                    <a href="/2020/07/17/hue-提交程序报错总结/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hue 提交程序报错总结</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/16/SecureCRT-安装和下载/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SecureCRT 安装和下载">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T05:58:06.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/SecureCRT-安装和下载/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SecureCRT 安装和下载</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -969,44 +1012,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
-                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
-                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1024,7 +1029,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1318,6 +1323,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hue/">
+                        <span class="tag">hue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
@@ -1460,6 +1472,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发工具/">
+                        <span class="tag">开发工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

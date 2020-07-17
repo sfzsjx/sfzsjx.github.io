@@ -136,6 +136,110 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-17T01:25:21.000Z">2020-07-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 306 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/17/hue-提交程序报错总结/">hue 提交程序报错总结</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.hue提交程序时依赖jar包小技巧<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">默认是先在工作区和默认路径找到所有的jar包，若有jar包冲突，则需要手动去除掉工作区的jar包，若jar包缺失则需要手动加上jar包</span><br><span class="line">若两个工作目录都有jar包，但版本不一致，默认使用工作区间的jar包，此时需要选择正确的版本号。</span><br><span class="line"></span><br><span class="line">① jar包冲突 Caused by: org.apache.hadoop.mapred.InvalidJobConfException: cache file (mapreduce.job.cache.files) scheme: &quot;hdfs&quot; host: &quot;nameservice1&quot; port: -1 file: &quot;/user/hue/oozie/workspaces/hue-oozie-1585550821.94/lib/slf4j-log4j12-1.7.25.jar&quot; conflicts with cache file (mapreduce.job.cache.files) hdfs://nameservice1/user/oozie/share/lib/lib_20190819164924/spark/slf4j-log4j12-1.7.25.jar</span><br><span class="line">（解决办法 ：去掉工作区jar包 ）</span><br><span class="line">② jar包缺失 [main] ERROR org.apache.spark.deploy.yarn.Client - Application diagnostics message: User class threw exception: org.apache.spark.sql.AnalysisException: Failed to find data source: kafka. Please deploy the application as per the deployment section of &quot;Structured Streaming + Kafka Integration Guide&quot;.;</span><br><span class="line">（解决办法：在工作区新增jar包）</span><br><span class="line">③jar包版本不对 </span><br><span class="line">Application diagnostics message: User class threw exception: java.lang.NoSuchMethodError: org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Iface.get_all_functions()Lorg/apache/hadoop/hive/metastore/api/GetAllFunctionsResponse;</span><br><span class="line">（解决办法：更换正确版本jar包，或者去掉工作区jar包）</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-16T05:58:06.000Z">2020-07-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 195 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/16/SecureCRT-安装和下载/">SecureCRT 安装和下载</a>
+            
+        </h1>
+        <div class="content">
+            <p>1.下载</p>
+<blockquote>
+<p>链接：<a href="https://pan.baidu.com/s/1CrMxHO5eaj15CV7GzzgheQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1CrMxHO5eaj15CV7GzzgheQ</a><br>提取码：o1sa</p>
+</blockquote>
+<p>2.解压安装<br><img src="/images/2020/07/16/03858510-c729-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p>3.输入以下注册信息，其中任意一个都行，第一个清册有效<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Name:meisi</span><br><span class="line">Company:TEAM ZWT</span><br><span class="line">Serial Number:03-14-367662</span><br><span class="line">License Key:ACCFAX R9FHJ7 QZVS2P JPBCVA ABCMBF HNEJ2T R9EVZN 2EEK2Q</span><br><span class="line">Issue Date:01-30-2018</span><br><span class="line">Features:</span><br><span class="line"> </span><br><span class="line">=========================</span><br><span class="line"></span><br><span class="line">Name:Ronaldo</span><br><span class="line">Company:TEAM ZWT</span><br><span class="line">Serial Number:03-49-375243</span><br><span class="line">License Key:ACGRNV 7BS22M RHCXRZ Q1ZTU6 AAUAUZ NGR1BA BQYM94 2JVHP4</span><br><span class="line">Issue Date:01-30-2018</span><br><span class="line">Features:</span><br></pre></td></tr></table></figure></p>
+<p>4.外观设置</p>
+<p><img src="/images/2020/07/16/dc170a00-c72b-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p>①设置主题背景<br><img src="/images/2020/07/16/2a1534b0-c72d-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p><img src="/images/2020/07/16/48747970-c72d-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p><img src="/images/2020/07/16/c9e0cc70-c72d-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p><img src="/images/2020/07/16/ff339dd0-c72d-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+<p><img src="/images/2020/07/16/49cf0af0-c72e-11ea-85dc-6bd40b871a61.png" alt="image.png"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time>
                 
                 <div class="level-item">
@@ -596,111 +700,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-10T07:21:58.000Z">2020-06-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/后台/">后台</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 119 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/10/spring-boot-test/">spring boot test</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc;</span><br><span class="line"></span><br><span class="line">import com.gree.bdc.entity.TGpsWarehouse;</span><br><span class="line">import com.gree.bdc.mapper.TGpsWarehouseMapper;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line">import javax.annotation.Resource;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest(classes = DataAccessApplication.class,webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)</span><br><span class="line">public class MysqlTest &#123;</span><br><span class="line"></span><br><span class="line">    @Resource</span><br><span class="line">    private TGpsWarehouseMapper tGpsWarehouseMapper;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void addBatchWareHouse()&#123;</span><br><span class="line">        List&lt;TGpsWarehouse&gt; warehouseList = new ArrayList&lt;&gt;();</span><br><span class="line">        TGpsWarehouse warehouse = new TGpsWarehouse(null,&quot;Aa&quot;,&quot;006&quot;,&quot;格力电器&quot;,</span><br><span class="line">                &quot;003&quot;,&quot;经济&quot;,2000,&quot;销售订单&quot;,null);</span><br><span class="line">        warehouseList.add(warehouse);</span><br><span class="line">        tGpsWarehouseMapper.addBatchWareHouse(warehouseList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.1.7.RELEASE&lt;/version&gt;</span><br><span class="line">           &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">       &lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">           &lt;!--&lt;scope&gt;test&lt;/scope&gt;--&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-06T09:12:06.000Z">2020-06-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 268 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/06/mysql-mybatis/">mysql mybatis</a>
-            
-        </h1>
-        <div class="content">
-            <p>1.mybatis 动态查询<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;select id=&quot;isExistWarehouse&quot; resultType=&quot;integer&quot; resultMap=&quot;BaseResultMap&quot;&gt;</span><br><span class="line">   select count(*) from t_gps_warehouse</span><br><span class="line">   &lt;where&gt;</span><br><span class="line">     &lt;if test=&quot;warehouseAddress != null &quot;&gt;</span><br><span class="line">       warehouse_address = #&#123;warehouseAddress&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line"></span><br><span class="line">     &lt;if test=&quot;warehouseCode != null &quot;&gt;</span><br><span class="line">       AND warehouse_code = #&#123;warehouseCode&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line">     &lt;if test=&quot;areaCode != null &quot;&gt;</span><br><span class="line">       AND area_code = #&#123;areaCode&#125;</span><br><span class="line">     &lt;/if&gt;</span><br><span class="line">   &lt;/where&gt;</span><br><span class="line"> &lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.mybatis插入数据报错<br><img src="/images/2020/06/08/0d2815a0-a975-11ea-9fb5-4b8d3e35b365.png" alt="image.png"></p>
-<p>原因：数据库中表的自增id没有设置成自增模式<br>解决办法：将自增id设置自动增加<br><img src="/images/2020/06/08/61474570-a975-11ea-9fb5-4b8d3e35b365.png" alt="image.png"></p>
-<p>3.mysql重新设置主键生成策略为auto_increment时报错：resulting in duplicate entry ‘1’ for key ‘PRIMARY’</p>
-<blockquote>
-<p>原因：自增字段有值为0或其他小于0值<br>解决方法：改为其他值大于0<br>参考解决方案：<a href="https://blog.csdn.net/huanghanqian/article/details/80866802" target="_blank" rel="noopener">自增id设置出错</a></p>
-</blockquote>
-<p>4.mybatis插入操作<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertWaybillNo&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gree.bdc.entity.TGpsWaybill&quot;&gt;</span><br><span class="line"></span><br><span class="line">   insert into t_gps_waybill (waybill_no,licence_plate, company_name, device_id,imei,</span><br><span class="line">                              leave_warehouse_id,latitude,longitude,geo_hash,factory_time,bind_status)</span><br><span class="line">    values (#&#123;waybillNo&#125;,#&#123;licencePlate&#125;,#&#123;companyName&#125;,#&#123;deviceId&#125;,#&#123;imei&#125;,#&#123;leaveWarehouseId&#125;,</span><br><span class="line">   #&#123;latitude&#125;,#&#123;longitude&#125;,#&#123;geoHash&#125;,#&#123;factoryTime&#125;,#&#123;bindStatus&#125;)</span><br><span class="line"></span><br><span class="line"> &lt;/insert&gt;</span><br></pre></td></tr></table></figure></p>
-<ol start="5">
-<li>mybatis 查询数据一直为 null<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.entity;</span><br><span class="line"></span><br><span class="line">import lombok.AllArgsConstructor;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 司机信息</span><br><span class="line"> * @author hadoop</span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class Driver &#123;</span><br><span class="line">    //司机名</span><br><span class="line">    private String driverName;</span><br><span class="line">    //司机电话</span><br><span class="line">    private String driverPhone;</span><br><span class="line">    //身份证号</span><br><span class="line">    private String idCard;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="/images/2020/06/11/98146fb0-abc3-11ea-9fb5-4b8d3e35b365.png" alt="image.png"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -719,7 +718,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/8/">8</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/9/">9</a></li>
             
         </ul>
     </nav>
@@ -769,7 +768,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            95
+                            97
                         </p>
                     </a>
                 </div>
@@ -781,7 +780,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -793,7 +792,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            41
+                            43
                         </p>
                     </a>
                 </div>
@@ -917,7 +916,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">48</span>
+                <span class="level-item tag">49</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -926,6 +925,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/开发工具/">
+            <span class="level-start">
+                <span class="level-item">开发工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -970,7 +977,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -979,6 +986,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/17/hue-提交程序报错总结/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hue 提交程序报错总结">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-17T01:25:21.000Z">2020-07-17</time></div>
+                    <a href="/2020/07/17/hue-提交程序报错总结/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hue 提交程序报错总结</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/16/SecureCRT-安装和下载/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SecureCRT 安装和下载">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T05:58:06.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/SecureCRT-安装和下载/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SecureCRT 安装和下载</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1037,44 +1082,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
-                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
-                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1092,7 +1099,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1386,6 +1393,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hue/">
+                        <span class="tag">hue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
@@ -1528,6 +1542,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发工具/">
+                        <span class="tag">开发工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

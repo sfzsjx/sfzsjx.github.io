@@ -136,6 +136,127 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-07T01:16:53.000Z">2019-03-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1202 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/07/18-决策树（中）-CART算法笔记/">18| 决策树（中） : CART算法笔记</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/2019/03/07/95366780-4076-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><blockquote>
+<p>基于信息度量的不同方式，我们把决策树分为ID3算法、C4.5算法和CART算法。CART算法（Classification And Regression Tree）,<br>又称分类回归树。也就是说CART决策树既可以作为分类树，又可以作为回归树。而且CART只支持二叉树。<br>分类树和回归树的区别<br>分类树可以处理离散数据，也就是数据种类有限的数据，它输出的是样本类别，而回归树可以对连续型的数值进行预测<br>也就是数据在某个区间都有取值的可能，它输出的是一个数值。</p>
+</blockquote>
+<h2 id="CART分类树工作流程"><a href="#CART分类树工作流程" class="headerlink" title="CART分类树工作流程"></a>CART分类树工作流程</h2><p>在属性选择上CART算法采用基尼系数作为衡量指标。</p>
+<blockquote>
+<p>假设t为节点，那么该节点是GINI系数为：<br><img src="/images/2019/03/07/4fe1cf50-4079-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中p(Ck|t)表示节点t属于类别Ck的概率，节点t的基尼系数为1减去个类别Ck概率平方和。<br>在CART算法中，基于基尼系数对特征属性进行二元分裂，假设属性A将节点D划分为D1和D2，如下图所示：<br><img src="/images/2019/03/07/d4b50920-407b-11e9-8a4c-37398b64114f.png" alt="image.png"><br>那么节点D的基尼系数等于子节点D1和D2的归一化基尼系数之和，用公式表示为：<br><img src="/images/2019/03/07/0e9e5290-407c-11e9-8a4c-37398b64114f.png" alt="image.png"><br>归一化基尼系数代表的是每个子节点的基尼系数乘以该节点占整体父节点D中的比例。节点D被属性A划分后基尼系数越大，样本集合的<br>不确定性越大，也就是不纯度越高。</p>
+</blockquote>
+<h2 id="如何使用CART算法来创建分类树"><a href="#如何使用CART算法来创建分类树" class="headerlink" title="如何使用CART算法来创建分类树"></a>如何使用CART算法来创建分类树</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line"># 准备数据集</span><br><span class="line">iris=load_iris()</span><br><span class="line"># 获取特征集和分类标识</span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.33, random_state=0)</span><br><span class="line"># 创建 CART 分类树</span><br><span class="line">clf = DecisionTreeClassifier(criterion=&apos;gini&apos;)</span><br><span class="line"># 拟合构造 CART 分类树</span><br><span class="line">clf = clf.fit(train_features, train_labels)</span><br><span class="line"># 用 CART 分类树做预测</span><br><span class="line">test_predict = clf.predict(test_features)</span><br><span class="line"># 预测结果与测试集结果作比对</span><br><span class="line">score = accuracy_score(test_labels, test_predict)</span><br><span class="line">print(&quot;CART 分类树准确率 %.4lf&quot; % score)</span><br></pre></td></tr></table></figure>
+<h2 id="CART回归树工作流程"><a href="#CART回归树工作流程" class="headerlink" title="CART回归树工作流程"></a>CART回归树工作流程</h2><blockquote>
+<p>在CART回归树中，通过样本的混乱程度，也就是样本的离散程度来评价“不纯度”。<br>设x为样本的个体，均值为u。可以通过取差值的绝对值或者方差来评价。<br>差值绝对值：<br><img src="/images/2019/03/07/ee8fa8c0-407e-11e9-8a4c-37398b64114f.png" alt="image.png"><br>方差：<br><img src="/images/2019/03/07/096e0420-407f-11e9-8a4c-37398b64114f.png" alt="image.png"><br>以上两种节点划分标准，分别对应着两种目标函数最优化的标准。最小绝对偏差（LAD）和最小二乘偏差（LSD）。</p>
+</blockquote>
+<h2 id="CART回归树预测"><a href="#CART回归树预测" class="headerlink" title="CART回归树预测"></a>CART回归树预测</h2><p>例子：波士顿房价预测<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">from sklearn.metrics import mean_squared_error</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.datasets import load_boston</span><br><span class="line">from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error</span><br><span class="line">from sklearn.tree import DecisionTreeRegressor</span><br><span class="line"># 准备数据集</span><br><span class="line">boston=load_boston()</span><br><span class="line"># 探索数据</span><br><span class="line">print(boston.feature_names)</span><br><span class="line"># 获取特征集和房价</span><br><span class="line">features = boston.data</span><br><span class="line">prices = boston.target</span><br><span class="line"># 随机抽取 33% 的数据作为测试集，其余为训练集</span><br><span class="line">train_features, test_features, train_price, test_price = train_test_split(features, prices, test_size=0.33)</span><br><span class="line"># 创建 CART 回归树</span><br><span class="line">dtr=DecisionTreeRegressor()</span><br><span class="line"># 拟合构造 CART 回归树</span><br><span class="line">dtr.fit(train_features, train_price)</span><br><span class="line"># 预测测试集中的房价</span><br><span class="line">predict_price = dtr.predict(test_features)</span><br><span class="line"># 测试集的结果评价</span><br><span class="line">print(&apos;回归树二乘偏差均值:&apos;, mean_squared_error(test_price, predict_price))</span><br><span class="line">print(&apos;回归树绝对值偏差均值:&apos;, mean_absolute_error(test_price, predict_price))</span><br></pre></td></tr></table></figure></p>
+<h2 id="CART决策树的剪枝"><a href="#CART决策树的剪枝" class="headerlink" title="CART决策树的剪枝"></a>CART决策树的剪枝</h2><p>CART决策树的剪枝主要采用的是CCP（cost-complexity prune）方法,又称代价复杂度。这种剪枝方式采用了节点的表面误差率增益值作为评估：<br><img src="/images/2019/03/07/7d6460c0-4081-11e9-8a4c-37398b64114f.png" alt="image.png"><br>其中Tt代表以t为根节点的子树，C(Tt)表示节点t的子树没被裁剪时子树Tt的误差，C(t)表示节点t的子树被裁剪时节点t的误差，|Tt|代表子树Tt的叶子树，剪枝后，T的叶子数减少了|Tt|-1。<br>所以节点的表面误差率增益值等于节点t的子树被剪枝后的误差变化除以减掉的叶子数量。</p>
+<p><img src="/images/2019/03/07/ce361dd0-4082-11e9-8a4c-37398b64114f.png" alt="image.png"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-01T02:37:48.000Z">2019-03-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 397 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/01/03-数据分析实战45-：-Python-基础语法/">03 数据分析实战45 ： Python 基础语法</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/2019/03/01/66ec2200-3bc8-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<h1 id="Python-基础语法"><a href="#Python-基础语法" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h1><h2 id="Python-语言特点"><a href="#Python-语言特点" class="headerlink" title="Python 语言特点"></a>Python 语言特点</h2><blockquote>
+<p>Python 语言最大的优点就是简洁，同时有大量的第三方库，功能强大，能够解决数据分析的大部分问题。比如科学计算工具NumPy 和 Pandas库，深度学习工具 Keras 和 TensorFlow,以及机器学习工具 Scikit-learn。</p>
+</blockquote>
+<h2 id="安装及-IDE-环境"><a href="#安装及-IDE-环境" class="headerlink" title="安装及 IDE 环境"></a>安装及 IDE 环境</h2><p>安装Python 3.x 官网下载安装。<br>Python IDE 推荐使用 PythonCharm</p>
+<h2 id="Python-基础语法-1"><a href="#Python-基础语法-1" class="headerlink" title="Python 基础语法"></a>Python 基础语法</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum = 100+100</span><br><span class="line">print (&apos;hello,%s&apos; %name) # 打印输出</span><br><span class="line">print (&apos;sum = %d&apos; %sum)</span><br></pre></td></tr></table></figure>
+<h3 id="判断语句-if-…-else-…"><a href="#判断语句-if-…-else-…" class="headerlink" title="判断语句 if … else …"></a>判断语句 if … else …</h3><figure class="highlight plain hljs"><figcaption><span>score></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       print (&apos;Excellent&apos;)</span><br><span class="line">else:</span><br><span class="line">       if score &lt; 60:</span><br><span class="line">           print( &apos;Fail&apos;)</span><br><span class="line">       else:</span><br><span class="line">           print (&apos;Good Job&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句-：-for-…-in"><a href="#循环语句-：-for-…-in" class="headerlink" title="循环语句 ： for … in"></a>循环语句 ： for … in</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for number in range(11):</span><br><span class="line">    sum = sum + number</span><br><span class="line">print (sum)</span><br></pre></td></tr></table></figure>
+<h3 id="循环语句：while"><a href="#循环语句：while" class="headerlink" title="循环语句：while"></a>循环语句：while</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">number = 1</span><br><span class="line">while number &lt; 11:</span><br><span class="line">       sum = sum + number</span><br><span class="line">       number = number + 1</span><br><span class="line">print （sum）</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型：列表、元组、字典、集合"><a href="#数据类型：列表、元组、字典、集合" class="headerlink" title="数据类型：列表、元组、字典、集合"></a>数据类型：列表、元组、字典、集合</h2><h3 id="列表："><a href="#列表：" class="headerlink" title="列表：[]"></a>列表：[]</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lists.append(&apos;d&apos;)</span><br><span class="line">print (lists)</span><br><span class="line">print (len(lists))</span><br><span class="line">lists.insert(0,&apos;mm&apos;)</span><br><span class="line">lists.pop()</span><br><span class="line">print (lists)</span><br></pre></td></tr></table></figure>
+<h3 id="元组（tuple）"><a href="#元组（tuple）" class="headerlink" title="元组（tuple）"></a>元组（tuple）</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (tuples[0])</span><br></pre></td></tr></table></figure>
+<h3 id="字典（dictionary）"><a href="#字典（dictionary）" class="headerlink" title="字典（dictionary）"></a>字典（dictionary）</h3><figure class="highlight plain hljs"><figcaption><span>-*- coding: utf-8 -*</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义一个 dictionary</span><br><span class="line">score = &#123;&apos;guanyu&apos;:95,&apos;zhangfei&apos;:96&#125;</span><br><span class="line"># 添加一个元素</span><br><span class="line">score[&apos;zhaoyun&apos;] = 98</span><br><span class="line">print (score)</span><br><span class="line"># 删除一个元素</span><br><span class="line">score.pop(&apos;zhangfei&apos;)</span><br><span class="line"># 查看 key 是否存在</span><br><span class="line">print (&apos;guanyu&apos; in score)</span><br><span class="line"># 查看一个 key 对应的值</span><br><span class="line">print (score.get(&apos;guanyu&apos;))</span><br><span class="line">print (score.get(&apos;yase&apos;,99))</span><br></pre></td></tr></table></figure>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.add(&apos;d&apos;)</span><br><span class="line">s.remove(&apos;b&apos;)</span><br><span class="line">print （s）</span><br><span class="line">print （&apos;c&apos; in s）</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/03/01/9d1f4470-3bcc-11e9-9d0c-09e85593a38e.png" alt="image.png"></p>
+<p><img src="/images/2019/03/01/a812ead0-3bcc-11e9-9d0c-09e85593a38e.jpg" alt="1550939818393.jpg"><br>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+<p>极客时间版权所有: <a href="https://time.geekbang.org/column/article/73574" target="_blank" rel="noopener">https://time.geekbang.org/column/article/73574</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-02-23T06:16:23.000Z">2019-02-23</time>
                 
                 <div class="level-item">
@@ -880,64 +1001,6 @@ public class KylinJdbc {
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-14T02:15:50.000Z">2018-08-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数据库/">数据库 </a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 469 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/14/图数据集群搭建/">图数据集群搭建</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong> NEO4J高可用集群搭建 </strong></p>
-<p>高可用的neo4j集群主要采用了主从的结构，来保证集群的容错能力和应变能力，同时也保证了了集群在读取密集型的数据的场景下可横向的扩展能力。同时，它还支持缓存分区，使得NEO4J高可用性集群比neo4j单实例具有更大的负载能力。但HA集群很快要不支持了。</p>
-<p>好了，话不多说，如果看过前一篇文章<a href="https://blog.csdn.net/fffsssfff6/article/details/81215416" target="_blank" rel="noopener">https://blog.csdn.net/fffsssfff6/article/details/81215416</a>, 完成了前半部分的一些基本准备，那么就可以直接进行HA集群搭建。若没有准备，则需要完成至JDK安装的步骤。下面就开始了：</p>
-<p>一、首先 下载neo4j企业版的安装包。可以参考<a href="https://blog.csdn.net/xubo245/article/details/50033003" target="_blank" rel="noopener">https://blog.csdn.net/xubo245/article/details/50033003</a>.  执行下面命令<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  http://dist.neo4j.org/neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">```							  </span><br><span class="line"> 或者前往neo4j官网下载 ：https://neo4j.com/download/ .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">二、然后将安装包解压后分别传入到 /opt/neo4j 目录下。</span><br><span class="line">``` bash</span><br><span class="line"></span><br><span class="line">tar -zxvf neo4j-enterprise-3.4.0-unix.tar.gz</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@master: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave1: /opt/neo4j</span><br><span class="line">scp -r neo4j-enterprise-3.4.0 root@slave2: /opt/neo4j</span><br></pre></td></tr></table></figure></p>
-<p>三 、修改配置文件neo4j.conf(重要)</p>
-<p>master节点：<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=1</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>slave1节点：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=2</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>slave2节点：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbms.mode=HA</span><br><span class="line">ha.server_id=3</span><br><span class="line">ha.initial_hosts=172.16.247.135:5001,172.16.247.132:5001,172.16.247.136:5001</span><br><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>四、启动HA集群,分别进入neo4j 目录下执行</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br><span class="line">./bin/neo4j start</span><br></pre></td></tr></table></figure>
-<p> 五、进入localhost：7474查看集群信息<br><img src="https://img-blog.csdn.net/20180803153649681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZGRlNTU0ZGRjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Image text"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -945,7 +1008,7 @@ public class KylinJdbc {
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/7/">上一页</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/9/">下一页</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -957,6 +1020,8 @@ public class KylinJdbc {
             <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
             <li><a class="pagination-link is-current" href="/page/8/">8</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/9/">9</a></li>
             
         </ul>
     </nav>
@@ -1006,7 +1071,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            95
+                            97
                         </p>
                     </a>
                 </div>
@@ -1018,7 +1083,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -1030,7 +1095,7 @@ public class KylinJdbc {
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            41
+                            43
                         </p>
                     </a>
                 </div>
@@ -1154,7 +1219,7 @@ public class KylinJdbc {
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">48</span>
+                <span class="level-item tag">49</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1163,6 +1228,14 @@ public class KylinJdbc {
             </span>
             <span class="level-end">
                 <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/开发工具/">
+            <span class="level-start">
+                <span class="level-item">开发工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1207,7 +1280,7 @@ public class KylinJdbc {
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1216,6 +1289,44 @@ public class KylinJdbc {
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/17/hue-提交程序报错总结/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hue 提交程序报错总结">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-17T01:25:21.000Z">2020-07-17</time></div>
+                    <a href="/2020/07/17/hue-提交程序报错总结/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hue 提交程序报错总结</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/16/SecureCRT-安装和下载/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SecureCRT 安装和下载">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T05:58:06.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/SecureCRT-安装和下载/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SecureCRT 安装和下载</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1274,44 +1385,6 @@ public class KylinJdbc {
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/26/spark-集群常见错误/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 集群常见错误">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-26T01:02:41.000Z">2020-06-26</time></div>
-                    <a href="/2020/06/26/spark-集群常见错误/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 集群常见错误</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/18/flink-运行时长记录/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 运行时长记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-18T06:14:01.000Z">2020-06-18</time></div>
-                    <a href="/2020/06/18/flink-运行时长记录/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 运行时长记录</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1329,7 +1402,7 @@ public class KylinJdbc {
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1623,6 +1696,13 @@ public class KylinJdbc {
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hue/">
+                        <span class="tag">hue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
                         <span class="tag is-grey">1</span>
@@ -1765,6 +1845,13 @@ public class KylinJdbc {
                 <div class="control">
                     <a class="tags has-addons" href="/tags/工具类/">
                         <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发工具/">
+                        <span class="tag">开发工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
