@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/07/24/markdowm%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2020-07-24T07:11:11.184Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/07/23/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%EF%BC%88CICD%EF%BC%89%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2020-07-23T09:08:06.949Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/07/22/hadoop/</loc>
+    
+    <lastmod>2020-07-23T01:13:51.270Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/05/29/mysql-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2020-07-20T07:09:32.679Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/07/17/hue-%E6%8F%90%E4%BA%A4%E7%A8%8B%E5%BA%8F%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2020-07-17T01:25:21.444Z</lastmod>
@@ -117,13 +145,6 @@
     <loc>http://yoursite.com/2020/05/29/flink-%E7%AE%97%E5%AD%90%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2020-06-04T01:43:57.509Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/05/29/mysql-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
-    
-    <lastmod>2020-06-02T07:55:07.144Z</lastmod>
     
   </url>
   

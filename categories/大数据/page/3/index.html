@@ -147,6 +147,72 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-11T06:59:39.000Z">2019-09-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 618 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/11/Apache-NiFi-简单介绍和使用/">Apache NiFi 简单介绍和使用</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、什么是Apache-NiFi"><a href="#一、什么是Apache-NiFi" class="headerlink" title="一、什么是Apache NiFi"></a>一、什么是Apache NiFi</h2><pre><code>简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。
+</code></pre><h2 id="二、NIFI-核心概念"><a href="#二、NIFI-核心概念" class="headerlink" title="二、NIFI 核心概念"></a>二、NIFI 核心概念</h2><p><img src="/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/a544b020-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="三、NIFI-架构"><a href="#三、NIFI-架构" class="headerlink" title="三、NIFI 架构"></a>三、NIFI 架构</h2><p><img src="/images/2019/09/11/dd2a1340-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<h2 id="四、-NIFI-使用界面介绍"><a href="#四、-NIFI-使用界面介绍" class="headerlink" title="四、 NIFI 使用界面介绍"></a>四、 NIFI 使用界面介绍</h2><p><img src="/images/2019/09/11/79ee7e20-d461-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
+<blockquote>
+<p>主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有<br>Processor:The Processor is the NiFi component that is used to listen for incoming data; pull data from external sources; publish data to external sources; and route, transform, or extract information from FlowFiles.</p>
+</blockquote>
+<blockquote>
+<p>Processor Group:When a dataflow becomes complex, it often is beneficial to reason about the dataflow at a higher, more abstract level. NiFi allows multiple components, such as Processors, to be grouped together into a Process Group. The NiFi User Interface then makes it easy for a DFM to connect together multiple Process Groups into a logical dataflow, as well as allowing the DFM to enter a Process Group in order to see and manipulate the components within the Process Group.</p>
+</blockquote>
+<blockquote>
+<p>我认为 Processor 就是一个数据处理器，它不仅可以从各种数据源中加载数据，转成Fiedflow基本nifi元素，还能够将数据处理成各种常见的格式以及将数据输出到各种数据库中<br>而Processor Group 则是一个装载 Processor的容器。</p>
+</blockquote>
+<h2 id="五、案例（JSON-TO-MYSQL）"><a href="#五、案例（JSON-TO-MYSQL）" class="headerlink" title="五、案例（JSON_TO_MYSQL）"></a>五、案例（JSON_TO_MYSQL）</h2><ol>
+<li>创建一个Processor Group ,将其拖到画布当中<br><img src="/images/2019/09/11/b8052b50-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>然后修改名字<br><img src="/images/2019/09/11/f0cefb00-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/52a49ab0-d467-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>读取json文件，GetFile –&gt; 将JSON 转为sql语句，ConvertJSONToSQL –&gt; 运行sql语句，PutSQL</li>
+<li>GetFile 设置输入目录Input Directory，目标文件 File Filter<br><img src="/images/2019/09/11/5e82d2b0-d468-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>ConvertJSONToSQL  设置数据库连接池JDBC Connection Pool ,SQL 类型 Statement Type ,表名 Table Name,其他默认 ，注意 ConvertJSONToSQL 只适用一个json值的文件<br><img src="/images/2019/09/11/3459dd70-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+<li>PutSQL 设置 数据库连接池，SQL Statement ，其他默认。一般来说只需要设置加黑的参数，但这里需要设置sql语句。<br><img src="/images/2019/09/11/c980d930-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-09-09T01:43:41.000Z">2019-09-09</time>
                 
                 <div class="level-item">
@@ -672,122 +738,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-27T01:43:36.000Z">2019-05-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 642 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/27/Linux-常用命令/">Linux 常用命令</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="linux系统中清空文件内容的三种方法"><a href="#linux系统中清空文件内容的三种方法" class="headerlink" title="linux系统中清空文件内容的三种方法"></a>linux系统中清空文件内容的三种方法</h3><p>1.使用vi/vim命令打开文件后，输入”%d”清空，后保存即可。但当文件内容较大时，处理较慢，命令如下：</p>
-<blockquote>
-<p>vim file_name<br>:%d<br>:wq</p>
-</blockquote>
-<p>2.使用cat命令情况，命令如下：</p>
-<blockquote>
-<p>cat /dev/null &gt; file_name</p>
-</blockquote>
-<p>3.使用echo命令清空，此时会在文件中写入一个空行“\n”，命令如下：</p>
-<blockquote>
-<p>echo “”&gt;file_name</p>
-</blockquote>
-<p>推荐使用cat命令</p>
-<h3 id="vim-跳转最后一行和跳到行首"><a href="#vim-跳转最后一行和跳到行首" class="headerlink" title="vim 跳转最后一行和跳到行首"></a>vim 跳转最后一行和跳到行首</h3><p>第一种方式：</p>
-<blockquote>
-<p>:$ 跳到最后一行<br>:1 跳到第一行</p>
-</blockquote>
-<p>第二种方式：</p>
-<blockquote>
-<p>shift+g 跳到最后一行<br>gg 跳转到第一行</p>
-</blockquote>
-<p>查找文件关键字内容</p>
-<blockquote>
-<p>grep -r “test”  /data/reports</p>
-</blockquote>
-<p>搜索命令</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/string</td>
-<td>向前搜索指定字符串；搜索时忽略大小写 :set ic</td>
-</tr>
-<tr>
-<td>n</td>
-<td>搜索指定字符串的下一个出现位置</td>
-</tr>
-<tr>
-<td>:%s/old/new/g</td>
-<td>全文替换指定字符串</td>
-</tr>
-<tr>
-<td>:n1,n2s/old/new/g</td>
-<td>在一定范围内替换指定字符串</td>
-</tr>
-</tbody>
-</table>
-<p>端口占用查询：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -anlp | grep 80</span><br><span class="line"></span><br><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure></p>
-<p>查看内存使用情况<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure></p>
-<p>查看磁盘使用情况</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
-<p>查看文件创建数量</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -i</span><br></pre></td></tr></table></figure>
-<p>删除某个文件的小文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -delete</span><br><span class="line">find . -type d -print -delete</span><br></pre></td></tr></table></figure></p>
-<p>查看占用线程最大的程序<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>修改服务最大线程数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1000000 &gt; /proc/sys/kernel/pid_max：修改pid_max值为1000000</span><br><span class="line">echo &quot;kernel.pid_max=1000000 &quot; &gt;&gt; /etc/sysctl.confsysctl -p：设置永久生效</span><br></pre></td></tr></table></figure></p>
-<p>监控java线程<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep java | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>监控网络客户连接数：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | grep tcp | grep 侦听端口 | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>linux 将本地文件传给其他服务器<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 2122  /home/lyxbdw/basedata/spark-2.4.3-bin-hadoop2.7.tgz  root@lyxbdw-01:/usr/local/spark</span><br><span class="line"></span><br><span class="line">注意第二个路径与冒号之间不能有空格</span><br></pre></td></tr></table></figure></p>
-<p>查看某个目录下大文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -size +50M | xargs du -h</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看CPU情况："><a href="#查看CPU情况：" class="headerlink" title="查看CPU情况："></a>查看CPU情况：</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo |grep &quot;model name&quot; &amp;&amp; cat /proc/cpuinfo |grep &quot;physical id&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="查看内存大小"><a href="#查看内存大小" class="headerlink" title="查看内存大小"></a>查看内存大小</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo | grep MemTotal</span><br></pre></td></tr></table></figure>
-<h2 id="查看pid下的进程"><a href="#查看pid下的进程" class="headerlink" title="查看pid下的进程"></a>查看pid下的进程</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux |grep -v grep|grep 31938</span><br></pre></td></tr></table></figure>
-<h2 id="查看Linux的核数"><a href="#查看Linux的核数" class="headerlink" title="查看Linux的核数"></a>查看Linux的核数</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;physical id&quot; | sort | uniq | wc -l</span><br><span class="line">1</span><br><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;core id&quot; | sort | uniq | wc -l</span><br><span class="line">2</span><br><span class="line">[bdcopt@iZwz920kp0myowdvn8v0zbZ device]$ cat /proc/cpuinfo | grep &quot;process&quot; | sort | uniq | wc -l</span><br></pre></td></tr></table></figure>
-<h2 id="查看linux-M"><a href="#查看linux-M" class="headerlink" title="查看linux M"></a>查看linux M</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lht</span><br></pre></td></tr></table></figure>
-<p>##linux服务器ip公网查看<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">linux系统中输入上述的命令，可以查看到本机连接的公网信息；如果该命令无效，可以使用下面一个命令，也同样可以获得对应的信息</span><br><span class="line"></span><br><span class="line">curl cip.cc</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -858,7 +808,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            97
+                            100
                         </p>
                     </a>
                 </div>
@@ -882,7 +832,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            43
+                            47
                         </p>
                     </a>
                 </div>
@@ -998,7 +948,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -1006,7 +956,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">49</span>
+                <span class="level-item tag">50</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1022,7 +972,7 @@
                 <span class="level-item">开发工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1067,7 +1017,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/CICD/" style="font-size: 10px;">CICD</a> <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdowm/" style="font-size: 10px;">markdowm</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 11.43px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/笔记/" style="font-size: 11.43px;">笔记</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1076,6 +1026,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/markdowm语法笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdowm语法笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T02:12:24.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/markdowm语法笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdowm语法笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/23/持续集成与持续部署（CICD）笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="持续集成与持续部署（CICD）笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-23T01:40:06.000Z">2020-07-23</time></div>
+                    <a href="/2020/07/23/持续集成与持续部署（CICD）笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续集成与持续部署（CICD）笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/22/hadoop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hadoop">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-22T02:52:34.000Z">2020-07-22</time></div>
+                    <a href="/2020/07/22/hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hadoop</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1115,63 +1122,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/06/hive-数据库/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hive 数据库">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time></div>
-                    <a href="/2020/07/06/hive-数据库/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hive 数据库</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取hive jdbc方式">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time></div>
-                    <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取hive jdbc方式</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/30/flink-提交命令/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交命令">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time></div>
-                    <a href="/2020/06/30/flink-提交命令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交命令</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1189,7 +1139,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1406,6 +1356,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/CICD/">
+                        <span class="tag">CICD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Dataframe/">
                         <span class="tag">Dataframe</span>
                         <span class="tag is-grey">1</span>
@@ -1469,6 +1426,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hadoop/">
+                        <span class="tag">hadoop</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
                         <span class="tag is-grey">2</span>
@@ -1513,6 +1477,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdowm/">
+                        <span class="tag">markdowm</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1625,7 +1596,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1696,6 +1667,13 @@
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/笔记/">
+                        <span class="tag">笔记</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

@@ -136,6 +136,203 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-19T01:35:40.000Z">2019-12-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 658 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/19/flink-提交任务/">flink 提交任务</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="flink-提交任务"><a href="#flink-提交任务" class="headerlink" title="flink 提交任务"></a>flink 提交任务</h1><h2 id="flink本地提交任务"><a href="#flink本地提交任务" class="headerlink" title="flink本地提交任务"></a>flink本地提交任务</h2><blockquote>
+<p>一般在本地测试时，需要在本地自己电脑提交flink任务，本地提交分两种：<br> 1.通过命令行的方式提交flink任务：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run ./examples/batch/WordCount.jar</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>2.通过网页ip:8081提交任务<br>点击 add new 上传jar包<br><img src="/images/2019/12/19/3d365750-21ff-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+</blockquote>
+<blockquote>
+<p>选择想要执行的jar包，点击主类，设置并行度，点击submit提交按钮<br><img src="/images/2019/12/19/1476e7b0-2201-11ea-80df-39774ea2e31e.png" alt="image.png"></p>
+</blockquote>
+<h2 id="flink集群提交任务"><a href="#flink集群提交任务" class="headerlink" title="flink集群提交任务"></a>flink集群提交任务</h2><blockquote>
+<p>说明：flink集群采用oozie编写shell脚本在yarn上提交flink任务，其中flink版本1.8.1，oozie(5.1.0-cdh6.3.0),hue(4.2.0-cdh6.3.0)<br>并且集群采用了kerberos和ldap安全认证，由于oozie并未集成flink任务提交，所以需要配置kerberos认证</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上传jar包，flink配置文件以及kerberos的keytab到自己的工作目录</span><br><span class="line">2.配置kerberos认证，编辑flink-conf.yaml配置文件，新增配置</span><br><span class="line">security.kerberos.login.use-ticket-cache: false</span><br><span class="line">security.kerberos.login.keytab: ./conf/260164.keytab</span><br><span class="line">security.kerberos.login.principal: 260164@GREE.IO</span><br><span class="line">3.编写shell脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">env -i FLINK_CONF_DIR=./conf /lvm/data3/flink/flink-1.8.1/bin/flink run -m yarn-cluster -yqu root.dev1 -ynm test-flink./test.jar</span><br><span class="line">重新指定flink配置环境文件目录 -m 指定提交模式，-yqu 指定提交yarn队列，-ynm 指定flink任务名称。最后指定要运行的jar包</span><br><span class="line">需要注意的是shell脚本尽量自己手动写一遍，避免出现一些格式编码等奇怪问题</span><br><span class="line">4.创建oozie shell任务</span><br><span class="line">指定conf配置文件目录，shell脚本，以及上传的jar包</span><br><span class="line">指定shell的队列，默认是default队列</span><br></pre></td></tr></table></figure>
+<h2 id="flink-集成-kafka-集群提交任务"><a href="#flink-集成-kafka-集群提交任务" class="headerlink" title="flink 集成 kafka 集群提交任务"></a>flink 集成 kafka 集群提交任务</h2><blockquote>
+<p>由于cdh集群集成了kerberos 以及kafka集群也集成了kerberos 所以需要配置kafkad的jaas.conf文件和krb5文件<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">KafkaClient &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  doNotPrompt=true</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  renewTicket=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=true</span><br><span class="line">  storeKey=true</span><br><span class="line">  keyTab=&quot;./conf/xx.keytab&quot;</span><br><span class="line">  principal=&quot;xx@GREE.IO&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>krb5.conf一般都不需要更改，主要是配置kafka读取到jaas.conf文件，flink的配置则按照flink集群提交的方法完成就可以。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">default = FILE:/lvm/data3/var/log/krb5libs.log</span><br><span class="line">kdc = FILE:/lvm/data3/var/log/krb5kdc.log</span><br><span class="line">admin_server = FILE:/lvm/data3/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">dns_lookup_realm = false</span><br><span class="line">dns_lookup_kdc = false</span><br><span class="line">ticket_lifetime = 24h</span><br><span class="line">renew_lifetime = 7d</span><br><span class="line">forwardable = true</span><br><span class="line">udp_preference_limit = 1</span><br><span class="line">default_realm = GREE.IO</span><br><span class="line">pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">GREE.IO = &#123;</span><br><span class="line"> kdc = cdh-master01</span><br><span class="line"> admin_server = cdh-master01</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line">.cdh-master01 = GREE.IO</span><br><span class="line">cdh-master01 = GREE.IO</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-18T06:24:05.000Z">2019-12-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/程序语言/">程序语言</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1123 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/18/JSON数据处理（gson-和-fastjson）/">JSON数据处理（gson 和 fastjson）</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="GSON-和-fastjson-总结"><a href="#GSON-和-fastjson-总结" class="headerlink" title="GSON 和 fastjson 总结"></a>GSON 和 fastjson 总结</h1><h2 id="1-JSON两种数据类型"><a href="#1-JSON两种数据类型" class="headerlink" title="1.JSON两种数据类型"></a>1.JSON两种数据类型</h2><ul>
+<li>json对象， object -&gt; {key:value,key:value,…}</li>
+<li>json数组，array -&gt; [value,value,…]</li>
+</ul>
+<h2 id="2-gson-解析-json对象"><a href="#2-gson-解析-json对象" class="headerlink" title="2.gson 解析 json对象"></a>2.gson 解析 json对象</h2><blockquote>
+<p>分为直接解析和通过java类来解析<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  Gson: Java to Json conversion --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.8.5&lt;/version&gt;</span><br><span class="line">           &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1.直接解析</span><br><span class="line"></span><br><span class="line"> //json对象形式解析</span><br><span class="line">        String data_json = &quot;&#123;\n&quot; +</span><br><span class="line">                &quot;        \&quot;sex\&quot;: &apos;男&apos;,\n&quot; +</span><br><span class="line">                &quot;        \&quot;hobby\&quot;:[\&quot;baskte\&quot;,\&quot;tennis\&quot;],\n&quot; +</span><br><span class="line">                &quot;        \&quot;introduce\&quot;: &#123;\n&quot; +</span><br><span class="line">                &quot;            \&quot;name\&quot;:\&quot;tom\&quot;,\n&quot; +</span><br><span class="line">                &quot;            \&quot;age\&quot;:23\n&quot; +</span><br><span class="line">                &quot;        &#125;\n&quot; +</span><br><span class="line">                &quot;    &#125;&quot;;</span><br><span class="line"></span><br><span class="line">        //json 解析器，解析json数据</span><br><span class="line">        JsonParser parser = new JsonParser();</span><br><span class="line">        JsonElement element = parser.parse(data_json);</span><br><span class="line">        if (element.isJsonObject()) &#123;</span><br><span class="line">            //转化为对象</span><br><span class="line">            JsonObject object = element.getAsJsonObject();</span><br><span class="line">            //1.当value为String时，取出String值</span><br><span class="line">            String sex = object.get(&quot;sex&quot;).getAsString();</span><br><span class="line"></span><br><span class="line">            //2.当value为数组array,取出array</span><br><span class="line">            JsonArray hobbies = object.getAsJsonArray(&quot;hobby&quot;);</span><br><span class="line">            for (int i = 0; i &lt; hobbies.size(); i++) &#123;</span><br><span class="line">                String hobby = hobbies.get(i).getAsString();</span><br><span class="line">                System.out.println(&quot;hobby: &quot; + hobby);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            //3.当value为object时，取出object</span><br><span class="line">            JsonObject introduce = object.getAsJsonObject(&quot;introduce&quot;);</span><br><span class="line">            String name = introduce.get(&quot;name&quot;).getAsString();</span><br><span class="line">            int age = introduce.get(&quot;age&quot;).getAsInt();</span><br><span class="line">            System.out.println(&quot;name: &quot; + name + &quot;;age: &quot; + age);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">2.通过java类来解析</span><br><span class="line"></span><br><span class="line">public class People   &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line">    public String address;</span><br><span class="line">    public int salary;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;&quot; +</span><br><span class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, age=&quot; + age +</span><br><span class="line">                &quot;, address=&apos;&quot; + address + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, salary=&quot; + salary ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//======================================================</span><br><span class="line"></span><br><span class="line">   //3.借助java类来生成对应的java对象来解析数据</span><br><span class="line">        String object_json = &quot;&#123;\&quot;name\&quot;:\&quot;tom\&quot;,\&quot;salary\&quot;:12999&#125;&quot;;</span><br><span class="line">        Gson gson = new Gson();</span><br><span class="line">        People people = gson.fromJson(object_json, People.class);</span><br><span class="line">        System.out.println(people.toString());</span><br></pre></td></tr></table></figure>
+<h2 id="3-gson-解析-json数组"><a href="#3-gson-解析-json数组" class="headerlink" title="3.gson 解析 json数组"></a>3.gson 解析 json数组</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// json数组对象解析</span><br><span class="line">       String array_data_json = &quot;[\n&quot; +</span><br><span class="line">               &quot;    \&quot;cake\&quot;,\n&quot; +</span><br><span class="line">               &quot;    2,\n&quot; +</span><br><span class="line">               &quot;    &#123;\&quot;brother\&quot;:\&quot;tom\&quot;,\&quot;sister\&quot;:\&quot;lucy\&quot;&#125;,\n&quot; +</span><br><span class="line">               &quot;    [\&quot;red\&quot;,\&quot;orange\&quot;]\n&quot; +</span><br><span class="line">               &quot;]&quot;;</span><br><span class="line"></span><br><span class="line">       // json解析器，解析json数据</span><br><span class="line">       JsonParser parser_array = new JsonParser();</span><br><span class="line">       JsonElement element_array = parser_array.parse(array_data_json);</span><br><span class="line">       // json属于数组类型</span><br><span class="line">       if (element_array.isJsonArray()) &#123;</span><br><span class="line">           JsonArray array = element_array.getAsJsonArray();</span><br><span class="line"></span><br><span class="line">           // 1. value为string时，取出string</span><br><span class="line">           String array_1 = array.get(0).getAsString();</span><br><span class="line">           System.out.println(&quot;array_1:&quot; + array_1);</span><br><span class="line"></span><br><span class="line">           // 2. value为int时，取出int</span><br><span class="line">           int array_2 = array.get(1).getAsInt();</span><br><span class="line">           System.out.println(&quot;array_2:&quot; + array_2);</span><br><span class="line"></span><br><span class="line">           // 3. value为object时，取出object</span><br><span class="line">           JsonObject array_3 = array.get(2).getAsJsonObject();</span><br><span class="line">           String brother = array_3.get(&quot;brother&quot;).getAsString();</span><br><span class="line">           String sister = array_3.get(&quot;sister&quot;).getAsString();</span><br><span class="line">           System.out.println(&quot;brother:&quot; + brother + &quot;;sister:&quot; + sister);</span><br><span class="line"></span><br><span class="line">           // 4. value为array时，取出array</span><br><span class="line">           JsonArray array_4 = array.get(3).getAsJsonArray();</span><br><span class="line">           for (int i = 0; i &lt; array_4.size(); i++) &#123;</span><br><span class="line">               System.out.println(array_4.get(i).getAsString());</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">2.java 数组解析</span><br><span class="line">当数据为数组时，对应java中是数组类型</span><br><span class="line">[&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;]</span><br><span class="line"></span><br><span class="line">String json2 = &quot;[\&quot;apple\&quot;, \&quot;pear\&quot;, \&quot;banana\&quot;]&quot;;</span><br><span class="line">Gson gson2 = new Gson();</span><br><span class="line">// 传入的java类型是String[].class</span><br><span class="line">String[] fruits = gson2.fromJson(json2, String[].class);  </span><br><span class="line"></span><br><span class="line">对于简单数组可以反序列化List类型</span><br><span class="line">String json2 = &quot;[\&quot;apple\&quot;, \&quot;pear\&quot;, \&quot;banana\&quot;]&quot;;</span><br><span class="line">Gson gson2 = new Gson();</span><br><span class="line">List&lt;String&gt; fruitList = gson2.fromJson(json2, new TypeToken&lt;List&lt;String&gt;&gt;()&#123;&#125;.getType());</span><br></pre></td></tr></table></figure>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><blockquote>
+<p>1.json数据与java类字段名不一样，可以添加注解@SerializedName()</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@SerializedName(&quot;money&quot;)</span><br><span class="line">private String salary;</span><br><span class="line"></span><br><span class="line">@SerializedName(&#123;&quot;money&quot;, &quot;salary&quot;&#125;)  // 可以有多个备选值</span><br><span class="line">private String salary;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.限定字段是否需要序列化<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Expose(serialize=false,deserialize=false)</span><br><span class="line">private String name;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>3.复合对象处理<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;tom&quot;,</span><br><span class="line">  &quot;age&quot;: 0,</span><br><span class="line">  &quot;money&quot;: 2999,</span><br><span class="line">  &quot;hobbies&quot;: [</span><br><span class="line">    &quot;basket&quot;,</span><br><span class="line">    &quot;tennis&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;collections&quot;: &#123;</span><br><span class="line">    &quot;2&quot;: &quot;paint&quot;,</span><br><span class="line">    &quot;3&quot;: &quot;mouse&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//一般而言，当value是数组时，对应java类中也是数组；当value 是对象时，对应java类中的map(k-v对)</span><br><span class="line"></span><br><span class="line">private List&lt;String&gt; hobbies;</span><br><span class="line">private Map&lt;Integer, String&gt; collections;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>4.通过泛型来处理<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">如json数据格式相近</span><br><span class="line">&#123;&quot;code&quot;:&quot;0&quot;,&quot;message&quot;:&quot;success&quot;,&quot;data&quot;:&#123;&#125;&#125;</span><br><span class="line">&#123;&quot;code&quot;:&quot;0&quot;,&quot;message&quot;:&quot;success&quot;,&quot;data&quot;:[]&#125;</span><br><span class="line">则动态生成java对象</span><br><span class="line"></span><br><span class="line">public class Result&lt;T&gt;&#123;</span><br><span class="line">    public int code;</span><br><span class="line">    public String message;</span><br><span class="line">    public T data;</span><br><span class="line">    // getter、setter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="4-gson将java对象转为json字符串"><a href="#4-gson将java对象转为json字符串" class="headerlink" title="4. gson将java对象转为json字符串"></a>4. gson将java对象转为json字符串</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Gson gson2 = new Gson();</span><br><span class="line">String json2 = gson2.toJson(entry2);</span><br><span class="line">System.out.println(json2);</span><br><span class="line"></span><br><span class="line">对于非值属性，即引用属性，如hobbies、collections，如果没有设置值的话，在序列化后的json数据中，是不会出现的。而如果是值属性的话，没有设置值的情况下，在json数据中会是使用java中的默认值。</span><br></pre></td></tr></table></figure>
+<h2 id="5-fastjson解析java对象"><a href="#5-fastjson解析java对象" class="headerlink" title="5.fastjson解析java对象"></a>5.fastjson解析java对象</h2><blockquote>
+<p>Json是一种轻量级的数据交换格式，采用一种“键：值”对的文本格式来存储和表示数据，在系统交换数据过程中常常被使用，是一种理想的数据交换语言。<br>fastjson.jar是阿里爸爸开发的一款专门用于Java开发的包，可以方便的实现json对象与JavaBean对象的转换，实现JavaBean对象与json字符串的转换，实现json对象与json字符串的转换。</p>
+</blockquote>
+<p>例子<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.gree.bdc.jsonchange;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.gree.bdc.entity.EnamellingPullingMachineStatus;</span><br><span class="line">import com.gree.bdc.entity.PullingRecord;</span><br><span class="line">import com.gree.bdc.util.DateUtils;</span><br><span class="line"></span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">public class JsonChange &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String jsonString = &quot;&#123;\&quot;CUR_DV\&quot;:\&quot;110.60\&quot;,\&quot;CUR_LSP\&quot;:\&quot;155.71\&quot;,\&quot;DQSX_WE\&quot;:\&quot;128.72\&quot;,\&quot;HP_PO\&quot;:\&quot;0\&quot;,\&quot;JLHP_TM\&quot;:\&quot;261.07\&quot;,\&quot;MachineCode\&quot;:\&quot;123\&quot;,\&quot;MachineType\&quot;:1,\&quot;PX_IT\&quot;:\&quot;1.00\&quot;,\&quot;PX_SP\&quot;:\&quot;198.26\&quot;,\&quot;QBX_LR\&quot;:\&quot;0.70\&quot;,\&quot;SDCX_LSP\&quot;:\&quot;158.00\&quot;,\&quot;SDGZ_LSP\&quot;:\&quot;158.00\&quot;,\&quot;SFHP_WE\&quot;:\&quot;270.00\&quot;,\&quot;SXZL_CUR\&quot;:\&quot;50.52\&quot;,\&quot;SXZL_SE\&quot;:\&quot;50.00\&quot;,\&quot;SXZL_SW\&quot;:\&quot;50.00\&quot;,\&quot;Sub_Oven_Index\&quot;:1,\&quot;Type_Data\&quot;:3,\&quot;YPX_CUD\&quot;:\&quot;8\&quot;,\&quot;YP_TY\&quot;:\&quot;8\&quot;,\&quot;YSX_RSP\&quot;:\&quot;0.00\&quot;,\&quot;ZL_EN\&quot;:\&quot;1\&quot;,\&quot;ZPX_CUD\&quot;:\&quot;8\&quot;,\&quot;ZP_TY\&quot;:\&quot;8\&quot;,\&quot;ZSX_RSP\&quot;:\&quot;140.21\&quot;&#125;&quot;;</span><br><span class="line"></span><br><span class="line">        EnamellingPullingMachineStatus enamellingPullingMachineStatus = JSON.parseObject( jsonString, EnamellingPullingMachineStatus.class );</span><br><span class="line">        PullingRecord pullingRecord = new PullingRecord();</span><br><span class="line">        String id = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);</span><br><span class="line">        String machine_index = enamellingPullingMachineStatus.getMachineCode() + (enamellingPullingMachineStatus.getSubOvenIndex() + 1);;</span><br><span class="line">        Float weight = enamellingPullingMachineStatus.getCurrentTakeUpWeight();;</span><br><span class="line">        String record_time = DateUtils.getFormatTimeNow();</span><br><span class="line">        pullingRecord.setId( id );</span><br><span class="line">        pullingRecord.setMachine_index( machine_index );</span><br><span class="line">        pullingRecord.setWeight( weight );</span><br><span class="line">        pullingRecord.setRecord_time( record_time );</span><br><span class="line"></span><br><span class="line">        String pullingRecordJson = JSON.toJSONString( pullingRecord );</span><br><span class="line">        System.out.println( pullingRecordJson );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考文献：<a href="https://www.jianshu.com/p/75a50aa0cad1" target="_blank" rel="noopener">GSON</a><br>          <a href="https://blog.csdn.net/srj1095530512/article/details/82529759" target="_blank" rel="noopener">Json详解以及fastjson使用教程</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-06T03:26:35.000Z">2019-12-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 444 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/06/flink-基础知识/">flink 基础知识</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、Flink核心概念和基础"><a href="#一、Flink核心概念和基础" class="headerlink" title="一、Flink核心概念和基础"></a>一、Flink核心概念和基础</h2><blockquote>
+<p>Flink 是一个框架和分布式处理引擎。用于对有界和无界数据流进行有状态计算。并且Flink提供了数据分布和<br>容错机制以及资源管理等核心功能。</p>
+</blockquote>
+<p>flink 提供了诸多高抽象层API以便用户进行分布式任务编写：</p>
+<ul>
+<li>DateSet API ,对静态数据进行批处理，将静态数据抽象成分布式的数据集，用户可以方便对分布式数据集进行处理。</li>
+<li>DateStream API ,对数据流进行流处理操作，将流数据抽象成分布式数据流。</li>
+<li>Table API ,对结果化数据进行查询操作，将流式数据抽象成关系表，并通过类SQL的DSL对关系表进行操作</li>
+</ul>
+<p>flink的特性：</p>
+<blockquote>
+<p>支持高吞吐、低延迟、高性能的流处理<br>支持带有事件时间的窗口（Window）操作<br>支持有状态计算的Exactly-once语义<br>支持高度灵活的窗口（Window） 操作<br>支持具有Backpressure功能的持续流模型<br>支持基于轻量级分布式快照实现容错（snapshot）<br>一个运行时同时支持Batch on Streaming处理和Streaming 处理<br>Flink在JVM实现了自己的内存管理<br>支持迭代计算<br>支持程序自动优化：避免特定情况下：Shuffle、排序等昂贵操作，中间结果有必要进行缓存</p>
+</blockquote>
+<h2 id="二、Flink-与-spark-streaming-区别"><a href="#二、Flink-与-spark-streaming-区别" class="headerlink" title="二、Flink 与 spark streaming 区别"></a>二、Flink 与 spark streaming 区别</h2><p><strong>Flink 是标准的实时处理引擎，基于事件驱动，而spark streaming 是微批处理（Micro-Batch）</strong></p>
+<p>参考：<a href="https://mp.weixin.qq.com/s/U6ctAawGl29ULIz7FLsY2A" target="_blank" rel="noopener">Flink面试通关手册</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-05T01:58:52.000Z">2019-12-05</time>
                 
                 <div class="level-item">
@@ -614,182 +811,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-11T06:59:39.000Z">2019-09-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 618 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/11/Apache-NiFi-简单介绍和使用/">Apache NiFi 简单介绍和使用</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、什么是Apache-NiFi"><a href="#一、什么是Apache-NiFi" class="headerlink" title="一、什么是Apache NiFi"></a>一、什么是Apache NiFi</h2><pre><code>简单来讲，NIFI就是为了构建系统之间的数据自动化传输的简易操作工具。提供了一些可靠的数据流的传输工具，解决了大部分现代企业中的数据ETL中所遇到的挑战。
-</code></pre><h2 id="二、NIFI-核心概念"><a href="#二、NIFI-核心概念" class="headerlink" title="二、NIFI 核心概念"></a>二、NIFI 核心概念</h2><p><img src="/images/2019/09/11/7c2f6a40-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/a544b020-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
-<h2 id="三、NIFI-架构"><a href="#三、NIFI-架构" class="headerlink" title="三、NIFI 架构"></a>三、NIFI 架构</h2><p><img src="/images/2019/09/11/dd2a1340-d45d-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
-<h2 id="四、-NIFI-使用界面介绍"><a href="#四、-NIFI-使用界面介绍" class="headerlink" title="四、 NIFI 使用界面介绍"></a>四、 NIFI 使用界面介绍</h2><p><img src="/images/2019/09/11/79ee7e20-d461-11e9-b427-5d1ae987f58a.png" alt="image.png"></p>
-<blockquote>
-<p>主要包括工具栏、状态栏、总菜单栏，操作缩图和画布。平常用到的组件主要有<br>Processor:The Processor is the NiFi component that is used to listen for incoming data; pull data from external sources; publish data to external sources; and route, transform, or extract information from FlowFiles.</p>
-</blockquote>
-<blockquote>
-<p>Processor Group:When a dataflow becomes complex, it often is beneficial to reason about the dataflow at a higher, more abstract level. NiFi allows multiple components, such as Processors, to be grouped together into a Process Group. The NiFi User Interface then makes it easy for a DFM to connect together multiple Process Groups into a logical dataflow, as well as allowing the DFM to enter a Process Group in order to see and manipulate the components within the Process Group.</p>
-</blockquote>
-<blockquote>
-<p>我认为 Processor 就是一个数据处理器，它不仅可以从各种数据源中加载数据，转成Fiedflow基本nifi元素，还能够将数据处理成各种常见的格式以及将数据输出到各种数据库中<br>而Processor Group 则是一个装载 Processor的容器。</p>
-</blockquote>
-<h2 id="五、案例（JSON-TO-MYSQL）"><a href="#五、案例（JSON-TO-MYSQL）" class="headerlink" title="五、案例（JSON_TO_MYSQL）"></a>五、案例（JSON_TO_MYSQL）</h2><ol>
-<li>创建一个Processor Group ,将其拖到画布当中<br><img src="/images/2019/09/11/b8052b50-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
-<li>然后修改名字<br><img src="/images/2019/09/11/f0cefb00-d466-11e9-b427-5d1ae987f58a.png" alt="image.png"><br><img src="/images/2019/09/11/52a49ab0-d467-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
-<li>读取json文件，GetFile –&gt; 将JSON 转为sql语句，ConvertJSONToSQL –&gt; 运行sql语句，PutSQL</li>
-<li>GetFile 设置输入目录Input Directory，目标文件 File Filter<br><img src="/images/2019/09/11/5e82d2b0-d468-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
-<li>ConvertJSONToSQL  设置数据库连接池JDBC Connection Pool ,SQL 类型 Statement Type ,表名 Table Name,其他默认 ，注意 ConvertJSONToSQL 只适用一个json值的文件<br><img src="/images/2019/09/11/3459dd70-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
-<li>PutSQL 设置 数据库连接池，SQL Statement ，其他默认。一般来说只需要设置加黑的参数，但这里需要设置sql语句。<br><img src="/images/2019/09/11/c980d930-d469-11e9-b427-5d1ae987f58a.png" alt="image.png"></li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-09T01:43:41.000Z">2019-09-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 229 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/09/NIFI-安装部署/">NIFI 安装部署</a>
-            
-        </h1>
-        <div class="content">
-            <p>::: hljs-center</p>
-<p>NIFI 安装部署</p>
-<p>:::</p>
-<h2 id="一、NIFI-下载"><a href="#一、NIFI-下载" class="headerlink" title="一、NIFI 下载"></a>一、NIFI 下载</h2><ul>
-<li>NIFI 下载链接：<a href="http://nifi.apache.org/download.html" target="_blank" rel="noopener">NIFI Downloads</a></li>
-<li>选择与自己环境匹配的安装包</li>
-<li><img src="/images/2019/09/09/b6d2a810-d2a0-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-<li>若是下载速度过慢，可以选择另一个下载地址：<a href="https://www.apache.org/dyn/closer.lua?path=/nifi/1.9.2/nifi-1.9.2-bin.zip" target="_blank" rel="noopener">NIFI 下载</a></li>
-<li><img src="/images/2019/09/09/7bb8b160-d2a1-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ul>
-<h2 id="二、NIFI-安装"><a href="#二、NIFI-安装" class="headerlink" title="二、NIFI 安装"></a>二、NIFI 安装</h2><ol>
-<li>将下载的安装包放到 E:\software\ ，然后解压安装，非常简单</li>
-<li>修改配置文件E:\software\nifi-1.9.2-bin\nifi-1.9.2\conf\nifi.properties，更改端口号</li>
-<li><img src="/images/2019/09/09/6df7ebd0-d2a2-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-<h2 id="三-、NIFI-运行"><a href="#三-、NIFI-运行" class="headerlink" title="三 、NIFI 运行"></a>三 、NIFI 运行</h2><ol>
-<li>进入E:\software\nifi-1.9.2-bin\nifi-1.9.2\bin 目录，双击run-nifi.bat，若是linux则sh nifi.sh</li>
-<li>打开浏览器，进入<a href="http://localhost:8081/nifi/，可能需要等会页面加载慢" target="_blank" rel="noopener">http://localhost:8081/nifi/，可能需要等会页面加载慢</a></li>
-<li><img src="/images/2019/09/09/2a0a96b0-d2a3-11e9-aa7e-85cf9ceb3292.png" alt="image.png"></li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-05T02:20:06.000Z">2019-09-05</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 232 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/09/05/maven-打包相关记录/">maven 打包相关记录</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="Maven项目打包"><a href="#Maven项目打包" class="headerlink" title="Maven项目打包"></a>Maven项目打包</h1><pre><code>这里主要记录常用的打包方式（将依赖打包进jar包）。
-</code></pre><h2 id="一、spring-boot-项目"><a href="#一、spring-boot-项目" class="headerlink" title="一、spring boot 项目"></a>一、spring boot 项目</h2><p>对于spring boot项目只需要添加spring boot 和maven整合的插件就可以</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.1.5.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- spring boot 依赖 --&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- spring boot end --&gt;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="二、普通的java项目"><a href="#二、普通的java项目" class="headerlink" title="二、普通的java项目"></a>二、普通的java项目</h2><p>对于普通的java项目需要添加额外的依赖才能够将依赖打包进jar中<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.5.5&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;archive&gt;</span><br><span class="line">                        &lt;manifest&gt;</span><br><span class="line">                            &lt;mainClass&gt;com.gree.cn.location.LocationMap&lt;/mainClass&gt;</span><br><span class="line">                        &lt;/manifest&gt;</span><br><span class="line">                    &lt;/archive&gt;</span><br><span class="line">                    &lt;descriptorRefs&gt;</span><br><span class="line">                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;</span><br><span class="line">                    &lt;/descriptorRefs&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;make-assembly&lt;/id&gt;</span><br><span class="line">                        &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.3.1&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                    &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="三、scala-项目打包"><a href="#三、scala-项目打包" class="headerlink" title="三、scala 项目打包"></a>三、scala 项目打包</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">       </span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.scala-tools&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-scala-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.15.2&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;scala-compile-first&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;includes&gt;</span><br><span class="line">                                &lt;include&gt;**/*.scala&lt;/include&gt;</span><br><span class="line">                            &lt;/includes&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;scala-test-compile&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;testCompile&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;appendAssemblyId&gt;false&lt;/appendAssemblyId&gt;</span><br><span class="line">                    &lt;descriptorRefs&gt;</span><br><span class="line">                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;</span><br><span class="line">                    &lt;/descriptorRefs&gt;</span><br><span class="line">                    &lt;archive&gt;</span><br><span class="line">                        &lt;manifest&gt;</span><br><span class="line">                            &lt;mainClass&gt;com.gree.cn.write2mysql.Write2mysql&lt;/mainClass&gt;</span><br><span class="line">                        &lt;/manifest&gt;</span><br><span class="line">                    &lt;/archive&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;make-assembly&lt;/id&gt;</span><br><span class="line">                        &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -864,7 +885,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            97
+                            100
                         </p>
                     </a>
                 </div>
@@ -888,7 +909,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            43
+                            47
                         </p>
                     </a>
                 </div>
@@ -1004,7 +1025,7 @@
                 <span class="level-item">后台</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/大数据/">
@@ -1012,7 +1033,7 @@
                 <span class="level-item">大数据</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">49</span>
+                <span class="level-item tag">50</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/学习/">
@@ -1028,7 +1049,7 @@
                 <span class="level-item">开发工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数据库/">
@@ -1073,7 +1094,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
+        <a href="/tags/CICD/" style="font-size: 10px;">CICD</a> <a href="/tags/Dataframe/" style="font-size: 10px;">Dataframe</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIFI/" style="font-size: 12.86px;">NIFI</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/cdh/" style="font-size: 10px;">cdh</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/flink/" style="font-size: 18.57px;">flink</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hbase/" style="font-size: 11.43px;">hbase</a> <a href="/tags/hive/" style="font-size: 11.43px;">hive</a> <a href="/tags/hue/" style="font-size: 10px;">hue</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/kafka/" style="font-size: 12.86px;">kafka</a> <a href="/tags/kylin/" style="font-size: 10px;">kylin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdowm/" style="font-size: 10px;">markdowm</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.71px;">mysql</a> <a href="/tags/neo4j/" style="font-size: 12.86px;">neo4j</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/scala/" style="font-size: 10px;">scala</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/spark/" style="font-size: 20px;">spark</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-cloud/" style="font-size: 10px;">spring cloud</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/决策树/" style="font-size: 11.43px;">决策树</a> <a href="/tags/学习/" style="font-size: 11.43px;">学习</a> <a href="/tags/工具/" style="font-size: 11.43px;">工具</a> <a href="/tags/工具类/" style="font-size: 10px;">工具类</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数据分析/" style="font-size: 17.14px;">数据分析</a> <a href="/tags/数据库/" style="font-size: 11.43px;">数据库</a> <a href="/tags/朴素贝叶斯/" style="font-size: 10px;">朴素贝叶斯</a> <a href="/tags/权限设计/" style="font-size: 10px;">权限设计</a> <a href="/tags/校验/" style="font-size: 10px;">校验</a> <a href="/tags/正则匹配/" style="font-size: 10px;">正则匹配</a> <a href="/tags/笔记/" style="font-size: 11.43px;">笔记</a> <a href="/tags/蓝牙定位/" style="font-size: 11.43px;">蓝牙定位</a>
     </div>
 </div>
     
@@ -1082,6 +1103,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/markdowm语法笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdowm语法笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T02:12:24.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/markdowm语法笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdowm语法笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/开发工具/">开发工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/23/持续集成与持续部署（CICD）笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="持续集成与持续部署（CICD）笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-23T01:40:06.000Z">2020-07-23</time></div>
+                    <a href="/2020/07/23/持续集成与持续部署（CICD）笔记/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续集成与持续部署（CICD）笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/后台/">后台</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/22/hadoop/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hadoop">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-22T02:52:34.000Z">2020-07-22</time></div>
+                    <a href="/2020/07/22/hadoop/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hadoop</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1121,63 +1199,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/06/hive-数据库/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hive 数据库">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-06T01:12:08.000Z">2020-07-06</time></div>
-                    <a href="/2020/07/06/hive-数据库/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hive 数据库</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="spark 读取hive jdbc方式">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-03T10:46:08.000Z">2020-07-03</time></div>
-                    <a href="/2020/07/03/spark-读取hive-jdbc方式/" class="title has-link-black-ter is-size-6 has-text-weight-normal">spark 读取hive jdbc方式</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/30/flink-提交命令/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="flink 提交命令">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-30T07:36:41.000Z">2020-06-30</time></div>
-                    <a href="/2020/06/30/flink-提交命令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">flink 提交命令</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/大数据/">大数据</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1195,7 +1216,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1412,6 +1433,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/CICD/">
+                        <span class="tag">CICD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Dataframe/">
                         <span class="tag">Dataframe</span>
                         <span class="tag is-grey">1</span>
@@ -1475,6 +1503,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hadoop/">
+                        <span class="tag">hadoop</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hbase/">
                         <span class="tag">hbase</span>
                         <span class="tag is-grey">2</span>
@@ -1519,6 +1554,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdowm/">
+                        <span class="tag">markdowm</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1631,7 +1673,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1702,6 +1744,13 @@
                     <a class="tags has-addons" href="/tags/正则匹配/">
                         <span class="tag">正则匹配</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/笔记/">
+                        <span class="tag">笔记</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
